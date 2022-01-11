@@ -9,13 +9,17 @@
 /* Begin PBXBuildFile section */
 		63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60A278DC58C0028381F /* AppDelegate.swift */; };
 		63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60C278DC58C0028381F /* SceneDelegate.swift */; };
-		63C4D60F278DC58C0028381F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60E278DC58C0028381F /* ViewController.swift */; };
 		63C4D612278DC58C0028381F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D610278DC58C0028381F /* Main.storyboard */; };
 		63C4D614278DC58E0028381F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D613278DC58E0028381F /* Assets.xcassets */; };
 		63C4D617278DC58E0028381F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D615278DC58E0028381F /* LaunchScreen.storyboard */; };
 		63C4D622278DC58E0028381F /* HSETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D621278DC58E0028381F /* HSETests.swift */; };
 		63C4D62C278DC58E0028381F /* HSEUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D62B278DC58E0028381F /* HSEUITests.swift */; };
 		63C4D62E278DC58E0028381F /* HSEUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D62D278DC58E0028381F /* HSEUITestsLaunchTests.swift */; };
+		63C4D63B278DC7270028381F /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D63A278DC7270028381F /* CoursesViewController.swift */; };
+		63C4D63D278DC7390028381F /* CoursesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D63C278DC7390028381F /* CoursesPageViewController.swift */; };
+		63C4D63F278DC7AB0028381F /* CoursesPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D63E278DC7AB0028381F /* CoursesPageContentViewController.swift */; };
+		63C4D641278DCD260028381F /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D640278DCD260028381F /* Course.swift */; };
+		63C4D643278DCE6F0028381F /* ControlCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D642278DCE6F0028381F /* ControlCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +43,6 @@
 		63C4D607278DC58C0028381F /* HSE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HSE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C4D60A278DC58C0028381F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C4D60C278DC58C0028381F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		63C4D60E278DC58C0028381F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		63C4D611278DC58C0028381F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63C4D613278DC58E0028381F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		63C4D616278DC58E0028381F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +52,11 @@
 		63C4D627278DC58E0028381F /* HSEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C4D62B278DC58E0028381F /* HSEUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSEUITests.swift; sourceTree = "<group>"; };
 		63C4D62D278DC58E0028381F /* HSEUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSEUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		63C4D63A278DC7270028381F /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
+		63C4D63C278DC7390028381F /* CoursesPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesPageViewController.swift; sourceTree = "<group>"; };
+		63C4D63E278DC7AB0028381F /* CoursesPageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesPageContentViewController.swift; sourceTree = "<group>"; };
+		63C4D640278DCD260028381F /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
+		63C4D642278DCE6F0028381F /* ControlCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,11 +109,15 @@
 			children = (
 				63C4D60A278DC58C0028381F /* AppDelegate.swift */,
 				63C4D60C278DC58C0028381F /* SceneDelegate.swift */,
-				63C4D60E278DC58C0028381F /* ViewController.swift */,
 				63C4D610278DC58C0028381F /* Main.storyboard */,
 				63C4D613278DC58E0028381F /* Assets.xcassets */,
 				63C4D615278DC58E0028381F /* LaunchScreen.storyboard */,
 				63C4D618278DC58E0028381F /* Info.plist */,
+				63C4D63A278DC7270028381F /* CoursesViewController.swift */,
+				63C4D63C278DC7390028381F /* CoursesPageViewController.swift */,
+				63C4D63E278DC7AB0028381F /* CoursesPageContentViewController.swift */,
+				63C4D640278DCD260028381F /* Course.swift */,
+				63C4D642278DCE6F0028381F /* ControlCollectionViewCell.swift */,
 			);
 			path = HSE;
 			sourceTree = "<group>";
@@ -258,9 +270,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C4D60F278DC58C0028381F /* ViewController.swift in Sources */,
+				63C4D641278DCD260028381F /* Course.swift in Sources */,
+				63C4D63F278DC7AB0028381F /* CoursesPageContentViewController.swift in Sources */,
 				63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */,
+				63C4D643278DCE6F0028381F /* ControlCollectionViewCell.swift in Sources */,
 				63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */,
+				63C4D63D278DC7390028381F /* CoursesPageViewController.swift in Sources */,
+				63C4D63B278DC7270028381F /* CoursesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
