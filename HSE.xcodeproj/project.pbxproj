@@ -109,8 +109,7 @@
 		63C4D609278DC58C0028381F /* HSE */ = {
 			isa = PBXGroup;
 			children = (
-				63C4D60A278DC58C0028381F /* AppDelegate.swift */,
-				63C4D60C278DC58C0028381F /* SceneDelegate.swift */,
+				63F857CE278F8A5300F45A97 /* Main */,
 				63C4D644278E35420028381F /* Model */,
 				63C4D64C278E37320028381F /* Modules */,
 				63C4D64A278E35A80028381F /* Networking */,
@@ -204,6 +203,15 @@
 				63F857CB278F2F7100F45A97 /* SegmentCollectionViewCell.xib */,
 			);
 			path = SegmentController;
+			sourceTree = "<group>";
+		};
+		63F857CE278F8A5300F45A97 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				63C4D60A278DC58C0028381F /* AppDelegate.swift */,
+				63C4D60C278DC58C0028381F /* SceneDelegate.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -13,6 +13,8 @@ class SegmentCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var notificationLabel: UILabel!
+    @IBOutlet weak var notificationView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     
     
@@ -22,9 +24,12 @@ class SegmentCollectionViewCell: UICollectionViewCell {
                 self.backView.backgroundColor = .blue
                 self.backView.alpha = 0.1
                 self.titleLabel.textColor = .blue
+                notificationView.backgroundColor = .white
             }else {
-                self.backView.alpha = 0.0
-                self.titleLabel.textColor = .darkGray
+                self.backView.alpha = 1
+                notificationView.backgroundColor = .systemGray6
+                self.backView.backgroundColor = .white
+                self.titleLabel.textColor = .lightGray
             }
         }
     }
@@ -32,12 +37,14 @@ class SegmentCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     
+        notificationView.layer.cornerRadius = 12
+        notificationView.backgroundColor = .systemGray6
         self.backView.alpha = 0.0
-        self.backView.layer.cornerRadius = 15
-        self.layer.cornerRadius = 15
+        self.backView.layer.cornerRadius = 8
+        self.layer.cornerRadius = 8
     }
     
-    func configure(title: String) {
+    public func configure(title: String) {
         self.titleLabel.text = title
     }
 

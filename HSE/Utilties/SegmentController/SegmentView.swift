@@ -28,11 +28,12 @@ class SegmentView: UIView {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 0, right: 36)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 36)
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.minimumInteritemSpacing = 12
         
         collectionView = UICollectionView(frame: self.frame, collectionViewLayout: layout)
+        collectionView?.backgroundColor = self.backgroundColor
         
         collectionView?.register(SegmentCollectionViewCell.self, forCellWithReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier)
         collectionView?.register(UINib(nibName: "SegmentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier)

@@ -13,9 +13,9 @@ struct Course {
     public let id: Int
     public let title: String
     
-    static let  courses = [Course(id: 1, title: "Algebra"),
+    static let  courses = [Course(id: 1, title: "Linear Algebra"),
                            Course(id: 2, title: "TSSP"),
-                           Course(id: 3, title: "Algebra"),
+                           Course(id: 3, title: "Discrete Mathematics"),
                            Course(id: 4, title: "TSSP"),
                            Course(id: 5, title: "Algebra"),
                            Course(id: 6, title: "TSSP"),
