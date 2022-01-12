@@ -21,6 +21,9 @@
 		63F857C7278F2AA500F45A97 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857C6278F2AA500F45A97 /* SegmentView.swift */; };
 		63F857CC278F2F7100F45A97 /* SegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857CA278F2F7100F45A97 /* SegmentCollectionViewCell.swift */; };
 		63F857CD278F2F7100F45A97 /* SegmentCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63F857CB278F2F7100F45A97 /* SegmentCollectionViewCell.xib */; };
+		63F857D1278F8C4800F45A97 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857D0278F8C4800F45A97 /* LoginViewController.swift */; };
+		63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857D3278F8CEB00F45A97 /* Textfield.swift */; };
+		63F857D7278F8F9F00F45A97 /* CustomSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857D6278F8F9F00F45A97 /* CustomSegmentedController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +62,9 @@
 		63F857C6278F2AA500F45A97 /* SegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
 		63F857CA278F2F7100F45A97 /* SegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		63F857CB278F2F7100F45A97 /* SegmentCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SegmentCollectionViewCell.xib; sourceTree = "<group>"; };
+		63F857D0278F8C4800F45A97 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		63F857D3278F8CEB00F45A97 /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
+		63F857D6278F8F9F00F45A97 /* CustomSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +156,8 @@
 		63C4D649278E358F0028381F /* Utilties */ = {
 			isa = PBXGroup;
 			children = (
+				63F857D5278F8F8100F45A97 /* CustomSegmentedContoller */,
+				63F857D2278F8CD400F45A97 /* Extensions */,
 				63C4D658278E47980028381F /* SegmentController */,
 			);
 			path = Utilties;
@@ -165,6 +173,7 @@
 		63C4D64C278E37320028381F /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				63F857CF278F8C2F00F45A97 /* Auth */,
 				63C4D64D278E37410028381F /* Courses */,
 			);
 			path = Modules;
@@ -212,6 +221,30 @@
 				63C4D60C278DC58C0028381F /* SceneDelegate.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		63F857CF278F8C2F00F45A97 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				63F857D0278F8C4800F45A97 /* LoginViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		63F857D2278F8CD400F45A97 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				63F857D3278F8CEB00F45A97 /* Textfield.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		63F857D5278F8F8100F45A97 /* CustomSegmentedContoller */ = {
+			isa = PBXGroup;
+			children = (
+				63F857D6278F8F9F00F45A97 /* CustomSegmentedController.swift */,
+			);
+			path = CustomSegmentedContoller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -350,6 +383,9 @@
 				63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */,
 				63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */,
 				63F857CC278F2F7100F45A97 /* SegmentCollectionViewCell.swift in Sources */,
+				63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */,
+				63F857D7278F8F9F00F45A97 /* CustomSegmentedController.swift in Sources */,
+				63F857D1278F8C4800F45A97 /* LoginViewController.swift in Sources */,
 				63C4D650278E38780028381F /* CourseViewModel.swift in Sources */,
 				63F857C7278F2AA500F45A97 /* SegmentView.swift in Sources */,
 				63C4D63B278DC7270028381F /* CoursesViewController.swift in Sources */,
