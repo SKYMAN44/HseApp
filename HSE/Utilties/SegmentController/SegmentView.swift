@@ -24,7 +24,7 @@ class SegmentView: UIView {
         setUp()
     }
     
-    func setUp() {
+    private func setUp() {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -72,6 +72,7 @@ extension SegmentView: UICollectionViewDelegate {
 
 
 extension SegmentView: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return titles.count
     }

@@ -17,6 +17,7 @@ class CoursesViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        
         fetchCourses()
 
         segmentController.setTitles(titles: courseViewModels.map({

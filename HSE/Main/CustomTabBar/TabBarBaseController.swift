@@ -8,49 +8,43 @@ import Foundation
 import UIKit
 
 class TabBarBaseController: UITabBarController {
-
-    var scheduleViewController: ScheduleViewController!
-    var gradesViewController: GradesViewController!
-    var accountViewController: AccountViewController!
-    var coursesViewController: CoursesViewController
-
     
     override func viewDidLoad(){
         super.viewDidLoad()
-        self.delegate = self
         
-        tabBar.barTintColor = .black
-        tabBar.isTranslucent = false
-        tabBar.unselectedItemTintColor = .gray
-        tabBar.tintColor = .white
+        tabBar.isTranslucent = true
+        tabBar.tintColor = UIColor(named: "Primary")
+        tabBar.backgroundColor = UIColor(named: "BackgroundAccent")
         
-        scheduleViewController =  ScheduleViewController()
-        gradesViewController =  GradesViewController()
-        accountViewController = AccountViewController()
-        coursesViewController =  CoursesViewController()
         
-        scheduleViewController.tabBarItem.image = UIImage(systemName: "calendar")
-//        scheduleViewController.tabBarItem.selectedImage = UIImage(systemName: "house.fill")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        gradesViewController.tabBarItem.image = UIImage(systemName: "award")
-//        gradesViewController.tabBarItem.selectedImage = UIImage(systemName: "magnifyingglass")
+        let scheduleViewController: ScheduleViewController =  storyboard.instantiateViewController(withIdentifier: "ScheduleViewController") as! ScheduleViewController
+        let gradesViewController: GradesViewController =  storyboard.instantiateViewController(withIdentifier: "GradesViewController") as! GradesViewController
+        let accountViewController: AccountViewController = storyboard.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
+        let coursesViewController: CoursesViewController =  storyboard.instantiateViewController(withIdentifier: "CoursesViewController") as! CoursesViewController
         
-        accountViewController.tabBarItem.image = UIImage(systemName: "user")
-//        accountViewController.tabBarItem.selectedImage = UIImage(systemName: "text.bubble.fill")
+        let navcontroller: NavViewController = storyboard.instantiateViewController(withIdentifier: "NavViewController") as! NavViewController
         
-        coursesViewController.tabBarItem.image = UIImage(systemName: "server")
-//        coursesViewController.tabBarItem.selectedImage = UIImage(systemName: "person.crop.circle.fill")
+        scheduleViewController.tabBarItem.image = UIImage(named: "calendarCS")
+        scheduleViewController.tabBarItem.selectedImage = UIImage(named: "calendarCS")
         
-        viewControllers = [scheduleViewController, gradesViewController, accountViewController, coursesViewController]
-    }
-    
-}
+        gradesViewController.tabBarItem.image = UIImage(named: "awardCS")
+        gradesViewController.tabBarItem.selectedImage = UIImage(named: "awardCS")
+        
+        accountViewController.tabBarItem.image = UIImage(named: "userCS")
+        accountViewController.tabBarItem.selectedImage = UIImage(named: "userCS")
+        
+        navcontroller.tabBarItem.image = UIImage(named: "serverCS")
+        navcontroller.tabBarItem.selectedImage = UIImage(named: "serverCS")
+        
+        self.setViewControllers([scheduleViewController,gradesViewController,navcontroller,accountViewController], animated: false)
 
-extension TabBarBaseController: UITabBarControllerDelegate {
-    
-    //MARK: UITabbar Delegate
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        return true
+        for (index, tabBarItem) in tabBar.items!.enumerated() {
+            tabBarItem.title = ""
+        }
+
+        self.selectedIndex = 0
     }
     
 }
