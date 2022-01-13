@@ -71,7 +71,7 @@ class CustomSegmentedController: UIControl {
             buttons.append(button)
         }
         
-        buttons[0].setTitleColor(selectorColor, for: .normal)
+        buttons[0].setTitleColor(selectorTextColor, for: .normal)
         
         selector = UIView(frame: CGRect(x: 0, y: 0, width: frame.width / CGFloat(buttons.count), height: frame.height))
         selector.layer.cornerRadius = 8
