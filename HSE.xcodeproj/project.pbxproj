@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		639DCE0D27923404007FC2DC /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0C27923404007FC2DC /* Schedule.swift */; };
+		639DCE1127923546007FC2DC /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0F27923546007FC2DC /* ScheduleTableViewCell.swift */; };
+		639DCE1227923546007FC2DC /* ScheduleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE1027923546007FC2DC /* ScheduleTableViewCell.xib */; };
 		63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60A278DC58C0028381F /* AppDelegate.swift */; };
 		63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60C278DC58C0028381F /* SceneDelegate.swift */; };
 		63C4D612278DC58C0028381F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D610278DC58C0028381F /* Main.storyboard */; };
@@ -52,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		639DCE0C27923404007FC2DC /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		639DCE0F27923546007FC2DC /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
+		639DCE1027923546007FC2DC /* ScheduleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleTableViewCell.xib; sourceTree = "<group>"; };
 		63C4D607278DC58C0028381F /* HSE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HSE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C4D60A278DC58C0028381F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C4D60C278DC58C0028381F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +114,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		639DCE0B279233F3007FC2DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				639DCE0C27923404007FC2DC /* Schedule.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		639DCE0E2792352A007FC2DC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				639DCE0F27923546007FC2DC /* ScheduleTableViewCell.swift */,
+				639DCE1027923546007FC2DC /* ScheduleTableViewCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		63C4D5FE278DC58C0028381F = {
 			isa = PBXGroup;
 			children = (
@@ -281,6 +304,8 @@
 		63F857E3279085CD00F45A97 /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				639DCE0E2792352A007FC2DC /* Views */,
+				639DCE0B279233F3007FC2DC /* Model */,
 				63F857DB2790655600F45A97 /* ScheduleViewController.swift */,
 				63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */,
 			);
@@ -419,6 +444,7 @@
 				63C4D617278DC58E0028381F /* LaunchScreen.storyboard in Resources */,
 				63C4D614278DC58E0028381F /* Assets.xcassets in Resources */,
 				63C4D612278DC58C0028381F /* Main.storyboard in Resources */,
+				639DCE1227923546007FC2DC /* ScheduleTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +475,7 @@
 				63C4D641278DCD260028381F /* Course.swift in Sources */,
 				63F857E02790658800F45A97 /* AccountViewController.swift in Sources */,
 				63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */,
+				639DCE1127923546007FC2DC /* ScheduleTableViewCell.swift in Sources */,
 				63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */,
 				63F857DC2790655600F45A97 /* ScheduleViewController.swift in Sources */,
 				63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */,
@@ -459,6 +486,7 @@
 				63F857D1278F8C4800F45A97 /* LoginViewController.swift in Sources */,
 				63C4D650278E38780028381F /* CourseViewModel.swift in Sources */,
 				63F857C7278F2AA500F45A97 /* SegmentView.swift in Sources */,
+				639DCE0D27923404007FC2DC /* Schedule.swift in Sources */,
 				63C4D63B278DC7270028381F /* CoursesViewController.swift in Sources */,
 				63F857EA2790F1D500F45A97 /* CalendarPopUpView.swift in Sources */,
 			);

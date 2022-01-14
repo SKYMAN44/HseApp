@@ -82,7 +82,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zIC-kz-a72" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4400" y="-290"/>
+            <point key="canvasLocation" x="-1158" y="316"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="pqO-x5-qlz">
@@ -197,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJH-bH-V7j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1177" y="316"/>
+            <point key="canvasLocation" x="-2220" y="316"/>
         </scene>
         <!--Account View Controller-->
         <scene sceneID="HzP-aQ-3ea">
@@ -221,20 +221,8 @@
                     <view key="view" contentMode="scaleToFill" id="YgX-2d-edg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3ze-MM-ib4">
-                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="rnP-dG-p7v"/>
                         <color key="backgroundColor" name="BackgroundAccent"/>
-                        <constraints>
-                            <constraint firstItem="3ze-MM-ib4" firstAttribute="leading" secondItem="rnP-dG-p7v" secondAttribute="leading" id="2ud-xU-U51"/>
-                            <constraint firstItem="3ze-MM-ib4" firstAttribute="top" secondItem="rnP-dG-p7v" secondAttribute="top" id="8rO-ao-Be3"/>
-                            <constraint firstItem="rnP-dG-p7v" firstAttribute="trailing" secondItem="3ze-MM-ib4" secondAttribute="trailing" id="hhx-82-Dic"/>
-                            <constraint firstItem="rnP-dG-p7v" firstAttribute="bottom" secondItem="3ze-MM-ib4" secondAttribute="bottom" id="yFQ-W8-Plc"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title=" " id="QhZ-wz-GQk"/>
                 </viewController>

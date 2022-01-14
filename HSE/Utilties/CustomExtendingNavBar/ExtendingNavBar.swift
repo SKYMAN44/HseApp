@@ -166,6 +166,11 @@ class ExtendingNavBar: UIControl {
                 self.slidingView.frame.origin.y = 0
             }) { _ in
                 self.animationCompleted = true
+                for constraint in self.constraints {
+                    if constraint.identifier == "heightConstrain" {
+                       constraint.constant = 60
+                    }
+                }
             }
         } else {
             animationCompleted = false
@@ -184,7 +189,14 @@ class ExtendingNavBar: UIControl {
                 self.slidingButton = UIButton()
                 self.slidingButton.addTarget(self, action: #selector(self.slidedButtonTapped), for: .touchUpInside)
                 
+                for constraint in self.constraints {
+                    if constraint.identifier == "heightConstrain" {
+                       constraint.constant = 108
+                    }
+                }
+                
                 self.addSubview(self.slidingButton)
+                
                 
                 self.slidingButton.translatesAutoresizingMaskIntoConstraints = false
                 
@@ -223,6 +235,12 @@ class ExtendingNavBar: UIControl {
                 self.choosenSegment = 0
             }
             self.sendActions(for: .valueChanged)
+            
+            for constraint in self.constraints {
+                if constraint.identifier == "heightConstrain" {
+                   constraint.constant = 60
+                }
+            }
         }
         
         let temp = topView
