@@ -101,6 +101,10 @@ class CustomSegmentedController: UIControl {
     }
     
     @objc func buttonTapped(button: UIButton) {
+        
+        let generator = UISelectionFeedbackGenerator()
+        generator.selectionChanged()
+        
         for (bIndex, btn) in buttons.enumerated() {
             btn.setTitleColor(textColor, for: .normal)
             if(btn == button) {

@@ -21,9 +21,9 @@ class SegmentCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if(isSelected) {
-                self.backView.backgroundColor = .blue
-                self.backView.alpha = 0.1
-                self.titleLabel.textColor = .blue
+                self.backView.backgroundColor = UIColor(named: "PrimaryFiller")
+                self.backView.alpha = 1
+                self.titleLabel.textColor = UIColor(named: "Primary")
                 notificationView.backgroundColor = .white
             }else {
                 self.backView.alpha = 1

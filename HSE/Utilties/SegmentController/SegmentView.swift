@@ -28,7 +28,7 @@ class SegmentView: UIView {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 36)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 0)
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.minimumInteritemSpacing = 12
         
@@ -36,16 +36,19 @@ class SegmentView: UIView {
         collectionView?.backgroundColor = self.backgroundColor
         
         collectionView?.register(SegmentCollectionViewCell.self, forCellWithReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier)
+        
         collectionView?.register(UINib(nibName: "SegmentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier)
         
         collectionView?.delegate = self
         collectionView?.dataSource = self
         
         collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.showsVerticalScrollIndicator = false
         
         self.addSubview(collectionView!)
         
-        setTitles(titles: ["sfsf","ss","sgffff","ffff"])
+        collectionView?.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
+        collectionView?.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
     }
     
     public func setTitles(titles: [String]) {
@@ -56,7 +59,8 @@ class SegmentView: UIView {
     }
     
     public func moveTo(index: Int) {
-        
+        let indexPath = IndexPath(row: index, section: 0)
+        collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
     
     
@@ -67,6 +71,7 @@ extension SegmentView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.segmentChosen(index: indexPath.row)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 }
 

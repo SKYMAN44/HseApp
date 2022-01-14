@@ -8,12 +8,26 @@
 import UIKit
 
 class ScheduleViewController: UIViewController {
-
+    
+    var navView: ExtendingNavBar?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        navView = ExtendingNavBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 44))
+        navView?.color = UIColor(named: "BackgroundAccent")!
+        navView?.addTarget(self, action: #selector(calendarButtonTapped) , for: .touchUpInside)
+        navigationController?.navigationBar.addSubview(navView!)
     }
+    
+    
+    @objc func calendarButtonTapped() {
+        CalendarPopUpView.init().show()
+    }
+    
+    
+    
+    
     
 
     /*

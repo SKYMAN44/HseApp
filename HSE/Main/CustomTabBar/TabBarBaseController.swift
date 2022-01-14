@@ -19,15 +19,17 @@ class TabBarBaseController: UITabBarController {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        let scheduleViewController: ScheduleViewController =  storyboard.instantiateViewController(withIdentifier: "ScheduleViewController") as! ScheduleViewController
+//        let scheduleViewController: ScheduleViewController =  storyboard.instantiateViewController(withIdentifier: "ScheduleViewController") as! ScheduleViewController
         let gradesViewController: GradesViewController =  storyboard.instantiateViewController(withIdentifier: "GradesViewController") as! GradesViewController
         let accountViewController: AccountViewController = storyboard.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-        let coursesViewController: CoursesViewController =  storyboard.instantiateViewController(withIdentifier: "CoursesViewController") as! CoursesViewController
-        
         let navcontroller: NavViewController = storyboard.instantiateViewController(withIdentifier: "NavViewController") as! NavViewController
         
-        scheduleViewController.tabBarItem.image = UIImage(named: "calendarCS")
-        scheduleViewController.tabBarItem.selectedImage = UIImage(named: "calendarCS")
+        let navcontrollerschedule = storyboard.instantiateViewController(withIdentifier: "NavBarSchedule") as! UIViewController
+        
+//        scheduleViewController.tabBarItem.image = UIImage(named: "calendarCS")
+//        scheduleViewController.tabBarItem.selectedImage = UIImage(named: "calendarCS")
+        navcontrollerschedule.tabBarItem.image = UIImage(named: "calendarCS")
+        navcontrollerschedule.tabBarItem.selectedImage = UIImage(named: "calendarCS")
         
         gradesViewController.tabBarItem.image = UIImage(named: "awardCS")
         gradesViewController.tabBarItem.selectedImage = UIImage(named: "awardCS")
@@ -38,7 +40,7 @@ class TabBarBaseController: UITabBarController {
         navcontroller.tabBarItem.image = UIImage(named: "serverCS")
         navcontroller.tabBarItem.selectedImage = UIImage(named: "serverCS")
         
-        self.setViewControllers([scheduleViewController,gradesViewController,navcontroller,accountViewController], animated: false)
+        self.setViewControllers([navcontrollerschedule,gradesViewController,navcontroller,accountViewController], animated: false)
 
         for (index, tabBarItem) in tabBar.items!.enumerated() {
             tabBarItem.title = ""
