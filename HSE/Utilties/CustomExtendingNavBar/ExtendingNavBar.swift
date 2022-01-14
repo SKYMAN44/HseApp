@@ -11,41 +11,53 @@ class ExtendingNavBar: UIControl {
 
     var mainView: UIView!
     var slidingView: UIView!
-    var chooseButton: UIButton!
+    var leftView: UIView!
+    var topView: UIView!
+    var backView: UIView!
+    var slidingButton: UIButton!
+    
+    var indicatorImageView: UIImageView!
+    
     var calendarButton: UIButton!
+    var mainButton: UIButton!
     
-    var selectedIndex = 0
+    private var slideViewIsVisible: Bool = false
+    private var animationCompleted: Bool = true
     
-    private var slideViewisVisible: Bool = false
+    public var choosenSegment = 0
     
     var mainLabel: UILabel =  {
         let label = UILabel()
         label.text = "TimeTable"
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
     var minorLabel: UILabel = {
         let label = UILabel()
         label.text = "Assigments"
+        label.font = .systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
     
     var color: UIColor = .white
 
     override func draw(_ rect: CGRect) {
+    }
+    
+    public func addSubviews() {
         
-        slidingView = UIView(frame: rect)
-        mainView = UIView(frame: rect)
+        // set up background views
+
+        slidingView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 48))
+        mainView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 60))
         
         slidingView.backgroundColor = color
         mainView.backgroundColor = color
-        
         addSubview(slidingView)
         addSubview(mainView)
         
-        chooseButton = UIButton(type: .system)
-        chooseButton.setImage(UIImage(named: "chevron-down"), for: .normal)
-        chooseButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        // set up calendar button
         
         calendarButton = UIButton(type: .system)
         calendarButton.setImage(UIImage(named: "calendarCS"), for: .normal)
@@ -53,44 +65,170 @@ class ExtendingNavBar: UIControl {
         
         mainView.addSubview(calendarButton)
         
-        let stackView = UIStackView(arrangedSubviews: [mainLabel,chooseButton])
-        stackView.axis = .horizontal
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .fill
-        stackView.spacing = 5
-        
-        mainView.addSubview(stackView)
-        slidingView.addSubview(minorLabel)
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
-        stackView.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true
-        stackView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        stackView.heightAnchor.constraint(equalTo: mainView.heightAnchor, multiplier: 0.75).isActive = true
-        
         calendarButton.translatesAutoresizingMaskIntoConstraints = false
         calendarButton.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
         calendarButton.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -15).isActive = true
         
+        // set up stackView
+        
+        mainButton = UIButton()
+        mainButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
+        leftView = UIView()
+        
+        indicatorImageView = UIImageView(image: UIImage(named: "chevron-down"))
+        indicatorImageView.contentMode = .center
+        
+        let sV = UIStackView()
+        sV.addArrangedSubview(leftView)
+        sV.addArrangedSubview(indicatorImageView)
+        
+        sV.axis = .horizontal
+        sV.distribution = .fill
+        sV.alignment = .fill
+        sV.spacing = 0
+        
+        mainView.addSubview(sV)
+        mainView.addSubview(mainButton)
+        
+        sV.translatesAutoresizingMaskIntoConstraints = false
+        sV.centerXAnchor.constraint(equalTo: mainView.centerXAnchor).isActive = true
+        sV.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
+
+        sV.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        sV.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        
+        mainButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        mainButton.rightAnchor.constraint(equalTo: sV.rightAnchor).isActive = true
+        mainButton.topAnchor.constraint(equalTo: sV.topAnchor).isActive = true
+        mainButton.bottomAnchor.constraint(equalTo: sV.bottomAnchor).isActive = true
+        mainButton.leftAnchor.constraint(equalTo: sV.leftAnchor).isActive = true
+        
+        // setup changing labels
+        
+        topView = UIView()
+        topView.backgroundColor = color
+        
+        backView = UIView()
+        backView.backgroundColor = color
+        
+        
+        topView.addSubview(mainLabel)
+        backView.addSubview(minorLabel)
+        
+        
+        mainLabel.translatesAutoresizingMaskIntoConstraints = false
         minorLabel.translatesAutoresizingMaskIntoConstraints = false
-        minorLabel.centerXAnchor.constraint(equalTo: mainLabel.centerXAnchor).isActive = true
-        minorLabel.centerYAnchor.constraint(equalTo: slidingView.centerYAnchor).isActive = true
+        
+        mainLabel.centerXAnchor.constraint(equalTo: topView.centerXAnchor).isActive = true
+        mainLabel.centerYAnchor.constraint(equalTo: topView.centerYAnchor).isActive = true
+        
+        minorLabel.centerXAnchor.constraint(equalTo: backView.centerXAnchor).isActive = true
+        minorLabel.centerYAnchor.constraint(equalTo: backView.centerYAnchor).isActive = true
+        
+        leftView.addSubview(backView)
+        leftView.addSubview(topView)
+        
+        topView.translatesAutoresizingMaskIntoConstraints = false
+        backView.translatesAutoresizingMaskIntoConstraints = false
+
+        topView.centerXAnchor.constraint(equalTo: leftView.centerXAnchor).isActive = true
+        topView.centerYAnchor.constraint(equalTo: leftView.centerYAnchor).isActive = true
+        topView.widthAnchor.constraint(equalTo: leftView.widthAnchor, multiplier: 1).isActive = true
+        topView.heightAnchor.constraint(equalTo: leftView.heightAnchor, multiplier: 1).isActive = true
+
+        backView.centerXAnchor.constraint(equalTo: leftView.centerXAnchor).isActive = true
+        backView.centerYAnchor.constraint(equalTo: leftView.centerYAnchor).isActive = true
+        backView.widthAnchor.constraint(equalTo: leftView.widthAnchor, multiplier: 1).isActive = true
+        backView.heightAnchor.constraint(equalTo: leftView.heightAnchor, multiplier: 1).isActive = true
+        
     }
     
     @objc func buttonTapped() {
-        if(slideViewisVisible) {
-            slideViewisVisible = false
-            UIView.animate(withDuration: 0.3) {
+        
+        if(!animationCompleted) {
+            return
+        }
+        
+        if(slideViewIsVisible) {
+            
+            animationCompleted = false
+            slideViewIsVisible = false
+            slidingButton.removeFromSuperview()
+            backView?.layer.zPosition = 0
+            slidingButton.removeFromSuperview()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.backView.frame.origin.y = 0
+                self.indicatorImageView.transform = CGAffineTransform.identity
+            })
+            UIView.animate(withDuration: 0.3, delay: 0.01, animations: {
                 self.slidingView.frame.origin.y = 0
-                self.chooseButton.transform = CGAffineTransform.identity
+            }) { _ in
+                self.animationCompleted = true
             }
         } else {
-            slideViewisVisible = true
-            UIView.animate(withDuration: 0.3) {
-                self.slidingView.frame.origin.y = self.frame.height
-                self.chooseButton.transform = CGAffineTransform(rotationAngle: CGFloat.pi / 2)
+            animationCompleted = false
+            UIView.animate(withDuration: 0.3, animations: {
+                self.slidingView.frame.origin.y = self.mainView.frame.height
+                self.indicatorImageView.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+            })
+            UIView.animate(withDuration: 0.3, delay: 0.01, animations: {
+                self.backView?.frame.origin.y = self.leftView.frame.height
+            }) { _ in
+                
+                self.backView?.layer.zPosition = 1
+                
+                self.slideViewIsVisible = true
+                
+                self.slidingButton = UIButton()
+                self.slidingButton.addTarget(self, action: #selector(self.slidedButtonTapped), for: .touchUpInside)
+                
+                self.addSubview(self.slidingButton)
+                
+                self.slidingButton.translatesAutoresizingMaskIntoConstraints = false
+                
+                self.slidingButton.centerXAnchor.constraint(equalTo: self.slidingView.centerXAnchor).isActive = true
+                self.slidingButton.topAnchor.constraint(equalTo: self.slidingView.topAnchor).isActive = true
+                self.slidingButton.widthAnchor.constraint(equalTo: self.slidingView.widthAnchor, multiplier: 1).isActive = true
+                self.slidingButton.heightAnchor.constraint(equalTo: self.slidingView.heightAnchor, multiplier: 1).isActive = true
+                self.animationCompleted = true
             }
+            
         }
+    }
+    
+    @objc func slidedButtonTapped() {
+        
+        if(!animationCompleted) {
+            return
+        }
+        animationCompleted = false
+        slidingButton.removeFromSuperview()
+        
+        self.backView.layer.zPosition = 1
+        self.topView.layer.zPosition = 0
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.backView.frame.origin.y = 0
+            self.indicatorImageView.transform = CGAffineTransform.identity
+        })
+        UIView.animate(withDuration: 0.3, delay: 0.01, animations: {
+            self.slidingView.frame.origin.y = 0
+        }) { _ in
+            self.animationCompleted = true
+            if(self.choosenSegment == 0) {
+                self.choosenSegment = 1
+            } else {
+                self.choosenSegment = 0
+            }
+            self.sendActions(for: .valueChanged)
+        }
+        
+        let temp = topView
+        topView = backView
+        backView = temp
+        slideViewIsVisible = false
     }
     
     @objc func calendarButtonTapped() {
