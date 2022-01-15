@@ -84,6 +84,16 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         
     }
     
+    let blurView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: ScreenSize.Width, height: ScreenSize.Height))
+        let blurEffect = UIBlurEffect.init(style: .dark)
+        let visualEffectView = UIVisualEffectView.init(effect: blurEffect)
+        visualEffectView.frame = view.bounds
+        visualEffectView.alpha = 0.3
+        view.addSubview(visualEffectView)
+        return view
+    } ()
+    
     // MARK: - Display Animations
     
     // Add CommentPopUpView in the front of the current window
@@ -91,12 +101,12 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
         
+        sceneDelegate.window?.addSubview(blurView)
         sceneDelegate.window?.addSubview(self)
         
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
             self.frame.origin.y = 0
         }) { _ in
-            
         }
     }
     
@@ -105,6 +115,7 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
             self.frame.origin.y = ScreenSize.Height
         }) { _ in
             self.removeFromSuperview()
+            self.blurView.removeFromSuperview()
         }
     }
     

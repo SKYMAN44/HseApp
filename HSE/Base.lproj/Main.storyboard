@@ -214,22 +214,6 @@
             </objects>
             <point key="canvasLocation" x="-76" y="1928"/>
         </scene>
-        <!-- -->
-        <scene sceneID="6P1-Xl-qEZ">
-            <objects>
-                <viewController storyboardIdentifier="ScheduleViewController" id="xi8-qg-0yN" customClass="ScheduleViewController" customModule="HSE" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YgX-2d-edg">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="rnP-dG-p7v"/>
-                        <color key="backgroundColor" name="BackgroundAccent"/>
-                    </view>
-                    <navigationItem key="navigationItem" title=" " id="QhZ-wz-GQk"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="La5-IB-eFY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="866.39999999999998" y="-486.20689655172418"/>
-        </scene>
         <!--Item-->
         <scene sceneID="8Dp-EY-cd3">
             <objects>
@@ -277,32 +261,9 @@
             </objects>
             <point key="canvasLocation" x="-76" y="1093.5960591133005"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="0tK-JT-Vb9">
-            <objects>
-                <navigationController storyboardIdentifier="NavBarSchedule" automaticallyAdjustsScrollViewInsets="NO" id="0lp-cd-BZc" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="krg-Ov-X2j">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" name="BackgroundAccent"/>
-                        <color key="barTintColor" name="BackgroundAccent"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="xi8-qg-0yN" kind="relationship" relationship="rootViewController" id="DeN-b8-QFe"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bnS-JQ-KI2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-76" y="-486.20689655172418"/>
-        </scene>
     </scenes>
     <resources>
         <image name="awardCS" width="24" height="24"/>
-        <namedColor name="BackgroundAccent">
-            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="BackgroundFirst">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

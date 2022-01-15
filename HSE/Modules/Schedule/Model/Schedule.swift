@@ -7,6 +7,7 @@
 
 import Foundation
 
+// temp parameters
 struct Schedule {
     
     let timeStart: String

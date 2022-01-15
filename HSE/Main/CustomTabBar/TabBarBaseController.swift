@@ -23,11 +23,9 @@ class TabBarBaseController: UITabBarController {
         let gradesViewController: GradesViewController =  storyboard.instantiateViewController(withIdentifier: "GradesViewController") as! GradesViewController
         let accountViewController: AccountViewController = storyboard.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
         let navcontroller: NavViewController = storyboard.instantiateViewController(withIdentifier: "NavViewController") as! NavViewController
+        let scheduleViewController = ScheduleViewController()
+        let navcontrollerschedule = ScheduleNavViewController(rootViewController: scheduleViewController)
         
-        let navcontrollerschedule = storyboard.instantiateViewController(withIdentifier: "NavBarSchedule") as! UIViewController
-        
-//        scheduleViewController.tabBarItem.image = UIImage(named: "calendarCS")
-//        scheduleViewController.tabBarItem.selectedImage = UIImage(named: "calendarCS")
         navcontrollerschedule.tabBarItem.image = UIImage(named: "calendarCS")
         navcontrollerschedule.tabBarItem.selectedImage = UIImage(named: "calendarCS")
         
