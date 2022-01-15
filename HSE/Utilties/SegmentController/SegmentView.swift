@@ -19,6 +19,17 @@ class SegmentView: UIView {
     
     var titles: [String] = []
     
+    override var backgroundColor: UIColor? {
+        didSet {
+            collectionView?.backgroundColor = backgroundColor
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setUp()
+    }
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUp()
@@ -28,7 +39,7 @@ class SegmentView: UIView {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 12)
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.minimumInteritemSpacing = 12
         
@@ -47,8 +58,15 @@ class SegmentView: UIView {
         
         self.addSubview(collectionView!)
         
+        collectionView?.translatesAutoresizingMaskIntoConstraints = false
+        
         collectionView?.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
         collectionView?.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
+        collectionView?.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
+        collectionView?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+    }
+    
+    override func draw(_ rect: CGRect) {
     }
     
     public func setTitles(titles: [String]) {

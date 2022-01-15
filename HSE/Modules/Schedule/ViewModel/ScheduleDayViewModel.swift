@@ -7,6 +7,7 @@
 
 import Foundation
 
+//no backend => logic not clear so far
 
 struct ScheduleDayViewModel {
     

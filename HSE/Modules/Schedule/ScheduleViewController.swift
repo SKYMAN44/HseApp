@@ -12,9 +12,13 @@ enum ContentType {
     case assigments
 }
 
+let tempArray: [String] = ["all","Homework","Midterm"]
+
 class ScheduleViewController: UIViewController {
     
     var navView: ExtendingNavBar?
+    
+    var segmentView: SegmentView?
     
     var tableView: UITableView = {
         let tableView = UITableView()
@@ -76,13 +80,51 @@ class ScheduleViewController: UIViewController {
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
-        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60).isActive = true //need to fix
-        tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: tabBarHeight).isActive = true
+        let tableViewConstraints = [
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: tabBarHeight)
+        ]
+        
+        tableViewConstraints[0].identifier = "tableHeightConstain"
+        print("_+_+_+_++_+_+++_++_+_+_+_+_+_++_+_+_+_ \(tableViewConstraints[0])")
+        
+        NSLayoutConstraint.activate(tableViewConstraints)
+        
 
         tableView.delegate = self
         tableView.dataSource = self
+    }
+    
+    
+    private func updateView() {
+        switch currentContent {
+        case .timeTable:
+            guard let view = segmentView else {return}
+            view.removeFromSuperview()
+            for constraint in tableView.constraints {
+                if constraint.identifier == "tableHeightConstain" {
+                    constraint.constant = 60
+                }
+            }
+        case .assigments:
+            segmentView = SegmentView(frame: CGRect(x: 0, y: 108, width: view.frame.width, height: 56))
+            segmentView?.setTitles(titles: tempArray)
+            segmentView?.backgroundColor = UIColor(named: "BackgroundAccent")!
+            view.addSubview(segmentView!)
+            view.bringSubviewToFront(navView!)
+            for constraint in tableView.constraints {
+                print("___-_-_-_-_-_-EXIST+++=+=+=+=+=")
+                print(constraint.firstAnchor)
+                if constraint.identifier == "tableHeightConstain" {
+                    print("Called_____-_-__----_-_-_-_-_")
+                    constraint.constant = 200
+                }
+            }
+            view.layoutIfNeeded()
+            
+        }
     }
     
     @objc func calendarButtonTapped() {
@@ -98,6 +140,7 @@ class ScheduleViewController: UIViewController {
         default:
             print("looks like error")
         }
+        updateView()
         tableView.reloadData()
     }
     
@@ -170,6 +213,5 @@ extension ScheduleViewController: UITableViewDataSource {
             return cell
         }
     }
-    
     
 }

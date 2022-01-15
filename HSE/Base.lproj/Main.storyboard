@@ -69,21 +69,6 @@
             </objects>
             <point key="canvasLocation" x="1014" y="316"/>
         </scene>
-        <!--Tab Bar Base Controller-->
-        <scene sceneID="j4s-tJ-MbR">
-            <objects>
-                <viewController storyboardIdentifier="TabBarBaseController" id="A6f-iI-kfH" customClass="TabBarBaseController" customModule="HSE" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Bfe-KG-pth">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="eu8-aK-Thz"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zIC-kz-a72" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1158" y="316"/>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="pqO-x5-qlz">
             <objects>
@@ -212,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GB6-68-MrK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-76" y="1928"/>
+            <point key="canvasLocation" x="-76" y="1927.8325123152711"/>
         </scene>
         <!--Item-->
         <scene sceneID="8Dp-EY-cd3">
@@ -247,12 +232,6 @@
                     <view key="view" contentMode="scaleToFill" id="p23-q7-Zcx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="awardCS" translatesAutoresizingMaskIntoConstraints="NO" id="CBf-wC-Fxe">
-                                <rect key="frame" x="52" y="193" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Gat-pm-E6b"/>
                         <color key="backgroundColor" systemColor="systemGreenColor"/>
                     </view>
@@ -263,7 +242,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="awardCS" width="24" height="24"/>
         <namedColor name="BackgroundFirst">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

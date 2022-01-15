@@ -167,7 +167,7 @@ class ExtendingNavBar: UIControl {
             }) { _ in
                 self.animationCompleted = true
                 for constraint in self.constraints {
-                    if constraint.identifier == "heightConstrain" {
+                    if(constraint.identifier == "heightConstrain") {
                        constraint.constant = 60
                     }
                 }
@@ -190,7 +190,7 @@ class ExtendingNavBar: UIControl {
                 self.slidingButton.addTarget(self, action: #selector(self.slidedButtonTapped), for: .touchUpInside)
                 
                 for constraint in self.constraints {
-                    if constraint.identifier == "heightConstrain" {
+                    if(constraint.identifier == "heightConstrain") {
                        constraint.constant = 108
                     }
                 }
@@ -242,7 +242,6 @@ class ExtendingNavBar: UIControl {
                 }
             }
         }
-        
         let temp = topView
         topView = backView
         backView = temp
@@ -252,11 +251,5 @@ class ExtendingNavBar: UIControl {
     @objc func calendarButtonTapped() {
         sendActions(for: .touchUpInside)
     }
-    
-    
-    
-    
-    
-    
 
 }

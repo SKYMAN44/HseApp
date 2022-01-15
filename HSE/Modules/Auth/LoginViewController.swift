@@ -65,9 +65,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let tabVC = storyboard.instantiateViewController(withIdentifier: "TabBarBaseController") as! TabBarBaseController
+        let tabVC = TabBarBaseController()
         tabVC.modalPresentationStyle = .fullScreen
         present(tabVC, animated: true, completion: nil)
     }
