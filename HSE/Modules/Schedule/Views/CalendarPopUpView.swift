@@ -86,17 +86,19 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
     
     let blurView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: ScreenSize.Width, height: ScreenSize.Height))
-        let blurEffect = UIBlurEffect.init(style: .dark)
+        let blurEffect = UIBlurEffect.init(style: .systemMaterialDark)
         let visualEffectView = UIVisualEffectView.init(effect: blurEffect)
         visualEffectView.frame = view.bounds
-        visualEffectView.alpha = 0.3
+        visualEffectView.alpha = 0.4
         view.addSubview(visualEffectView)
+        view.alpha = 0
         return view
     } ()
     
     // MARK: - Display Animations
     
     // Add CommentPopUpView in the front of the current window
+    
     @objc func show(){
         
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene, let sceneDelegate = windowScene.delegate as? SceneDelegate else { return }
@@ -106,12 +108,14 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
             self.frame.origin.y = 0
+            self.blurView.alpha = 1
         }) { _ in
         }
     }
     
     @objc func dismiss(){
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseIn, animations: {
+            self.blurView.alpha = 0
             self.frame.origin.y = ScreenSize.Height
         }) { _ in
             self.removeFromSuperview()
@@ -133,10 +137,13 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         switch sender.state {
         case .began, .changed:
             
+            let slidingDistanceNormalized = transition.y / 300
+            print("____-__-_--__-______\(slidingDistanceNormalized)")
             //Only allow swipe down or up to the minY of PopupView
             if(totalSlidingDistance <= 0 && transition.y < 0)  {return}
             if(self.frame.origin.y + transition.y >= 0) {
                 self.frame.origin.y += transition.y
+                self.blurView.alpha -= slidingDistanceNormalized
                 sender.setTranslation(.zero, in: popUpView)
                 totalSlidingDistance += transition.y
             }
@@ -148,6 +155,7 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
             } else if(totalSlidingDistance >= 0) {
                 UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut]) {
                     self.frame.origin.y -= self.totalSlidingDistance
+                    self.blurView.alpha = 1
                     self.layoutIfNeeded()
                 }
             }
@@ -155,6 +163,7 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         default:
             UIView.animate(withDuration: 0.2, delay: 0, options: [.curveEaseOut]) {
                 self.frame.origin.y -= self.totalSlidingDistance
+                self.blurView.alpha = 1
                 self.layoutIfNeeded()
             }
             totalSlidingDistance = 0

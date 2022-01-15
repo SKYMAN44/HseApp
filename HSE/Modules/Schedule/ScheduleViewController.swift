@@ -138,7 +138,7 @@ extension ScheduleViewController: UITableViewDataSource {
         
         let label = UILabel()
         label.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: 15)
-        label.font = .systemFont(ofSize: 15, weight: .semibold)
+        label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = .systemGray3
         
         switch currentContent {

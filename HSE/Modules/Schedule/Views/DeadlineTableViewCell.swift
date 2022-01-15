@@ -10,10 +10,15 @@ import UIKit
 class DeadlineTableViewCell: UITableViewCell {
 
     static let reuseIdentifier = "DeadlineTableViewCell"
+
+    @IBOutlet weak var deadlineTimeView: UIView!
+    @IBOutlet weak var submittedTimeView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        deadlineTimeView.layer.cornerRadius = 4
+        submittedTimeView.layer.cornerRadius = 4
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
