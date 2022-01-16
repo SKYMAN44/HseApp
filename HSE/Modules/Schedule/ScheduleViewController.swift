@@ -78,6 +78,8 @@ class ScheduleViewController: UIViewController {
         tableView.sectionFooterHeight = 0.0;
         tableView.backgroundColor = .white
         
+        tableView.automaticallyAdjustsScrollIndicatorInsets = false
+        
         tableView.estimatedRowHeight = 82
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -87,7 +89,7 @@ class ScheduleViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
             tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: tabBarHeight)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ]
         
         tableViewConstraints[0].identifier = "tableHeightConstain"
