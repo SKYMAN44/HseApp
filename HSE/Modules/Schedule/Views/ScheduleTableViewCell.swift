@@ -11,6 +11,8 @@ class ScheduleTableViewCell: UITableViewCell {
 
     static let reuseIdentifier = "ScheduleTableViewCell"
     
+    @IBOutlet weak var subjectNameLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -19,6 +21,10 @@ class ScheduleTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    public func configure(schedule: Schedule) {
+        subjectNameLabel.text = schedule.subjectName
     }
     
 }

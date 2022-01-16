@@ -13,14 +13,14 @@ struct Schedule {
     let timeStart: String
     let timeEnd: String
     let type: String
-    let name: String
+    let subjectName: String
     let visitType: String
     
     
-    static let array: [Schedule] = [ Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", name: "Machine Learning", visitType: "Online"),
-        Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", name: "Machine Learning", visitType: "Online"),
-        Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", name: "Machine Learning", visitType: "Online"),
-        Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", name: "Machine Learning", visitType: "Online"),
-        Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", name: "Machine Learning", visitType: "Online")
+    static let array: [Schedule] = [ Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", subjectName: "Machine Learning", visitType: "Online"),
+        Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", subjectName: "Time Series and Stochatic Processes (eng)", visitType: "Online"),
+        Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", subjectName: "Machine Learning", visitType: "Online"),
+        Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", subjectName: "Machine Learning", visitType: "Online"),
+        Schedule(timeStart: "10:30", timeEnd: "10:30", type: "Lecture", subjectName: "Machine Learning", visitType: "Online")
     ]
 }

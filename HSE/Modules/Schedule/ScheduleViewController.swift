@@ -77,6 +77,8 @@ class ScheduleViewController: UIViewController {
         tableView.sectionHeaderHeight = 30;
         tableView.sectionFooterHeight = 0.0;
         tableView.backgroundColor = .white
+        
+        tableView.estimatedRowHeight = 82
         tableView.rowHeight = UITableView.automaticDimension
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -221,11 +223,12 @@ extension ScheduleViewController: UITableViewDataSource {
         
         switch currentContent {
         case .timeTable:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
             cell.selectionStyle = .none
+            cell.configure(schedule: ScheduleDay.days[indexPath.section].schedule[indexPath.row])
             return cell
         case .assigments:
-            let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell
             cell.selectionStyle = .none
             return cell
         }
