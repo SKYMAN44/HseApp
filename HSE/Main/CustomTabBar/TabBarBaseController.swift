@@ -16,18 +16,15 @@ class TabBarBaseController: UITabBarController {
         tabBar.tintColor = UIColor(named: "Primary")
         tabBar.backgroundColor = UIColor(named: "BackgroundAccent")
         
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-//        let scheduleViewController: ScheduleViewController =  storyboard.instantiateViewController(withIdentifier: "ScheduleViewController") as! ScheduleViewController
-        let gradesViewController: GradesViewController =  storyboard.instantiateViewController(withIdentifier: "GradesViewController") as! GradesViewController
-        let accountViewController: AccountViewController = storyboard.instantiateViewController(withIdentifier: "AccountViewController") as! AccountViewController
-        let navcontroller: NavViewController = storyboard.instantiateViewController(withIdentifier: "NavViewController") as! NavViewController
+        let courseViewController = CoursesViewController()
+        let navControllerCourses = BaseNavViewController(rootViewController: courseViewController)
+        let gradesViewController = GradesViewController()
+        let accountViewController = AccountViewController()
         let scheduleViewController = ScheduleViewController()
-        let navcontrollerschedule = ScheduleNavViewController(rootViewController: scheduleViewController)
+        let navControllerSchedule = BaseNavViewController(rootViewController: scheduleViewController)
         
-        navcontrollerschedule.tabBarItem.image = UIImage(named: "calendarCS")
-        navcontrollerschedule.tabBarItem.selectedImage = UIImage(named: "calendarCS")
+        navControllerSchedule.tabBarItem.image = UIImage(named: "calendarCS")
+        navControllerSchedule.tabBarItem.selectedImage = UIImage(named: "calendarCS")
         
         gradesViewController.tabBarItem.image = UIImage(named: "awardCS")
         gradesViewController.tabBarItem.selectedImage = UIImage(named: "awardCS")
@@ -35,12 +32,12 @@ class TabBarBaseController: UITabBarController {
         accountViewController.tabBarItem.image = UIImage(named: "userCS")
         accountViewController.tabBarItem.selectedImage = UIImage(named: "userCS")
         
-        navcontroller.tabBarItem.image = UIImage(named: "serverCS")
-        navcontroller.tabBarItem.selectedImage = UIImage(named: "serverCS")
+        navControllerCourses.tabBarItem.image = UIImage(named: "serverCS")
+        navControllerCourses.tabBarItem.selectedImage = UIImage(named: "serverCS")
         
-        self.setViewControllers([navcontrollerschedule,gradesViewController,navcontroller,accountViewController], animated: false)
+        self.setViewControllers([navControllerSchedule, navControllerCourses, gradesViewController, accountViewController], animated: false)
 
-        for (index, tabBarItem) in tabBar.items!.enumerated() {
+        for ( _ , tabBarItem) in tabBar.items!.enumerated() {
             tabBarItem.title = ""
         }
 

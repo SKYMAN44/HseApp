@@ -64,6 +64,7 @@ class SegmentView: UIView {
         collectionView?.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
         collectionView?.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
         collectionView?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
+        
     }
     
     override func draw(_ rect: CGRect) {
@@ -73,12 +74,13 @@ class SegmentView: UIView {
         self.titles = titles
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
+            self.collectionView?.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
         }
     }
     
     public func moveTo(index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
-        collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        collectionView!.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
     

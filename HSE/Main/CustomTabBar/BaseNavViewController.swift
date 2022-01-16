@@ -1,13 +1,13 @@
 //
-//  NavViewController.swift
+//  ScheduleNavViewController.swift
 //  HSE
 //
-//  Created by Дмитрий Соколов on 13.01.2022.
+//  Created by Дмитрий Соколов on 15.01.2022.
 //
 
 import UIKit
 
-class NavViewController: UINavigationController {
+class BaseNavViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

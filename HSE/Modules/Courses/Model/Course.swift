@@ -24,3 +24,28 @@ struct Course {
     ]
     
 }
+
+
+//temp things for layout
+
+struct Chat: Hashable {
+    
+    let id = UUID()
+    let name: String
+    
+    static let chats = [Chat(name: "random"),
+                        Chat(name: "random2"),
+                        Chat(name: "random3")]
+}
+
+
+struct TA: Hashable {
+    let id = UUID()
+    let name: String
+    
+    
+    static let tas = [TA(name: "DIMA"),
+                      TA(name: "Oleg"),
+                      TA(name: "Dan")
+    ]
+}
