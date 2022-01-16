@@ -69,8 +69,6 @@ class ScheduleViewController: UIViewController {
         
         NSLayoutConstraint.activate(constraints)
         
-        let tabBarHeight = self.tabBarController!.tabBar.frame.size.height
-        
         // tableView setUp
         
         tableView.separatorColor = .clear
