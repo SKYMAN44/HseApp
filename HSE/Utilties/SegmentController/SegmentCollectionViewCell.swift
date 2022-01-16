@@ -42,6 +42,8 @@ class SegmentCollectionViewCell: UICollectionViewCell {
         self.backView.alpha = 0.0
         self.backView.layer.cornerRadius = 8
         self.layer.cornerRadius = 8
+        
+        notificationLabel.text = String(Int.random(in: 0...999))
     }
     
     public func configure(title: String) {
