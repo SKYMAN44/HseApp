@@ -22,6 +22,8 @@
 		639DCE282793883F007FC2DC /* ChatCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE262793883F007FC2DC /* ChatCollectionViewCell.xib */; };
 		639DCE2B27938901007FC2DC /* TeachingStuffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2927938901007FC2DC /* TeachingStuffCollectionViewCell.swift */; };
 		639DCE2C27938901007FC2DC /* TeachingStuffCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE2A27938901007FC2DC /* TeachingStuffCollectionViewCell.xib */; };
+		639DCE2E2794C7C8007FC2DC /* testPic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE2D2794C7C8007FC2DC /* testPic.jpg */; };
+		639DCE302794C88D007FC2DC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2F2794C88D007FC2DC /* Image.swift */; };
 		63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60A278DC58C0028381F /* AppDelegate.swift */; };
 		63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60C278DC58C0028381F /* SceneDelegate.swift */; };
 		63C4D612278DC58C0028381F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D610278DC58C0028381F /* Main.storyboard */; };
@@ -81,6 +83,8 @@
 		639DCE262793883F007FC2DC /* ChatCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatCollectionViewCell.xib; sourceTree = "<group>"; };
 		639DCE2927938901007FC2DC /* TeachingStuffCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStuffCollectionViewCell.swift; sourceTree = "<group>"; };
 		639DCE2A27938901007FC2DC /* TeachingStuffCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeachingStuffCollectionViewCell.xib; sourceTree = "<group>"; };
+		639DCE2D2794C7C8007FC2DC /* testPic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testPic.jpg; path = HSE/testPic.jpg; sourceTree = SOURCE_ROOT; };
+		639DCE2F2794C88D007FC2DC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		63C4D607278DC58C0028381F /* HSE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HSE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C4D60A278DC58C0028381F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C4D60C278DC58C0028381F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -206,6 +210,7 @@
 				63C4D613278DC58E0028381F /* Assets.xcassets */,
 				63C4D615278DC58E0028381F /* LaunchScreen.storyboard */,
 				63C4D618278DC58E0028381F /* Info.plist */,
+				639DCE2D2794C7C8007FC2DC /* testPic.jpg */,
 			);
 			path = HSE;
 			sourceTree = "<group>";
@@ -321,6 +326,7 @@
 			isa = PBXGroup;
 			children = (
 				63F857D3278F8CEB00F45A97 /* Textfield.swift */,
+				639DCE2F2794C88D007FC2DC /* Image.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -481,6 +487,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				639DCE2E2794C7C8007FC2DC /* testPic.jpg in Resources */,
 				63F857CD278F2F7100F45A97 /* SegmentCollectionViewCell.xib in Resources */,
 				63C4D617278DC58E0028381F /* LaunchScreen.storyboard in Resources */,
 				63C4D614278DC58E0028381F /* Assets.xcassets in Resources */,
@@ -532,6 +539,7 @@
 				639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */,
 				639DCE272793883F007FC2DC /* ChatCollectionViewCell.swift in Sources */,
 				63F857D7278F8F9F00F45A97 /* CustomSegmentedController.swift in Sources */,
+				639DCE302794C88D007FC2DC /* Image.swift in Sources */,
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,
 				639DCE22279306B1007FC2DC /* ScheduleDayViewModel.swift in Sources */,
 				63F857D1278F8C4800F45A97 /* LoginViewController.swift in Sources */,

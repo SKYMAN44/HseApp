@@ -9,7 +9,6 @@ import UIKit
 
 class CoursesViewController: UIViewController {
     
-
     var segmentView: SegmentView!
     
     var courseViewModels = [CourseViewModel]()

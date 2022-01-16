@@ -188,7 +188,6 @@ class ExtendingNavBar: UIControl {
                 
                 self.slidingButton = UIButton()
                 self.slidingButton.addTarget(self, action: #selector(self.slidedButtonTapped), for: .touchUpInside)
-                
                 for constraint in self.constraints {
                     if(constraint.identifier == "heightConstrain") {
                        constraint.constant = 108
@@ -234,13 +233,13 @@ class ExtendingNavBar: UIControl {
             } else {
                 self.choosenSegment = 0
             }
-            self.sendActions(for: .valueChanged)
             
             for constraint in self.constraints {
                 if constraint.identifier == "heightConstrain" {
                    constraint.constant = 60
                 }
             }
+            self.sendActions(for: .valueChanged)
         }
         let temp = topView
         topView = backView

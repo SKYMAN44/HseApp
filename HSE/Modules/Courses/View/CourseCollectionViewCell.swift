@@ -72,6 +72,7 @@ extension CourseCollectionViewCell {
     
     func configureDataSource() {
         // MARK: Data Source Initialization
+        
         dataSource = .init(collectionView: oneCourseCollectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
             let section = self.sections[indexPath.section]
             switch section {

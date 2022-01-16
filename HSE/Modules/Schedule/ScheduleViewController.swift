@@ -51,7 +51,7 @@ class ScheduleViewController: UIViewController {
         
         navView?.addSubviews()
         
-        navView?.addTarget(self, action: #selector(calendarButtonTapped) , for: .touchUpInside)
+        navView?.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
         navView?.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
         
         view.addSubview(navView!)
@@ -77,6 +77,7 @@ class ScheduleViewController: UIViewController {
         tableView.sectionHeaderHeight = 30;
         tableView.sectionFooterHeight = 0.0;
         tableView.backgroundColor = .white
+        tableView.rowHeight = UITableView.automaticDimension
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
 
@@ -88,7 +89,6 @@ class ScheduleViewController: UIViewController {
         ]
         
         tableViewConstraints[0].identifier = "tableHeightConstain"
-        print("_+_+_+_++_+_+++_++_+_+_+_+_+_++_+_+_+_ \(tableViewConstraints[0])")
         
         NSLayoutConstraint.activate(tableViewConstraints)
         
@@ -99,27 +99,44 @@ class ScheduleViewController: UIViewController {
     
     
     private func updateView() {
+        
         switch currentContent {
         case .timeTable:
+            //remove segmented view
             guard let view = segmentView else {return}
             view.removeFromSuperview()
-            for constraint in tableView.constraints {
+            
+            for constraint in self.view.constraints {
                 if constraint.identifier == "tableHeightConstain" {
                     constraint.constant = 60
                 }
             }
+            
         case .assigments:
+            
+            // add segmented view
             segmentView = SegmentView(frame: CGRect(x: 0, y: 108, width: view.frame.width, height: 56))
             segmentView?.setTitles(titles: tempArray)
             segmentView?.backgroundColor = UIColor(named: "BackgroundAccent")!
+            
             view.addSubview(segmentView!)
+            
+            let segmentViewConstraints = [
+                segmentView!.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+                segmentView!.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+                segmentView!.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+                segmentView!.heightAnchor.constraint(equalToConstant: 56)
+            ]
+            
+            NSLayoutConstraint.activate(segmentViewConstraints)
+            
+            //place navView on top of segmentView
             view.bringSubviewToFront(navView!)
-            for constraint in tableView.constraints {
-                print("___-_-_-_-_-_-EXIST+++=+=+=+=+=")
-                print(constraint.firstAnchor)
+            
+            // change top constraint of tableview so segmentView not covers it
+            for constraint in self.view.constraints {
                 if constraint.identifier == "tableHeightConstain" {
-                    print("Called_____-_-__----_-_-_-_-_")
-                    constraint.constant = 200
+                    constraint.constant = 116
                 }
             }
             view.layoutIfNeeded()
