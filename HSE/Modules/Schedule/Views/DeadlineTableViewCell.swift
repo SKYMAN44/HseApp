@@ -17,6 +17,8 @@ class DeadlineTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        self.backgroundColor = .background.style(.firstLevel)()
+        
         deadlineTimeView.layer.cornerRadius = 4
         submittedTimeView.layer.cornerRadius = 4
     }

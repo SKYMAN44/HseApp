@@ -32,9 +32,10 @@ class CoursesViewController: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(named: "BackgroundAccent")
-        self.navigationController?.navigationBar.backgroundColor = UIColor(named: "BackgroundAccent")
+        self.view.backgroundColor = .background.style(.accent)()
+        self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
         self.navigationItem.title = "Courses"
         
         fetchCourses()
@@ -43,7 +44,8 @@ class CoursesViewController: UIViewController {
         segmentView.setTitles(titles: courseViewModels.map({
             return $0.title
         }))
-        segmentView.backgroundColor =  UIColor(named: "BackgroundAccent")
+        
+        segmentView.backgroundColor = .background.style(.accent)()
         segmentView.delegate = self
         
         view.addSubview(segmentView)

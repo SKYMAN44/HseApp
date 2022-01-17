@@ -29,14 +29,16 @@ class ExtendingNavBar: UIControl {
     var mainLabel: UILabel =  {
         let label = UILabel()
         label.text = "TimeTable"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .customFont.style(.title)()
+        label.textColor = .textAndIcons.style(.primary) ()
         return label
     }()
     
     var minorLabel: UILabel = {
         let label = UILabel()
         label.text = "Assigments"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = .customFont.style(.title)()
+        label.textColor = .textAndIcons.style(.primary) ()
         return label
     }()
     
@@ -49,7 +51,7 @@ class ExtendingNavBar: UIControl {
         
         // set up background views
 
-        slidingView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 48))
+        slidingView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 58))
         mainView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 60))
         
         slidingView.backgroundColor = color
@@ -62,6 +64,7 @@ class ExtendingNavBar: UIControl {
         calendarButton = UIButton(type: .system)
         calendarButton.setImage(UIImage(named: "calendarCS"), for: .normal)
         calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+        calendarButton.tintColor = .textAndIcons.style(.primary)()
         
         mainView.addSubview(calendarButton)
         
@@ -77,6 +80,7 @@ class ExtendingNavBar: UIControl {
         leftView = UIView()
         
         indicatorImageView = UIImageView(image: UIImage(named: "chevron-down"))
+        indicatorImageView.tintColor = .textAndIcons.style(.primary)()
         indicatorImageView.contentMode = .center
         
         let sV = UIStackView()
@@ -190,7 +194,7 @@ class ExtendingNavBar: UIControl {
                 self.slidingButton.addTarget(self, action: #selector(self.slidedButtonTapped), for: .touchUpInside)
                 for constraint in self.constraints {
                     if(constraint.identifier == "heightConstrain") {
-                       constraint.constant = 108
+                       constraint.constant = 116
                     }
                 }
                 
@@ -249,6 +253,36 @@ class ExtendingNavBar: UIControl {
     
     @objc func calendarButtonTapped() {
         sendActions(for: .touchUpInside)
+    }
+    
+    
+    public func hide() {
+        if(!animationCompleted) {
+            return
+        }
+        
+        if(slideViewIsVisible) {
+            
+            animationCompleted = false
+            slideViewIsVisible = false
+            slidingButton.removeFromSuperview()
+            backView?.layer.zPosition = 0
+            slidingButton.removeFromSuperview()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.backView.frame.origin.y = 0
+                self.indicatorImageView.transform = CGAffineTransform.identity
+            })
+            UIView.animate(withDuration: 0.3, delay: 0.01, animations: {
+                self.slidingView.frame.origin.y = 0
+            }) { _ in
+                self.animationCompleted = true
+                for constraint in self.constraints {
+                    if(constraint.identifier == "heightConstrain") {
+                       constraint.constant = 60
+                    }
+                }
+            }
+        }
     }
 
 }

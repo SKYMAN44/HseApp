@@ -24,6 +24,13 @@
 		639DCE2C27938901007FC2DC /* TeachingStuffCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE2A27938901007FC2DC /* TeachingStuffCollectionViewCell.xib */; };
 		639DCE2E2794C7C8007FC2DC /* testPic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE2D2794C7C8007FC2DC /* testPic.jpg */; };
 		639DCE302794C88D007FC2DC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2F2794C88D007FC2DC /* Image.swift */; };
+		639DCE34279576A2007FC2DC /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE33279576A2007FC2DC /* EndPointType.swift */; };
+		639DCE3727957740007FC2DC /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE3627957740007FC2DC /* Inter-Bold.ttf */; };
+		639DCE3927957750007FC2DC /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE3827957750007FC2DC /* Inter-Medium.ttf */; };
+		639DCE3B2795775C007FC2DC /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE3A2795775C007FC2DC /* Inter-Regular.ttf */; };
+		639DCE3D27957783007FC2DC /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE3C27957783007FC2DC /* Inter-SemiBold.ttf */; };
+		639DCE3F27957A94007FC2DC /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE3E27957A94007FC2DC /* Font.swift */; };
+		639DCE4127958C95007FC2DC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE4027958C95007FC2DC /* Color.swift */; };
 		63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60A278DC58C0028381F /* AppDelegate.swift */; };
 		63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60C278DC58C0028381F /* SceneDelegate.swift */; };
 		63C4D612278DC58C0028381F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D610278DC58C0028381F /* Main.storyboard */; };
@@ -85,6 +92,13 @@
 		639DCE2A27938901007FC2DC /* TeachingStuffCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeachingStuffCollectionViewCell.xib; sourceTree = "<group>"; };
 		639DCE2D2794C7C8007FC2DC /* testPic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testPic.jpg; path = HSE/testPic.jpg; sourceTree = SOURCE_ROOT; };
 		639DCE2F2794C88D007FC2DC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		639DCE33279576A2007FC2DC /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		639DCE3627957740007FC2DC /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
+		639DCE3827957750007FC2DC /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
+		639DCE3A2795775C007FC2DC /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
+		639DCE3C27957783007FC2DC /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
+		639DCE3E27957A94007FC2DC /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		639DCE4027958C95007FC2DC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		63C4D607278DC58C0028381F /* HSE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HSE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C4D60A278DC58C0028381F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63C4D60C278DC58C0028381F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -179,6 +193,32 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		639DCE3127957658007FC2DC /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		639DCE322795768B007FC2DC /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				639DCE33279576A2007FC2DC /* EndPointType.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		639DCE3527957709007FC2DC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				639DCE3627957740007FC2DC /* Inter-Bold.ttf */,
+				639DCE3827957750007FC2DC /* Inter-Medium.ttf */,
+				639DCE3A2795775C007FC2DC /* Inter-Regular.ttf */,
+				639DCE3C27957783007FC2DC /* Inter-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		63C4D5FE278DC58C0028381F = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +246,7 @@
 				63C4D64C278E37320028381F /* Modules */,
 				63C4D64A278E35A80028381F /* Networking */,
 				63C4D649278E358F0028381F /* Utilties */,
+				639DCE3527957709007FC2DC /* Fonts */,
 				63C4D610278DC58C0028381F /* Main.storyboard */,
 				63C4D613278DC58E0028381F /* Assets.xcassets */,
 				63C4D615278DC58E0028381F /* LaunchScreen.storyboard */,
@@ -247,6 +288,8 @@
 		63C4D64A278E35A80028381F /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				639DCE322795768B007FC2DC /* Service */,
+				639DCE3127957658007FC2DC /* EndPoint */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -327,6 +370,8 @@
 			children = (
 				63F857D3278F8CEB00F45A97 /* Textfield.swift */,
 				639DCE2F2794C88D007FC2DC /* Image.swift */,
+				639DCE3E27957A94007FC2DC /* Font.swift */,
+				639DCE4027958C95007FC2DC /* Color.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -491,10 +536,14 @@
 				63F857CD278F2F7100F45A97 /* SegmentCollectionViewCell.xib in Resources */,
 				63C4D617278DC58E0028381F /* LaunchScreen.storyboard in Resources */,
 				63C4D614278DC58E0028381F /* Assets.xcassets in Resources */,
+				639DCE3D27957783007FC2DC /* Inter-SemiBold.ttf in Resources */,
 				639DCE1D2792E9EC007FC2DC /* DeadlineTableViewCell.xib in Resources */,
 				63C4D612278DC58C0028381F /* Main.storyboard in Resources */,
+				639DCE3727957740007FC2DC /* Inter-Bold.ttf in Resources */,
 				639DCE282793883F007FC2DC /* ChatCollectionViewCell.xib in Resources */,
 				639DCE2C27938901007FC2DC /* TeachingStuffCollectionViewCell.xib in Resources */,
+				639DCE3927957750007FC2DC /* Inter-Medium.ttf in Resources */,
+				639DCE3B2795775C007FC2DC /* Inter-Regular.ttf in Resources */,
 				639DCE1227923546007FC2DC /* ScheduleTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -525,9 +574,11 @@
 				63C4D641278DCD260028381F /* Course.swift in Sources */,
 				63F857E02790658800F45A97 /* AccountViewController.swift in Sources */,
 				639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */,
+				639DCE4127958C95007FC2DC /* Color.swift in Sources */,
 				63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */,
 				639DCE1127923546007FC2DC /* ScheduleTableViewCell.swift in Sources */,
 				63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */,
+				639DCE34279576A2007FC2DC /* EndPointType.swift in Sources */,
 				639DCE1F2792FDA4007FC2DC /* BaseNavViewController.swift in Sources */,
 				63F857DC2790655600F45A97 /* ScheduleViewController.swift in Sources */,
 				63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */,
@@ -543,6 +594,7 @@
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,
 				639DCE22279306B1007FC2DC /* ScheduleDayViewModel.swift in Sources */,
 				63F857D1278F8C4800F45A97 /* LoginViewController.swift in Sources */,
+				639DCE3F27957A94007FC2DC /* Font.swift in Sources */,
 				63C4D650278E38780028381F /* CourseViewModel.swift in Sources */,
 				63F857C7278F2AA500F45A97 /* SegmentView.swift in Sources */,
 				639DCE0D27923404007FC2DC /* Schedule.swift in Sources */,

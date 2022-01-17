@@ -66,6 +66,7 @@ class CustomSegmentedController: UIControl {
         for title in titles {
             let button = UIButton(type: .system)
             button.setTitle(title, for: .normal)
+            button.titleLabel?.font = .customFont.style(.body)()
             button.setTitleColor(textColor, for: .normal)
             button.addTarget(self, action: #selector(buttonTapped(button:)), for: .touchUpInside)
             buttons.append(button)

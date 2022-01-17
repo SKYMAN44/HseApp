@@ -12,7 +12,7 @@ enum ContentType {
     case assigments
 }
 
-let tempArray: [String] = ["all","Homework","Midterm"]
+let tempArray: [String] = ["All","Homework","Midterm"]
 
 class ScheduleViewController: UIViewController {
     
@@ -44,10 +44,10 @@ class ScheduleViewController: UIViewController {
         // setUp navBar
         
         navigationController?.setNavigationBarHidden(true, animated: false)
-        self.view.backgroundColor = UIColor(named: "BackgroundAccent")!
+        self.view.backgroundColor = .background.style(.accent)()
         
         navView = ExtendingNavBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
-        navView?.color = UIColor(named: "BackgroundAccent")!
+        navView?.color = .background.style(.accent)()
         
         navView?.addSubviews()
         
@@ -74,7 +74,7 @@ class ScheduleViewController: UIViewController {
         tableView.separatorColor = .clear
         tableView.sectionHeaderHeight = 30;
         tableView.sectionFooterHeight = 0.0;
-        tableView.backgroundColor = .white
+        tableView.backgroundColor = .background.style(.firstLevel)()
         
         tableView.automaticallyAdjustsScrollIndicatorInsets = false
         
@@ -119,7 +119,7 @@ class ScheduleViewController: UIViewController {
             // add segmented view
             segmentView = SegmentView(frame: CGRect(x: 0, y: 108, width: view.frame.width, height: 56))
             segmentView?.setTitles(titles: tempArray)
-            segmentView?.backgroundColor = UIColor(named: "BackgroundAccent")!
+            segmentView?.backgroundColor = .background.style(.accent)()
             
             view.addSubview(segmentView!)
             
@@ -196,12 +196,12 @@ extension ScheduleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
-        headerView.backgroundColor = .white
+        headerView.backgroundColor = .background.style(.firstLevel)()
         
         let label = UILabel()
         label.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: 15)
-        label.font = .systemFont(ofSize: 12, weight: .medium)
-        label.textColor = .systemGray3
+        label.font = .customFont.style(.special)()
+        label.textColor = .textAndIcons.style(.tretiary)()
         
         switch currentContent {
         case .timeTable:
@@ -234,4 +234,13 @@ extension ScheduleViewController: UITableViewDataSource {
         }
     }
     
+}
+
+
+extension ScheduleViewController: UIScrollViewDelegate {
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        navView?.hide()
+
+    }
 }

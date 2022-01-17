@@ -21,15 +21,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailTextField.layer.cornerRadius = 8
         emailTextField.layer.masksToBounds = true
         emailTextField.layer.borderWidth = 0
-        emailTextField.backgroundColor = .systemGray6
         emailTextField.placeholder = "HSE Email"
+        emailTextField.backgroundColor = .background.style(.accent)()
         emailTextField.setLeftPaddingPoints(16)
 
         passwordTextField.layer.cornerRadius = 8
         passwordTextField.layer.masksToBounds = true
         passwordTextField.layer.borderWidth = 0
-        passwordTextField.backgroundColor = .systemGray6
         passwordTextField.placeholder = "Password"
+        passwordTextField.backgroundColor = .background.style(.accent)()
         passwordTextField.setLeftPaddingPoints(16)
         
         emailTextField.delegate = self

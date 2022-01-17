@@ -43,7 +43,7 @@ class CourseCollectionViewCell: UICollectionViewCell {
         addSubview(oneCourseCollectionView)
         
         oneCourseCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        oneCourseCollectionView.backgroundColor = .white
+        oneCourseCollectionView.backgroundColor = .background.style(.firstLevel)()
         
         let constraints = [
             oneCourseCollectionView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
@@ -120,7 +120,7 @@ extension CourseCollectionViewCell {
                 
                 let section = NSCollectionLayoutSection(group: group)
                 
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
                 
                 section.orthogonalScrollingBehavior = .none
                 

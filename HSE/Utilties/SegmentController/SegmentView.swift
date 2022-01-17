@@ -39,7 +39,7 @@ class SegmentView: UIView {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 12)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 0)
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.minimumInteritemSpacing = 12
         

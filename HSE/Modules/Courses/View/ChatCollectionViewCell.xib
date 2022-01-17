@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="287" height="84"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="hTs-ql-qf5">
-                                <rect key="frame" x="0.0" y="12" width="287" height="60"/>
+                                <rect key="frame" x="16" y="12" width="255" height="60"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="testPic.png" translatesAutoresizingMaskIntoConstraints="NO" id="fOW-Hl-nsm">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -30,7 +30,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="8Dd-Av-HHU">
-                                        <rect key="frame" x="72" y="0.0" width="167" height="60"/>
+                                        <rect key="frame" x="72" y="0.0" width="135" height="60"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="aMl-9x-uqB">
                                                 <rect key="frame" x="0.0" y="0.0" width="101.5" height="18"/>
@@ -54,16 +54,16 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="wfw-il-evZ">
-                                                <rect key="frame" x="0.0" y="43" width="167" height="17"/>
+                                                <rect key="frame" x="0.0" y="43" width="135" height="17"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Я в своем познании настолько" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aOw-F5-yIv">
-                                                        <rect key="frame" x="0.0" y="0.0" width="132.5" height="17"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="100.5" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" systemColor="systemGray3Color"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VfC-bg-wSy">
-                                                        <rect key="frame" x="140.5" y="0.0" width="26.5" height="17"/>
+                                                        <rect key="frame" x="108.5" y="0.0" width="26.5" height="17"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <color key="textColor" systemColor="systemGray3Color"/>
                                                         <nil key="highlightedColor"/>
@@ -73,7 +73,7 @@
                                         </subviews>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2f8-f8-D0g">
-                                        <rect key="frame" x="251" y="0.0" width="36" height="60"/>
+                                        <rect key="frame" x="219" y="0.0" width="36" height="60"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rye-kS-Bkp">
                                                 <rect key="frame" x="-0.5" y="19" width="37" height="22.5"/>
@@ -96,7 +96,6 @@
                                                 </constraints>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="Rye-kS-Bkp" firstAttribute="centerX" secondItem="2f8-f8-D0g" secondAttribute="centerX" id="1pb-SD-Zb1"/>
                                             <constraint firstItem="Rye-kS-Bkp" firstAttribute="centerY" secondItem="2f8-f8-D0g" secondAttribute="centerY" id="9EG-UE-upK"/>
@@ -106,12 +105,11 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="hTs-ql-qf5" firstAttribute="top" secondItem="usv-1Z-ZJT" secondAttribute="top" constant="12" id="AYL-G9-5Yb"/>
-                            <constraint firstAttribute="trailing" secondItem="hTs-ql-qf5" secondAttribute="trailing" id="MeL-vi-LNz"/>
+                            <constraint firstItem="hTs-ql-qf5" firstAttribute="leading" secondItem="usv-1Z-ZJT" secondAttribute="leading" constant="16" id="YYN-KZ-N6t"/>
                             <constraint firstAttribute="bottom" secondItem="hTs-ql-qf5" secondAttribute="bottom" constant="12" id="sDO-mK-zza"/>
-                            <constraint firstItem="hTs-ql-qf5" firstAttribute="leading" secondItem="usv-1Z-ZJT" secondAttribute="leading" id="x1V-pG-L4z"/>
+                            <constraint firstAttribute="trailing" secondItem="hTs-ql-qf5" secondAttribute="trailing" constant="16" id="zHm-Fe-pYT"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -126,8 +124,12 @@
             <size key="customSize" width="287" height="84"/>
             <connections>
                 <outlet property="chatImageView" destination="fOW-Hl-nsm" id="Bhw-3w-eoF"/>
+                <outlet property="chatNameLabel" destination="gDf-yv-9Dz" id="VQv-bg-XlT"/>
+                <outlet property="messageContentLabel" destination="aOw-F5-yIv" id="Egv-YI-ioc"/>
+                <outlet property="messageTimeLabel" destination="VfC-bg-wSy" id="evk-lI-wAy"/>
                 <outlet property="notificationLabel" destination="qq6-Em-FTS" id="iwu-JL-5pQ"/>
                 <outlet property="notificationView" destination="Rye-kS-Bkp" id="SqP-ro-GJu"/>
+                <outlet property="senderNameLabel" destination="Jbu-FW-IsE" id="uVA-yi-KcN"/>
             </connections>
             <point key="canvasLocation" x="309.4202898550725" y="108.48214285714285"/>
         </collectionViewCell>

@@ -21,15 +21,15 @@ class SegmentCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet {
             if(isSelected) {
-                self.backView.backgroundColor = UIColor(named: "PrimaryFiller")
+                self.backView.backgroundColor = .primary.style(.filler)()
                 self.backView.alpha = 1
-                self.titleLabel.textColor = UIColor(named: "Primary")
-                notificationView.backgroundColor = .white
+                self.titleLabel.textColor = .primary.style(.primary)()
+                notificationView.backgroundColor = .background.style(.firstLevel)()
             }else {
                 self.backView.alpha = 1
-                notificationView.backgroundColor = .systemGray6
-                self.backView.backgroundColor = .white
-                self.titleLabel.textColor = .lightGray
+                notificationView.backgroundColor = .background.style(.accent)()
+                self.backView.backgroundColor = .background.style(.firstLevel)()
+                self.titleLabel.textColor = .textAndIcons.style(.secondary)()
             }
         }
     }
@@ -38,10 +38,13 @@ class SegmentCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
     
         notificationView.layer.cornerRadius = 12
-        notificationView.backgroundColor = .systemGray6
+        notificationView.backgroundColor = .background.style(.accent)()
         self.backView.alpha = 0.0
         self.backView.layer.cornerRadius = 8
         self.layer.cornerRadius = 8
+        
+        titleLabel.font = .customFont.style(.body)()
+        notificationLabel.font = .customFont.style(.caption)()
         
         notificationLabel.text = String(Int.random(in: 0...999))
     }

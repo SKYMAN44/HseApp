@@ -13,8 +13,8 @@ class TabBarBaseController: UITabBarController {
         super.viewDidLoad()
         
         tabBar.isTranslucent = true
-        tabBar.tintColor = UIColor(named: "Primary")
-        tabBar.backgroundColor = UIColor(named: "BackgroundAccent")
+        tabBar.tintColor = .primary.style(.primary)()
+        tabBar.backgroundColor = .background.style(.accent)()
         
         let courseViewController = CoursesViewController()
         let navControllerCourses = BaseNavViewController(rootViewController: courseViewController)

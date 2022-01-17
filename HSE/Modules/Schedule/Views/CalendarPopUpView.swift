@@ -49,7 +49,7 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         
         // Pop Up View
         popUpView = UIView(frame: CGRect(x: 0, y: ScreenSize.Height * 0.5, width: ScreenSize.Width, height: ScreenSize.Height * 0.5))
-        popUpView.backgroundColor = .white
+        popUpView.backgroundColor = .background.style(.firstLevel)()
         self.popUpView.isUserInteractionEnabled = true
         addSubview(popUpView)
         
@@ -65,7 +65,7 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         let calendar = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
         calendar.datePickerMode = .date
         calendar.preferredDatePickerStyle = .inline
-        calendar.tintColor = UIColor(named: "Primary")
+        calendar.tintColor = .primary.style(.primary)()
         
         popUpView.addSubview(calendar)
         
