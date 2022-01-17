@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LLd-jH-a5x">
     <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -21,8 +22,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Иллюстрация_без_названия" translatesAutoresizingMaskIntoConstraints="NO" id="k8W-CX-Nzo">
+                                <rect key="frame" x="24" y="68" width="327" height="248"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="248" id="4zT-SY-r0G"/>
+                                </constraints>
+                            </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="mGp-1S-UIu">
-                                <rect key="frame" x="24" y="297" width="327" height="164"/>
+                                <rect key="frame" x="24" y="340" width="327" height="164"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1O-Lv-pb8" customClass="CustomSegmentedController" customModule="HSE" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="327" height="36"/>
@@ -116,10 +123,13 @@
                             <constraint firstItem="hNX-77-4Qy" firstAttribute="leading" secondItem="EDF-xT-R7y" secondAttribute="leading" constant="24" id="IWB-mG-3Yl"/>
                             <constraint firstItem="EDF-xT-R7y" firstAttribute="trailing" secondItem="909-mA-QGK" secondAttribute="trailing" constant="24" id="JVC-iO-Cga"/>
                             <constraint firstItem="mGp-1S-UIu" firstAttribute="leading" secondItem="EDF-xT-R7y" secondAttribute="leading" constant="24" id="LM2-T0-W8n"/>
+                            <constraint firstItem="k8W-CX-Nzo" firstAttribute="leading" secondItem="EDF-xT-R7y" secondAttribute="leading" constant="24" id="MJb-1G-vqp"/>
                             <constraint firstItem="EDF-xT-R7y" firstAttribute="trailing" secondItem="mGp-1S-UIu" secondAttribute="trailing" constant="24" id="Sad-05-pqc"/>
+                            <constraint firstItem="EDF-xT-R7y" firstAttribute="trailing" secondItem="k8W-CX-Nzo" secondAttribute="trailing" constant="24" id="U95-WY-JO1"/>
                             <constraint firstItem="EDF-xT-R7y" firstAttribute="bottom" secondItem="hNX-77-4Qy" secondAttribute="bottom" constant="24" id="iqT-wX-uus"/>
+                            <constraint firstItem="mGp-1S-UIu" firstAttribute="top" secondItem="k8W-CX-Nzo" secondAttribute="bottom" constant="24" id="jWY-OR-70p"/>
                             <constraint firstItem="EDF-xT-R7y" firstAttribute="trailing" secondItem="hNX-77-4Qy" secondAttribute="trailing" constant="24" id="o4L-hf-CT7"/>
-                            <constraint firstItem="mGp-1S-UIu" firstAttribute="top" secondItem="EDF-xT-R7y" secondAttribute="top" constant="253" id="pdU-PP-5zh"/>
+                            <constraint firstItem="k8W-CX-Nzo" firstAttribute="top" secondItem="EDF-xT-R7y" secondAttribute="top" constant="24" id="p59-Gi-h6D"/>
                         </constraints>
                     </view>
                     <connections>
@@ -134,6 +144,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Иллюстрация_без_названия" width="2048" height="2048"/>
         <namedColor name="BackgroundAccent">
             <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -144,13 +155,13 @@
             <color red="0.12156862745098039" green="0.30588235294117649" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="PrimaryFiller">
-            <color red="0.12156862745098039" green="0.30588235294117649" blue="0.7803921568627451" alpha="0.14999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.12156862745098039" green="0.30588235294117649" blue="0.7803921568627451" alpha="0.15000000596046448" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text&amp;IconsSecondary">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Text&amp;IconsTretiary">
-            <color red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.0" blue="0.0" alpha="0.30000001192092896" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="onPrimary">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
