@@ -49,7 +49,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="SegmentValueChanged:" destination="LLd-jH-a5x" eventType="valueChanged" id="tHW-lZ-qWf"/>
+                                            <action selector="segmentValueChanged:" destination="LLd-jH-a5x" eventType="valueChanged" id="4MH-h1-8G3"/>
                                         </connections>
                                     </view>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1qh-hF-I7Y">
@@ -140,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mJH-bH-V7j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1087" y="316"/>
+            <point key="canvasLocation" x="-1433" y="313"/>
         </scene>
     </scenes>
     <resources>

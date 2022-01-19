@@ -14,7 +14,7 @@ enum ContentType {
 
 let tempArray: [String] = ["All","Homework","Midterm"]
 
-class ScheduleViewController: UIViewController {
+final class ScheduleViewController: UIViewController {
     
     var navView: ExtendingNavBar?
     
@@ -30,7 +30,7 @@ class ScheduleViewController: UIViewController {
         tableView.register(UINib(nibName: "DeadlineTableViewCell", bundle: nil), forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
         
         return tableView
-    } ()
+    }()
     
     private let refreshControl = UIRefreshControl()
     

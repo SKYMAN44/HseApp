@@ -31,10 +31,10 @@ class CourseCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        oneCourseCollectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: generateLayout())
         
-        oneCourseCollectionView.register(ChatCollectionViewCell.self, forCellWithReuseIdentifier: ChatCollectionViewCell.reuseIdentifier)
-        oneCourseCollectionView.register(UINib(nibName: "ChatCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: ChatCollectionViewCell.reuseIdentifier)
+        oneCourseCollectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
+        
+        oneCourseCollectionView.register(CourseChatCollectionViewCell.self, forCellWithReuseIdentifier: CourseChatCollectionViewCell.reuseIdentifier)
         oneCourseCollectionView.register(TeachingStuffCollectionViewCell.self, forCellWithReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier)
         oneCourseCollectionView.register(UINib(nibName: "TeachingStuffCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier)
         
@@ -77,8 +77,8 @@ extension CourseCollectionViewCell {
             let section = self.sections[indexPath.section]
             switch section {
             case .chat:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.reuseIdentifier, for: indexPath) as! ChatCollectionViewCell
-                
+//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.reuseIdentifier, for: indexPath) as! ChatCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CourseChatCollectionViewCell.reuseIdentifier, for: indexPath) as! CourseChatCollectionViewCell
                 return cell
             case .tStuff:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier, for: indexPath) as! TeachingStuffCollectionViewCell

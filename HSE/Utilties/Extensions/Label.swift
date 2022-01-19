@@ -1,15 +1,14 @@
 //
-//  Font.swift
+//  Label.swift
 //  HSE
 //
-//  Created by Дмитрий Соколов on 17.01.2022.
+//  Created by Дмитрий Соколов on 18.01.2022.
 //
 
 import Foundation
 import UIKit
 
-// переделать на extension label
-extension UIFont {
+extension UILabel {
     
     enum customFont {
         case headline
@@ -38,5 +37,4 @@ extension UIFont {
             return font
         }
     }
-    
 }

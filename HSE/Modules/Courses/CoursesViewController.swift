@@ -7,31 +7,32 @@
 
 import UIKit
 
-class CoursesViewController: UIViewController {
-    
+final class CoursesViewController: UIViewController {
     var segmentView: SegmentView!
-    
     var courseViewModels = [CourseViewModel]()
-    
     var courseCollectionView: UICollectionView = {
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
 
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
         collectionView.isPagingEnabled = true
     
         collectionView.register(CourseCollectionViewCell.self, forCellWithReuseIdentifier: "CourseCollectionViewCell")
 
         return collectionView
-    } ()
+    }()
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
+    
+        configureUI()
+    }
+    
+    // разбить на методы
+    private func configureUI() {
         self.view.backgroundColor = .background.style(.accent)()
         self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -78,8 +79,8 @@ class CoursesViewController: UIViewController {
         ]
 
         NSLayoutConstraint.activate(collectionConstraints)
-    
     }
+    
     
     private func fetchCourses() {
         //simulate network call by now
@@ -92,7 +93,6 @@ class CoursesViewController: UIViewController {
 }
 
 extension CoursesViewController: UIScrollViewDelegate {
-    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let pageWidth = scrollView.frame.size.width
         let page = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
@@ -102,15 +102,15 @@ extension CoursesViewController: UIScrollViewDelegate {
 }
 
 
-extension CoursesViewController: UICollectionViewDelegate {
-    
-    
-}
+extension CoursesViewController: UICollectionViewDelegate { }
 
 
 extension CoursesViewController: UICollectionViewDataSource {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int {
         return courseViewModels.count
     }
     

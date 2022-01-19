@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// guard case if case
 extension UIColor {
     enum background {
         case firstLevel

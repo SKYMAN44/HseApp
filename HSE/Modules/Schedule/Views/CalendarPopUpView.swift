@@ -26,7 +26,7 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         setupView()
     }
     
-    init(){
+    init() {
         super.init(frame: CGRect(x: 0, y: ScreenSize.Height, width: ScreenSize.Width, height: ScreenSize.Height))
         setupView()
     }
@@ -35,7 +35,7 @@ class CalendarPopUpView: UIView, UIScrollViewDelegate {
         super.init(coder: coder)
     }
     
-    func setupView(){
+    func setupView() {
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(animatePopUpView(sender:)))
         
         // Background

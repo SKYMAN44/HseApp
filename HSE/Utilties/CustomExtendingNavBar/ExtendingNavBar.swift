@@ -9,6 +9,7 @@ import UIKit
 
 class ExtendingNavBar: UIControl {
 
+    //  убрать force unwrap
     var mainView: UIView!
     var slidingView: UIView!
     var leftView: UIView!
@@ -30,7 +31,7 @@ class ExtendingNavBar: UIControl {
         let label = UILabel()
         label.text = "TimeTable"
         label.font = .customFont.style(.title)()
-        label.textColor = .textAndIcons.style(.primary) ()
+        label.textColor = .textAndIcons.style(.primary)()
         return label
     }()
     

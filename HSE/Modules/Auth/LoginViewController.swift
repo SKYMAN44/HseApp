@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+final class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
@@ -39,19 +39,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         view.addGestureRecognizer(tap) // Add gesture recognizer to background view
     }
     
-    @objc func handleTap()
-    {
+    @objc func handleTap() {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool
-    {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return false
     }
     
-    @IBAction func SegmentValueChanged(_ sender: CustomSegmentedController) {
+    @IBAction func segmentValueChanged(_ sender: CustomSegmentedController) {
         switch sender.selectedSegmentIndex {
         case 0:
             print("Student")

@@ -7,9 +7,9 @@
 import Foundation
 import UIKit
 
-class TabBarBaseController: UITabBarController {
+final class TabBarBaseController: UITabBarController {
     
-    override func viewDidLoad(){
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         tabBar.isTranslucent = true

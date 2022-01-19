@@ -27,15 +27,16 @@ class SegmentView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setUp()
+        setup()
     }
     
+//    @available(*unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setUp()
+        setup()
     }
     
-    private func setUp() {
+    private func setup() {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -69,6 +70,10 @@ class SegmentView: UIView {
     
     override func draw(_ rect: CGRect) {
     }
+    
+    // worker endpoint
+    // learn manager swift
+    // alamofire
     
     public func setTitles(titles: [String]) {
         self.titles = titles
