@@ -77,7 +77,6 @@ extension CourseCollectionViewCell {
             let section = self.sections[indexPath.section]
             switch section {
             case .chat:
-//                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatCollectionViewCell.reuseIdentifier, for: indexPath) as! ChatCollectionViewCell
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CourseChatCollectionViewCell.reuseIdentifier, for: indexPath) as! CourseChatCollectionViewCell
                 return cell
             case .tStuff:
