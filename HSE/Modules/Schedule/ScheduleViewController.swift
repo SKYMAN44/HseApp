@@ -26,7 +26,7 @@ final class ScheduleViewController: UIViewController {
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
         
         tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
-        tableView.register(UINib(nibName: "DeadlineTableViewCell", bundle: nil), forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
+//        tableView.register(UINib(nibName: "DeadlineTableViewCell", bundle: nil), forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
         
         return tableView
     }()

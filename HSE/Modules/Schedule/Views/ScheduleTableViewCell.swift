@@ -96,8 +96,6 @@ final class ScheduleTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
         setupView()
-        
-        print("CALLLEDINIT")
     }
     
     required init?(coder: NSCoder) {

@@ -11,7 +11,7 @@ protocol SegmentViewDelegate {
     func segmentChosen(index: Int)
 }
 
-class SegmentView: UIView {
+final class SegmentView: UIView {
     
     var collectionView: UICollectionView?
     
@@ -48,8 +48,6 @@ class SegmentView: UIView {
         collectionView?.backgroundColor = self.backgroundColor
         
         collectionView?.register(SegmentCollectionViewCell.self, forCellWithReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier)
-        
-        collectionView?.register(UINib(nibName: "SegmentCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier)
         
         collectionView?.delegate = self
         collectionView?.dataSource = self

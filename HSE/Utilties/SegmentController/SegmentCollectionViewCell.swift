@@ -2,55 +2,114 @@
 //  SegmentCollectionViewCell.swift
 //  HSE
 //
-//  Created by Дмитрий Соколов on 12.01.2022.
+//  Created by Дмитрий Соколов on 20.01.2022.
 //
 
 import UIKit
 
 class SegmentCollectionViewCell: UICollectionViewCell {
-
-    static let reuseIdentifier = "SegmentCollectionViewCell"
-
-    @IBOutlet weak var backView: UIView!
-    @IBOutlet weak var mainView: UIView!
-    @IBOutlet weak var notificationLabel: UILabel!
-    @IBOutlet weak var notificationView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
     
+    static let reuseIdentifier = "SegmentCollectionViewCell"
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .customFont.style(.body)()
+        label.textColor = .textAndIcons.style(.secondary)()
+        label.textAlignment = .center
+        
+        return label
+    }()
+    
+    private let notificationView: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 12
+        view.backgroundColor = .background.style(.accent)()
+        
+        return view
+    }()
+    
+    private let notificationLabel: UILabel = {
+        let label = UILabel()
+        label.font = .customFont.style(.caption)()
+        label.textColor = .textAndIcons.style(.secondary)()
+        label.textAlignment = .center
+        
+        return label
+    }()
     
     override var isSelected: Bool {
         didSet {
             if(isSelected) {
-                self.backView.backgroundColor = .primary.style(.filler)()
-                self.backView.alpha = 1
+                self.backgroundColor = .primary.style(.filler)()
                 self.titleLabel.textColor = .primary.style(.primary)()
                 notificationView.backgroundColor = .background.style(.firstLevel)()
             }else {
-                self.backView.alpha = 1
                 notificationView.backgroundColor = .background.style(.accent)()
-                self.backView.backgroundColor = .background.style(.firstLevel)()
+                self.backgroundColor = .background.style(.firstLevel)()
                 self.titleLabel.textColor = .textAndIcons.style(.secondary)()
             }
         }
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
     
-        notificationView.layer.cornerRadius = 12
-        notificationView.backgroundColor = .background.style(.accent)()
-        self.backView.alpha = 0.0
-        self.backView.layer.cornerRadius = 8
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func setupView() {
+        self.backgroundColor = .background.style(.secondLevel)()
         self.layer.cornerRadius = 8
+        self.translatesAutoresizingMaskIntoConstraints = false
+        self.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
-        titleLabel.font = .customFont.style(.body)()
-        notificationLabel.font = .customFont.style(.caption)()
+        notificationView.addSubview(notificationLabel)
         
+        notificationLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        let notificationConstrains = [
+            notificationLabel.leadingAnchor.constraint(equalTo: notificationView.leadingAnchor, constant: 8),
+            notificationLabel.trailingAnchor.constraint(equalTo: notificationView.trailingAnchor, constant: -8),
+            notificationLabel.topAnchor.constraint(equalTo: notificationView.topAnchor, constant: 4),
+            notificationLabel.bottomAnchor.constraint(equalTo: notificationView.bottomAnchor, constant: -4)
+        ]
+        
+        NSLayoutConstraint.activate(notificationConstrains)
+        
+        
+        let stackView = UIStackView(arrangedSubviews: [titleLabel, notificationView])
+        
+        stackView.alignment = .fill
+        stackView.distribution = .fill
+        stackView.spacing = 8
+        stackView.axis = .horizontal
+        
+        
+        addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let stackViewConstrains = [
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 6),
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6)
+        ]
+        
+        NSLayoutConstraint.activate(stackViewConstrains)
+    }
+    
+    
+    public func configure(title: String) {
+        titleLabel.text = title
         notificationLabel.text = String(Int.random(in: 0...999))
     }
     
-    public func configure(title: String) {
-        self.titleLabel.text = title
-    }
-
+    
 }
