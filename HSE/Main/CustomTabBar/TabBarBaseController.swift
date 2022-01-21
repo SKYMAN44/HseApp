@@ -9,6 +9,8 @@ import UIKit
 
 final class TabBarBaseController: UITabBarController {
     
+    private let test: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,3 +47,5 @@ final class TabBarBaseController: UITabBarController {
     }
     
 }
+
+
