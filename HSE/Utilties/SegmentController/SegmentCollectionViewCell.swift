@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SegmentCollectionViewCell: UICollectionViewCell {
+final class SegmentCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "SegmentCollectionViewCell"
     

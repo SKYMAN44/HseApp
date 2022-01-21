@@ -7,11 +7,11 @@
 
 import UIKit
 
-class CourseChatCollectionViewCell: UICollectionViewCell {
+final class CourseChatCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CourseChatCollectionViewCell"
     
-    let chatImageView: UIImageView = {
+    private let chatImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -28,29 +28,32 @@ class CourseChatCollectionViewCell: UICollectionViewCell {
         imageView.clipsToBounds = true
         
         imageView.image = UIImage(named: "testPic.jpg")!.circleMask
+        
         return imageView
     }()
     
-    let senderNameLabel: UILabel = {
+    private let senderNameLabel: UILabel = {
         let label = UILabel()
         label.font = .customFont.style(.footnote)()
         label.textColor = .textAndIcons.style(.primary)()
         label.text = "Me"
         label.textAlignment = .left
+        
         return label
     }()
     
-    let chatNameLabel: UILabel = {
+    private let chatNameLabel: UILabel = {
         let label = UILabel()
         label.font = .customFont.style(.body)()
         label.textColor = .textAndIcons.style(.primary)()
         label.text = "Important"
         label.textAlignment = .left
+        
         return label
     }()
     
     
-    let messageContentLabel: UILabel = {
+    private let messageContentLabel: UILabel = {
         let label = UILabel()
         label.font = .customFont.style(.footnote)()
         label.textColor = .textAndIcons.style(.secondary)()
@@ -61,24 +64,26 @@ class CourseChatCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    let messageTimeLabel: UILabel = {
+    private let messageTimeLabel: UILabel = {
         let label = UILabel()
         label.font = .customFont.style(.footnote)()
         label.textColor = .textAndIcons.style(.secondary)()
+        
         label.text = "17m"
         return label
     }()
     
-    let notificationLabel: UILabel = {
+    private let notificationLabel: UILabel = {
         let label = UILabel()
         label.text = String(Int.random(in: 0...999))
         label.font = .customFont.style(.caption)()
         label.textColor = .textAndIcons.style(.secondary)()
         label.textAlignment = .center
+        
         return label
     }()
     
-    let notificationView: UIView = {
+    private let notificationView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
         view.backgroundColor = .background.style(.accent)()
@@ -86,20 +91,22 @@ class CourseChatCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    let volumeImageView: UIImageView = {
+    private let volumeImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "volumeCS"))
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = .textAndIcons.style(.tretiary)()
+        
         return imageView
     }()
     
     
-    let mainStackView: UIStackView = {
+    private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.alignment = .fill
         stackView.distribution = .fill
         stackView.spacing = 12
         stackView.axis = .horizontal
+        
         return stackView
     }()
     

@@ -8,9 +8,9 @@
 import UIKit
 
 final class CoursesViewController: UIViewController {
-    var segmentView: SegmentView!
-    var courseViewModels = [CourseViewModel]()
-    var courseCollectionView: UICollectionView = {
+    private var segmentView: SegmentView!
+    private var courseViewModels = [CourseViewModel]()
+    private var courseCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.minimumInteritemSpacing = 0
@@ -28,6 +28,7 @@ final class CoursesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        
         configureUI()
     }
     

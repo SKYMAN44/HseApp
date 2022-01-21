@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DeadlineTableViewCell: UITableViewCell {
+final class DeadlineTableViewCell: UITableViewCell {
     
     static let reuseIdentifier = "DeadlineTableViewCell"
     

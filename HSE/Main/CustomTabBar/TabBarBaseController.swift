@@ -12,6 +12,7 @@ final class TabBarBaseController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         tabBar.isTranslucent = true
         tabBar.tintColor = .primary.style(.primary)()
         tabBar.backgroundColor = .background.style(.accent)()

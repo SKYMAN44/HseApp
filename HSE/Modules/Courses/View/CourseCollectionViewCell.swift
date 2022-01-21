@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CourseCollectionViewCell: UICollectionViewCell {
+final class CourseCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CourseCollectionViewCell"
     
@@ -22,11 +22,11 @@ class CourseCollectionViewCell: UICollectionViewCell {
         static let formula = "formula"
     }
     
-    var sections = [Section]()
+    private var sections = [Section]()
     
-    var oneCourseCollectionView: UICollectionView!
+    private var oneCourseCollectionView: UICollectionView!
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
+    private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -16,11 +16,11 @@ let tempArray: [String] = ["All","Homework","Midterm"]
 
 final class ScheduleViewController: UIViewController {
     
-    var navView: ExtendingNavBar?
+    private var navView: ExtendingNavBar?
     
-    var segmentView: SegmentView?
+    private var segmentView: SegmentView?
     
-    var tableView: UITableView = {
+    private var tableView: UITableView = {
         let tableView = UITableView()
         
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
@@ -37,6 +37,7 @@ final class ScheduleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         view.addSubview(tableView)
         
@@ -145,11 +146,11 @@ final class ScheduleViewController: UIViewController {
         }
     }
     
-    @objc func calendarButtonTapped() {
+    @objc private func calendarButtonTapped() {
         CalendarPopUpView.init().show()
     }
     
-    @objc func segmentChanged() {
+    @objc private func segmentChanged() {
         switch navView?.choosenSegment {
         case 0:
             currentContent = .timeTable

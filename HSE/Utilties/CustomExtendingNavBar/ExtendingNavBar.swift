@@ -7,20 +7,20 @@
 
 import UIKit
 
-class ExtendingNavBar: UIControl {
+final class ExtendingNavBar: UIControl {
 
     //  убрать force unwrap
-    var mainView: UIView!
-    var slidingView: UIView!
-    var leftView: UIView!
-    var topView: UIView!
-    var backView: UIView!
-    var slidingButton: UIButton!
+    private var mainView: UIView!
+    private var slidingView: UIView!
+    private var leftView: UIView!
+    private var topView: UIView!
+    private var backView: UIView!
+    private var slidingButton: UIButton!
     
-    var indicatorImageView: UIImageView!
+    private var indicatorImageView: UIImageView!
     
-    var calendarButton: UIButton!
-    var mainButton: UIButton!
+    private var calendarButton: UIButton!
+    private var mainButton: UIButton!
     
     private var slideViewIsVisible: Bool = false
     private var animationCompleted: Bool = true
