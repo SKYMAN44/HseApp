@@ -8,6 +8,7 @@
 import UIKit
 
 final class CoursesViewController: UIViewController {
+    
     private var segmentView: SegmentView!
     private var courseViewModels = [CourseViewModel]()
     private var courseCollectionView: UICollectionView = {

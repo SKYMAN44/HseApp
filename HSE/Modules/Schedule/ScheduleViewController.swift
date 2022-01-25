@@ -146,11 +146,13 @@ final class ScheduleViewController: UIViewController {
         }
     }
     
-    @objc private func calendarButtonTapped() {
+    @objc
+    private func calendarButtonTapped() {
         CalendarPopUpView.init().show()
     }
     
-    @objc private func segmentChanged() {
+    @objc
+    private func segmentChanged() {
         switch navView?.choosenSegment {
         case 0:
             currentContent = .timeTable

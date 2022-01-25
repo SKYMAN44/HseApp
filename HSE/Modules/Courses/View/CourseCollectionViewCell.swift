@@ -20,6 +20,7 @@ final class CourseCollectionViewCell: UICollectionViewCell {
         static let search = "search"
         static let description = "description"
         static let formula = "formula"
+        static let title = "title"
     }
     
     private var sections = [Section]()
@@ -36,7 +37,9 @@ final class CourseCollectionViewCell: UICollectionViewCell {
         
         oneCourseCollectionView.register(CourseChatCollectionViewCell.self, forCellWithReuseIdentifier: CourseChatCollectionViewCell.reuseIdentifier)
         oneCourseCollectionView.register(TeachingStuffCollectionViewCell.self, forCellWithReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier)
-        oneCourseCollectionView.register(UINib(nibName: "TeachingStuffCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier)
+        
+        oneCourseCollectionView.register(DescriptionCollectionReusableView.self, forSupplementaryViewOfKind: SupplementaryViewKind.description, withReuseIdentifier: DescriptionCollectionReusableView.reuseIdentifier)
+        oneCourseCollectionView.register(TitleCollectionReusableView.self, forSupplementaryViewOfKind: SupplementaryViewKind.title, withReuseIdentifier: TitleCollectionReusableView.reuseIdentifier)
         
         oneCourseCollectionView.delegate = self
         
@@ -63,10 +66,7 @@ final class CourseCollectionViewCell: UICollectionViewCell {
     
 }
 
-extension CourseCollectionViewCell: UICollectionViewDelegate {
-    
-}
-
+extension CourseCollectionViewCell: UICollectionViewDelegate {}
 
 extension CourseCollectionViewCell {
     
@@ -78,13 +78,32 @@ extension CourseCollectionViewCell {
             switch section {
             case .chat:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CourseChatCollectionViewCell.reuseIdentifier, for: indexPath) as! CourseChatCollectionViewCell
+                
                 return cell
             case .tStuff:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier, for: indexPath) as! TeachingStuffCollectionViewCell
+                cell.configure()
                 
                 return cell
             }
         })
+        
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+            switch kind {
+            case SupplementaryViewKind.description:
+                let descriptionView = collectionView.dequeueReusableSupplementaryView(ofKind: SupplementaryViewKind.description, withReuseIdentifier: DescriptionCollectionReusableView.reuseIdentifier, for: indexPath) as! DescriptionCollectionReusableView
+                descriptionView.configure()
+                
+                return descriptionView
+            case SupplementaryViewKind.title :
+                let title = collectionView.dequeueReusableSupplementaryView(ofKind: SupplementaryViewKind.title, withReuseIdentifier: TitleCollectionReusableView.reuseIdentifier, for: indexPath) as! TitleCollectionReusableView
+                title.setTitle(title: "Teaching Stuff")
+                
+                return title
+            default:
+                return nil
+            }
+        }
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.chat, .tStuff])
@@ -104,9 +123,16 @@ extension CourseCollectionViewCell {
     private func generateLayout() -> UICollectionViewLayout
     {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection?  in
-        
-            let section = self.sections[sectionIndex]
             
+            // is it the best approach ?
+            let size = DescriptionCollectionReusableView(frame: .zero).systemLayoutSizeFitting(CGSize(width: self.frame.width, height: UIView.layoutFittingExpandedSize.height))
+            let headerItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(size.height))
+            let descriptionItem = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerItemSize, elementKind: SupplementaryViewKind.description, alignment: .bottom)
+            
+            let title = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(30)), elementKind: SupplementaryViewKind.title, alignment: .top)
+            
+            let section = self.sections[sectionIndex]
+    
             switch section {
             case .chat:
                 
@@ -119,25 +145,24 @@ extension CourseCollectionViewCell {
                 
                 let section = NSCollectionLayoutSection(group: group)
                 
+                section.boundarySupplementaryItems = [descriptionItem]
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-                
                 section.orthogonalScrollingBehavior = .none
                 
                 return section
                 
             case .tStuff:
                 
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(1), heightDimension: .fractionalHeight(1))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                item.edgeSpacing = NSCollectionLayoutEdgeSpacing(leading: nil, top: .fixed(8), trailing: nil, bottom: nil)
-                
-                let groupSize = NSCollectionLayoutSize(widthDimension: .estimated(36), heightDimension: .estimated(36))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(72))
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 
                 let section = NSCollectionLayoutSection(group: group)
                 
-                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+                section.boundarySupplementaryItems = [title]
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
                 section.orthogonalScrollingBehavior = .none
                 
                 return section

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		638622DF279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */; };
+		638622E1279CB6F7004BCEB8 /* DescriptionCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622E0279CB6F7004BCEB8 /* DescriptionCollectionReusableView.swift */; };
+		638622E3279CC20E004BCEB8 /* TitleCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622E2279CC20E004BCEB8 /* TitleCollectionReusableView.swift */; };
 		639DCE0D27923404007FC2DC /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0C27923404007FC2DC /* Schedule.swift */; };
 		639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE13279240E3007FC2DC /* ScheduleDay.swift */; };
 		639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE152792E8D1007FC2DC /* Deadline.swift */; };
@@ -14,8 +17,6 @@
 		639DCE1F2792FDA4007FC2DC /* BaseNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE1E2792FDA4007FC2DC /* BaseNavViewController.swift */; };
 		639DCE22279306B1007FC2DC /* ScheduleDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE21279306B1007FC2DC /* ScheduleDayViewModel.swift */; };
 		639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2327937F95007FC2DC /* CourseCollectionViewCell.swift */; };
-		639DCE2B27938901007FC2DC /* TeachingStuffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2927938901007FC2DC /* TeachingStuffCollectionViewCell.swift */; };
-		639DCE2C27938901007FC2DC /* TeachingStuffCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE2A27938901007FC2DC /* TeachingStuffCollectionViewCell.xib */; };
 		639DCE2E2794C7C8007FC2DC /* testPic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE2D2794C7C8007FC2DC /* testPic.jpg */; };
 		639DCE302794C88D007FC2DC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2F2794C88D007FC2DC /* Image.swift */; };
 		639DCE34279576A2007FC2DC /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE33279576A2007FC2DC /* EndPointType.swift */; };
@@ -72,6 +73,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStuffCollectionViewCell.swift; sourceTree = "<group>"; };
+		638622E0279CB6F7004BCEB8 /* DescriptionCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCollectionReusableView.swift; sourceTree = "<group>"; };
+		638622E2279CC20E004BCEB8 /* TitleCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionReusableView.swift; sourceTree = "<group>"; };
 		639DCE0C27923404007FC2DC /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		639DCE13279240E3007FC2DC /* ScheduleDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDay.swift; sourceTree = "<group>"; };
 		639DCE152792E8D1007FC2DC /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
@@ -79,8 +83,6 @@
 		639DCE1E2792FDA4007FC2DC /* BaseNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavViewController.swift; sourceTree = "<group>"; };
 		639DCE21279306B1007FC2DC /* ScheduleDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayViewModel.swift; sourceTree = "<group>"; };
 		639DCE2327937F95007FC2DC /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
-		639DCE2927938901007FC2DC /* TeachingStuffCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStuffCollectionViewCell.swift; sourceTree = "<group>"; };
-		639DCE2A27938901007FC2DC /* TeachingStuffCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeachingStuffCollectionViewCell.xib; sourceTree = "<group>"; };
 		639DCE2D2794C7C8007FC2DC /* testPic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testPic.jpg; path = HSE/testPic.jpg; sourceTree = SOURCE_ROOT; };
 		639DCE2F2794C88D007FC2DC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		639DCE33279576A2007FC2DC /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
@@ -322,8 +324,9 @@
 			children = (
 				639DCE2327937F95007FC2DC /* CourseCollectionViewCell.swift */,
 				639DCE4227975C6E007FC2DC /* CourseChatCollectionViewCell.swift */,
-				639DCE2927938901007FC2DC /* TeachingStuffCollectionViewCell.swift */,
-				639DCE2A27938901007FC2DC /* TeachingStuffCollectionViewCell.xib */,
+				638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */,
+				638622E0279CB6F7004BCEB8 /* DescriptionCollectionReusableView.swift */,
+				638622E2279CC20E004BCEB8 /* TitleCollectionReusableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -529,7 +532,6 @@
 				639DCE3D27957783007FC2DC /* Inter-SemiBold.ttf in Resources */,
 				63C4D612278DC58C0028381F /* Main.storyboard in Resources */,
 				639DCE3727957740007FC2DC /* Inter-Bold.ttf in Resources */,
-				639DCE2C27938901007FC2DC /* TeachingStuffCollectionViewCell.xib in Resources */,
 				639DCE3927957750007FC2DC /* Inter-Medium.ttf in Resources */,
 				639DCE3B2795775C007FC2DC /* Inter-Regular.ttf in Resources */,
 			);
@@ -572,19 +574,21 @@
 				639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */,
 				639DCE452797617C007FC2DC /* Label.swift in Sources */,
 				63F857DE2790657B00F45A97 /* GradesViewController.swift in Sources */,
-				639DCE2B27938901007FC2DC /* TeachingStuffCollectionViewCell.swift in Sources */,
 				639DCE4327975C6F007FC2DC /* CourseChatCollectionViewCell.swift in Sources */,
 				63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */,
 				639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */,
 				63F857D7278F8F9F00F45A97 /* CustomSegmentedController.swift in Sources */,
+				638622E3279CC20E004BCEB8 /* TitleCollectionReusableView.swift in Sources */,
 				639DCE302794C88D007FC2DC /* Image.swift in Sources */,
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,
+				638622E1279CB6F7004BCEB8 /* DescriptionCollectionReusableView.swift in Sources */,
 				639DCE22279306B1007FC2DC /* ScheduleDayViewModel.swift in Sources */,
 				63F857D1278F8C4800F45A97 /* LoginViewController.swift in Sources */,
 				639DCE3F27957A94007FC2DC /* Font.swift in Sources */,
 				63C4D650278E38780028381F /* CourseViewModel.swift in Sources */,
 				639DCE47279865F3007FC2DC /* ScheduleTableViewCell.swift in Sources */,
 				63F857C7278F2AA500F45A97 /* SegmentView.swift in Sources */,
+				638622DF279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift in Sources */,
 				639DCE0D27923404007FC2DC /* Schedule.swift in Sources */,
 				63C4D63B278DC7270028381F /* CoursesViewController.swift in Sources */,
 				639DCE4927988969007FC2DC /* DeadlineTableViewCell.swift in Sources */,

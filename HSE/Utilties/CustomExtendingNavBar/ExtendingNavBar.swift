@@ -214,7 +214,8 @@ final class ExtendingNavBar: UIControl {
         }
     }
     
-    @objc func slidedButtonTapped() {
+    @objc
+    func slidedButtonTapped() {
         
         if(!animationCompleted) {
             return
@@ -252,7 +253,8 @@ final class ExtendingNavBar: UIControl {
         slideViewIsVisible = false
     }
     
-    @objc func calendarButtonTapped() {
+    @objc
+    func calendarButtonTapped() {
         sendActions(for: .touchUpInside)
     }
     
