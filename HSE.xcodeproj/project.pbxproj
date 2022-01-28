@@ -15,6 +15,7 @@
 		638622EC27A34DC3004BCEB8 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622EB27A34DC3004BCEB8 /* MessageTableViewCell.swift */; };
 		638622EF27A34FF2004BCEB8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622EE27A34FF2004BCEB8 /* Message.swift */; };
 		638622F127A47300004BCEB8 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622F027A47300004BCEB8 /* MessageViewModel.swift */; };
+		638622F327A4B006004BCEB8 /* FormulaCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622F227A4B006004BCEB8 /* FormulaCollectionReusableView.swift */; };
 		639DCE0D27923404007FC2DC /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0C27923404007FC2DC /* Schedule.swift */; };
 		639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE13279240E3007FC2DC /* ScheduleDay.swift */; };
 		639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE152792E8D1007FC2DC /* Deadline.swift */; };
@@ -86,6 +87,7 @@
 		638622EB27A34DC3004BCEB8 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		638622EE27A34FF2004BCEB8 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		638622F027A47300004BCEB8 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		638622F227A4B006004BCEB8 /* FormulaCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaCollectionReusableView.swift; sourceTree = "<group>"; };
 		639DCE0C27923404007FC2DC /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
 		639DCE13279240E3007FC2DC /* ScheduleDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDay.swift; sourceTree = "<group>"; };
 		639DCE152792E8D1007FC2DC /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
@@ -373,6 +375,7 @@
 				638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */,
 				638622E0279CB6F7004BCEB8 /* DescriptionCollectionReusableView.swift */,
 				638622E2279CC20E004BCEB8 /* TitleCollectionReusableView.swift */,
+				638622F227A4B006004BCEB8 /* FormulaCollectionReusableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -630,6 +633,7 @@
 				63F857D7278F8F9F00F45A97 /* CustomSegmentedController.swift in Sources */,
 				638622E3279CC20E004BCEB8 /* TitleCollectionReusableView.swift in Sources */,
 				639DCE302794C88D007FC2DC /* Image.swift in Sources */,
+				638622F327A4B006004BCEB8 /* FormulaCollectionReusableView.swift in Sources */,
 				638622EC27A34DC3004BCEB8 /* MessageTableViewCell.swift in Sources */,
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,
 				638622E1279CB6F7004BCEB8 /* DescriptionCollectionReusableView.swift in Sources */,
