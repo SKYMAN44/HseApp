@@ -26,7 +26,6 @@ final class ScheduleViewController: UIViewController {
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
         
         tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
-//        tableView.register(UINib(nibName: "DeadlineTableViewCell", bundle: nil), forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
         
         return tableView
     }()
@@ -35,17 +34,31 @@ final class ScheduleViewController: UIViewController {
     
     private var currentContent: ContentType = .timeTable
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
-        view.addSubview(tableView)
-        
-        // setUp navBar
-        
-        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.backgroundColor = .background.style(.accent)()
         
+        // tableView setUp
+        setupTableView()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        // setUp navBar
+        setupNavBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    // MARK: - UI setup
+    
+    private func setupNavBar() {
         navView = ExtendingNavBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         navView?.color = .background.style(.accent)()
         
@@ -68,8 +81,10 @@ final class ScheduleViewController: UIViewController {
         constraints[3].identifier = "heightConstrain"
         
         NSLayoutConstraint.activate(constraints)
-        
-        // tableView setUp
+    }
+    
+    private func setupTableView() {
+        view.addSubview(tableView)
         
         tableView.separatorColor = .clear
         tableView.sectionHeaderHeight = 30;
@@ -93,10 +108,6 @@ final class ScheduleViewController: UIViewController {
         tableViewConstraints[0].identifier = "tableHeightConstain"
         
         NSLayoutConstraint.activate(tableViewConstraints)
-        
-
-        tableView.delegate = self
-        tableView.dataSource = self
     }
     
     
@@ -173,6 +184,11 @@ final class ScheduleViewController: UIViewController {
 
 extension ScheduleViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard currentContent == .assigments else { return }
+        let detailVC = TaskDetailViewController()
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 extension ScheduleViewController: UITableViewDataSource {
@@ -243,6 +259,5 @@ extension ScheduleViewController: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         navView?.hide()
-
     }
 }

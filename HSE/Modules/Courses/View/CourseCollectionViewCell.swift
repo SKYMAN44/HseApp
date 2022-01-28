@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CourseCollectionVeiwCellDelegate {
+    func chatSelected()
+}
+
 final class CourseCollectionViewCell: UICollectionViewCell {
     
     static let reuseIdentifier = "CourseCollectionViewCell"
@@ -28,6 +32,8 @@ final class CourseCollectionViewCell: UICollectionViewCell {
     private var oneCourseCollectionView: UICollectionView!
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>!
+    
+    public var delegate: CourseCollectionVeiwCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,7 +72,15 @@ final class CourseCollectionViewCell: UICollectionViewCell {
     
 }
 
-extension CourseCollectionViewCell: UICollectionViewDelegate {}
+extension CourseCollectionViewCell: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard (collectionView.cellForItem(at: indexPath) as? CourseChatCollectionViewCell) != nil else { return }
+        
+        delegate?.chatSelected()
+    }
+}
 
 extension CourseCollectionViewCell {
     

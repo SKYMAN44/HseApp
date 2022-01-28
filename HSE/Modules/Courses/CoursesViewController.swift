@@ -26,14 +26,25 @@ final class CoursesViewController: UIViewController {
         return collectionView
     }()
     
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     
         
         configureUI()
+        
+        courseCollectionView.delegate = self
+        courseCollectionView.dataSource = self
     }
     
-    // разбить на методы
+    override func viewDidAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = false
+    }
+    
+    
+    // MARK: - UI setup
+    
     private func configureUI() {
         self.view.backgroundColor = .background.style(.accent)()
         self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
@@ -43,6 +54,12 @@ final class CoursesViewController: UIViewController {
         
         fetchCourses()
         
+        setupSegmentView()
+        setupCollectionView()
+    }
+    
+    
+    private func setupSegmentView() {
         segmentView = SegmentView(frame: CGRect(x: 0, y: 60, width: view.frame.width, height: 56))
         segmentView.setTitles(titles: courseViewModels.map({
             return $0.title
@@ -63,10 +80,9 @@ final class CoursesViewController: UIViewController {
         ]
         
         NSLayoutConstraint.activate(constraints)
-        
-        courseCollectionView.delegate = self
-        courseCollectionView.dataSource = self
-        
+    }
+    
+    private func setupCollectionView() {
         view.addSubview(courseCollectionView)
 
         courseCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -103,9 +119,14 @@ extension CoursesViewController: UIScrollViewDelegate {
     
 }
 
+// MARK: - CollectionView Delegate
+
 
 extension CoursesViewController: UICollectionViewDelegate { }
 
+
+
+// MARK: - CollectionView DataSource
 
 extension CoursesViewController: UICollectionViewDataSource {
     
@@ -118,6 +139,8 @@ extension CoursesViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CourseCollectionViewCell.reuseIdentifier, for: indexPath) as! CourseCollectionViewCell
+        
+        cell.delegate = self
         
         return cell
     }
@@ -133,10 +156,24 @@ extension CoursesViewController: UICollectionViewDelegateFlowLayout {
     
 }
 
+
+// MARK: - SegmentView delegate
+
 extension CoursesViewController: SegmentViewDelegate {
     
     func segmentChosen(index: Int) {
         courseCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
+    }
+    
+}
+
+// MARK: - CourseCellDelegate
+
+extension CoursesViewController: CourseCollectionVeiwCellDelegate {
+    func chatSelected() {
+        let chatViewController = ChatViewController()
+        
+        self.navigationController?.pushViewController(chatViewController, animated: true)
     }
     
     

@@ -110,6 +110,7 @@ final class CourseChatCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
+    // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -121,6 +122,8 @@ final class CourseChatCollectionViewCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - UI setup
     
     private func setupView() {
         
