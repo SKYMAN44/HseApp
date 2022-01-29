@@ -32,14 +32,11 @@ final class CoursesViewController: UIViewController {
         super.viewDidLoad()
     
         
+        fetchCourses()
         configureUI()
         
         courseCollectionView.delegate = self
         courseCollectionView.dataSource = self
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        tabBarController?.tabBar.isHidden = false
     }
     
     
@@ -51,8 +48,6 @@ final class CoursesViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         
         self.navigationItem.title = "Courses"
-        
-        fetchCourses()
         
         setupSegmentView()
         setupCollectionView()
@@ -99,6 +94,7 @@ final class CoursesViewController: UIViewController {
         NSLayoutConstraint.activate(collectionConstraints)
     }
     
+// MARK: - API Call
     
     private func fetchCourses() {
         //simulate network call by now
@@ -110,8 +106,12 @@ final class CoursesViewController: UIViewController {
     
 }
 
+// MARK: - Scroll Delegate
+
 extension CoursesViewController: UIScrollViewDelegate {
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // track change of pages
         let pageWidth = scrollView.frame.size.width
         let page = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
         segmentView.moveTo(index: page)
@@ -120,7 +120,6 @@ extension CoursesViewController: UIScrollViewDelegate {
 }
 
 // MARK: - CollectionView Delegate
-
 
 extension CoursesViewController: UICollectionViewDelegate { }
 
@@ -173,7 +172,9 @@ extension CoursesViewController: CourseCollectionVeiwCellDelegate {
     func chatSelected() {
         let chatViewController = ChatViewController()
         
+        self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(chatViewController, animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
     
     

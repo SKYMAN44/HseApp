@@ -26,6 +26,7 @@ final class CourseChatCollectionViewCell: UICollectionViewCell {
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
         imageView.clipsToBounds = true
+        imageView.heightAnchor.constraint(equalToConstant: 60).isActive = true
         
         imageView.image = UIImage(named: "testPic.jpg")!.circleMask
         
@@ -110,6 +111,17 @@ final class CourseChatCollectionViewCell: UICollectionViewCell {
         return stackView
     }()
     
+    override var isSelected: Bool {
+        didSet {
+            if(isSelected) {
+                self.backgroundColor = .background.style(.accent)()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.backgroundColor = .clear
+                }
+            }
+        }
+    }
+    
     // MARK: - Initialization
     
     override init(frame: CGRect) {
@@ -188,9 +200,10 @@ final class CourseChatCollectionViewCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            mainStackView.rightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.rightAnchor, constant: -12),
             mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
+            mainStackView.widthAnchor.constraint(equalToConstant: ScreenSize.Width - 32)
         ])
         
     }

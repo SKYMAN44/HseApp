@@ -41,7 +41,7 @@ class MessageTableViewCell: UITableViewCell {
     
     private let bubbleView: UIView = {
         let view = UIView()
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 12
         view.backgroundColor = .background.style(.accent)()
         
         return view
@@ -134,10 +134,11 @@ class MessageTableViewCell: UITableViewCell {
                 mainSV.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
                 mainSV.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: -100)
             ])
+            bubbleView.backgroundColor = .background.style(.accent)()
             
         } else {
             addSubview(bubbleView)
-            
+            bubbleView.backgroundColor = .primary.style(.filler)()
             bubbleView.translatesAutoresizingMaskIntoConstraints = false
             
             NSLayoutConstraint.activate([

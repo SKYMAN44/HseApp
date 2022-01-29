@@ -26,6 +26,7 @@ final class TeachingStuffCollectionViewCell: UICollectionViewCell {
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
         imageView.clipsToBounds = true
+        imageView.widthAnchor.constraint(equalToConstant: 48).isActive = true
         
         imageView.image = UIImage(named: "testPic.jpg")!.circleMask
         
@@ -54,7 +55,6 @@ final class TeachingStuffCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
         setupView()
     }
     
@@ -69,24 +69,22 @@ final class TeachingStuffCollectionViewCell: UICollectionViewCell {
         textSV.alignment = .leading
         textSV.axis = .vertical
         
-        
         let mainSV = UIStackView(arrangedSubviews: [imageView, textSV])
         mainSV.distribution = .fill
         mainSV.alignment = .center
         mainSV.axis = .horizontal
         mainSV.spacing = 8
-        
-        
-        
+
         addSubview(mainSV)
         
         mainSV.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             mainSV.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            mainSV.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            mainSV.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
             mainSV.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
-            mainSV.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+            mainSV.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
+            mainSV.widthAnchor.constraint(equalToConstant: ScreenSize.Width - 32)
         ])
         
     }

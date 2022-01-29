@@ -1,5 +1,5 @@
 //
-//  FormulaCollectionReusableView.swift
+//  FormulaCollectionViewCell.swift
 //  HSE
 //
 //  Created by Дмитрий Соколов on 29.01.2022.
@@ -7,8 +7,8 @@
 
 import UIKit
 
-final class FormulaCollectionReusableView: UICollectionReusableView {
-    static let reuseIdentifier = "FormulaCollectionReusableView"
+final class FormulaCollectionViewCell: UICollectionViewCell {
+    static let reuseIdentifier = "FormulaCollectionViewCell"
     
     private let formulaLabel: UILabel = {
         let label = UILabel()
@@ -42,12 +42,12 @@ final class FormulaCollectionReusableView: UICollectionReusableView {
             formulaLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
             formulaLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 12),
             formulaLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -12),
-            formulaLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
+            formulaLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
+            formulaLabel.widthAnchor.constraint(equalToConstant: ScreenSize.Width - 56)
         ])
     }
     
-    public func configure() {
-        formulaLabel.text = "0.25*(0.3*Exam1 + 0.7*(0.3125*Oral1 + 0.25* W1 + 0.25*Q1 + 0.1875*H1)) +  0.75*(0.3*Exam2 + 0.7*(0.3125*Oral2 + 0.25*W2 + 0.25*Q2 +0.1875*H2)))"
+    public func configure(_ formula: Formula) {
+        formulaLabel.text = formula.formula
     }
-    
 }

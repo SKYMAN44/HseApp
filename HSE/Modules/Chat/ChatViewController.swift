@@ -8,10 +8,10 @@
 import UIKit
 
 
-var temparr: [Message] = []
-
 final class ChatViewController: UIViewController {
 
+    var temparr: [Message] = []
+    
     private var tableView: UITableView = {
         let tableView = UITableView()
         
@@ -71,7 +71,6 @@ final class ChatViewController: UIViewController {
 
         
         view.backgroundColor = .background.style(.accent)()
-        self.tabBarController?.tabBar.isHidden = true
         
         //temp for debug
         temparr.append(contentsOf: Message.array)
@@ -86,12 +85,15 @@ final class ChatViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        tableView.scrollToBottom(isAnimated: false)
     }
     
     override func viewDidLayoutSubviews() {
         sendButton.clipsToBounds = true
         sendButton.layer.cornerRadius = sendButton.frame.width / 2
     }
+    
     
     @objc
     private func sendButtonTapped() {

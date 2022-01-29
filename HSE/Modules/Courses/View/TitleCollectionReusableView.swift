@@ -39,6 +39,7 @@ final class TitleCollectionReusableView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             titleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            titleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 16),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
     }
