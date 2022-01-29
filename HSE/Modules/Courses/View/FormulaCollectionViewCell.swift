@@ -19,6 +19,24 @@ final class FormulaCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let formulaTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .textAndIcons.style(.primary)()
+        label.font = .customFont.style(.body)()
+        label.textAlignment = .left
+        label.text = "Formula"
+        
+        return label
+    }()
+    
+    private let backView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .background.style(.accent)()
+        view.layer.cornerRadius = 8
+        
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -31,20 +49,36 @@ final class FormulaCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        self.backgroundColor = .background.style(.accent)()
-        self.layer.cornerRadius = 8
         
-        addSubview(formulaLabel)
+        backView.addSubview(formulaLabel)
         
         formulaLabel.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            formulaLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
-            formulaLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 12),
-            formulaLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -12),
-            formulaLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
-            formulaLabel.widthAnchor.constraint(equalToConstant: ScreenSize.Width - 56)
+            formulaLabel.topAnchor.constraint(equalTo: backView.topAnchor, constant: 12),
+            formulaLabel.leftAnchor.constraint(equalTo: backView.leftAnchor, constant: 12),
+            formulaLabel.rightAnchor.constraint(equalTo: backView.rightAnchor, constant: -12),
+            formulaLabel.bottomAnchor.constraint(equalTo: backView.bottomAnchor, constant: -12),
         ])
+        
+        let stackView = UIStackView(arrangedSubviews: [formulaTitleLabel, backView])
+        stackView.distribution = .fill
+        stackView.alignment = .fill
+        stackView.axis = .vertical
+        stackView.spacing = 12
+        
+        addSubview(stackView)
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: self.topAnchor, constant: 12),
+            stackView.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 12),
+            stackView.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -12),
+            stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12),
+            stackView.widthAnchor.constraint(equalToConstant: ScreenSize.Width - 32)
+        ])
+        
     }
     
     public func configure(_ formula: Formula) {

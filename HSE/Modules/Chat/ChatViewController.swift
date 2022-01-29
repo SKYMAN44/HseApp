@@ -10,6 +10,7 @@ import UIKit
 
 final class ChatViewController: UIViewController {
 
+    //temporary for debug
     var temparr: [Message] = []
     
     private var tableView: UITableView = {
@@ -76,12 +77,10 @@ final class ChatViewController: UIViewController {
         temparr.append(contentsOf: Message.array)
         
         setupInputContainer()
-        
         setupTableView()
         
         tableView.dataSource = self
         tableView.delegate = self
-        
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -151,7 +150,6 @@ final class ChatViewController: UIViewController {
             stackView.rightAnchor.constraint(equalTo: messageInputContainerView.rightAnchor, constant: -10),
             stackView.bottomAnchor.constraint(equalTo: messageInputContainerView.bottomAnchor, constant: -10)
         ])
-        
         
         view.addSubview(messageInputContainerView)
         

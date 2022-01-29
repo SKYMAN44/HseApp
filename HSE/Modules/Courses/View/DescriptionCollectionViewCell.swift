@@ -20,6 +20,16 @@ class DescriptionCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let botomTitleLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .textAndIcons.style(.primary)()
+        label.font = .customFont.style(.body)()
+        label.textAlignment = .left
+        label.text = "Teaching Staff"
+        
+        return label
+    }()
+    
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textAndIcons.style(.secondary)()
@@ -43,7 +53,7 @@ class DescriptionCollectionViewCell: UICollectionViewCell {
     
     private func setupView() {
         
-        let mainSV = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel])
+        let mainSV = UIStackView(arrangedSubviews: [titleLabel, descriptionLabel, botomTitleLabel])
         mainSV.distribution = .fill
         mainSV.alignment = .leading
         mainSV.axis = .vertical

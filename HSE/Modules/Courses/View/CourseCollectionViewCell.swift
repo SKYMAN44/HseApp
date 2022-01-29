@@ -21,12 +21,6 @@ final class CourseCollectionViewCell: UICollectionViewCell {
         case formula
     }
     
-    enum SupplementaryViewKind {
-        static let search = "search"
-        static let title = "title"
-        static let formulaTitle = "formulaTitle"
-    }
-    
     private var sections = [Section]()
     
     private var oneCourseCollectionView: UICollectionView = {
@@ -44,9 +38,6 @@ final class CourseCollectionViewCell: UICollectionViewCell {
         collectionView.register(DescriptionCollectionViewCell.self, forCellWithReuseIdentifier: DescriptionCollectionViewCell.reuseIdentifier)
         collectionView.register(TeachingStuffCollectionViewCell.self, forCellWithReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier)
         collectionView.register(FormulaCollectionViewCell.self, forCellWithReuseIdentifier: FormulaCollectionViewCell.reuseIdentifier)
-        
-        collectionView.register(TitleCollectionReusableView.self, forSupplementaryViewOfKind: SupplementaryViewKind.title, withReuseIdentifier: TitleCollectionReusableView.reuseIdentifier)
-        collectionView.register(TitleCollectionReusableView.self, forSupplementaryViewOfKind: SupplementaryViewKind.formulaTitle, withReuseIdentifier: TitleCollectionReusableView.reuseIdentifier)
         
         return collectionView
     }()
@@ -91,6 +82,7 @@ final class CourseCollectionViewCell: UICollectionViewCell {
     
 }
 
+
 // MARK: - CollectionView Delegate
 
 extension CourseCollectionViewCell: UICollectionViewDelegate {
@@ -134,23 +126,6 @@ extension CourseCollectionViewCell {
                 return cell
             }
         })
-        
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
-            switch kind {
-            case SupplementaryViewKind.title:
-                let title = collectionView.dequeueReusableSupplementaryView(ofKind: SupplementaryViewKind.title, withReuseIdentifier: TitleCollectionReusableView.reuseIdentifier, for: indexPath) as! TitleCollectionReusableView
-                title.setTitle(title: "Teaching Stuff")
-                
-                return title
-            case SupplementaryViewKind.formulaTitle:
-                let title = collectionView.dequeueReusableSupplementaryView(ofKind: SupplementaryViewKind.formulaTitle, withReuseIdentifier: TitleCollectionReusableView.reuseIdentifier, for: indexPath) as! TitleCollectionReusableView
-                title.setTitle(title: "Formula")
-                
-                return title
-            default:
-                return nil
-            }
-        }
         
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.chat, .description, .tStuff, .formula])
