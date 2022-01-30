@@ -115,6 +115,7 @@ final class CourseChatCollectionViewCell: UICollectionViewCell {
         didSet {
             if(isSelected) {
                 self.backgroundColor = .background.style(.accent)()
+                isSelected = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.backgroundColor = .clear
                 }

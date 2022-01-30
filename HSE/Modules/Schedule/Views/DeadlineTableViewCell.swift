@@ -96,6 +96,7 @@ final class DeadlineTableViewCell: UITableViewCell {
     
     private func setupView() {
         
+        self.backgroundColor = .background.style(.firstLevel)()
         
         deadlineTimeView.addSubview(deadlineTimeLabel)
         

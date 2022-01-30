@@ -72,7 +72,9 @@ class MessageTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
+        
+        let interaction = UIContextMenuInteraction(delegate: self)
+        bubbleView.addInteraction(interaction)
     }
     
     required init?(coder: NSCoder) {
@@ -89,6 +91,8 @@ class MessageTableViewCell: UITableViewCell {
     
     // view setUp in init (redo)
     private func setupView(sender: SenderType) {
+        
+        self.backgroundColor = .background.style(.firstLevel)()
         
         let textSV = UIStackView(arrangedSubviews: [senderLabel, timeLabel])
         textSV.alignment = .fill
@@ -150,6 +154,7 @@ class MessageTableViewCell: UITableViewCell {
         }
         layoutSubviews()
         
+        
     }
     
     
@@ -161,5 +166,25 @@ class MessageTableViewCell: UITableViewCell {
         setupView(sender: message.senderType)
     }
     
+    func replySelected(from action: UIAction) { }
+    
 
+}
+
+extension MessageTableViewCell: UIContextMenuInteractionDelegate {
+    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            let children: [UIMenuElement] = [self.makeRemoveRatingAction()]
+            return UIMenu(title: "", children: children)
+        })
+    }
+    
+    func makeRemoveRatingAction() -> UIAction {
+        return UIAction(
+        title: "Reply",
+        image: UIImage(systemName: "arrowshape.turn.up.left"),
+        identifier: nil,
+        handler: replySelected)
+    }
+    
 }
