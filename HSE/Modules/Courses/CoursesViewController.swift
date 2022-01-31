@@ -55,7 +55,7 @@ final class CoursesViewController: UIViewController {
     
     
     private func setupSegmentView() {
-        segmentView = SegmentView(frame: CGRect(x: 0, y: 60, width: view.frame.width, height: 56))
+        segmentView = SegmentView(frame: .zero)
         segmentView.setTitles(titles: courseViewModels.map({
             return $0.title
         }))

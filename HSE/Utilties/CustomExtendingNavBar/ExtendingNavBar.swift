@@ -16,16 +16,34 @@ final class ExtendingNavBar: UIControl {
     private var topView: UIView!
     private var backView: UIView!
     private var slidingButton: UIButton!
-    
     private var indicatorImageView: UIImageView!
     
-    private var calendarButton: UIButton!
-    private var mainButton: UIButton!
+    private var calendarButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "calendarCS"), for: .normal)
+        button.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+        button.tintColor = .textAndIcons.style(.primary)()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addConstraint(NSLayoutConstraint(item: button,
+                                                attribute: .height,
+                                                relatedBy: .equal,
+                                                toItem: button,
+                                                attribute: .width,
+                                                multiplier: 1,
+                                                constant: 0))
+        
+        return button
+    }()
     
+    private var mainButton: UIButton!
     private var slideViewIsVisible: Bool = false
     private var animationCompleted: Bool = true
     
+    /// returns currently chosen segment (0 or 1)
     public var choosenSegment = 0
+    
+    /// returns view height in closed form (available after addSubviews function call )
+    public private(set) var closedHeight: Double?
     
     var mainLabel: UILabel =  {
         let label = UILabel()
@@ -48,8 +66,10 @@ final class ExtendingNavBar: UIControl {
     override func draw(_ rect: CGRect) {
     }
     
+    /// function to setup navBar, call after all constrains were set
     public func addSubviews() {
         
+        closedHeight = self.frame.height
         // set up background views
 
         slidingView = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 58))
@@ -60,16 +80,11 @@ final class ExtendingNavBar: UIControl {
         addSubview(slidingView)
         addSubview(mainView)
         
-        // set up calendar button
         
-        calendarButton = UIButton(type: .system)
-        calendarButton.setImage(UIImage(named: "calendarCS"), for: .normal)
-        calendarButton.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
-        calendarButton.tintColor = .textAndIcons.style(.primary)()
+        // set up calendar button
         
         mainView.addSubview(calendarButton)
         
-        calendarButton.translatesAutoresizingMaskIntoConstraints = false
         calendarButton.centerYAnchor.constraint(equalTo: mainView.centerYAnchor).isActive = true
         calendarButton.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -15).isActive = true
         

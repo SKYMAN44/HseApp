@@ -94,6 +94,8 @@ final class ChatViewController: UIViewController {
     }
     
     
+    // MARK: Interactions
+    
     @objc
     private func sendButtonTapped() {
         guard let text = inputTextField.text else {return}

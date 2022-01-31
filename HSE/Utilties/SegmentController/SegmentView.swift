@@ -8,16 +8,19 @@
 import UIKit
 
 protocol SegmentViewDelegate {
+    /// called by segmentView when chosen segment has changed
     func segmentChosen(index: Int)
 }
 
 final class SegmentView: UIView {
     
-    var collectionView: UICollectionView?
+    private var collectionView: UICollectionView?
     
-    var delegate: SegmentViewDelegate?
+    /// segmentView delegate
+    public var delegate: SegmentViewDelegate?
     
-    var titles: [String] = []
+    /// current titles
+    public private(set) var titles: [String] = []
     
     override var backgroundColor: UIColor? {
         didSet {
@@ -25,26 +28,26 @@ final class SegmentView: UIView {
         }
     }
     
+    // MARK: - Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
     }
     
-//    @available(*unavailable)
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
     
     private func setup() {
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 0)
         layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         layout.minimumInteritemSpacing = 12
         
-        collectionView = UICollectionView(frame: self.frame, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView?.backgroundColor = self.backgroundColor
         
         collectionView?.register(SegmentCollectionViewCell.self, forCellWithReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier)
@@ -59,11 +62,10 @@ final class SegmentView: UIView {
         
         collectionView?.translatesAutoresizingMaskIntoConstraints = false
         
-        collectionView?.rightAnchor.constraint(equalTo: rightAnchor, constant: 0).isActive = true
-        collectionView?.leftAnchor.constraint(equalTo: leftAnchor, constant: 0).isActive = true
-        collectionView?.topAnchor.constraint(equalTo: topAnchor, constant: 0).isActive = true
-        collectionView?.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0).isActive = true
-        
+        collectionView?.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        collectionView?.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        collectionView?.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        collectionView?.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
     override func draw(_ rect: CGRect) {
@@ -73,6 +75,10 @@ final class SegmentView: UIView {
     // learn manager swift
     // alamofire
     
+    
+    // MARK: - API
+    
+    /// set titles in segments
     public func setTitles(titles: [String]) {
         self.titles = titles
         DispatchQueue.main.async {
@@ -81,6 +87,7 @@ final class SegmentView: UIView {
         }
     }
     
+    /// scroll to specified segment
     public func moveTo(index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
         collectionView!.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
@@ -90,6 +97,8 @@ final class SegmentView: UIView {
 
 }
 
+// MARK: - CollectionView Delegate
+
 extension SegmentView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -98,6 +107,7 @@ extension SegmentView: UICollectionViewDelegate {
     }
 }
 
+// MARK: - CollectionView DataSource
 
 extension SegmentView: UICollectionViewDataSource {
     
@@ -108,9 +118,8 @@ extension SegmentView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier, for: indexPath) as! SegmentCollectionViewCell
         cell.configure(title: titles[indexPath.row])
+        
         return cell
     }
-    
-    
     
 }
