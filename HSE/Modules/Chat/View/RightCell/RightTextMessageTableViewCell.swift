@@ -49,7 +49,7 @@ final class RightTextMessageTableViewCell: BaseRightMessageTableViewCell, Messag
         ])
     }
     
-    func configure(message: MessageViewModel) {
+    public func configure(message: MessageViewModel) {
         messageLabel.text = message.text
     }
     
@@ -57,20 +57,4 @@ final class RightTextMessageTableViewCell: BaseRightMessageTableViewCell, Messag
         print("Fake so far")
     }
     
-    func replySelected(from action: UIAction) { }
-    
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
-            let children: [UIMenuElement] = [self.makeReplyAction()]
-            return UIMenu(title: "", children: children)
-        })
-    }
-    
-    func makeReplyAction() -> UIAction {
-        return UIAction(
-        title: "Reply",
-        image: UIImage(systemName: "arrowshape.turn.up.left"),
-        identifier: nil,
-        handler: replySelected)
-    }
 }

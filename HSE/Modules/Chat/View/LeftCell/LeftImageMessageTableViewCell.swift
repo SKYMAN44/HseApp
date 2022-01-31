@@ -12,7 +12,7 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
 
     private let messageImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.autoresizesSubviews = true
         imageView.layer.cornerRadius = 12
@@ -51,9 +51,21 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
         ])
     }
     
+    private func setImage(image: UIImage) {
+        let ratio = image.size.width / image.size.height
+        messageImageView.image = image
+        messageImageView.addConstraint(NSLayoutConstraint(item: messageImageView,
+                                                          attribute: .height,
+                                                          relatedBy: .equal,
+                                                          toItem: messageImageView,
+                                                          attribute: .width,
+                                                          multiplier: ratio,
+                                                          constant: 0))
+    }
     
-    func configure(message: MessageViewModel) {
-        messageImageView.image = UIImage(named: "testPic.jpg")
+    
+    public func configure(message: MessageViewModel) {
+        setImage(image: UIImage(named: "testPic.jpg")!)
     }
     
     func handleReply() {

@@ -12,7 +12,7 @@ open class BaseRightMessageTableViewCell: UITableViewCell {
     public let bubbleView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
-        view.backgroundColor = .background.style(.accent)()
+        view.backgroundColor = .primary.style(.filler)()
         
         return view
     }()
@@ -21,6 +21,9 @@ open class BaseRightMessageTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupUI()
+        
+        let interaction = UIContextMenuInteraction(delegate: self)
+        bubbleView.addInteraction(interaction)
     }
     
     required public init?(coder: NSCoder) {
@@ -29,16 +32,35 @@ open class BaseRightMessageTableViewCell: UITableViewCell {
     
     
     open func setupUI() {
-        addSubview(bubbleView)
+        contentView.addSubview(bubbleView)
         
         bubbleView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            bubbleView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            bubbleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            bubbleView.rightAnchor.constraint(equalTo: rightAnchor, constant: -8),
-            bubbleView.leftAnchor.constraint(greaterThanOrEqualTo: leftAnchor, constant: 100)
+            bubbleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            bubbleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            bubbleView.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8),
+            bubbleView.leftAnchor.constraint(greaterThanOrEqualTo: contentView.leftAnchor, constant: 100)
         ])
     }
     
+}
+
+extension BaseRightMessageTableViewCell: UIContextMenuInteractionDelegate {
+    public func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            let children: [UIMenuElement] = [self.makeRemoveRatingAction()]
+            return UIMenu(title: "", children: children)
+        })
+    }
+    
+    func makeRemoveRatingAction() -> UIAction {
+        return UIAction(
+        title: "Reply",
+        image: UIImage(systemName: "arrowshape.turn.up.left"),
+        identifier: nil,
+        handler: replySelected)
+    }
+    
+    func replySelected(from action: UIAction) { }
 }
 

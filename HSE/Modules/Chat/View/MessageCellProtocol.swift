@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 protocol MessageCellProtocol: UITableViewCell {
     static var reuseIdentifier: String { get }
     

@@ -43,6 +43,9 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupUI()
+        
+        let interaction = UIContextMenuInteraction(delegate: self)
+        bubbleView.addInteraction(interaction)
     }
     
     required public init?(coder: NSCoder) {
@@ -60,18 +63,38 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         senderImage.translatesAutoresizingMaskIntoConstraints = false
         senderImage.widthAnchor.constraint(equalToConstant: 24).isActive = true
         
-        addSubview(mainSV)
+        self.contentView.addSubview(mainSV)
         
         mainSV.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            mainSV.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
-            mainSV.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -8),
-            mainSV.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 8),
-            mainSV.rightAnchor.constraint(lessThanOrEqualTo: self.rightAnchor, constant: -100)
+            mainSV.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            mainSV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            mainSV.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 8),
+            mainSV.rightAnchor.constraint(lessThanOrEqualTo: contentView.rightAnchor, constant: -100)
         ])
         bubbleView.backgroundColor = .background.style(.accent)()
+        
     }
 
+}
+
+extension BaseLeftMessageTableViewCell: UIContextMenuInteractionDelegate {
+    public func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
+            let children: [UIMenuElement] = [self.makeRemoveRatingAction()]
+            return UIMenu(title: "", children: children)
+        })
+    }
+    
+    func makeRemoveRatingAction() -> UIAction {
+        return UIAction(
+        title: "Reply",
+        image: UIImage(systemName: "arrowshape.turn.up.left"),
+        identifier: nil,
+        handler: replySelected)
+    }
+    
+    func replySelected(from action: UIAction) { }
 }
 

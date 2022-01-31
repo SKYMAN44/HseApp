@@ -7,25 +7,7 @@
 
 import UIKit
 
-final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageCellProtocol, UIContextMenuInteractionDelegate {
-    
-    func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
-            let children: [UIMenuElement] = [self.makeRemoveRatingAction()]
-            return UIMenu(title: "", children: children)
-        })
-    }
-    
-    func makeRemoveRatingAction() -> UIAction {
-        return UIAction(
-        title: "Reply",
-        image: UIImage(systemName: "arrowshape.turn.up.left"),
-        identifier: nil,
-        handler: replySelected)
-    }
-    
-    func replySelected(from action: UIAction) { }
-    
+final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageCellProtocol {
     static var reuseIdentifier = "LeftTextMessageTableViewCell"
 
     private let messageLabel: UILabel = {
@@ -50,9 +32,6 @@ final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageC
         super.setupUI()
         
         setupMessageLabel()
-        
-        let interaction = UIContextMenuInteraction(delegate: self)
-        messageLabel.addInteraction(interaction)
     }
     
     private func setupMessageLabel() {
@@ -66,13 +45,11 @@ final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageC
             messageLabel.rightAnchor.constraint(equalTo: bubbleView.rightAnchor, constant: -8),
             messageLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -8)
         ])
+        
     }
     
-    
-    func configure(message: MessageViewModel) {
+    public func configure(message: MessageViewModel) {
         messageLabel.text = message.text
-        print("__--__-_-__-___-_")
-        print(messageLabel.interactions)
     }
     
     func handleReply() {
