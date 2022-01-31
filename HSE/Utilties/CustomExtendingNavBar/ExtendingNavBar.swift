@@ -165,7 +165,8 @@ final class ExtendingNavBar: UIControl {
         
     }
     
-    @objc func buttonTapped() {
+    @objc
+    func buttonTapped() {
         
         if(!animationCompleted) {
             return

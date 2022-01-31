@@ -11,13 +11,17 @@ import UIKit
 final class ChatViewController: UIViewController {
 
     //temporary for debug
-    var temparr: [Message] = []
+    var temparr: [MessageViewModel] = []
     
     private var tableView: UITableView = {
         let tableView = UITableView()
         
         tableView.backgroundColor = .background.style(.firstLevel)()
         tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: "MessageTableViewCell")
+        tableView.register(LeftTextMessageTableViewCell.self, forCellReuseIdentifier: LeftTextMessageTableViewCell.reuseIdentifier)
+        tableView.register(RightTextMessageTableViewCell.self, forCellReuseIdentifier: RightTextMessageTableViewCell.reuseIdentifier)
+        tableView.register(RightImageMessageTableViewCell.self, forCellReuseIdentifier: RightImageMessageTableViewCell.reuseIdentifier)
+        tableView.register(LeftImageMessageTableViewCell.self, forCellReuseIdentifier: LeftImageMessageTableViewCell.reuseIdentifier)
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorColor = .clear
         
@@ -74,7 +78,7 @@ final class ChatViewController: UIViewController {
         view.backgroundColor = .background.style(.accent)()
         
         //temp for debug
-        temparr.append(contentsOf: Message.array)
+        temparr.append(contentsOf: MessageViewModel.testArray)
         
         setupInputContainer()
         setupTableView()
@@ -105,10 +109,11 @@ final class ChatViewController: UIViewController {
         let hour = calendar.component(.hour, from: date)
         let minutes = calendar.component(.minute, from: date)
         let timeString = "\(hour):\(minutes)"
-        let message = Message(senderName: "Dima", senderType: .right, message: text, attachment: nil, time: timeString)
+        let message = MessageViewModel(side: .right, type: .text, text: text, imageURL: nil)
+//        let message = Message(senderName: "Dima", senderType: .right, message: text, attachment: nil, time: timeString)
         temparr.append(message)
         tableView.reloadData()
-        
+
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         tableView.scrollToRow(at: IndexPath(row: lastRowIndex, section: lastSectionIndex), at: .bottom, animated: true)
@@ -195,7 +200,8 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: MessageTableViewCell.reuseIdentifier) as! MessageTableViewCell
+        let cell = MessageCellFactory.createCell(message: temparr[indexPath.row], tableView: tableView, indexPath: indexPath)
+        
         cell.selectionStyle = .none
         cell.configure(message: temparr[indexPath.row])
         

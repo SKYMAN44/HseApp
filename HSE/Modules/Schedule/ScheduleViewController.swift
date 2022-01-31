@@ -34,8 +34,6 @@ final class ScheduleViewController: UIViewController {
         return tableView
     }()
     
-    private let refreshControl = UIRefreshControl()
-    
     private var currentContent: ContentType = .timeTable
     
     // MARK: - Lifecycle
@@ -116,7 +114,6 @@ final class ScheduleViewController: UIViewController {
     }
     
     private func addSegmentView() {
-        // add segmented view
         segmentView.setTitles(titles: tempArray)
         view.addSubview(segmentView)
         
@@ -134,7 +131,6 @@ final class ScheduleViewController: UIViewController {
     
     
     private func updateView() {
-        
         switch currentContent {
         case .timeTable:
             //remove segmented view
@@ -146,12 +142,9 @@ final class ScheduleViewController: UIViewController {
                 }
             }
         case .assigments:
-            
             addSegmentView()
-            
             //place navView on top of segmentView
             view.bringSubviewToFront(navView!)
-            
             // change top constraint of tableview so segmentView not covers it
             for constraint in self.view.constraints {
                 if constraint.identifier == "tableHeightConstain" {
@@ -159,7 +152,6 @@ final class ScheduleViewController: UIViewController {
                 }
             }
             view.layoutIfNeeded()
-            
         }
     }
     
