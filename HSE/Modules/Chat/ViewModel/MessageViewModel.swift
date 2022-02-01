@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Side {
     case left
@@ -23,6 +24,7 @@ struct MessageViewModel {
     let type: MessageType
     let text: String?
     let imageURL: URL?
+    var imageArray: UIImage = UIImage(systemName: "plus")!
     
     
     static let testArray: [MessageViewModel] = [

@@ -8,11 +8,15 @@
 import UIKit
 
 final class RightImageMessageTableViewCell: BaseRightMessageTableViewCell, MessageCellProtocol {
-    static var reuseIdentifier = "LeftImageMessageTableViewCell"
+    static var reuseIdentifier = "RightImageMessageTableViewCell"
 
     private let messageImageView: UIImageView = {
-        let imageView =  UIImageView()
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.autoresizesSubviews = true
+        imageView.layer.cornerRadius = 12
+        imageView.clearsContextBeforeDrawing = true
         
         return imageView
     }()
@@ -39,16 +43,30 @@ final class RightImageMessageTableViewCell: BaseRightMessageTableViewCell, Messa
         messageImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 8),
-            messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 8),
-            messageImageView.rightAnchor.constraint(equalTo: bubbleView.rightAnchor, constant: -8),
-            messageImageView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -8)
+            messageImageView.topAnchor.constraint(equalTo: bubbleView.topAnchor, constant: 0),
+            messageImageView.leftAnchor.constraint(equalTo: bubbleView.leftAnchor, constant: 0),
+            messageImageView.rightAnchor.constraint(equalTo: bubbleView.rightAnchor, constant: 0),
+            messageImageView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: 0),
+            messageImageView.widthAnchor.constraint(lessThanOrEqualToConstant: ScreenSize.Width / 2)
         ])
+    }
+    
+    private func setImage(image: UIImage) {
+        let ratio = image.size.width / image.size.height
+        messageImageView.image = image
+        messageImageView.addConstraint(NSLayoutConstraint(item: messageImageView,
+                                                          attribute: .height,
+                                                          relatedBy: .equal,
+                                                          toItem: messageImageView,
+                                                          attribute: .width,
+                                                          multiplier: ratio,
+                                                          constant: 0))
     }
     
     
     public func configure(message: MessageViewModel) {
-        messageImageView.image = UIImage(named: "testPic.jpg")
+        setImage(image: message.imageArray)
+//        setImage(image: UIImage(named: "testPic.jpg")!)
     }
     
     func handleReply() {
