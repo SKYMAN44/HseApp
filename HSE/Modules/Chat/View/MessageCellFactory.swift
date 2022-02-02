@@ -11,21 +11,37 @@ import UIKit
 
 struct MessageCellFactory {
     
-    static public func createCell(message: MessageViewModel, tableView: UITableView, indexPath: IndexPath) -> MessageCellProtocol {
+    static public func createCell(message: MessageViewModel, tableView: UITableView, indexPath: IndexPath, hostingController: chatCellDelegate) -> MessageCellProtocol {
         switch message.side {
         case .left:
             switch message.type {
             case .text:
-                return tableView.dequeueReusableCell(withIdentifier: LeftTextMessageTableViewCell.reuseIdentifier, for: indexPath) as! LeftTextMessageTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: LeftTextMessageTableViewCell.reuseIdentifier, for: indexPath) as! LeftTextMessageTableViewCell
+                cell.delegate = hostingController
+                cell.myIndexPath = indexPath
+                
+                return cell
             case .image:
-                return tableView.dequeueReusableCell(withIdentifier: LeftImageMessageTableViewCell.reuseIdentifier, for: indexPath) as! LeftImageMessageTableViewCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: LeftImageMessageTableViewCell.reuseIdentifier, for: indexPath) as! LeftImageMessageTableViewCell
+                cell.delegate = hostingController
+                cell.myIndexPath = indexPath
+                
+                return cell
             }
         case .right:
             switch message.type {
             case .text:
-                return tableView.dequeueReusableCell(withIdentifier: RightTextMessageTableViewCell.reuseIdentifier, for: indexPath) as! MessageCellProtocol
+                let cell = tableView.dequeueReusableCell(withIdentifier: RightTextMessageTableViewCell.reuseIdentifier, for: indexPath) as! RightTextMessageTableViewCell
+                cell.delegate = hostingController
+                cell.myIndexPath = indexPath
+                
+                return cell
             case .image:
-                return tableView.dequeueReusableCell(withIdentifier: RightImageMessageTableViewCell.reuseIdentifier, for: indexPath) as! MessageCellProtocol
+                let cell = tableView.dequeueReusableCell(withIdentifier: RightImageMessageTableViewCell.reuseIdentifier, for: indexPath) as! RightImageMessageTableViewCell
+                cell.delegate = hostingController
+                cell.myIndexPath = indexPath
+                
+                return cell
             }
         }
     }

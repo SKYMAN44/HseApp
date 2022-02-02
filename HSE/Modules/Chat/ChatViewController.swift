@@ -85,7 +85,7 @@ final class ChatViewController: UIViewController {
         textField.contentInsetAdjustmentBehavior = .never
         textField.isEditable = true
         textField.text = "Message"
-        textField.font = .customFont.style(.body)()
+        textField.font = .customFont.style(.message)()
         textField.textContainerInset = UIEdgeInsets(top: 8, left: 10, bottom: 8, right: 10)
         textField.isScrollEnabled = false
         
@@ -94,8 +94,8 @@ final class ChatViewController: UIViewController {
     
     private var inputViewBotttomConstrain: NSLayoutConstraint?
     private var inputViewHeightConstrain: NSLayoutConstraint?
-    
-    
+    private var selectedIndexPath: IndexPath?
+    private weak var selectedImageView: UIImageView?
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -277,7 +277,7 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = MessageCellFactory.createCell(message: temparr[indexPath.row], tableView: tableView, indexPath: indexPath)
+        let cell = MessageCellFactory.createCell(message: temparr[indexPath.row], tableView: tableView, indexPath: indexPath, hostingController: self)
         
         cell.selectionStyle = .none
         cell.configure(message: temparr[indexPath.row])
@@ -353,4 +353,63 @@ extension ChatViewController: UIImagePickerControllerDelegate & UINavigationCont
         dismiss(animated: true, completion: nil)
     }
 }
+
+// MARK: - ChatCellDelegate
+
+extension ChatViewController: chatCellDelegate {
+    func selectedContentInCell(content: UIImageView, indexPath: IndexPath) {
+        selectedImageView = content
+        selectedIndexPath = indexPath
+        let photoController = PhotoZoomViewController()
+        photoController.image = content.image
+        let nav = self.navigationController
+//        nav?.delegate = photoController.transitionController
+        photoController.transitionController.fromDelegate = self
+        photoController.transitionController.toDelegate = photoController
+        self.navigationController?.pushViewController(photoController, animated: true)
+    }
+    
+    
+}
+
+
+extension ChatViewController: ZoomAnimatorDelegate {
+    
+    func transitionWillStartWith(zoomAnimator: ZoomAnimator) {
+        
+    }
+    
+    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
+//        let cell = self.collectionView.cellForItem(at: self.selectedIndexPath) as! PhotoCollectionViewCell
+//
+//        let cellFrame = self.collectionView.convert(cell.frame, to: self.view)
+//
+//        if cellFrame.minY < self.collectionView.contentInset.top {
+//            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .top, animated: false)
+//        } else if cellFrame.maxY > self.view.frame.height - self.collectionView.contentInset.bottom {
+//            self.collectionView.scrollToItem(at: self.selectedIndexPath, at: .bottom, animated: false)
+//        }
+    }
+    
+    func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
+        
+        //Get a guarded reference to the cell's UIImageView
+        let referenceImageView = selectedImageView
+        
+        return referenceImageView
+    }
+    
+    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
+        
+        
+        //Get a guarded reference to the cell's frame
+//        let unconvertedFrame = getFrameFromCollectionViewCell(for: self.selectedIndexPath)
+        
+        let cellFrame = selectedImageView?.frame
+        
+        return cellFrame
+    }
+    
+}
+
 

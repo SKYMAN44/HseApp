@@ -39,6 +39,9 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         return imageView
     }()
     
+    var delegate: chatCellDelegate?
+    var myIndexPath: IndexPath?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -61,7 +64,7 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         mainSV.spacing = 8
         
         senderImage.translatesAutoresizingMaskIntoConstraints = false
-        senderImage.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        senderImage.widthAnchor.constraint(equalToConstant: 36).isActive = true
         
         self.contentView.addSubview(mainSV)
         

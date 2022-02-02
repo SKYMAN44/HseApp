@@ -18,6 +18,8 @@ extension UIFont {
         case footnote
         case caption
         case special
+        case message
+        case formula
         
         func style() -> UIFont {
             let font: UIFont
@@ -34,6 +36,11 @@ extension UIFont {
                 font = UIFont(name: "Inter-Medium", size: 12)!
             case .special:
                 font = UIFont(name: "Inter-Medium", size: 14)!
+            case .message:
+                font = UIFont(name: "Inter-Regular", size: 16)!
+            case .formula:
+                font = UIFont(name: "Inter-Regular", size: 16)!
+//                font = UIFont(name: "SF Mono Medium", size: 14)!
             }
             return font
         }

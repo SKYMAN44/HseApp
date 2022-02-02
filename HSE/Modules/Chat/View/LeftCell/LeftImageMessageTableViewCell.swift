@@ -17,6 +17,7 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
         imageView.autoresizesSubviews = true
         imageView.layer.cornerRadius = 12
         imageView.clearsContextBeforeDrawing = true
+        imageView.isUserInteractionEnabled = true
         
         return imageView
     }()
@@ -34,10 +35,10 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
         super.setupUI()
         
         
-        setupMessageLabel()
+        setupMessageImageView()
     }
     
-    private func setupMessageLabel() {
+    private func setupMessageImageView() {
         self.bubbleView.addSubview(messageImageView)
         
         messageImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -49,6 +50,9 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
             messageImageView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: 0),
             messageImageView.widthAnchor.constraint(lessThanOrEqualToConstant: ScreenSize.Width / 2)
         ])
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        messageImageView.addGestureRecognizer(tapGesture)
     }
     
     private func setImage(image: UIImage) {
@@ -63,6 +67,11 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
                                                           constant: 0))
     }
     
+    @objc
+    private func imageTapped() {
+        contentSelected()
+    }
+    
     
     public func configure(message: MessageViewModel) {
         setImage(image: UIImage(named: "testPic.jpg")!)
@@ -70,6 +79,11 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
     
     func handleReply() {
         print("Fake so far")
+    }
+    
+    
+    private func contentSelected() {
+        self.delegate?.selectedContentInCell(content: messageImageView, indexPath: myIndexPath!)
     }
 
 }

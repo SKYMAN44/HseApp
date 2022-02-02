@@ -13,7 +13,7 @@ final class FormulaCollectionViewCell: UICollectionViewCell {
     private let formulaLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = .customFont.style(.caption)()
+        label.font = .customFont.style(.formula)()
         label.textColor = .textAndIcons.style(.primary)()
         
         return label

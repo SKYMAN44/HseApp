@@ -14,7 +14,7 @@ final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageC
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.font = .customFont.style(.footnote)()
+        label.font = .customFont.style(.message)()
         label.textColor = .textAndIcons.style(.primary)()
         
         return label
