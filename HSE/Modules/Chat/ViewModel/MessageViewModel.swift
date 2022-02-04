@@ -24,7 +24,7 @@ struct MessageViewModel {
     let type: MessageType
     let text: String?
     let imageURL: URL?
-    var imageArray: UIImage = UIImage(systemName: "plus")!
+    var imageArray: UIImage?
     
     
     static let testArray: [MessageViewModel] = [
@@ -45,7 +45,6 @@ struct MessageViewModel {
         MessageViewModel(side: .left, type: .image, text: nil, imageURL: URL(string: "fake")),
         MessageViewModel(side: .left, type: .text, text: "Я все скипнул, мне доступ открыт и везде зеленый свет", imageURL: nil),
         MessageViewModel(side: .right, type: .text, text: "У меня мама заболела непонятно чем, пока результаты теста придут, суббота уже пройдёт..", imageURL: nil),
-        MessageViewModel(side: .right, type: .image, text: nil, imageURL: URL(string: "fake")),
         MessageViewModel(side: .left, type: .text, text: "Я все скипнул, мне доступ открыт и везде зеленый свет", imageURL: nil),
         MessageViewModel(side: .left, type: .text, text: "Я все скипнул, мне доступ открыт и везде зеленый свет", imageURL: nil)
     ]

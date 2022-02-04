@@ -60,36 +60,6 @@ final class ChatViewController: UIViewController {
     
     // MARK: - Interactions
     
-//    @objc
-//    private func chooseImageTapped(sender: UIButton) {
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.delegate = self
-//        let alertController = UIAlertController(title:"Choose Image Source", message: nil,preferredStyle: .actionSheet)
-//
-//        let cancelAction = UIAlertAction(title: "Cancel",style: .cancel, handler: nil)
-//        alertController.addAction(cancelAction)
-//
-//        if UIImagePickerController.isSourceTypeAvailable(.camera)
-//        {
-//            let cameraAction = UIAlertAction(title: "Camera",style: .default, handler: { action in imagePicker.sourceType = .camera
-//            self.present(imagePicker, animated: true, completion: nil)
-//            })
-//            alertController.addAction(cameraAction)
-//        }
-//
-//        if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-//            let photoLibraryAction = UIAlertAction(title: "Photo Library",style: .default, handler: { action in
-//                imagePicker.sourceType = .photoLibrary
-//                self.present(imagePicker, animated: true, completion: nil)
-//            })
-//        alertController.addAction(photoLibraryAction)
-//        }
-//
-//        alertController.popoverPresentationController?.sourceView = sender
-//
-//        present(alertController, animated: true, completion: nil)
-//    }
-    
     @objc
     private func handleKeyboardNotification(notification: NSNotification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -140,9 +110,6 @@ final class ChatViewController: UIViewController {
             tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
         ])
     }
-    
-    // remove
-    var testImageArr: [UIImage] = []
 
 }
 
@@ -157,7 +124,6 @@ extension ChatViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = MessageCellFactory.createCell(message: temparr[indexPath.row], tableView: tableView, indexPath: indexPath, hostingController: self)
-        
         cell.selectionStyle = .none
         cell.configure(message: temparr[indexPath.row])
         
@@ -181,8 +147,7 @@ extension ChatViewController: UITableViewDelegate {
 extension ChatViewController: InputViewDelegate {
     func messageSent(messageViewModel: MessageViewModel) {
         temparr.append(messageViewModel)
-        tableView.reloadData()
-        
+        tableView.insertRows(at: [IndexPath(row: temparr.count - 1, section: 0)], with: .bottom)
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
         tableView.scrollToRow(at: IndexPath(row: lastRowIndex, section: lastSectionIndex), at: .bottom, animated: true)
@@ -195,13 +160,13 @@ extension ChatViewController: InputViewDelegate {
 
 // MARK: - ChatCellDelegate
 
-extension ChatViewController: chatCellDelegate {
+extension ChatViewController: ChatCellDelegate {
     func selectedContentInCell(content: UIImageView, indexPath: IndexPath) {
         selectedImageView = content
         selectedIndexPath = indexPath
         let photoController = PhotoZoomViewController()
         photoController.image = content.image
-        let nav = self.navigationController
+//        let nav = self.navigationController
 //        nav?.delegate = photoController.transitionController
 //        photoController.transitionController.fromDelegate = self
         photoController.transitionController.toDelegate = photoController

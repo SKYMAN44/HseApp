@@ -84,14 +84,24 @@ class InputView: UIView {
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 70, height: 70)
         layout.minimumInteritemSpacing = 8
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.register(InputContentCollectionViewCell.self, forCellWithReuseIdentifier: InputContentCollectionViewCell.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
         return collectionView
+    }()
+    
+    private var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.contentInsetAdjustmentBehavior = .automatic
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
     }()
     
     
@@ -101,11 +111,15 @@ class InputView: UIView {
         didSet {
             if(chosenPhotos.isEmpty) {
                 contentCollectionView.isHidden = true
+                contentCollectionView.reloadData()
+                textViewDidChange(inputTextView)
             } else {
                 contentCollectionView.isHidden = false
                 contentCollectionView.reloadData()
                 textViewDidChange(inputTextView)
             }
+            let textViewIsEmpty = inputTextView.text == "" ? true : false
+            enableButton(textViewIsEmpty: textViewIsEmpty, photosIsEmpty: chosenPhotos.isEmpty)
         }
     }
     // MARK: - Init
@@ -170,21 +184,33 @@ class InputView: UIView {
             inputFieldView.rightAnchor.constraint(equalTo: sendButton.leftAnchor, constant: -8)
         ])
         
+        inputFieldView.addSubview(scrollView)
+        
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: inputFieldView.topAnchor, constant: 5),
+            scrollView.leftAnchor.constraint(equalTo: inputFieldView.leftAnchor, constant: 5),
+            scrollView.bottomAnchor.constraint(equalTo: inputFieldView.bottomAnchor, constant: -5),
+            scrollView.rightAnchor.constraint(equalTo: inputFieldView.rightAnchor, constant: -5)
+        ])
+        
         let stackView = UIStackView(arrangedSubviews: [contentCollectionView, inputTextView])
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.spacing = 5
         
-        inputFieldView.addSubview(stackView)
+        scrollView.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: inputFieldView.topAnchor, constant: 5),
-            stackView.bottomAnchor.constraint(equalTo: inputFieldView.bottomAnchor, constant: -5),
-            stackView.leftAnchor.constraint(equalTo: inputFieldView.leftAnchor, constant: 5),
-            stackView.rightAnchor.constraint(equalTo: inputFieldView.rightAnchor, constant: -5)
+            stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            stackView.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor),
+            stackView.rightAnchor.constraint(equalTo: scrollView.contentLayoutGuide.rightAnchor),
+            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
         
         contentCollectionView.isHidden = true
@@ -194,10 +220,20 @@ class InputView: UIView {
     
     @objc
     private func sendButtonTapped() {
-        guard let text = inputTextView.text, inputTextView.text != "" else { return }
-        inputTextView.text = ""
-        let viewModel = MessageViewModel(side: .right, type: .text, text: text, imageURL: nil)
-        delegate?.messageSent(messageViewModel: viewModel)
+        if let text = inputTextView.text, inputTextView.text != "", inputTextView.textColor != .textAndIcons.style(.tretiary)() {
+            inputTextView.text = ""
+            let viewModel = MessageViewModel(side: .right, type: .text, text: text, imageURL: nil)
+            delegate?.messageSent(messageViewModel: viewModel)
+        }
+        
+        guard !chosenPhotos.isEmpty else { return }
+        
+        chosenPhotos.forEach { (photo) in
+            var viewModel = MessageViewModel(side: .right, type: .image, text: nil, imageURL: URL(string: "f"))
+            viewModel.imageArray = photo.copy() as? UIImage
+            delegate?.messageSent(messageViewModel: viewModel)
+        }
+        chosenPhotos.removeAll()
     }
     
     @objc
@@ -231,6 +267,14 @@ class InputView: UIView {
 
         controller.present(alertController, animated: true, completion: nil)
     }
+    
+    private func enableButton(textViewIsEmpty: Bool, photosIsEmpty: Bool) {
+        if(!textViewIsEmpty || !photosIsEmpty) {
+            sendButton.isEnabled = true
+        } else {
+            sendButton.isEnabled = false
+        }
+    }
 
     
     // MARK: - API
@@ -255,16 +299,26 @@ extension InputView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: InputContentCollectionViewCell.reuseIdentifier, for: indexPath) as! InputContentCollectionViewCell
         cell.configure(image: chosenPhotos[indexPath.row])
+        cell.delegate = self
+        cell.indexPath = indexPath
+        
         return cell
     }
     
+}
+
+// MARK: - CollectionViewCell Delegate
+
+extension InputView: InputContentCollectionViewCellDelegate {
+    func removeButtonPressed(indexPath: IndexPath) {
+        chosenPhotos.remove(at: indexPath.row)
+    }
 }
 
 // MARK: - TextViewDelegate
 
 extension InputView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        sendButton.isEnabled = true
         if(textView.textColor == .textAndIcons.style(.tretiary)()) {
             textView.text = nil
             textView.textColor = .textAndIcons.style(.primary)()
@@ -273,7 +327,8 @@ extension InputView: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if(textView.text.isEmpty || textView.text == "") {
-            sendButton.isEnabled = false
+            let textViewIsEmpty = textView.text == "" ? true : false
+            enableButton(textViewIsEmpty: textViewIsEmpty, photosIsEmpty: chosenPhotos.isEmpty)
             textView.text = "Message"
             textView.textColor = .textAndIcons.style(.tretiary)()
             delegate?.inputViewHeightDidChange(heightConstrain: 56)
@@ -284,13 +339,15 @@ extension InputView: UITextViewDelegate {
         let fixedWidth = textView.frame.size.width
         let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
         let height = newSize.height
-        if(!chosenPhotos.isEmpty) {
+        let textViewIsEmpty = textView.text == "" ? true : false
+        enableButton(textViewIsEmpty: textViewIsEmpty, photosIsEmpty: chosenPhotos.isEmpty)
+        if(!chosenPhotos.isEmpty && height >= 52) {
             delegate?.inputViewHeightDidChange(heightConstrain: 150)
+        } else if (!chosenPhotos.isEmpty && height < 52) {
+            delegate?.inputViewHeightDidChange(heightConstrain: 130)
         } else if(height > 100) {
             delegate?.inputViewHeightDidChange(heightConstrain: 150)
-            inputTextView.isScrollEnabled = true
         } else {
-            inputTextView.isScrollEnabled = false
             delegate?.inputViewHeightDidChange(heightConstrain: 30 + height)
         }
     }

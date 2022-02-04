@@ -39,7 +39,7 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    var delegate: chatCellDelegate?
+    var delegate: ChatCellDelegate?
     var myIndexPath: IndexPath?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

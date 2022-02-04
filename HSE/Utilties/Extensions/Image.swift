@@ -25,4 +25,14 @@ extension UIImage {
         imageView.layer.render(in: context)
         return UIGraphicsGetImageFromCurrentImageContext()
     }
+    
+    func clone() -> UIImage? {
+        guard let originalCgImage = self.cgImage,
+              let newCgImage = originalCgImage.copy()
+        else {
+            return nil
+        }
+        return UIImage(cgImage: newCgImage, scale: self.scale, orientation: self.imageOrientation)
+    }
+    
 }

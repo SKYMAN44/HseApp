@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol InputContentCollectionViewCellDelegate {
+    func removeButtonPressed(indexPath: IndexPath)
+}
+
 final class InputContentCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "InputContentCollectionViewCell"
     
@@ -40,6 +44,9 @@ final class InputContentCollectionViewCell: UICollectionViewCell {
         
         return button
     }()
+    
+    public var delegate: InputContentCollectionViewCellDelegate?
+    public var indexPath: IndexPath?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -83,7 +90,7 @@ final class InputContentCollectionViewCell: UICollectionViewCell {
     
     @objc
     private func removeButtonTapped() {
-        
+        delegate?.removeButtonPressed(indexPath: indexPath!)
     }
     
     public func configure(image: UIImage) {

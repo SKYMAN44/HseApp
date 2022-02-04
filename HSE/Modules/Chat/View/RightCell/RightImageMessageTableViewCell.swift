@@ -17,9 +17,12 @@ final class RightImageMessageTableViewCell: BaseRightMessageTableViewCell, Messa
         imageView.autoresizesSubviews = true
         imageView.layer.cornerRadius = 12
         imageView.clearsContextBeforeDrawing = true
+        imageView.isUserInteractionEnabled = true
         
         return imageView
     }()
+    
+    var imageViewHeightConstrain: NSLayoutConstraint?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,6 +40,19 @@ final class RightImageMessageTableViewCell: BaseRightMessageTableViewCell, Messa
         setupMessageLabel()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.updateConstraints()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        
+        self.messageImageView.image = nil
+    }
+    
     private func setupMessageLabel() {
         self.bubbleView.addSubview(messageImageView)
         
@@ -49,28 +65,47 @@ final class RightImageMessageTableViewCell: BaseRightMessageTableViewCell, Messa
             messageImageView.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: 0),
             messageImageView.widthAnchor.constraint(lessThanOrEqualToConstant: ScreenSize.Width / 2)
         ])
+        
+        imageViewHeightConstrain = NSLayoutConstraint(item: messageImageView,
+                                                      attribute: .height,
+                                                      relatedBy: .equal,
+                                                      toItem: messageImageView,
+                                                      attribute: .width,
+                                                      multiplier: 1,
+                                                      constant: 0)
+        messageImageView.addConstraint(imageViewHeightConstrain!)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        messageImageView.addGestureRecognizer(tapGesture)
     }
     
     private func setImage(image: UIImage) {
         let ratio = image.size.width / image.size.height
         messageImageView.image = image
-        messageImageView.addConstraint(NSLayoutConstraint(item: messageImageView,
-                                                          attribute: .height,
-                                                          relatedBy: .equal,
-                                                          toItem: messageImageView,
-                                                          attribute: .width,
-                                                          multiplier: ratio,
-                                                          constant: 0))
+        imageViewHeightConstrain? = NSLayoutConstraint(item: messageImageView,
+                                                       attribute: .height,
+                                                       relatedBy: .equal,
+                                                       toItem: messageImageView,
+                                                       attribute: .width,
+                                                       multiplier: ratio,
+                                                       constant: 0)
     }
     
+    @objc
+    private func imageTapped() {
+        contentSelected()
+    }
     
     public func configure(message: MessageViewModel) {
-        setImage(image: message.imageArray)
-//        setImage(image: UIImage(named: "testPic.jpg")!)
+        setImage(image: message.imageArray!)
     }
     
     func handleReply() {
         print("Fake so far")
+    }
+    
+    private func contentSelected() {
+        self.delegate?.selectedContentInCell(content: messageImageView, indexPath: myIndexPath!)
     }
     
 }
