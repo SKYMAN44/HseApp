@@ -15,7 +15,7 @@ protocol ZoomAnimatorDelegate: AnyObject {
     func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect?
 }
 
-class ZoomAnimator: NSObject {
+final class ZoomAnimator: NSObject {
     
     weak var fromDelegate: ZoomAnimatorDelegate?
     weak var toDelegate: ZoomAnimatorDelegate?

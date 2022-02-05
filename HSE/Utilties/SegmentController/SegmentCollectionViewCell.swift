@@ -8,7 +8,6 @@
 import UIKit
 
 final class SegmentCollectionViewCell: UICollectionViewCell {
-    
     static let reuseIdentifier = "SegmentCollectionViewCell"
     
     private let titleLabel: UILabel = {

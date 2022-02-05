@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ZoomTransitionController: NSObject {
+final class ZoomTransitionController: NSObject {
     
     let animator: ZoomAnimator
     let interactionController: ZoomDismissalInteractionController

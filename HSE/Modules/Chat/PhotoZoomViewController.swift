@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PhotoZoomViewController: UIViewController {
+final class PhotoZoomViewController: UIViewController {
     
     private var photoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -29,6 +29,7 @@ class PhotoZoomViewController: UIViewController {
     private var imageLeadingConstrain: NSLayoutConstraint?
     private var imageTrailingConstrain: NSLayoutConstraint?
     private var tapGestureRecognizer: UITapGestureRecognizer!
+    private var panGestureRecognizer: UIPanGestureRecognizer!
     
     enum ScreenMode {
         case full, normal
@@ -41,11 +42,13 @@ class PhotoZoomViewController: UIViewController {
     
     public var transitionController = ZoomTransitionController()
     public var image: UIImage?
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         self.navigationController?.navigationBar.barTintColor = .background.style(.accent)()
         view.backgroundColor = .black
@@ -55,6 +58,9 @@ class PhotoZoomViewController: UIViewController {
         
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapPerformed(gestureRecognizer:)))
         self.view.addGestureRecognizer(self.tapGestureRecognizer)
+        self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPanWith(gestureRecognizer:)))
+        self.panGestureRecognizer.delegate = self
+        self.view.addGestureRecognizer(self.panGestureRecognizer)
     }
     
     override func viewDidLayoutSubviews() {
@@ -202,11 +208,34 @@ extension PhotoZoomViewController: UIScrollViewDelegate {
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         updateConstraintsForSize(self.view.bounds.size)
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        self.delegate?.photoZoomViewController(self, scrollViewDidScroll: scrollView)
-//    }
 }
+
+// MARK: - GestureRecognizerDelegate
+
+extension PhotoZoomViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
+            let velocity = gestureRecognizer.velocity(in: self.view)
+            let velocityCheck = velocity.y < 0
+            if velocityCheck {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if otherGestureRecognizer == self.scrollView.panGestureRecognizer {
+            if self.scrollView.contentOffset.y == 0 {
+                return true
+            }
+        }
+        return false
+    }
+}
+
+// MARK: - ZoomAnimator Delegate
 
 extension PhotoZoomViewController: ZoomAnimatorDelegate {
     

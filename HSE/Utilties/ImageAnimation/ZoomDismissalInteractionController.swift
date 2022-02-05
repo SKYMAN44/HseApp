@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class ZoomDismissalInteractionController: NSObject {
+final class ZoomDismissalInteractionController: NSObject {
     
     var transitionContext: UIViewControllerContextTransitioning?
     var animator: UIViewControllerAnimatedTransitioning?

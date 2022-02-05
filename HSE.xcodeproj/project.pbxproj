@@ -407,9 +407,9 @@
 		63C4D649278E358F0028381F /* Utilties */ = {
 			isa = PBXGroup;
 			children = (
-				6304EAC227AC173B00BDF75D /* InputView */,
 				6304EAB527AACF9900BDF75D /* ImageAnimation */,
-				63F857E62790D35E00F45A97 /* CustomExtendingNavBar */,
+				6304EAC227AC173B00BDF75D /* InputView */,
+				63F857E62790D35E00F45A97 /* ExtendingNavBar */,
 				63F857D5278F8F8100F45A97 /* CustomSegmentedContoller */,
 				63F857D2278F8CD400F45A97 /* Extensions */,
 				63C4D658278E47980028381F /* SegmentController */,
@@ -558,12 +558,12 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
-		63F857E62790D35E00F45A97 /* CustomExtendingNavBar */ = {
+		63F857E62790D35E00F45A97 /* ExtendingNavBar */ = {
 			isa = PBXGroup;
 			children = (
 				63F857E72790DAE500F45A97 /* ExtendingNavBar.swift */,
 			);
-			path = CustomExtendingNavBar;
+			path = ExtendingNavBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
