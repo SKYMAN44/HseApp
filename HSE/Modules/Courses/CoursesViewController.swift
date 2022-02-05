@@ -56,9 +56,12 @@ final class CoursesViewController: UIViewController {
     
     private func setupSegmentView() {
         segmentView = SegmentView(frame: .zero)
-        segmentView.setTitles(titles: courseViewModels.map({
-            return $0.title
-        }))
+        segmentView.setTitles(
+            titles: Dictionary(uniqueKeysWithValues: zip(
+            courseViewModels.map({ $0.title}),
+            courseViewModels.map({ $0.counter})
+            ))
+        )
         
         segmentView.backgroundColor = .background.style(.accent)()
         segmentView.delegate = self

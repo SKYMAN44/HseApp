@@ -81,9 +81,15 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
         print("Fake so far")
     }
     
+    private func imageFrameRegardingCell() -> CGRect {
+        let firstLevelFrame = bubbleView.convert(messageImageView.frame, to: bubbleView.superview)
+        let secondLevelFrame = bubbleView.superview?.convert(firstLevelFrame, to: self.contentView)
+        
+        return secondLevelFrame!
+    }
     
     private func contentSelected() {
-        self.delegate?.selectedContentInCell(content: messageImageView, indexPath: myIndexPath!)
+        self.delegate?.selectedContentInCell(content: messageImageView, contentFrameInCell: imageFrameRegardingCell(), indexPath: myIndexPath!)
     }
 
 }

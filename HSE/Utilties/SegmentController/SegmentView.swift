@@ -19,8 +19,8 @@ final class SegmentView: UIView {
     /// segmentView delegate
     public var delegate: SegmentViewDelegate?
     
-    /// current titles
-    public private(set) var titles: [String] = []
+    /// current segment items
+    public private(set) var segmentItems: [Item] = []
     
     override var backgroundColor: UIColor? {
         didSet {
@@ -32,11 +32,15 @@ final class SegmentView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
         setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        
+        
         setup()
     }
     
@@ -79,8 +83,11 @@ final class SegmentView: UIView {
     // MARK: - API
     
     /// set titles in segments
-    public func setTitles(titles: [String]) {
-        self.titles = titles
+    public func setTitles(titles: [String: Int?]) {
+        segmentItems.removeAll()
+        titles.forEach { (title, count) in
+            segmentItems.append(Item(title: title, notifications: count))
+        }
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
             self.collectionView?.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .centeredHorizontally)
@@ -93,8 +100,6 @@ final class SegmentView: UIView {
         collectionView!.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
-    
-
 }
 
 // MARK: - CollectionView Delegate
@@ -112,12 +117,12 @@ extension SegmentView: UICollectionViewDelegate {
 extension SegmentView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return titles.count
+        return segmentItems.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SegmentCollectionViewCell.reuseIdentifier, for: indexPath) as! SegmentCollectionViewCell
-        cell.configure(title: titles[indexPath.row])
+        cell.configure(item: segmentItems[indexPath.row])
         
         return cell
     }

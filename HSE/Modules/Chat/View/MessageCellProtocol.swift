@@ -16,5 +16,5 @@ protocol MessageCellProtocol: UITableViewCell {
 }
 
 protocol ChatCellDelegate {
-    func selectedContentInCell(content: UIImageView, indexPath: IndexPath)
+    func selectedContentInCell(content: UIImageView, contentFrameInCell: CGRect, indexPath: IndexPath)
 }

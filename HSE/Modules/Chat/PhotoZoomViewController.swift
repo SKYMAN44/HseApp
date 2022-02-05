@@ -18,31 +18,43 @@ class PhotoZoomViewController: UIViewController {
     
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
         
         return scrollView
     }()
-    
-    var doubleTapGestureRecognizer: UITapGestureRecognizer!
-    public var image: UIImage?
     
     private var imageTopConstrain: NSLayoutConstraint?
     private var imageBottomConstrain: NSLayoutConstraint?
     private var imageLeadingConstrain: NSLayoutConstraint?
     private var imageTrailingConstrain: NSLayoutConstraint?
+    private var tapGestureRecognizer: UITapGestureRecognizer!
     
-    var transitionController = ZoomTransitionController()
-    // MARK: LifeCycle
+    enum ScreenMode {
+        case full, normal
+    }
+    
+    private var currentMode: ScreenMode = .normal
+    // screen taps counter
+    private var numberOfTaps: Int = 0
+    private var timer: Timer?
+    
+    public var transitionController = ZoomTransitionController()
+    public var image: UIImage?
+    // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
+        self.navigationController?.navigationBar.barTintColor = .background.style(.accent)()
+        view.backgroundColor = .black
         setupUI()
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never
-        self.doubleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didDoubleTapWith(gestureRecognizer:)))
-        self.doubleTapGestureRecognizer.numberOfTapsRequired = 2
-        self.view.addGestureRecognizer(self.doubleTapGestureRecognizer)
+        
+        self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapPerformed(gestureRecognizer:)))
+        self.view.addGestureRecognizer(self.tapGestureRecognizer)
     }
     
     override func viewDidLayoutSubviews() {
@@ -61,16 +73,17 @@ class PhotoZoomViewController: UIViewController {
         updateConstraintsForSize(view.bounds.size)
     }
     
+    // MARK: - UI setup
+    
     private func setupUI() {
-        
         view.addSubview(scrollView)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
         
         photoImageView.image = image
@@ -88,7 +101,54 @@ class PhotoZoomViewController: UIViewController {
         imageTrailingConstrain?.isActive = true
     }
     
-    @objc func didDoubleTapWith(gestureRecognizer: UITapGestureRecognizer) {
+    // MARK: - Interactions
+    
+    @objc
+    private func tapPerformed(gestureRecognizer: UITapGestureRecognizer) {
+        if(numberOfTaps == 0) {
+            numberOfTaps += 1
+            timer = Timer.scheduledTimer(withTimeInterval: 0.7, repeats: false) { _ in
+                self.didSingleTapWith(gestureRecognizer: gestureRecognizer)
+                self.numberOfTaps = 0
+            }
+        } else {
+            self.timer?.invalidate()
+            self.didDoubleTapWith(gestureRecognizer: gestureRecognizer)
+            self.numberOfTaps = 0
+        }
+    }
+    
+    @objc func didPanWith(gestureRecognizer: UIPanGestureRecognizer) {
+        switch gestureRecognizer.state {
+        case .began:
+            self.scrollView.isScrollEnabled = false
+            self.transitionController.isInteractive = true
+            let _ = self.navigationController?.popViewController(animated: true)
+        case .ended:
+            if self.transitionController.isInteractive {
+                self.scrollView.isScrollEnabled = true
+                self.transitionController.isInteractive = false
+                self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
+            }
+        default:
+            if self.transitionController.isInteractive {
+                self.transitionController.didPanWith(gestureRecognizer: gestureRecognizer)
+            }
+        }
+    }
+    
+    private func didSingleTapWith(gestureRecognizer: UITapGestureRecognizer) {
+        if(currentMode == .full) {
+            self.navigationController?.setNavigationBarHidden(false, animated: true)
+            currentMode = .normal
+        } else {
+            self.navigationController?.setNavigationBarHidden(true, animated: true)
+            currentMode = .full
+        }
+
+    }
+    
+    private func didDoubleTapWith(gestureRecognizer: UITapGestureRecognizer) {
         let pointInView = gestureRecognizer.location(in: self.photoImageView)
         var newZoomScale = self.scrollView.maximumZoomScale
         
@@ -106,8 +166,7 @@ class PhotoZoomViewController: UIViewController {
     }
     
     
-    fileprivate func updateZoomScaleForSize(_ size: CGSize) {
-
+    private func updateZoomScaleForSize(_ size: CGSize) {
         let widthScale = size.width / photoImageView.bounds.width
         let heightScale = size.height / photoImageView.bounds.height
         let minScale = min(widthScale, heightScale)
@@ -117,7 +176,7 @@ class PhotoZoomViewController: UIViewController {
         scrollView.maximumZoomScale = minScale * 4
     }
 
-    fileprivate func updateConstraintsForSize(_ size: CGSize) {
+    private func updateConstraintsForSize(_ size: CGSize) {
         let yOffset = max(0, (size.height - photoImageView.frame.height) / 2)
         imageTopConstrain?.constant = yOffset
         imageBottomConstrain?.constant  = yOffset
@@ -132,6 +191,8 @@ class PhotoZoomViewController: UIViewController {
     }
 
 }
+
+// MARK: - Scroll Delegate
 
 extension PhotoZoomViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {

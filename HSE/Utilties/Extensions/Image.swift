@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    
     var circleMask: UIImage? {
         let square = CGSize(width: min(size.width, size.height), height: min(size.width, size.height))
         let imageView = UIImageView(frame: .init(origin: .init(x: 0, y: 0), size: square))
@@ -24,15 +23,6 @@ extension UIImage {
         guard let context = UIGraphicsGetCurrentContext() else { return nil }
         imageView.layer.render(in: context)
         return UIGraphicsGetImageFromCurrentImageContext()
-    }
-    
-    func clone() -> UIImage? {
-        guard let originalCgImage = self.cgImage,
-              let newCgImage = originalCgImage.copy()
-        else {
-            return nil
-        }
-        return UIImage(cgImage: newCgImage, scale: self.scale, orientation: self.imageOrientation)
     }
     
 }

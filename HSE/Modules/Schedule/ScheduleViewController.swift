@@ -12,7 +12,7 @@ enum ContentType {
     case assigments
 }
 
-let tempArray: [String] = ["All","Homework","Midterm"]
+let tempArray: [String: Int?] = ["All": 123,"Homework": nil,"Midterm": 20]
 
 final class ScheduleViewController: UIViewController {
     

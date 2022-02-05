@@ -13,7 +13,6 @@ protocol InputViewDelegate {
 }
 
 class InputView: UIView {
-    
     private var sendButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "upwardArrow"), for: .normal)
@@ -36,9 +35,11 @@ class InputView: UIView {
     
     private var chooseImageButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "plus.circle"), for: .normal)
-        button.tintColor = .background.style(.firstLevel)()
-        button.backgroundColor = .primary.style(.primary)()
+        button.setImage(UIImage(named: "plus-circle"), for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.tintColor = .primary.style(.primary)()
+        button.backgroundColor = .clear
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addConstraint(NSLayoutConstraint(item: button,
                                                   attribute: .height,
@@ -75,6 +76,7 @@ class InputView: UIView {
         let view = UIView()
         view.backgroundColor = .background.style(.firstLevel)()
         view.layer.cornerRadius = 12
+        view.clipsToBounds = true
         
         return view
     }()
@@ -84,22 +86,24 @@ class InputView: UIView {
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 70, height: 70)
         layout.minimumInteritemSpacing = 8
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(InputContentCollectionViewCell.self, forCellWithReuseIdentifier: InputContentCollectionViewCell.reuseIdentifier)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        collectionView.heightAnchor.constraint(equalToConstant: 80).isActive = true
         
         return collectionView
     }()
     
     private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.contentInsetAdjustmentBehavior = .automatic
+        scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.isExclusiveTouch = false
+        scrollView.isMultipleTouchEnabled = true
         
         return scrollView
     }()
@@ -187,27 +191,27 @@ class InputView: UIView {
         inputFieldView.addSubview(scrollView)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
+    
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: inputFieldView.topAnchor, constant: 5),
-            scrollView.leftAnchor.constraint(equalTo: inputFieldView.leftAnchor, constant: 5),
-            scrollView.bottomAnchor.constraint(equalTo: inputFieldView.bottomAnchor, constant: -5),
-            scrollView.rightAnchor.constraint(equalTo: inputFieldView.rightAnchor, constant: -5)
+            scrollView.topAnchor.constraint(equalTo: inputFieldView.topAnchor),
+            scrollView.leftAnchor.constraint(equalTo: inputFieldView.leftAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: inputFieldView.bottomAnchor),
+            scrollView.rightAnchor.constraint(equalTo: inputFieldView.rightAnchor)
         ])
         
         let stackView = UIStackView(arrangedSubviews: [contentCollectionView, inputTextView])
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .vertical
-        stackView.spacing = 5
+        stackView.spacing = 0
         
         scrollView.addSubview(stackView)
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
+            stackView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: 5),
+            stackView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -5),
             stackView.leftAnchor.constraint(equalTo: scrollView.contentLayoutGuide.leftAnchor),
             stackView.rightAnchor.constraint(equalTo: scrollView.contentLayoutGuide.rightAnchor),
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
@@ -365,19 +369,5 @@ extension InputView: UIImagePickerControllerDelegate & UINavigationControllerDel
         chosenPhotos.append(selectedImage)
         
         controller.dismiss(animated: true, completion: nil)
-    }
-}
-
-
-
-extension UIView {
-    func findViewController() -> UIViewController? {
-        if let nextResponder = self.next as? UIViewController {
-            return nextResponder
-        } else if let nextResponder = self.next as? UIView {
-            return nextResponder.findViewController()
-        } else {
-            return nil
-        }
     }
 }

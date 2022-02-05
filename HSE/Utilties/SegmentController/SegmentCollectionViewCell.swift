@@ -106,9 +106,15 @@ final class SegmentCollectionViewCell: UICollectionViewCell {
     }
     
     
-    public func configure(title: String) {
-        titleLabel.text = title
-        notificationLabel.text = String(Int.random(in: 0...999))
+    public func configure(item: Item) {
+        titleLabel.text = item.title
+        guard let notificationCounter = item.notifications
+        else {
+            notificationView.isHidden = true
+            return
+        }
+        notificationView.isHidden = false
+        notificationLabel.text = String(notificationCounter)
     }
     
     

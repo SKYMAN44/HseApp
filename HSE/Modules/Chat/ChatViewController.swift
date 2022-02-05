@@ -34,6 +34,7 @@ final class ChatViewController: UIViewController {
     private var inputViewHeightConstrain: NSLayoutConstraint?
     private var selectedIndexPath: IndexPath?
     private weak var selectedImageView: UIImageView?
+    private var selectedContentFrameInCell: CGRect?
     
     // MARK: - Lifecycle
     
@@ -141,6 +142,28 @@ extension ChatViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - ChatCellDelegate
+
+extension ChatViewController: ChatCellDelegate {
+    func selectedContentInCell(content: UIImageView, contentFrameInCell: CGRect, indexPath: IndexPath) {
+        selectedImageView = content
+        selectedIndexPath = indexPath
+        selectedContentFrameInCell = contentFrameInCell
+        
+        let photoController = PhotoZoomViewController()
+        photoController.image = content.image
+        
+        let nav = self.navigationController
+        nav?.delegate = photoController.transitionController
+        
+        photoController.transitionController.fromDelegate = self
+        photoController.transitionController.toDelegate = photoController
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(photoController, animated: true)
+    }
+    
+}
+
 
 // MARK: - InputViewDelegate
 
@@ -158,23 +181,35 @@ extension ChatViewController: InputViewDelegate {
     }
 }
 
-// MARK: - ChatCellDelegate
 
-extension ChatViewController: ChatCellDelegate {
-    func selectedContentInCell(content: UIImageView, indexPath: IndexPath) {
-        selectedImageView = content
-        selectedIndexPath = indexPath
-        let photoController = PhotoZoomViewController()
-        photoController.image = content.image
-//        let nav = self.navigationController
-//        nav?.delegate = photoController.transitionController
-//        photoController.transitionController.fromDelegate = self
-        photoController.transitionController.toDelegate = photoController
-        self.navigationController?.pushViewController(photoController, animated: true)
+// MARK: - ZoomAnimatorDelegate
+
+extension ChatViewController: ZoomAnimatorDelegate {
+    
+    func transitionWillStartWith(zoomAnimator: ZoomAnimator) { }
+    
+    func transitionDidEndWith(zoomAnimator: ZoomAnimator) {
     }
     
+    func referenceImageView(for zoomAnimator: ZoomAnimator) -> UIImageView? {
+        guard let image = selectedImageView else { return nil }
+        
+        return image
+    }
+    
+    func referenceImageViewFrameInTransitioningView(for zoomAnimator: ZoomAnimator) -> CGRect? {
+        guard let indexPath = selectedIndexPath,
+              let rawFrame = selectedContentFrameInCell
+        else {
+            return nil
+        }
+        
+        let rectOfCellInTableView = tableView.rectForRow(at: indexPath)
+        let rectOfCellInSuperview = tableView.convert(rectOfCellInTableView, to: tableView.superview)
+        let correctOriginPoint = CGPoint(x: rawFrame.origin.x, y: rectOfCellInSuperview.origin.y + rawFrame.origin.y)
+        let finalFrame = CGRect(origin: correctOriginPoint, size: rawFrame.size)
+        
+        return finalFrame
+    }
     
 }
-
-
-
