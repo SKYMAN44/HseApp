@@ -49,7 +49,7 @@ final class LoginViewController: UIViewController, UITextFieldDelegate {
         return false
     }
     
-    @IBAction func segmentValueChanged(_ sender: CustomSegmentedController) {
+    @IBAction func segmentValueChanged(_ sender: SegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             print("Student")

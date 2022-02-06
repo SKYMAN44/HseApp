@@ -24,6 +24,7 @@
 		6304EAC627AC1AC200BDF75D /* InputContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EAC527AC1AC200BDF75D /* InputContentCollectionViewCell.swift */; };
 		6304EAC827AEE0EA00BDF75D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EAC727AEE0EA00BDF75D /* Extensions.swift */; };
 		6304EACA27AEF2ED00BDF75D /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EAC927AEF2EC00BDF75D /* Item.swift */; };
+		6304EACC27B017B600BDF75D /* Login2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EACB27B017B500BDF75D /* Login2ViewController.swift */; };
 		638622DF279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */; };
 		638622E627A3413C004BCEB8 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622E527A3413C004BCEB8 /* TaskDetailViewController.swift */; };
 		638622EA27A34D87004BCEB8 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622E927A34D87004BCEB8 /* ChatViewController.swift */; };
@@ -69,7 +70,7 @@
 		63F857C7278F2AA500F45A97 /* SegmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857C6278F2AA500F45A97 /* SegmentView.swift */; };
 		63F857D1278F8C4800F45A97 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857D0278F8C4800F45A97 /* LoginViewController.swift */; };
 		63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857D3278F8CEB00F45A97 /* Textfield.swift */; };
-		63F857D7278F8F9F00F45A97 /* CustomSegmentedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857D6278F8F9F00F45A97 /* CustomSegmentedController.swift */; };
+		63F857D7278F8F9F00F45A97 /* SegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857D6278F8F9F00F45A97 /* SegmentedControl.swift */; };
 		63F857DA279063FA00F45A97 /* TabBarBaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857D9279063FA00F45A97 /* TabBarBaseController.swift */; };
 		63F857DC2790655600F45A97 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857DB2790655600F45A97 /* ScheduleViewController.swift */; };
 		63F857DE2790657B00F45A97 /* GradesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857DD2790657B00F45A97 /* GradesViewController.swift */; };
@@ -114,6 +115,7 @@
 		6304EAC527AC1AC200BDF75D /* InputContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		6304EAC727AEE0EA00BDF75D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6304EAC927AEF2EC00BDF75D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		6304EACB27B017B500BDF75D /* Login2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login2ViewController.swift; sourceTree = "<group>"; };
 		638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStuffCollectionViewCell.swift; sourceTree = "<group>"; };
 		638622E527A3413C004BCEB8 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		638622E927A34D87004BCEB8 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -131,7 +133,7 @@
 		639DCE1E2792FDA4007FC2DC /* BaseNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavViewController.swift; sourceTree = "<group>"; };
 		639DCE21279306B1007FC2DC /* ScheduleDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayViewModel.swift; sourceTree = "<group>"; };
 		639DCE2327937F95007FC2DC /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
-		639DCE2D2794C7C8007FC2DC /* testPic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testPic.jpg; path = HSE/testPic.jpg; sourceTree = SOURCE_ROOT; };
+		639DCE2D2794C7C8007FC2DC /* testPic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testPic.jpg; path = HSE/Assets/testPic.jpg; sourceTree = SOURCE_ROOT; };
 		639DCE2F2794C88D007FC2DC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		639DCE33279576A2007FC2DC /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
 		639DCE3627957740007FC2DC /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
@@ -163,7 +165,7 @@
 		63F857C6278F2AA500F45A97 /* SegmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentView.swift; sourceTree = "<group>"; };
 		63F857D0278F8C4800F45A97 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		63F857D3278F8CEB00F45A97 /* Textfield.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Textfield.swift; sourceTree = "<group>"; };
-		63F857D6278F8F9F00F45A97 /* CustomSegmentedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegmentedController.swift; sourceTree = "<group>"; };
+		63F857D6278F8F9F00F45A97 /* SegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControl.swift; sourceTree = "<group>"; };
 		63F857D9279063FA00F45A97 /* TabBarBaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarBaseController.swift; sourceTree = "<group>"; };
 		63F857DB2790655600F45A97 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		63F857DD2790657B00F45A97 /* GradesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +245,16 @@
 				6304EAC727AEE0EA00BDF75D /* Extensions.swift */,
 			);
 			path = InputView;
+			sourceTree = "<group>";
+		};
+		6304EACD27B0224500BDF75D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				639DCE2D2794C7C8007FC2DC /* testPic.jpg */,
+				63C4D613278DC58E0028381F /* Assets.xcassets */,
+				639DCE3527957709007FC2DC /* Fonts */,
+			);
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		638622E427A32A60004BCEB8 /* Chat */ = {
@@ -377,12 +389,10 @@
 				63C4D64C278E37320028381F /* Modules */,
 				63C4D64A278E35A80028381F /* Networking */,
 				63C4D649278E358F0028381F /* Utilties */,
-				639DCE3527957709007FC2DC /* Fonts */,
+				6304EACD27B0224500BDF75D /* Assets */,
 				63C4D610278DC58C0028381F /* Main.storyboard */,
-				63C4D613278DC58E0028381F /* Assets.xcassets */,
 				63C4D615278DC58E0028381F /* LaunchScreen.storyboard */,
 				63C4D618278DC58E0028381F /* Info.plist */,
-				639DCE2D2794C7C8007FC2DC /* testPic.jpg */,
 			);
 			path = HSE;
 			sourceTree = "<group>";
@@ -410,9 +420,9 @@
 				6304EAB527AACF9900BDF75D /* ImageAnimation */,
 				6304EAC227AC173B00BDF75D /* InputView */,
 				63F857E62790D35E00F45A97 /* ExtendingNavBar */,
-				63F857D5278F8F8100F45A97 /* CustomSegmentedContoller */,
+				63F857D5278F8F8100F45A97 /* SegmentedContol */,
+				63C4D658278E47980028381F /* SegmentView */,
 				63F857D2278F8CD400F45A97 /* Extensions */,
-				63C4D658278E47980028381F /* SegmentController */,
 				63F857EB2791880600F45A97 /* ScreenSize.swift */,
 			);
 			path = Utilties;
@@ -471,14 +481,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		63C4D658278E47980028381F /* SegmentController */ = {
+		63C4D658278E47980028381F /* SegmentView */ = {
 			isa = PBXGroup;
 			children = (
 				63F857C6278F2AA500F45A97 /* SegmentView.swift */,
 				639DCE4A2798B4F0007FC2DC /* SegmentCollectionViewCell.swift */,
 				6304EAC927AEF2EC00BDF75D /* Item.swift */,
 			);
-			path = SegmentController;
+			path = SegmentView;
 			sourceTree = "<group>";
 		};
 		63F857CE278F8A5300F45A97 /* Main */ = {
@@ -495,6 +505,7 @@
 			isa = PBXGroup;
 			children = (
 				63F857D0278F8C4800F45A97 /* LoginViewController.swift */,
+				6304EACB27B017B500BDF75D /* Login2ViewController.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -513,12 +524,12 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		63F857D5278F8F8100F45A97 /* CustomSegmentedContoller */ = {
+		63F857D5278F8F8100F45A97 /* SegmentedContol */ = {
 			isa = PBXGroup;
 			children = (
-				63F857D6278F8F9F00F45A97 /* CustomSegmentedController.swift */,
+				63F857D6278F8F9F00F45A97 /* SegmentedControl.swift */,
 			);
-			path = CustomSegmentedContoller;
+			path = SegmentedContol;
 			sourceTree = "<group>";
 		};
 		63F857D8279063C000F45A97 /* CustomTabBar */ = {
@@ -733,10 +744,11 @@
 				63F857DE2790657B00F45A97 /* GradesViewController.swift in Sources */,
 				6304EACA27AEF2ED00BDF75D /* Item.swift in Sources */,
 				639DCE4327975C6F007FC2DC /* CourseChatCollectionViewCell.swift in Sources */,
+				6304EACC27B017B600BDF75D /* Login2ViewController.swift in Sources */,
 				63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */,
 				638622E627A3413C004BCEB8 /* TaskDetailViewController.swift in Sources */,
 				639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */,
-				63F857D7278F8F9F00F45A97 /* CustomSegmentedController.swift in Sources */,
+				63F857D7278F8F9F00F45A97 /* SegmentedControl.swift in Sources */,
 				639DCE302794C88D007FC2DC /* Image.swift in Sources */,
 				638622EC27A34DC3004BCEB8 /* MessageTableViewCell.swift in Sources */,
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,
