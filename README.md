@@ -13,12 +13,12 @@ Dmitrii Sokolov
 
 ## Project Structure
 
-.
+    .
     ├── Main                  # App & Scene Delegate, base controller
     ├── Modules               # Modules: chat,login,schedule etc...
     ├── Networking            # Network Layer
     ├── Utilities             # Extensions and custom components
-    ├── Assests               # fonts, colors, symbols
+    └── Assests               # fonts, colors, symbols
 
 ## Preview
 
