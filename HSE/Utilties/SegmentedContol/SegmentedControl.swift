@@ -7,50 +7,43 @@
 
 import UIKit
 
-@IBDesignable
-class SegmentedControl: UIControl {
+final class SegmentedControl: UIControl {
 
     var buttons = [UIButton]()
     var selector: UIView!
     var selectedSegmentIndex = 0
     
-    @IBInspectable
-    var borderWidth: CGFloat = 0{
+    public var borderWidth: CGFloat = 0{
         didSet {
             self.layer.borderWidth = borderWidth
         }
     }
     
-    @IBInspectable
-    var borderColor: UIColor = .clear {
+    public var borderColor: UIColor = .clear {
         didSet {
             self.layer.borderColor = borderColor.cgColor
         }
     }
     
-    @IBInspectable
-    var titlesCS: String = "" {
+    public var titlesCS: String = "" {
         didSet{
             updateView()
         }
     }
     
-    @IBInspectable
-    var textColor: UIColor = .systemGray6 {
+    public var textColor: UIColor = .systemGray6 {
         didSet {
             updateView()
         }
     }
     
-    @IBInspectable
-    var selectorColor: UIColor = .blue {
+    public var selectorColor: UIColor = .blue {
         didSet {
             updateView()
         }
     }
     
-    @IBInspectable
-    var selectorTextColor: UIColor = .blue {
+    public var selectorTextColor: UIColor = .blue {
         didSet {
             updateView()
         }
@@ -80,6 +73,12 @@ class SegmentedControl: UIControl {
         selector.alpha = 0.5
         addSubview(selector)
         
+        selector.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            selector.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3),
+            selector.heightAnchor.constraint(equalTo: self.heightAnchor)
+        ])
+        
         let stackView = UIStackView(arrangedSubviews: buttons)
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually
@@ -99,7 +98,8 @@ class SegmentedControl: UIControl {
         
     }
     
-    @objc func buttonTapped(button: UIButton) {
+    @objc
+    private func buttonTapped(button: UIButton) {
         
         let generator = UISelectionFeedbackGenerator()
         generator.selectionChanged()
