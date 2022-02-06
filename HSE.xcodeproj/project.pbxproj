@@ -114,6 +114,7 @@
 		6304EAC727AEE0EA00BDF75D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6304EAC927AEF2EC00BDF75D /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		6304EACB27B017B500BDF75D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6304EACE27B0826F00BDF75D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStuffCollectionViewCell.swift; sourceTree = "<group>"; };
 		638622E527A3413C004BCEB8 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		638622E927A34D87004BCEB8 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
@@ -364,6 +365,7 @@
 				63C4D609278DC58C0028381F /* HSE */,
 				63C4D620278DC58E0028381F /* HSETests */,
 				63C4D62A278DC58E0028381F /* HSEUITests */,
+				6304EACE27B0826F00BDF75D /* README.md */,
 				63C4D608278DC58C0028381F /* Products */,
 			);
 			sourceTree = "<group>";
