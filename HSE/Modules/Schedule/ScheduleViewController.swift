@@ -187,8 +187,11 @@ extension ScheduleViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard currentContent == .assigments else { return }
-        let detailVC = TaskDetailViewController()
+        
+        let detailVC = TaskDetailViewController(deadline: DeadlineDay.days[indexPath.section].deadlines[indexPath.row])
+        self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detailVC, animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
 }
 

@@ -62,9 +62,13 @@ final class ExtendingNavBar: UIControl {
     }()
     
     var color: UIColor = .white
+    
+    // MARK: - Init
 
     override func draw(_ rect: CGRect) {
     }
+    
+    // MARK: - UI setup
     
     /// function to setup navBar, call after all constrains were set
     public func addSubviews() {
@@ -165,8 +169,10 @@ final class ExtendingNavBar: UIControl {
         
     }
     
+    // MARK: - Interactions
+    
     @objc
-    func buttonTapped() {
+    private func buttonTapped() {
         
         if(!animationCompleted) {
             return
@@ -231,7 +237,7 @@ final class ExtendingNavBar: UIControl {
     }
     
     @objc
-    func slidedButtonTapped() {
+    private func slidedButtonTapped() {
         
         if(!animationCompleted) {
             return
