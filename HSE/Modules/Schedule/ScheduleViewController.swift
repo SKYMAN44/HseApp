@@ -36,6 +36,8 @@ final class ScheduleViewController: UIViewController {
     private var currentContent: ContentType = .timeTable
     
     private var viewModel: ScheduleViewModel!
+    private var models = [ScheduleDay]()
+    private var networkManager = NetworkManager()
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -57,6 +59,22 @@ final class ScheduleViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
+        
+        APICall()
+    }
+    
+    private func APICall() {
+        networkManager.getSchedule { schedule, error in
+            if let error = error {
+                print(error)
+            }
+            if let schedule = schedule {
+                self.models = schedule
+            }
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     // MARK: - UI setup
@@ -202,7 +220,7 @@ extension ScheduleViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         switch currentContent {
         case .timeTable:
-            return ScheduleDay.days.count
+            return models.count
         case .assigments:
             return DeadlineDay.days.count
         }
@@ -211,7 +229,7 @@ extension ScheduleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentContent {
         case .timeTable:
-            return ScheduleDay.days[section].schedule.count
+            return models[section].timeSlot.count
         case .assigments:
             return DeadlineDay.days[section].deadlines.count
         }
@@ -229,7 +247,7 @@ extension ScheduleViewController: UITableViewDataSource {
         
         switch currentContent {
         case .timeTable:
-            label.text = ScheduleDay.days[section].day
+            label.text = models[section].day
         case .assigments:
             label.text = DeadlineDay.days[section].day
         }
@@ -248,7 +266,7 @@ extension ScheduleViewController: UITableViewDataSource {
         case .timeTable:
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
             cell.selectionStyle = .none
-            cell.configure(schedule: ScheduleDay.days[indexPath.section].schedule[indexPath.row])
+            cell.configure(schedule: models[indexPath.section].timeSlot[indexPath.row])
             return cell
         case .assigments:
             let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell

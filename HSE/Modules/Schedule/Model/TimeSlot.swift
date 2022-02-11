@@ -8,7 +8,7 @@
 import Foundation
 
 // temp parameters
-struct TimeSlot {
+struct TimeSlot: Decodable {
     
     let timeStart: String
     let timeEnd: String
