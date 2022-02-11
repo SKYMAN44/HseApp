@@ -42,6 +42,8 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
     var delegate: ChatCellDelegate?
     var myIndexPath: IndexPath?
     
+    // MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -55,6 +57,8 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    // MARK: - UI setup
     
     open func setupUI() {
         let mainSV = UIStackView(arrangedSubviews: [senderImage, bubbleView])

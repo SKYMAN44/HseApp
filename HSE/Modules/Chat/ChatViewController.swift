@@ -17,7 +17,6 @@ final class ChatViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.backgroundColor = .background.style(.firstLevel)()
-        tableView.register(MessageTableViewCell.self, forCellReuseIdentifier: "MessageTableViewCell")
         tableView.register(LeftTextMessageTableViewCell.self, forCellReuseIdentifier: LeftTextMessageTableViewCell.reuseIdentifier)
         tableView.register(RightTextMessageTableViewCell.self, forCellReuseIdentifier: RightTextMessageTableViewCell.reuseIdentifier)
         tableView.register(RightImageMessageTableViewCell.self, forCellReuseIdentifier: RightImageMessageTableViewCell.reuseIdentifier)

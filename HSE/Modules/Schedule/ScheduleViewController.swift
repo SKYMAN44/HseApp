@@ -28,7 +28,6 @@ final class ScheduleViewController: UIViewController {
         let tableView = UITableView()
         
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
-        
         tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
         
         return tableView
@@ -36,6 +35,7 @@ final class ScheduleViewController: UIViewController {
     
     private var currentContent: ContentType = .timeTable
     
+    private var viewModel: ScheduleViewModel!
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -43,7 +43,7 @@ final class ScheduleViewController: UIViewController {
         
         
         self.view.backgroundColor = .background.style(.accent)()
-        
+        viewModel = ScheduleViewModel()
         // setUp navBar
         setupNavBar()
         
@@ -244,7 +244,6 @@ extension ScheduleViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch currentContent {
         case .timeTable:
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell

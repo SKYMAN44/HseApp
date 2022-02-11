@@ -29,19 +29,27 @@
 		638622DF279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */; };
 		638622E627A3413C004BCEB8 /* TaskDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622E527A3413C004BCEB8 /* TaskDetailViewController.swift */; };
 		638622EA27A34D87004BCEB8 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622E927A34D87004BCEB8 /* ChatViewController.swift */; };
-		638622EC27A34DC3004BCEB8 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622EB27A34DC3004BCEB8 /* MessageTableViewCell.swift */; };
 		638622EF27A34FF2004BCEB8 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622EE27A34FF2004BCEB8 /* Message.swift */; };
 		638622F127A47300004BCEB8 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622F027A47300004BCEB8 /* MessageViewModel.swift */; };
 		638622F527A59A2D004BCEB8 /* FormulaCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622F427A59A2D004BCEB8 /* FormulaCollectionViewCell.swift */; };
 		638622F727A5A587004BCEB8 /* DescriptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622F627A5A587004BCEB8 /* DescriptionCollectionViewCell.swift */; };
 		638622F927A5B652004BCEB8 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622F827A5B652004BCEB8 /* CollectionView.swift */; };
 		638622FB27A5D01E004BCEB8 /* TableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622FA27A5D01E004BCEB8 /* TableView.swift */; };
-		639DCE0D27923404007FC2DC /* Schedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0C27923404007FC2DC /* Schedule.swift */; };
+		63881F5A27B5D77D004A2AEE /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F5927B5D77D004A2AEE /* HTTPMethod.swift */; };
+		63881F5C27B5D7DA004A2AEE /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F5B27B5D7DA004A2AEE /* HTTPTask.swift */; };
+		63881F5E27B5D8EA004A2AEE /* ParameterEncoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F5D27B5D8EA004A2AEE /* ParameterEncoding.swift */; };
+		63881F6027B5DB4D004A2AEE /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F5F27B5DB4D004A2AEE /* URLParameterEncoder.swift */; };
+		63881F6227B5E1C4004A2AEE /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6127B5E1C4004A2AEE /* JSONParameterEncoder.swift */; };
+		63881F6427B5E2A4004A2AEE /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6327B5E2A4004A2AEE /* NetworkRouter.swift */; };
+		63881F6627B5E399004A2AEE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6527B5E399004A2AEE /* Router.swift */; };
+		63881F6827B5F81E004A2AEE /* ScheduleEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6727B5F81E004A2AEE /* ScheduleEndPoint.swift */; };
+		63881F6A27B5F9A8004A2AEE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6927B5F9A8004A2AEE /* NetworkManager.swift */; };
+		639DCE0D27923404007FC2DC /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0C27923404007FC2DC /* TimeSlot.swift */; };
 		639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE13279240E3007FC2DC /* ScheduleDay.swift */; };
 		639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE152792E8D1007FC2DC /* Deadline.swift */; };
 		639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE172792E8F6007FC2DC /* DeadlineDay.swift */; };
 		639DCE1F2792FDA4007FC2DC /* BaseNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE1E2792FDA4007FC2DC /* BaseNavViewController.swift */; };
-		639DCE22279306B1007FC2DC /* ScheduleDayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE21279306B1007FC2DC /* ScheduleDayViewModel.swift */; };
+		639DCE22279306B1007FC2DC /* ScheduleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE21279306B1007FC2DC /* ScheduleViewModel.swift */; };
 		639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2327937F95007FC2DC /* CourseCollectionViewCell.swift */; };
 		639DCE2E2794C7C8007FC2DC /* testPic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE2D2794C7C8007FC2DC /* testPic.jpg */; };
 		639DCE302794C88D007FC2DC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2F2794C88D007FC2DC /* Image.swift */; };
@@ -130,19 +138,27 @@
 		638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachingStuffCollectionViewCell.swift; sourceTree = "<group>"; };
 		638622E527A3413C004BCEB8 /* TaskDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailViewController.swift; sourceTree = "<group>"; };
 		638622E927A34D87004BCEB8 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		638622EB27A34DC3004BCEB8 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		638622EE27A34FF2004BCEB8 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		638622F027A47300004BCEB8 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		638622F427A59A2D004BCEB8 /* FormulaCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormulaCollectionViewCell.swift; sourceTree = "<group>"; };
 		638622F627A5A587004BCEB8 /* DescriptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		638622F827A5B652004BCEB8 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		638622FA27A5D01E004BCEB8 /* TableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableView.swift; sourceTree = "<group>"; };
-		639DCE0C27923404007FC2DC /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		63881F5927B5D77D004A2AEE /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		63881F5B27B5D7DA004A2AEE /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		63881F5D27B5D8EA004A2AEE /* ParameterEncoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterEncoding.swift; sourceTree = "<group>"; };
+		63881F5F27B5DB4D004A2AEE /* URLParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
+		63881F6127B5E1C4004A2AEE /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
+		63881F6327B5E2A4004A2AEE /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
+		63881F6527B5E399004A2AEE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		63881F6727B5F81E004A2AEE /* ScheduleEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleEndPoint.swift; sourceTree = "<group>"; };
+		63881F6927B5F9A8004A2AEE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		639DCE0C27923404007FC2DC /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		639DCE13279240E3007FC2DC /* ScheduleDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDay.swift; sourceTree = "<group>"; };
 		639DCE152792E8D1007FC2DC /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
 		639DCE172792E8F6007FC2DC /* DeadlineDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadlineDay.swift; sourceTree = "<group>"; };
 		639DCE1E2792FDA4007FC2DC /* BaseNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavViewController.swift; sourceTree = "<group>"; };
-		639DCE21279306B1007FC2DC /* ScheduleDayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDayViewModel.swift; sourceTree = "<group>"; };
+		639DCE21279306B1007FC2DC /* ScheduleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewModel.swift; sourceTree = "<group>"; };
 		639DCE2327937F95007FC2DC /* CourseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCollectionViewCell.swift; sourceTree = "<group>"; };
 		639DCE2D2794C7C8007FC2DC /* testPic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testPic.jpg; path = HSE/Assets/testPic.jpg; sourceTree = SOURCE_ROOT; };
 		639DCE2F2794C88D007FC2DC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -292,7 +308,6 @@
 		638622E727A34CFF004BCEB8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				638622EB27A34DC3004BCEB8 /* MessageTableViewCell.swift */,
 				6304EAA927A87DC400BDF75D /* MessageCellFactory.swift */,
 				6304EA9F27A8723200BDF75D /* MessageCellProtocol.swift */,
 				6304EAAF27A896FC00BDF75D /* BaseCell */,
@@ -318,10 +333,28 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		63881F5727B5D6CF004A2AEE /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				63881F6927B5F9A8004A2AEE /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		63881F5827B5D6DB004A2AEE /* Encoding */ = {
+			isa = PBXGroup;
+			children = (
+				63881F5D27B5D8EA004A2AEE /* ParameterEncoding.swift */,
+				63881F5F27B5DB4D004A2AEE /* URLParameterEncoder.swift */,
+				63881F6127B5E1C4004A2AEE /* JSONParameterEncoder.swift */,
+			);
+			path = Encoding;
+			sourceTree = "<group>";
+		};
 		639DCE0B279233F3007FC2DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				639DCE0C27923404007FC2DC /* Schedule.swift */,
+				639DCE0C27923404007FC2DC /* TimeSlot.swift */,
 				639DCE13279240E3007FC2DC /* ScheduleDay.swift */,
 				639DCE152792E8D1007FC2DC /* Deadline.swift */,
 				639DCE172792E8F6007FC2DC /* DeadlineDay.swift */,
@@ -350,7 +383,7 @@
 		639DCE202793068B007FC2DC /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				639DCE21279306B1007FC2DC /* ScheduleDayViewModel.swift */,
+				639DCE21279306B1007FC2DC /* ScheduleViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -358,6 +391,7 @@
 		639DCE3127957658007FC2DC /* EndPoint */ = {
 			isa = PBXGroup;
 			children = (
+				63881F6727B5F81E004A2AEE /* ScheduleEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -366,6 +400,10 @@
 			isa = PBXGroup;
 			children = (
 				639DCE33279576A2007FC2DC /* EndPointType.swift */,
+				63881F5927B5D77D004A2AEE /* HTTPMethod.swift */,
+				63881F5B27B5D7DA004A2AEE /* HTTPTask.swift */,
+				63881F6327B5E2A4004A2AEE /* NetworkRouter.swift */,
+				63881F6527B5E399004A2AEE /* Router.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -451,8 +489,10 @@
 		63C4D64A278E35A80028381F /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				639DCE322795768B007FC2DC /* Service */,
 				639DCE3127957658007FC2DC /* EndPoint */,
+				63881F5727B5D6CF004A2AEE /* Manager */,
+				639DCE322795768B007FC2DC /* Service */,
+				63881F5827B5D6DB004A2AEE /* Encoding */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -775,18 +815,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63881F6A27B5F9A8004A2AEE /* NetworkManager.swift in Sources */,
 				63F857E82790DAE500F45A97 /* ExtendingNavBar.swift in Sources */,
+				63881F6427B5E2A4004A2AEE /* NetworkRouter.swift in Sources */,
 				6304EAD027B13D8600BDF75D /* TaskInfoCollectionViewCell.swift in Sources */,
 				6304EAA027A8723300BDF75D /* MessageCellProtocol.swift in Sources */,
 				6304EAB727AACFB500BDF75D /* ZoomAnimator.swift in Sources */,
 				6304EAAE27A8817500BDF75D /* RightImageMessageTableViewCell.swift in Sources */,
 				63F857DA279063FA00F45A97 /* TabBarBaseController.swift in Sources */,
 				6304EAB927AAEB9900BDF75D /* ZoomTransitionController.swift in Sources */,
+				63881F6627B5E399004A2AEE /* Router.swift in Sources */,
 				638622F127A47300004BCEB8 /* MessageViewModel.swift in Sources */,
 				6304EAC827AEE0EA00BDF75D /* Extensions.swift in Sources */,
 				63E0499E27B1C8AC00942E36 /* SubmissionCollectionViewCell.swift in Sources */,
 				63C4D641278DCD260028381F /* Course.swift in Sources */,
 				63F857E02790658800F45A97 /* AccountViewController.swift in Sources */,
+				63881F5C27B5D7DA004A2AEE /* HTTPTask.swift in Sources */,
+				63881F5A27B5D77D004A2AEE /* HTTPMethod.swift in Sources */,
 				639DCE4B2798B4F0007FC2DC /* SegmentCollectionViewCell.swift in Sources */,
 				6304EAA627A87BC500BDF75D /* BaseRightMessageTableViewCell.swift in Sources */,
 				639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */,
@@ -805,8 +850,10 @@
 				63E0499A27B1BF9900942E36 /* SubmitInteractionCollectionViewCell.swift in Sources */,
 				6304EAA427A8771100BDF75D /* LeftTextMessageTableViewCell.swift in Sources */,
 				63F857DC2790655600F45A97 /* ScheduleViewController.swift in Sources */,
+				63881F6227B5E1C4004A2AEE /* JSONParameterEncoder.swift in Sources */,
 				63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */,
 				6304EABD27AB018800BDF75D /* PhotoZoomViewController.swift in Sources */,
+				63881F6027B5DB4D004A2AEE /* URLParameterEncoder.swift in Sources */,
 				639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */,
 				639DCE452797617C007FC2DC /* Label.swift in Sources */,
 				63F857DE2790657B00F45A97 /* GradesViewController.swift in Sources */,
@@ -815,13 +862,13 @@
 				6304EACC27B017B600BDF75D /* LoginViewController.swift in Sources */,
 				63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */,
 				638622E627A3413C004BCEB8 /* TaskDetailViewController.swift in Sources */,
+				63881F5E27B5D8EA004A2AEE /* ParameterEncoding.swift in Sources */,
 				639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */,
 				63F857D7278F8F9F00F45A97 /* SegmentedControl.swift in Sources */,
 				639DCE302794C88D007FC2DC /* Image.swift in Sources */,
 				63E0498E27B15F0400942E36 /* TaskViewModel.swift in Sources */,
-				638622EC27A34DC3004BCEB8 /* MessageTableViewCell.swift in Sources */,
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,
-				639DCE22279306B1007FC2DC /* ScheduleDayViewModel.swift in Sources */,
+				639DCE22279306B1007FC2DC /* ScheduleViewModel.swift in Sources */,
 				6304EAAA27A87DC400BDF75D /* MessageCellFactory.swift in Sources */,
 				638622F927A5B652004BCEB8 /* CollectionView.swift in Sources */,
 				639DCE3F27957A94007FC2DC /* Font.swift in Sources */,
@@ -833,7 +880,8 @@
 				63F857C7278F2AA500F45A97 /* SegmentView.swift in Sources */,
 				638622DF279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift in Sources */,
 				63E0498C27B159B500942E36 /* TimeCollectionViewCell.swift in Sources */,
-				639DCE0D27923404007FC2DC /* Schedule.swift in Sources */,
+				63881F6827B5F81E004A2AEE /* ScheduleEndPoint.swift in Sources */,
+				639DCE0D27923404007FC2DC /* TimeSlot.swift in Sources */,
 				6304EABB27AAED4400BDF75D /* ZoomDismissalInteractionController.swift in Sources */,
 				638622F527A59A2D004BCEB8 /* FormulaCollectionViewCell.swift in Sources */,
 				6304EAC627AC1AC200BDF75D /* InputContentCollectionViewCell.swift in Sources */,

@@ -153,7 +153,7 @@ final class ScheduleTableViewCell: UITableViewCell {
     }
     
     
-    public func configure(schedule: Schedule) {
+    public func configure(schedule: TimeSlot) {
         subjectNameLabel.text = schedule.subjectName
         eventTypeLabel.text = "SEMINAR"
         startTimeLabel.text = "10:30"

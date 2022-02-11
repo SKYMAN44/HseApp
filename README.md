@@ -19,7 +19,15 @@ Dmitrii Sokolov
     ├── Networking            # Network Layer
     ├── Utilities             # Extensions and custom components
     └── Assests               # fonts, colors, symbols
+    
+## Network Layer
 
+    .
+    ├── EndPoint
+    ├── Manager              
+    ├── Service               # Constructing and performing generic reqest 
+    └── Encoding              # Encoding URL/JSON  
+    
 ## Preview
 
 ## Description

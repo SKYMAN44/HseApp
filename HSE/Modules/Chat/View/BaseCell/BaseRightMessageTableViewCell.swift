@@ -17,6 +17,8 @@ open class BaseRightMessageTableViewCell: UITableViewCell {
         return view
     }()
     
+    // MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -33,6 +35,7 @@ open class BaseRightMessageTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI setup
     
     open func setupUI() {
         contentView.addSubview(bubbleView)
