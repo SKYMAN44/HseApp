@@ -18,14 +18,14 @@ Dmitrii Sokolov
     ├── Modules               # Modules: chat,login,schedule etc...
     ├── Networking            # Network Layer
     ├── Utilities             # Extensions and custom components
-    └── Assests               # fonts, colors, symbols
+    └── Assets               # fonts, colors, symbols
     
 ## Network Layer
 
     .
     ├── EndPoint
     ├── Manager              
-    ├── Service               # Constructing and performing generic reqest 
+    ├── Service               # Constructing and performing generic request 
     └── Encoding              # Encoding URL/JSON  
     
 ## Preview
