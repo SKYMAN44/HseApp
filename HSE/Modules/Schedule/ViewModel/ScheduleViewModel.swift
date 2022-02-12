@@ -27,6 +27,14 @@ class ScheduleViewModel: NSObject {
             updateData()
         }
     }
+    private var isLoading: Bool = false {
+        didSet {
+            if(isLoading) {
+                setShimmer()
+            }
+        }
+    }
+    
     public private(set) var schedule = [ScheduleDay]() {
         didSet {
             self.updateDataSource()
@@ -40,17 +48,40 @@ class ScheduleViewModel: NSObject {
         }
     }
     
-    public lazy var datasource = UITableViewDiffableDataSource<AnyHashable,AnyHashable>(tableView: tableView!) { tableView, indexPath, itemIdentifier in
-        switch self.contentType {
-        case .timeTable:
+    enum Item: Hashable {
+        case timeslot(TimeSlot)
+        case deadline(Deadline)
+        case loading(UUID)
+        
+        var isLoading: Bool {
+            switch self {
+            case .loading(_):
+                return true
+            default:
+                return false
+            }
+        }
+        
+        static var loadingItems: [Item] {
+            return Array(repeatingExpression: Item.loading(UUID()), count: 8)
+        }
+    }
+    
+    public lazy var datasource = UITableViewDiffableDataSource<AnyHashable,Item>(tableView: tableView!) { tableView, indexPath, itemIdentifier in
+        switch itemIdentifier {
+        case .timeslot(let timeslot):
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
             cell.selectionStyle = .none
-            cell.configure(schedule: itemIdentifier as! TimeSlot)
+            cell.configure(schedule: timeslot)
             return cell
-        case .assigments:
+        case .deadline(let deadline):
             let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell
             cell.selectionStyle = .none
-            cell.configure(deadline: itemIdentifier as! Deadline)
+            cell.configure(deadline: deadline)
+            return cell
+        case .loading(_):
+            let cell = tableView.dequeueReusableCell(withIdentifier: ShimmerScheduleTableViewCell.reuseIdentifier, for: indexPath) as! ShimmerScheduleTableViewCell
+            cell.showLoading()
             return cell
         }
     }
@@ -72,16 +103,16 @@ class ScheduleViewModel: NSObject {
     
     private func updateDataSource() {
         let sectionIdentifiers: [String]
-        var itemBySection = [String: [AnyHashable]]()
+        var itemBySection = [String: [Item]]()
         if contentType == .timeTable {
             sectionIdentifiers = self.schedule.map {$0.day}
             self.schedule.forEach( {
-                itemBySection[$0.day] = $0.timeSlot
+                itemBySection[$0.day] = $0.timeSlot.map({ Item.timeslot($0)})
             })
         } else {
             sectionIdentifiers = self.deadlines.map {$0.day}
             self.deadlines.forEach( {
-                itemBySection[$0.day] = $0.assignments
+                itemBySection[$0.day] = $0.assignments.map({ Item.deadline($0)})
             })
         }
         datasource.applySnapshotUsing(sectionIDs: sectionIdentifiers, itemBySection: itemBySection, animatingDifferences: false)
@@ -97,6 +128,7 @@ class ScheduleViewModel: NSObject {
             if let schedule = schedule {
                 self.schedule = schedule
             }
+            self.isLoading = false
         }
     }
     
@@ -108,7 +140,12 @@ class ScheduleViewModel: NSObject {
             if let deadlines = deadlines {
                 self.deadlines = deadlines
             }
+            self.isLoading = false
         }
+    }
+    
+    private func setShimmer() {
+        datasource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
     }
     
     private func sortDeadlines() {
@@ -118,6 +155,7 @@ class ScheduleViewModel: NSObject {
     // MARK: - Internal calls
     
     public func updateData() {
+        isLoading = true
         if contentType == .timeTable {
             fetchSchedule()
             networkManager.cancelDeadline()

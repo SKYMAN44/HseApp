@@ -38,7 +38,7 @@ extension DeadLineAPI: EndPointType {
     }
     
     var task: HTTPTask {
-        if case .deadlines(let id) = self {
+        if case .deadlines(_) = self {
             return .request
         } else {
             return .request

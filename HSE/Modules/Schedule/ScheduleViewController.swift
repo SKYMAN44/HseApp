@@ -10,7 +10,6 @@ import UIKit
 let tempArray: [String: Int?] = ["All": 123,"Homework": nil,"Midterm": 20]
 
 final class ScheduleViewController: UIViewController {
-    
     private var navView: ExtendingNavBar?
     private var segmentView: SegmentView = {
         let segmentView = SegmentView(frame: .zero)
@@ -23,6 +22,7 @@ final class ScheduleViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
         tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
+        tableView.register(ShimmerScheduleTableViewCell.self, forCellReuseIdentifier: ShimmerScheduleTableViewCell.reuseIdentifier)
         
         return tableView
     }()
@@ -50,7 +50,7 @@ final class ScheduleViewController: UIViewController {
         viewModel.bindScheduleViewModelToController = {
             DispatchQueue.main.async {
                 if let refreshC = self.refreshControl {
-                    refreshC.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0.2)
+                    refreshC.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0)
                 }
             }
         }
@@ -58,7 +58,6 @@ final class ScheduleViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
-        refreshData()
     }
     
     // MARK: - UI setup
@@ -198,7 +197,7 @@ final class ScheduleViewController: UIViewController {
 extension ScheduleViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard currentContent == .assigments else { return }
+//        guard currentContent == .assigments else { return }
         
         let detailVC = TaskDetailViewController(deadline: viewModel.deadlines[indexPath.section].assignments[indexPath.row])
         self.hidesBottomBarWhenPushed = true
@@ -207,7 +206,6 @@ extension ScheduleViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
         let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
         headerView.backgroundColor = .background.style(.firstLevel)()
         
@@ -216,12 +214,14 @@ extension ScheduleViewController: UITableViewDelegate {
         label.font = .customFont.style(.special)()
         label.textColor = .textAndIcons.style(.tretiary)()
         
-        switch currentContent {
-        case .timeTable:
-            label.text = viewModel.schedule[section].day
-        case .assigments:
-            label.text = viewModel.deadlines[section].day
-        }
+//        switch currentContent {
+//        case .timeTable:
+//            guard viewModel.schedule[section].day != nil else { return nil }
+//            label.text = viewModel.schedule[section].day
+//        case .assigments:
+//            guard viewModel.schedule[section].day != nil else { return nil }
+//            label.text = viewModel.deadlines[section].day
+//        }
         
         headerView.addSubview(label)
         

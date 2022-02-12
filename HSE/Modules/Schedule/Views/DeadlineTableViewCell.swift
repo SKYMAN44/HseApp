@@ -8,7 +8,6 @@
 import UIKit
 
 final class DeadlineTableViewCell: UITableViewCell {
-    
     static let reuseIdentifier = "DeadlineTableViewCell"
     
     private let deadlineTimeView: UIView = {
@@ -156,9 +155,6 @@ final class DeadlineTableViewCell: UITableViewCell {
             mainSV.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
             mainSV.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
         ])
-        
-        
-        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

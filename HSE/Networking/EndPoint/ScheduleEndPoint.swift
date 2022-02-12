@@ -43,7 +43,7 @@ extension ScheduleAPI: EndPointType {
     }
     
     var task: HTTPTask {
-        if case .currentSchedule(let id) = self {
+        if case .currentSchedule(_) = self {
             return .request
         } else {
             return .request

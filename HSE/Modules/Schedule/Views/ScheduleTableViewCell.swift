@@ -141,9 +141,26 @@ final class ScheduleTableViewCell: UITableViewCell {
         rigthStackView.topAnchor.constraint(equalTo: mainSV.topAnchor, constant: 4).isActive = true
         rigthStackView.bottomAnchor.constraint(equalTo: mainSV.bottomAnchor, constant: -4).isActive = true
         
-        
     }
     
+    
+    public func startShimmer() {
+        subjectNameLabel.configureAndStartShimmering()
+        eventTypeLabel.configureAndStartShimmering()
+        locationLabel.configureAndStartShimmering()
+        startTimeLabel.configureAndStartShimmering()
+        endTimeLabel.configureAndStartShimmering()
+        onlineImageView.configureAndStartShimmering()
+    }
+    
+    private func stopShimmer() {
+        subjectNameLabel.stopShimmering()
+        eventTypeLabel.stopShimmering()
+        locationLabel.stopShimmering()
+        startTimeLabel.stopShimmering()
+        endTimeLabel.stopShimmering()
+        onlineImageView.stopShimmering()
+    }
     
 
     override func setSelected(_ selected: Bool, animated: Bool) {
