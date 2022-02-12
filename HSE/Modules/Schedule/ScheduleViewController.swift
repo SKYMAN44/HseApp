@@ -32,20 +32,6 @@ final class ScheduleViewController: UIViewController {
     private var currentContent: ContentType = .timeTable
     private lazy var viewModel = ScheduleViewModel(tableView: tableView)
     
-    private lazy var datasource = UITableViewDiffableDataSource<AnyHashable,AnyHashable>(tableView: tableView) { [self] tableView, indexPath, itemIdentifier in
-        switch currentContent {
-        case .timeTable:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
-            cell.selectionStyle = .none
-            cell.configure(schedule: viewModel.schedule[indexPath.section].timeSlot[indexPath.row])
-            return cell
-        case .assigments:
-            let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell
-            cell.selectionStyle = .none
-            return cell
-        }
-    }
-    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -60,39 +46,19 @@ final class ScheduleViewController: UIViewController {
         setupRefreshControl()
         
         tableView.delegate = self
-        createDataSource()
-        tableView.dataSource = datasource
         
         viewModel.bindScheduleViewModelToController = {
             DispatchQueue.main.async {
                 if let refreshC = self.refreshControl {
                     refreshC.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0.2)
                 }
-                self.createDataSource()
             }
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
-        viewModel.updateData()
-    }
-    
-    private func createDataSource() {
-        let sectionIdentifiers: [String]
-        var itemBySection = [String: [AnyHashable]]()
-        if currentContent == .timeTable {
-            sectionIdentifiers = viewModel.schedule.map {$0.day}
-            viewModel.schedule.forEach( {
-                itemBySection[$0.day] = $0.timeSlot
-            })
-        } else {
-            sectionIdentifiers = viewModel.deadlines.map {$0.day}
-            viewModel.deadlines.forEach( {
-                itemBySection[$0.day] = $0.assignments
-            })
-        }
-        datasource.applySnapshotUsing(sectionIDs: sectionIdentifiers, itemBySection: itemBySection, animatingDifferences: true)
+        refreshData()
     }
     
     // MARK: - UI setup
@@ -165,6 +131,7 @@ final class ScheduleViewController: UIViewController {
         view.addSubview(segmentView)
         
         segmentView.translatesAutoresizingMaskIntoConstraints = false
+        segmentView.delegate = self
         
         let segmentViewConstraints = [
             segmentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: navView!.closedHeight!),
@@ -177,8 +144,8 @@ final class ScheduleViewController: UIViewController {
     }
     
     
-    private func updateView() {
-        switch currentContent {
+    private func updateView(content: ContentType) {
+        switch content {
         case .timeTable:
             //remove segmented view
             segmentView.removeFromSuperview()
@@ -214,15 +181,14 @@ final class ScheduleViewController: UIViewController {
     private func segmentChanged() {
         switch navView?.choosenSegment {
         case 0:
-            currentContent = .timeTable
+            updateView(content: .timeTable)
             viewModel.contentChanged(contentType: .timeTable)
         case 1:
-            currentContent = .assigments
+            updateView(content: .assigments)
             viewModel.contentChanged(contentType: .assigments)
         default:
             print("looks like error")
         }
-        updateView()
     }
     
 }
@@ -274,4 +240,18 @@ extension ScheduleViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         navView?.hide()
     }
+}
+
+extension ScheduleViewController: SegmentViewDelegate {
+    func segmentChosen(index: Int) {
+        switch index {
+        case 1:
+            viewModel.deadLineContentChanged(.hw)
+        case 2:
+            viewModel.deadLineContentChanged(.cw)
+        default:
+            viewModel.deadLineContentChanged(.all)
+        }
+    }
+    
 }

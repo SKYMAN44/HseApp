@@ -7,10 +7,15 @@
 
 import Foundation
 
+enum DeadlineType: String, Decodable {
+    case hw = "hw"
+    case cw = "cw"
+}
 // temp parameters
 struct Deadline: Decodable{
     
     let id: Int
+    let type: DeadlineType
     let subjectName: String
     let assigmentName: String
     let deadlineTime: String

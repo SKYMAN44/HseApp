@@ -26,6 +26,10 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
     }
     
     func cancel() {
+        guard let task = task else {
+            return
+        }
+
         self.task?.cancel()
     }
     

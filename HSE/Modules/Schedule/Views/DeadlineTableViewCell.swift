@@ -166,5 +166,12 @@ final class DeadlineTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    public func configure(deadline: Deadline) {
+        subjectLabel.text = deadline.subjectName
+        taskNameLabel.text = deadline.assigmentName
+        deadlineTimeLabel.text = deadline.deadlineTime
+        submittedTimeLabel.text = deadline.sumbisionTIme
+    }
 
 }

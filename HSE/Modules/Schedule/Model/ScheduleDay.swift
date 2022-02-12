@@ -8,18 +8,11 @@
 import Foundation
 
 // temp parameters
-
-struct Day: Decodable, Hashable {
-    let day: String
-}
-
 struct ScheduleDay: Decodable {
     
     let day: String
     let timeSlot: [TimeSlot]
 }
 
-extension ScheduleDay: Hashable {
-    
-}
+extension ScheduleDay: Hashable { }
 
