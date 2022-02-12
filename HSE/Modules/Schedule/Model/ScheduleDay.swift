@@ -8,17 +8,18 @@
 import Foundation
 
 // temp parameters
+
+struct Day: Decodable, Hashable {
+    let day: String
+}
+
 struct ScheduleDay: Decodable {
     
     let day: String
     let timeSlot: [TimeSlot]
-    
-    
-    static let days: [ScheduleDay] = [
-        ScheduleDay(day: "THURSDAY, JANUARY 10", timeSlot: TimeSlot.array),
-        ScheduleDay(day: "THURSDAY, JANUARY 11", timeSlot: TimeSlot.array),
-        ScheduleDay(day: "THURSDAY, JANUARY 12", timeSlot: TimeSlot.array),
-        ScheduleDay(day: "THURSDAY, JANUARY 13", timeSlot: TimeSlot.array),
-        ScheduleDay(day: "THURSDAY, JANUARY 14", timeSlot: TimeSlot.array),
-    ]
 }
+
+extension ScheduleDay: Hashable {
+    
+}
+

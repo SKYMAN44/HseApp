@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 //no backend => logic not clear so far
 
@@ -34,13 +35,14 @@ class ScheduleViewModel: NSObject {
     }
     
     public var bindScheduleViewModelToController: () -> () = {}
+    private weak var tableView: UITableView?
     
-    override init() {
+    init(tableView: UITableView) {
+        self.tableView = tableView
         super.init()
         
         networkManager = NetworkManager()
-        fetchSchedule()
-        fetchDeadline()
+        updateData()
     }
     
     private func fetchSchedule() {

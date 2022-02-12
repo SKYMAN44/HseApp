@@ -30,8 +30,21 @@ final class ScheduleViewController: UIViewController {
     private var refreshControl: UIRefreshControl!
     
     private var currentContent: ContentType = .timeTable
-    private var viewModel = ScheduleViewModel()
-    private var dataSource: 
+    private lazy var viewModel = ScheduleViewModel(tableView: tableView)
+    
+    private lazy var datasource = UITableViewDiffableDataSource<AnyHashable,AnyHashable>(tableView: tableView) { [self] tableView, indexPath, itemIdentifier in
+        switch currentContent {
+        case .timeTable:
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
+            cell.selectionStyle = .none
+            cell.configure(schedule: viewModel.schedule[indexPath.section].timeSlot[indexPath.row])
+            return cell
+        case .assigments:
+            let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell
+            cell.selectionStyle = .none
+            return cell
+        }
+    }
     
     // MARK: - Lifecycle
     
@@ -47,14 +60,15 @@ final class ScheduleViewController: UIViewController {
         setupRefreshControl()
         
         tableView.delegate = self
-        tableView.dataSource = self
+        createDataSource()
+        tableView.dataSource = datasource
         
         viewModel.bindScheduleViewModelToController = {
             DispatchQueue.main.async {
                 if let refreshC = self.refreshControl {
                     refreshC.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0.2)
                 }
-                self.tableView.reloadData()
+                self.createDataSource()
             }
         }
     }
@@ -62,6 +76,23 @@ final class ScheduleViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.setNavigationBarHidden(true, animated: true)
         viewModel.updateData()
+    }
+    
+    private func createDataSource() {
+        let sectionIdentifiers: [String]
+        var itemBySection = [String: [AnyHashable]]()
+        if currentContent == .timeTable {
+            sectionIdentifiers = viewModel.schedule.map {$0.day}
+            viewModel.schedule.forEach( {
+                itemBySection[$0.day] = $0.timeSlot
+            })
+        } else {
+            sectionIdentifiers = viewModel.deadlines.map {$0.day}
+            viewModel.deadlines.forEach( {
+                itemBySection[$0.day] = $0.assignments
+            })
+        }
+        datasource.applySnapshotUsing(sectionIDs: sectionIdentifiers, itemBySection: itemBySection, animatingDifferences: true)
     }
     
     // MARK: - UI setup
@@ -192,47 +223,21 @@ final class ScheduleViewController: UIViewController {
             print("looks like error")
         }
         updateView()
-//        tableView.reloadData()
     }
     
 }
 
  // MARK: - TableView Delegate
 
-// maybe change to diffable datasource
-
 extension ScheduleViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard currentContent == .assigments else { return }
         
-        let detailVC = TaskDetailViewController(deadline: DeadlineDay.days[indexPath.section].assignments[indexPath.row])
+        let detailVC = TaskDetailViewController(deadline: viewModel.deadlines[indexPath.section].assignments[indexPath.row])
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detailVC, animated: true)
         self.hidesBottomBarWhenPushed = false
-    }
-}
-
-// MARK: - TableView DataSource
-
-extension ScheduleViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        switch currentContent {
-        case .timeTable:
-            return viewModel.schedule.count
-        case .assigments:
-            return viewModel.deadlines.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch currentContent {
-        case .timeTable:
-            return viewModel.schedule[section].timeSlot.count
-        case .assigments:
-            return viewModel.deadlines[section].assignments.count
-        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -260,23 +265,7 @@ extension ScheduleViewController: UITableViewDataSource {
 
         return headerView
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch currentContent {
-        case .timeTable:
-            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
-            cell.selectionStyle = .none
-            cell.configure(schedule: viewModel.schedule[indexPath.section].timeSlot[indexPath.row])
-            return cell
-        case .assigments:
-            let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell
-            cell.selectionStyle = .none
-            return cell
-        }
-    }
-    
 }
-
 
 // MARK: - Scroll Delegate
 
