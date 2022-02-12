@@ -103,6 +103,11 @@ final class ScheduleTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func prepareForReuse() {
+        stopShimmering()
+        super.prepareForReuse()
+    }
+    
     private func setupView() {
         self.backgroundColor = .background.style(.firstLevel)()
         

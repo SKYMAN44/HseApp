@@ -197,7 +197,7 @@ final class ScheduleViewController: UIViewController {
 extension ScheduleViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        guard currentContent == .assigments else { return }
+        guard viewModel.contentType == .assigments else { return }
         
         let detailVC = TaskDetailViewController(deadline: viewModel.deadlines[indexPath.section].assignments[indexPath.row])
         self.hidesBottomBarWhenPushed = true

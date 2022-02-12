@@ -22,7 +22,7 @@ enum DeadlineContentType {
 
 class ScheduleViewModel: NSObject {
     private var networkManager: NetworkManager!
-    private var contentType: ContentType = .timeTable {
+    public private(set) var contentType: ContentType = .timeTable {
         didSet {
             updateData()
         }
@@ -80,8 +80,9 @@ class ScheduleViewModel: NSObject {
             cell.configure(deadline: deadline)
             return cell
         case .loading(_):
-            let cell = tableView.dequeueReusableCell(withIdentifier: ShimmerScheduleTableViewCell.reuseIdentifier, for: indexPath) as! ShimmerScheduleTableViewCell
-            cell.showLoading()
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
+            cell.selectionStyle = .none
+            cell.startShimmer()
             return cell
         }
     }
@@ -94,7 +95,6 @@ class ScheduleViewModel: NSObject {
     init(tableView: UITableView) {
         self.tableView = tableView
         super.init()
-        
         
         tableView.dataSource = datasource
         networkManager = NetworkManager()
@@ -126,9 +126,9 @@ class ScheduleViewModel: NSObject {
                 print(error)
             }
             if let schedule = schedule {
+                self.isLoading = false
                 self.schedule = schedule
             }
-            self.isLoading = false
         }
     }
     
@@ -138,9 +138,9 @@ class ScheduleViewModel: NSObject {
                 print(error)
             }
             if let deadlines = deadlines {
+                self.isLoading = false
                 self.deadlines = deadlines
             }
-            self.isLoading = false
         }
     }
     
