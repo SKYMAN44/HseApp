@@ -5,6 +5,7 @@
 //  Created by Дмитрий Соколов on 11.02.2022.
 //
 
+// https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER
 import Foundation
 
 enum NetworkEnvironment {
@@ -21,11 +22,11 @@ extension ScheduleAPI: EndPointType {
     var baseURL: URL {
         switch NetworkManager.environment {
         case .local:
-            return URL(string:"http://localhost:3000/timetable/")!
+            return URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/timetable/")!
         case .production:
-            return URL(string:"http://localhost:3000/timetable/")!
+            return URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/timetable/")!
         case .test:
-            return URL(string:"http://localhost:3000/timetable/")!
+            return URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/timetable/")!
         }
     }
     

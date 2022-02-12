@@ -155,10 +155,10 @@ final class ScheduleTableViewCell: UITableViewCell {
     
     public func configure(schedule: TimeSlot) {
         subjectNameLabel.text = schedule.subjectName
-        eventTypeLabel.text = "SEMINAR"
-        startTimeLabel.text = "10:30"
-        endTimeLabel.text = "15:00"
-        locationLabel.text = "Online"
+        eventTypeLabel.text = schedule.type
+        startTimeLabel.text = schedule.timeStart
+        endTimeLabel.text = schedule.timeEnd
+        locationLabel.text = schedule.visitType
         onlineImageView.image = UIImage(named: "camera")
     }
 

@@ -11,8 +11,8 @@ import Foundation
 struct NetworkManager {
     static let environment: NetworkEnvironment = .local
     static let ApiKey = "NO_key"
-    public let router = Router<ScheduleAPI>()
-    
+    private let router = Router<ScheduleAPI>()
+    private let routerD = Router<DeadLineAPI>()
     
     enum NetworkingResponse: String {
         case success
@@ -39,7 +39,7 @@ struct NetworkManager {
         }
     }
     
-    func getSchedule(completion: @escaping (_ schedule: [ScheduleDay]?, _ error: String?) -> () ) {
+    public func getSchedule(completion: @escaping (_ schedule: [ScheduleDay]?, _ error: String?) -> () ) {
         router.request(.currentSchedule(id: 1)) { data, response, error in
             if error != nil {
                 completion(nil, "Check Network Connection")
@@ -65,6 +65,42 @@ struct NetworkManager {
                 }
             }
         }
+    }
+    
+    public func getDeadline(completion: @escaping (_ schedule: [DeadlineDay]?, _ error: String?) -> () ) {
+        routerD.request(.deadlines(id: 1)) { data, response, error in
+            if error != nil {
+                completion(nil, "Check Network Connection")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkRequest(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkingResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let apiResponse = try JSONDecoder().decode([DeadlineDay].self, from: responseData)
+                        completion(apiResponse, nil)
+                    } catch {
+                        completion(nil, NetworkingResponse.unableToDecode.rawValue)
+                    }
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
+    public func cancelSchedule() {
+        router.cancel()
+    }
+    
+    public func cancelDeadline() {
+        routerD.cancel()
     }
 }
 

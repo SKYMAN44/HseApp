@@ -8,7 +8,7 @@
 import Foundation
 
 // temp parameters
-struct Deadline {
+struct Deadline: Decodable {
     
     let subjectName: String
     let assigmentName: String

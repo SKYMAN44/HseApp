@@ -7,11 +7,6 @@
 
 import UIKit
 
-enum ContentType {
-    case timeTable
-    case assigments
-}
-
 let tempArray: [String: Int?] = ["All": 123,"Homework": nil,"Midterm": 20]
 
 final class ScheduleViewController: UIViewController {
@@ -26,18 +21,18 @@ final class ScheduleViewController: UIViewController {
     
     private var tableView: UITableView = {
         let tableView = UITableView()
-        
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
         tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
         
         return tableView
     }()
     
-    private var currentContent: ContentType = .timeTable
+    private var refreshControl: UIRefreshControl!
     
-    private var viewModel: ScheduleViewModel!
-    private var models = [ScheduleDay]()
-    private var networkManager = NetworkManager()
+    private var currentContent: ContentType = .timeTable
+    private var viewModel = ScheduleViewModel()
+    private var dataSource: 
+    
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
@@ -45,39 +40,42 @@ final class ScheduleViewController: UIViewController {
         
         
         self.view.backgroundColor = .background.style(.accent)()
-        viewModel = ScheduleViewModel()
         // setUp navBar
         setupNavBar()
-        
         // tableView setUp
         setupTableView()
+        setupRefreshControl()
         
         tableView.delegate = self
         tableView.dataSource = self
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        
-        APICall()
-    }
-    
-    private func APICall() {
-        networkManager.getSchedule { schedule, error in
-            if let error = error {
-                print(error)
-            }
-            if let schedule = schedule {
-                self.models = schedule
-            }
+        viewModel.bindScheduleViewModelToController = {
             DispatchQueue.main.async {
+                if let refreshC = self.refreshControl {
+                    refreshC.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0.2)
+                }
                 self.tableView.reloadData()
             }
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+        viewModel.updateData()
+    }
+    
     // MARK: - UI setup
+    
+    private func setupRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc
+    private func refreshData() {
+        viewModel.updateData()
+    }
     
     private func setupNavBar() {
         navView = ExtendingNavBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
@@ -186,13 +184,15 @@ final class ScheduleViewController: UIViewController {
         switch navView?.choosenSegment {
         case 0:
             currentContent = .timeTable
+            viewModel.contentChanged(contentType: .timeTable)
         case 1:
             currentContent = .assigments
+            viewModel.contentChanged(contentType: .assigments)
         default:
             print("looks like error")
         }
         updateView()
-        tableView.reloadData()
+//        tableView.reloadData()
     }
     
 }
@@ -206,7 +206,7 @@ extension ScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard currentContent == .assigments else { return }
         
-        let detailVC = TaskDetailViewController(deadline: DeadlineDay.days[indexPath.section].deadlines[indexPath.row])
+        let detailVC = TaskDetailViewController(deadline: DeadlineDay.days[indexPath.section].assignments[indexPath.row])
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detailVC, animated: true)
         self.hidesBottomBarWhenPushed = false
@@ -220,18 +220,18 @@ extension ScheduleViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         switch currentContent {
         case .timeTable:
-            return models.count
+            return viewModel.schedule.count
         case .assigments:
-            return DeadlineDay.days.count
+            return viewModel.deadlines.count
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch currentContent {
         case .timeTable:
-            return models[section].timeSlot.count
+            return viewModel.schedule[section].timeSlot.count
         case .assigments:
-            return DeadlineDay.days[section].deadlines.count
+            return viewModel.deadlines[section].assignments.count
         }
     }
     
@@ -247,9 +247,9 @@ extension ScheduleViewController: UITableViewDataSource {
         
         switch currentContent {
         case .timeTable:
-            label.text = models[section].day
+            label.text = viewModel.schedule[section].day
         case .assigments:
-            label.text = DeadlineDay.days[section].day
+            label.text = viewModel.deadlines[section].day
         }
         
         headerView.addSubview(label)
@@ -266,7 +266,7 @@ extension ScheduleViewController: UITableViewDataSource {
         case .timeTable:
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
             cell.selectionStyle = .none
-            cell.configure(schedule: models[indexPath.section].timeSlot[indexPath.row])
+            cell.configure(schedule: viewModel.schedule[indexPath.section].timeSlot[indexPath.row])
             return cell
         case .assigments:
             let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell
