@@ -302,6 +302,8 @@ extension UIView {
 }
 
 
+
+
 extension UIView {
     
     func configureAndStartShimmering() {
@@ -310,7 +312,7 @@ extension UIView {
         startShimmering()
     }
     
-    func startShimmering() {
+    private func startShimmering() {
         
 //        let light = UIColor(white: 0, alpha: 0.1).cgColor
         let light = UIColor(named: "OutlineLight")!.cgColor

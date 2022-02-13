@@ -46,8 +46,8 @@
 		63881F6A27B5F9A8004A2AEE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6927B5F9A8004A2AEE /* NetworkManager.swift */; };
 		63881F6C27B72A8E004A2AEE /* DeadLineEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6B27B72A8E004A2AEE /* DeadLineEndPoint.swift */; };
 		63881F6E27B75500004A2AEE /* TableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6D27B75500004A2AEE /* TableViewDiffableDataSource.swift */; };
-		63881F7227B77F71004A2AEE /* ShimmerScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F7127B77F71004A2AEE /* ShimmerScheduleTableViewCell.swift */; };
 		63881F7627B7802B004A2AEE /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F7527B7802B004A2AEE /* Array.swift */; };
+		63881F7827B986BD004A2AEE /* shimmerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F7727B986BD004A2AEE /* shimmerProtocol.swift */; };
 		639DCE0D27923404007FC2DC /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0C27923404007FC2DC /* TimeSlot.swift */; };
 		639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE13279240E3007FC2DC /* ScheduleDay.swift */; };
 		639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE152792E8D1007FC2DC /* Deadline.swift */; };
@@ -159,8 +159,8 @@
 		63881F6927B5F9A8004A2AEE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		63881F6B27B72A8E004A2AEE /* DeadLineEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeadLineEndPoint.swift; sourceTree = "<group>"; };
 		63881F6D27B75500004A2AEE /* TableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDiffableDataSource.swift; sourceTree = "<group>"; };
-		63881F7127B77F71004A2AEE /* ShimmerScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerScheduleTableViewCell.swift; sourceTree = "<group>"; };
 		63881F7527B7802B004A2AEE /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		63881F7727B986BD004A2AEE /* shimmerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shimmerProtocol.swift; sourceTree = "<group>"; };
 		639DCE0C27923404007FC2DC /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		639DCE13279240E3007FC2DC /* ScheduleDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDay.swift; sourceTree = "<group>"; };
 		639DCE152792E8D1007FC2DC /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
@@ -376,7 +376,7 @@
 				63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */,
 				639DCE46279865F3007FC2DC /* ScheduleTableViewCell.swift */,
 				639DCE4827988969007FC2DC /* DeadlineTableViewCell.swift */,
-				63881F7127B77F71004A2AEE /* ShimmerScheduleTableViewCell.swift */,
+				63881F7727B986BD004A2AEE /* shimmerProtocol.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -851,7 +851,6 @@
 				63881F7627B7802B004A2AEE /* Array.swift in Sources */,
 				638622F727A5A587004BCEB8 /* DescriptionCollectionViewCell.swift in Sources */,
 				63E049A027B1D42E00942E36 /* AddSubmissionCollectionViewCell.swift in Sources */,
-				63881F7227B77F71004A2AEE /* ShimmerScheduleTableViewCell.swift in Sources */,
 				63E0499627B1ABEB00942E36 /* TaskHeaderCollectionReusableView.swift in Sources */,
 				6304EAA827A87C8100BDF75D /* RightTextMessageTableViewCell.swift in Sources */,
 				639DCE4127958C95007FC2DC /* Color.swift in Sources */,
@@ -876,6 +875,7 @@
 				6304EACA27AEF2ED00BDF75D /* Item.swift in Sources */,
 				639DCE4327975C6F007FC2DC /* CourseChatCollectionViewCell.swift in Sources */,
 				6304EACC27B017B600BDF75D /* LoginViewController.swift in Sources */,
+				63881F7827B986BD004A2AEE /* shimmerProtocol.swift in Sources */,
 				63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */,
 				638622E627A3413C004BCEB8 /* TaskDetailViewController.swift in Sources */,
 				63881F5E27B5D8EA004A2AEE /* ParameterEncoding.swift in Sources */,

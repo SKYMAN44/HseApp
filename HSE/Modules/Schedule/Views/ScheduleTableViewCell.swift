@@ -8,8 +8,8 @@
 import UIKit
 
 final class ScheduleTableViewCell: UITableViewCell {
-    
     static let reuseIdentifier = "ScheduleTableViewCell"
+    static let shimmerReuseIdentifier = "ShimmerScheduleTableViewCell"
     
     private let separatorView: UIView = {
         let view = UIView()
@@ -104,9 +104,16 @@ final class ScheduleTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        stopShimmering()
+        stopShimmer()
+        self.backgroundColor = .background.style(.firstLevel)()
         super.prepareForReuse()
     }
+    
+    deinit {
+        stopShimmer()
+    }
+    
+    // MARK: - UI setup
     
     private func setupView() {
         self.backgroundColor = .background.style(.firstLevel)()
@@ -145,28 +152,7 @@ final class ScheduleTableViewCell: UITableViewCell {
         
         rigthStackView.topAnchor.constraint(equalTo: mainSV.topAnchor, constant: 4).isActive = true
         rigthStackView.bottomAnchor.constraint(equalTo: mainSV.bottomAnchor, constant: -4).isActive = true
-        
     }
-    
-    
-    public func startShimmer() {
-        subjectNameLabel.configureAndStartShimmering()
-        eventTypeLabel.configureAndStartShimmering()
-        locationLabel.configureAndStartShimmering()
-        startTimeLabel.configureAndStartShimmering()
-        endTimeLabel.configureAndStartShimmering()
-        onlineImageView.configureAndStartShimmering()
-    }
-    
-    private func stopShimmer() {
-        subjectNameLabel.stopShimmering()
-        eventTypeLabel.stopShimmering()
-        locationLabel.stopShimmering()
-        startTimeLabel.stopShimmering()
-        endTimeLabel.stopShimmering()
-        onlineImageView.stopShimmering()
-    }
-    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -183,5 +169,39 @@ final class ScheduleTableViewCell: UITableViewCell {
         locationLabel.text = schedule.visitType
         onlineImageView.image = UIImage(named: "camera")
     }
+    
+    public func configureShimmer() {
+        subjectNameLabel.text = "                     "
+        eventTypeLabel.text = "           "
+        startTimeLabel.text = "           "
+        endTimeLabel.text = "           "
+        locationLabel.text = "           "
+        startShimmer()
+    }
 
+}
+
+
+// MARK: - Shimmer
+
+extension ScheduleTableViewCell: ShimmeringObject {
+    public func startShimmer() {
+        applyShimmerTo(to: [subjectNameLabel,
+                            eventTypeLabel,
+                            locationLabel,
+                            startTimeLabel,
+                            endTimeLabel,
+                            onlineImageView
+                           ])
+    }
+    
+    public func stopShimmer() {
+        removeShimmerFrom(from: [subjectNameLabel,
+                                 eventTypeLabel,
+                                 locationLabel,
+                                 startTimeLabel,
+                                 endTimeLabel,
+                                 onlineImageView
+                                ])
+    }
 }

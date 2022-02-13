@@ -22,7 +22,8 @@ final class ScheduleViewController: UIViewController {
         let tableView = UITableView()
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
         tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
-        tableView.register(ShimmerScheduleTableViewCell.self, forCellReuseIdentifier: ShimmerScheduleTableViewCell.reuseIdentifier)
+        tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.shimmerReuseIdentifier)
+        tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.shimmerReuseIdentifier)
         
         return tableView
     }()
@@ -37,7 +38,6 @@ final class ScheduleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         self.view.backgroundColor = .background.style(.accent)()
         // setUp navBar
         setupNavBar()
@@ -46,14 +46,14 @@ final class ScheduleViewController: UIViewController {
         setupRefreshControl()
         
         tableView.delegate = self
-        
         viewModel.bindScheduleViewModelToController = {
             DispatchQueue.main.async {
-                if let refreshC = self.refreshControl {
-                    refreshC.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0)
-                }
+//                if let refreshC = self.refreshControl {
+//                    refreshC.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0)
+//                }
             }
         }
+        viewModel.updateData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,6 +70,7 @@ final class ScheduleViewController: UIViewController {
     
     @objc
     private func refreshData() {
+        refreshControl.endRefreshing()
         viewModel.updateData()
     }
     
@@ -199,7 +200,7 @@ extension ScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard viewModel.contentType == .assigments else { return }
         
-        let detailVC = TaskDetailViewController(deadline: viewModel.deadlines[indexPath.section].assignments[indexPath.row])
+        let detailVC = TaskDetailViewController(deadline: viewModel.currentdeadlines[indexPath.section].assignments[indexPath.row])
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(detailVC, animated: true)
         self.hidesBottomBarWhenPushed = false
@@ -213,15 +214,16 @@ extension ScheduleViewController: UITableViewDelegate {
         label.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: 15)
         label.font = .customFont.style(.special)()
         label.textColor = .textAndIcons.style(.tretiary)()
-        
-//        switch currentContent {
-//        case .timeTable:
-//            guard viewModel.schedule[section].day != nil else { return nil }
-//            label.text = viewModel.schedule[section].day
-//        case .assigments:
-//            guard viewModel.schedule[section].day != nil else { return nil }
-//            label.text = viewModel.deadlines[section].day
-//        }
+        if viewModel.isLoading == false {
+            switch viewModel.contentType {
+            case .timeTable:
+                label.text = viewModel.schedule[section].day
+            case .assigments:
+                label.text = viewModel.currentdeadlines[section].day
+            }
+        } else {
+            label.text = ""
+        }
         
         headerView.addSubview(label)
         

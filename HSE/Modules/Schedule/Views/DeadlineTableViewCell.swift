@@ -9,6 +9,7 @@ import UIKit
 
 final class DeadlineTableViewCell: UITableViewCell {
     static let reuseIdentifier = "DeadlineTableViewCell"
+    static let shimmerReuseIdentifier = "ShimmerDeadlineTableViewCell"
     
     private let deadlineTimeView: UIView = {
         let view = UIView()
@@ -169,5 +170,31 @@ final class DeadlineTableViewCell: UITableViewCell {
         deadlineTimeLabel.text = deadline.deadlineTime
         submittedTimeLabel.text = deadline.sumbisionTIme
     }
+    
+    public func configureShimmer() {
+        subjectLabel.text = "                     "
+        taskNameLabel.text = "                         "
+        deadlineTimeLabel.text = "           "
+        submittedTimeLabel.text = "           "
+        startShimmer()
+    }
 
+}
+
+extension DeadlineTableViewCell: ShimmeringObject {
+    func startShimmer() {
+        applyShimmerTo(to: [subjectLabel,
+                           taskNameLabel,
+                           deadlineTimeView,
+                           submittedTimeView])
+    }
+    
+    func stopShimmer() {
+        removeShimmerFrom(from: [subjectLabel,
+                                 taskNameLabel,
+                                 deadlineTimeView,
+                                 submittedTimeView])
+    }
+    
+    
 }

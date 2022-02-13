@@ -22,12 +22,13 @@ enum DeadlineContentType {
 
 class ScheduleViewModel: NSObject {
     private var networkManager: NetworkManager!
+    private var deadlineType: DeadlineContentType = .all
     public private(set) var contentType: ContentType = .timeTable {
         didSet {
             updateData()
         }
     }
-    private var isLoading: Bool = false {
+    public var isLoading: Bool = false {
         didSet {
             if(isLoading) {
                 setShimmer()
@@ -42,6 +43,12 @@ class ScheduleViewModel: NSObject {
         }
     }
     public private(set) var deadlines = [DeadlineDay]() {
+        didSet {
+            sortDeadlines()
+        }
+    }
+    
+    public private(set) var currentdeadlines = [DeadlineDay]() {
         didSet {
             self.updateDataSource()
             bindScheduleViewModelToController()
@@ -68,21 +75,31 @@ class ScheduleViewModel: NSObject {
     }
     
     public lazy var datasource = UITableViewDiffableDataSource<AnyHashable,Item>(tableView: tableView!) { tableView, indexPath, itemIdentifier in
-        switch itemIdentifier {
-        case .timeslot(let timeslot):
+        switch (itemIdentifier, self.contentType) {
+        case (.timeslot(let timeslot), _ ):
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
             cell.selectionStyle = .none
             cell.configure(schedule: timeslot)
+            
             return cell
-        case .deadline(let deadline):
+        case (.deadline(let deadline), _):
             let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell
             cell.selectionStyle = .none
             cell.configure(deadline: deadline)
+            
             return cell
-        case .loading(_):
-            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
+        case (.loading(_), .timeTable):
+            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.shimmerReuseIdentifier , for: indexPath) as! ScheduleTableViewCell
             cell.selectionStyle = .none
-            cell.startShimmer()
+            cell.setHeight(to: 100)
+            cell.configureShimmer()
+            
+            return cell
+        case (.loading(_), .assigments):
+            let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.shimmerReuseIdentifier , for: indexPath) as! DeadlineTableViewCell
+            cell.selectionStyle = .none
+            cell.configureShimmer()
+            
             return cell
         }
     }
@@ -93,12 +110,11 @@ class ScheduleViewModel: NSObject {
     // MARK: - Init
     
     init(tableView: UITableView) {
-        self.tableView = tableView
         super.init()
         
+        self.tableView = tableView
         tableView.dataSource = datasource
         networkManager = NetworkManager()
-        updateData()
     }
     
     private func updateDataSource() {
@@ -110,8 +126,8 @@ class ScheduleViewModel: NSObject {
                 itemBySection[$0.day] = $0.timeSlot.map({ Item.timeslot($0)})
             })
         } else {
-            sectionIdentifiers = self.deadlines.map {$0.day}
-            self.deadlines.forEach( {
+            sectionIdentifiers = self.currentdeadlines.map {$0.day}
+            self.currentdeadlines.forEach( {
                 itemBySection[$0.day] = $0.assignments.map({ Item.deadline($0)})
             })
         }
@@ -144,12 +160,21 @@ class ScheduleViewModel: NSObject {
         }
     }
     
+    // MARK: - shimmer
+    
     private func setShimmer() {
         datasource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
     }
     
     private func sortDeadlines() {
-        
+        switch deadlineType {
+        case .all:
+            currentdeadlines = deadlines
+        case .hw:
+            currentdeadlines = deadlines
+        case .cw:
+            currentdeadlines = deadlines
+        }
     }
     
     // MARK: - Internal calls
@@ -170,5 +195,6 @@ class ScheduleViewModel: NSObject {
     }
     
     public func deadLineContentChanged(_ type: DeadlineContentType) {
+        
     }
 }
