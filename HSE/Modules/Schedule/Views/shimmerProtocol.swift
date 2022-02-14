@@ -13,7 +13,6 @@ protocol ShimmeringObject {
     func stopShimmer()
 }
 
-
 extension ShimmeringObject {
     func applyShimmerTo(to views: [UIView]) {
         for view in views {

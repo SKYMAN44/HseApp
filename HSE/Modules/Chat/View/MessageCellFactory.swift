@@ -11,7 +11,9 @@ import UIKit
 
 struct MessageCellFactory {
     
-    static public func createCell(message: MessageViewModel, tableView: UITableView, indexPath: IndexPath, hostingController: ChatCellDelegate) -> MessageCellProtocol {
+    static public func createCell(message: MessageViewModel,
+                                  tableView: UITableView, indexPath: IndexPath,
+                                  hostingController: ChatCellDelegate) -> MessageCellProtocol {
         switch message.side {
         case .left:
             switch message.type {

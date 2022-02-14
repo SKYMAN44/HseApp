@@ -48,6 +48,10 @@
 		63881F6E27B75500004A2AEE /* TableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F6D27B75500004A2AEE /* TableViewDiffableDataSource.swift */; };
 		63881F7627B7802B004A2AEE /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F7527B7802B004A2AEE /* Array.swift */; };
 		63881F7827B986BD004A2AEE /* shimmerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F7727B986BD004A2AEE /* shimmerProtocol.swift */; };
+		63881F7D27B9B84D004A2AEE /* GradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F7C27B9B84D004A2AEE /* GradeTableViewCell.swift */; };
+		63881F7F27B9BC4C004A2AEE /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F7E27B9BC4C004A2AEE /* Grade.swift */; };
+		63881F8127B9BCC3004A2AEE /* GradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F8027B9BCC3004A2AEE /* GradeViewModel.swift */; };
+		63881F8327B9E5AB004A2AEE /* GradeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F8227B9E5AB004A2AEE /* GradeEndPoint.swift */; };
 		639DCE0D27923404007FC2DC /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0C27923404007FC2DC /* TimeSlot.swift */; };
 		639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE13279240E3007FC2DC /* ScheduleDay.swift */; };
 		639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE152792E8D1007FC2DC /* Deadline.swift */; };
@@ -161,6 +165,10 @@
 		63881F6D27B75500004A2AEE /* TableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewDiffableDataSource.swift; sourceTree = "<group>"; };
 		63881F7527B7802B004A2AEE /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		63881F7727B986BD004A2AEE /* shimmerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shimmerProtocol.swift; sourceTree = "<group>"; };
+		63881F7C27B9B84D004A2AEE /* GradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeTableViewCell.swift; sourceTree = "<group>"; };
+		63881F7E27B9BC4C004A2AEE /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
+		63881F8027B9BCC3004A2AEE /* GradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeViewModel.swift; sourceTree = "<group>"; };
+		63881F8227B9E5AB004A2AEE /* GradeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeEndPoint.swift; sourceTree = "<group>"; };
 		639DCE0C27923404007FC2DC /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		639DCE13279240E3007FC2DC /* ScheduleDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDay.swift; sourceTree = "<group>"; };
 		639DCE152792E8D1007FC2DC /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
@@ -304,9 +312,9 @@
 		638622E427A32A60004BCEB8 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				638622ED27A34FE1004BCEB8 /* ViewModel */,
 				638622E827A34D0B004BCEB8 /* Model */,
 				638622E727A34CFF004BCEB8 /* View */,
+				638622ED27A34FE1004BCEB8 /* ViewModel */,
 				638622E927A34D87004BCEB8 /* ChatViewController.swift */,
 				6304EABC27AB018800BDF75D /* PhotoZoomViewController.swift */,
 			);
@@ -359,6 +367,30 @@
 			path = Encoding;
 			sourceTree = "<group>";
 		};
+		63881F7927B9B82A004A2AEE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				63881F7C27B9B84D004A2AEE /* GradeTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		63881F7A27B9B82F004A2AEE /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				63881F8027B9BCC3004A2AEE /* GradeViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		63881F7B27B9B837004A2AEE /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				63881F7E27B9BC4C004A2AEE /* Grade.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		639DCE0B279233F3007FC2DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +434,7 @@
 			children = (
 				63881F6727B5F81E004A2AEE /* ScheduleEndPoint.swift */,
 				63881F6B27B72A8E004A2AEE /* DeadLineEndPoint.swift */,
+				63881F8227B9E5AB004A2AEE /* GradeEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -669,6 +702,9 @@
 		63F857E4279085DA00F45A97 /* Grades */ = {
 			isa = PBXGroup;
 			children = (
+				63881F7B27B9B837004A2AEE /* Model */,
+				63881F7927B9B82A004A2AEE /* View */,
+				63881F7A27B9B82F004A2AEE /* ViewModel */,
 				63F857DD2790657B00F45A97 /* GradesViewController.swift */,
 			);
 			path = Grades;
@@ -862,6 +898,7 @@
 				639DCE34279576A2007FC2DC /* EndPointType.swift in Sources */,
 				63E0499027B1789200942E36 /* CreatorCollectionViewCell.swift in Sources */,
 				639DCE1F2792FDA4007FC2DC /* BaseNavViewController.swift in Sources */,
+				63881F7F27B9BC4C004A2AEE /* Grade.swift in Sources */,
 				63E0499A27B1BF9900942E36 /* SubmitInteractionCollectionViewCell.swift in Sources */,
 				6304EAA427A8771100BDF75D /* LeftTextMessageTableViewCell.swift in Sources */,
 				63F857DC2790655600F45A97 /* ScheduleViewController.swift in Sources */,
@@ -886,6 +923,7 @@
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,
 				639DCE22279306B1007FC2DC /* ScheduleViewModel.swift in Sources */,
 				6304EAAA27A87DC400BDF75D /* MessageCellFactory.swift in Sources */,
+				63881F7D27B9B84D004A2AEE /* GradeTableViewCell.swift in Sources */,
 				638622F927A5B652004BCEB8 /* CollectionView.swift in Sources */,
 				639DCE3F27957A94007FC2DC /* Font.swift in Sources */,
 				6304EAAC27A8802000BDF75D /* LeftImageMessageTableViewCell.swift in Sources */,
@@ -907,6 +945,8 @@
 				6304EAC427AC177000BDF75D /* InputView.swift in Sources */,
 				639DCE4927988969007FC2DC /* DeadlineTableViewCell.swift in Sources */,
 				63F857EA2790F1D500F45A97 /* CalendarPopUpView.swift in Sources */,
+				63881F8327B9E5AB004A2AEE /* GradeEndPoint.swift in Sources */,
+				63881F8127B9BCC3004A2AEE /* GradeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

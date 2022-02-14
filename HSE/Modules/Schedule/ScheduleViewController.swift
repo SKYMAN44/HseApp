@@ -7,18 +7,18 @@
 
 import UIKit
 
-let tempArray: [String: Int?] = ["All": 123,"Homework": nil,"Midterm": 20]
-
 final class ScheduleViewController: UIViewController {
+    let tempArray: [String: Int] = ["All": 123,"Homework": 0,"Midterm": 20]
+    
     private var navView: ExtendingNavBar?
-    private var segmentView: SegmentView = {
+    private let segmentView: SegmentView = {
         let segmentView = SegmentView(frame: .zero)
         segmentView.backgroundColor = .background.style(.accent)()
         
         return segmentView
     }()
     
-    private var tableView: UITableView = {
+    private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
         tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
@@ -29,7 +29,6 @@ final class ScheduleViewController: UIViewController {
     }()
     
     private var refreshControl: UIRefreshControl!
-    
     private var currentContent: ContentType = .timeTable
     private lazy var viewModel = ScheduleViewModel(tableView: tableView)
     
@@ -48,12 +47,8 @@ final class ScheduleViewController: UIViewController {
         tableView.delegate = self
         viewModel.bindScheduleViewModelToController = {
             DispatchQueue.main.async {
-//                if let refreshC = self.refreshControl {
-//                    refreshC.perform(#selector(UIRefreshControl.endRefreshing), with: nil, afterDelay: 0)
-//                }
             }
         }
-        viewModel.updateData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,12 +63,6 @@ final class ScheduleViewController: UIViewController {
         tableView.refreshControl = refreshControl
     }
     
-    @objc
-    private func refreshData() {
-        refreshControl.endRefreshing()
-        viewModel.updateData()
-    }
-    
     private func setupNavBar() {
         navView = ExtendingNavBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         navView?.color = .background.style(.accent)()
@@ -83,20 +72,12 @@ final class ScheduleViewController: UIViewController {
         
         view.addSubview(navView!)
         
-        navView?.translatesAutoresizingMaskIntoConstraints = false
-        
-        let constraints = [
-            navView!.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            navView!.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            navView!.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            navView!.heightAnchor.constraint(equalToConstant: 60)
-        ]
-        
+        navView?.pin(to: view, [.left, .right])
+        navView?.pinTop(to: view.safeAreaLayoutGuide.topAnchor)
+        let constrain = navView?.setHeight(to: 60)
         navView?.addSubviews()
         
-        constraints[3].identifier = "heightConstrain"
-        
-        NSLayoutConstraint.activate(constraints)
+        constrain!.identifier = "heightConstrain"
     }
     
     private func setupTableView() {
@@ -111,19 +92,12 @@ final class ScheduleViewController: UIViewController {
         
         tableView.estimatedRowHeight = 82
         tableView.rowHeight = UITableView.automaticDimension
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
 
-        let tableViewConstraints = [
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: navView!.closedHeight!),
-            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ]
+        let constrain = tableView.pinTop(to: view.safeAreaLayoutGuide.topAnchor, navView!.closedHeight!)
+        tableView.pin(to: view, [.left, .right])
+        tableView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor)
         
-        tableViewConstraints[0].identifier = "tableHeightConstain"
-        
-        NSLayoutConstraint.activate(tableViewConstraints)
+        constrain.identifier = "tableHeightConstain"
     }
     
     private func addSegmentView() {
@@ -133,16 +107,37 @@ final class ScheduleViewController: UIViewController {
         segmentView.translatesAutoresizingMaskIntoConstraints = false
         segmentView.delegate = self
         
-        let segmentViewConstraints = [
-            segmentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: navView!.closedHeight!),
-            segmentView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            segmentView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            segmentView.heightAnchor.constraint(equalToConstant: 56)
-        ]
-        
-        NSLayoutConstraint.activate(segmentViewConstraints)
+        segmentView.pin(to: view, [.left, .right])
+        segmentView.pinTop(to: view.safeAreaLayoutGuide.topAnchor, navView!.closedHeight!)
+        segmentView.setHeight(to: 56)
     }
     
+    // MARK: - Interactions
+    
+    @objc
+    private func calendarButtonTapped() {
+        CalendarPopUpView.init().show()
+    }
+    
+    @objc
+    private func segmentChanged() {
+        switch navView?.choosenSegment {
+        case 0:
+            updateView(content: .timeTable)
+            viewModel.contentChanged(contentType: .timeTable)
+        case 1:
+            updateView(content: .assigments)
+            viewModel.contentChanged(contentType: .assigments)
+        default:
+            print("looks like error")
+        }
+    }
+    
+    @objc
+    private func refreshData() {
+        refreshControl.endRefreshing()
+        viewModel.updateData()
+    }
     
     private func updateView(content: ContentType) {
         switch content {
@@ -168,35 +163,11 @@ final class ScheduleViewController: UIViewController {
             view.layoutIfNeeded()
         }
     }
-    
-    
-    // MARK: - Interactions
-    
-    @objc
-    private func calendarButtonTapped() {
-        CalendarPopUpView.init().show()
-    }
-    
-    @objc
-    private func segmentChanged() {
-        switch navView?.choosenSegment {
-        case 0:
-            updateView(content: .timeTable)
-            viewModel.contentChanged(contentType: .timeTable)
-        case 1:
-            updateView(content: .assigments)
-            viewModel.contentChanged(contentType: .assigments)
-        default:
-            print("looks like error")
-        }
-    }
-    
 }
 
  // MARK: - TableView Delegate
 
 extension ScheduleViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard viewModel.contentType == .assigments else { return }
         
@@ -238,11 +209,13 @@ extension ScheduleViewController: UITableViewDelegate {
 // MARK: - Scroll Delegate
 
 extension ScheduleViewController: UIScrollViewDelegate {
-    
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         navView?.hide()
     }
 }
+
+
+// MARK: - SegmentView Delegate
 
 extension ScheduleViewController: SegmentViewDelegate {
     func segmentChosen(index: Int) {
@@ -255,5 +228,4 @@ extension ScheduleViewController: SegmentViewDelegate {
             viewModel.deadLineContentChanged(.all)
         }
     }
-    
 }

@@ -23,12 +23,13 @@ final class TabBarBaseController: UITabBarController {
         let accountViewController = AccountViewController()
         let scheduleViewController = ScheduleViewController()
         let navControllerSchedule = BaseNavViewController(rootViewController: scheduleViewController)
+        let navControllerGrades = BaseNavViewController(rootViewController: gradesViewController)
         
         navControllerSchedule.tabBarItem.image = UIImage(named: "calendarCS")
         navControllerSchedule.tabBarItem.selectedImage = UIImage(named: "calendarCS")
         
-        gradesViewController.tabBarItem.image = UIImage(named: "awardCS")
-        gradesViewController.tabBarItem.selectedImage = UIImage(named: "awardCS")
+        navControllerGrades.tabBarItem.image = UIImage(named: "awardCS")
+        navControllerGrades.tabBarItem.selectedImage = UIImage(named: "awardCS")
         
         accountViewController.tabBarItem.image = UIImage(named: "userCS")
         accountViewController.tabBarItem.selectedImage = UIImage(named: "userCS")
@@ -36,7 +37,7 @@ final class TabBarBaseController: UITabBarController {
         navControllerCourses.tabBarItem.image = UIImage(named: "serverCS")
         navControllerCourses.tabBarItem.selectedImage = UIImage(named: "serverCS")
         
-        self.setViewControllers([navControllerSchedule, navControllerCourses, gradesViewController, accountViewController], animated: false)
+        self.setViewControllers([navControllerSchedule, navControllerCourses, navControllerGrades, accountViewController], animated: false)
 
         for ( _ , tabBarItem) in tabBar.items!.enumerated() {
             tabBarItem.title = ""

@@ -326,8 +326,9 @@ extension UIView {
         gradient.endPoint   = CGPoint(x: 1.0, y: 0.525)
         gradient.locations  = [0.2, 0.5, 0.8]
         
-        layer.mask = gradient
-        layer.cornerRadius = 8
+//        layer.mask = gradient
+        layer.addSublayer(gradient)
+        layer.cornerRadius = 6
         layer.masksToBounds = true
         
         let animation: CABasicAnimation = CABasicAnimation.init(keyPath: "locations")
@@ -345,6 +346,11 @@ extension UIView {
     
     func stopShimmering() {
         layer.cornerRadius = 0
-        layer.mask = nil
+//        layer.mask = nil
+        layer.sublayers?.forEach { (sublayer) in
+            if sublayer is CAGradientLayer {
+                sublayer.removeFromSuperlayer()
+            }
+        }
     }
 }

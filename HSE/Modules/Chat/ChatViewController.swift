@@ -9,8 +9,6 @@ import UIKit
 
 
 final class ChatViewController: UIViewController {
-
-    //temporary for debug
     var temparr: [MessageViewModel] = []
     
     private var tableView: UITableView = {
@@ -101,14 +99,9 @@ final class ChatViewController: UIViewController {
     private func setupTableView() {
         view.addSubview(tableView)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: inputContainerView.topAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-        ])
+        tableView.pin(to: view, [.left, .right])
+        tableView.pinTop(to: view.safeAreaLayoutGuide.topAnchor)
+        tableView.pinBottom(to: inputContainerView.topAnchor)
     }
 
 }

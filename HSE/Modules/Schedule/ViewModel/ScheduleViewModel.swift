@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 enum ContentType {
     case timeTable
     case assigments
@@ -42,12 +41,13 @@ class ScheduleViewModel: NSObject {
             bindScheduleViewModelToController()
         }
     }
-    public private(set) var deadlines = [DeadlineDay]() {
+    // Store fetched deadlines
+    private var deadlines = [DeadlineDay]() {
         didSet {
             sortDeadlines()
         }
     }
-    
+    // Sorted deadlines ready to be presented
     public private(set) var currentdeadlines = [DeadlineDay]() {
         didSet {
             self.updateDataSource()
@@ -55,24 +55,7 @@ class ScheduleViewModel: NSObject {
         }
     }
     
-    enum Item: Hashable {
-        case timeslot(TimeSlot)
-        case deadline(Deadline)
-        case loading(UUID)
-        
-        var isLoading: Bool {
-            switch self {
-            case .loading(_):
-                return true
-            default:
-                return false
-            }
-        }
-        
-        static var loadingItems: [Item] {
-            return Array(repeatingExpression: Item.loading(UUID()), count: 8)
-        }
-    }
+    // MARK: - Data Source
     
     public lazy var datasource = UITableViewDiffableDataSource<AnyHashable,Item>(tableView: tableView!) { tableView, indexPath, itemIdentifier in
         switch (itemIdentifier, self.contentType) {
@@ -98,9 +81,20 @@ class ScheduleViewModel: NSObject {
         case (.loading(_), .assigments):
             let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.shimmerReuseIdentifier , for: indexPath) as! DeadlineTableViewCell
             cell.selectionStyle = .none
+            cell.setHeight(to: 80)
             cell.configureShimmer()
             
             return cell
+        }
+    }
+    
+    enum Item: Hashable {
+        case timeslot(TimeSlot)
+        case deadline(Deadline)
+        case loading(UUID)
+        
+        static var loadingItems: [Item] {
+            return Array(repeatingExpression: Item.loading(UUID()), count: 8)
         }
     }
     
@@ -112,14 +106,19 @@ class ScheduleViewModel: NSObject {
     init(tableView: UITableView) {
         super.init()
         
+        
         self.tableView = tableView
         tableView.dataSource = datasource
         networkManager = NetworkManager()
+        updateData()
     }
+    
+    // MARK: - Data Source update
     
     private func updateDataSource() {
         let sectionIdentifiers: [String]
         var itemBySection = [String: [Item]]()
+        // transform array into itemBySection form, where Key is a day(Section) values is array of timeslots/deadlines
         if contentType == .timeTable {
             sectionIdentifiers = self.schedule.map {$0.day}
             self.schedule.forEach( {
@@ -132,6 +131,32 @@ class ScheduleViewModel: NSObject {
             })
         }
         datasource.applySnapshotUsing(sectionIDs: sectionIdentifiers, itemBySection: itemBySection, animatingDifferences: false)
+    }
+    
+    private func sortDeadlines() {
+        // depending on user selection, filter deadlines to only homeworks, controlworks or all together
+        switch deadlineType {
+        case .all:
+            currentdeadlines = deadlines
+        case .hw:
+            var hwDeadlines = [DeadlineDay]()
+            deadlines.forEach( {
+                let filteredAssinments = $0.assignments.filter {
+                    $0.type == .hw
+                }
+                hwDeadlines.append(DeadlineDay(day: $0.day, assignments: filteredAssinments))
+            })
+            currentdeadlines = hwDeadlines
+        case .cw:
+            var cwDeadlines = [DeadlineDay]()
+            deadlines.forEach( {
+                let filteredAssinments = $0.assignments.filter {
+                    $0.type == .cw
+                }
+                cwDeadlines.append(DeadlineDay(day: $0.day, assignments: filteredAssinments))
+            })
+            currentdeadlines = cwDeadlines
+        }
     }
     
     // MARK: - API Calls
@@ -160,21 +185,10 @@ class ScheduleViewModel: NSObject {
         }
     }
     
-    // MARK: - shimmer
+    // MARK: - Shimmer
     
     private func setShimmer() {
         datasource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
-    }
-    
-    private func sortDeadlines() {
-        switch deadlineType {
-        case .all:
-            currentdeadlines = deadlines
-        case .hw:
-            currentdeadlines = deadlines
-        case .cw:
-            currentdeadlines = deadlines
-        }
     }
     
     // MARK: - Internal calls
@@ -195,6 +209,7 @@ class ScheduleViewModel: NSObject {
     }
     
     public func deadLineContentChanged(_ type: DeadlineContentType) {
-        
+        deadlineType = type
+        sortDeadlines()
     }
 }

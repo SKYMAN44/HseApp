@@ -7,9 +7,11 @@
 
 import Foundation
 
-// temp parameters
-struct DeadlineDay: Decodable, Hashable {
-    
+struct DeadlineDay {
     let day: String
     let assignments: [Deadline]
 }
+
+extension DeadlineDay: Decodable { }
+
+extension DeadlineDay: Hashable { }

@@ -83,7 +83,7 @@ final class SegmentView: UIView {
     // MARK: - API
     
     /// set titles in segments
-    public func setTitles(titles: [String: Int?]) {
+    public func setTitles(titles: [String: Int]) {
         segmentItems.removeAll()
         titles.forEach { (title, count) in
             segmentItems.append(Item(title: title, notifications: count))

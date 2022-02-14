@@ -7,7 +7,6 @@
 
 import Foundation
 
-// temp parameters
 struct ScheduleDay: Decodable {
     
     let day: String

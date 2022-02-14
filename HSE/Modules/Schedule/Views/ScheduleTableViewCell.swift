@@ -104,9 +104,9 @@ final class ScheduleTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
-        stopShimmer()
-        self.backgroundColor = .background.style(.firstLevel)()
         super.prepareForReuse()
+        
+        stopShimmer()
     }
     
     deinit {
@@ -137,17 +137,18 @@ final class ScheduleTableViewCell: UITableViewCell {
         
         mainSV.alignment = .fill
         mainSV.distribution = .fill
+        mainSV.axis = .horizontal
         mainSV.spacing = 12
         
         mainSV.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(mainSV)
+        contentView.addSubview(mainSV)
         
         NSLayoutConstraint.activate([
-            mainSV.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            mainSV.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            mainSV.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            mainSV.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+            mainSV.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            mainSV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            mainSV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            mainSV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
         ])
         
         rigthStackView.topAnchor.constraint(equalTo: mainSV.topAnchor, constant: 4).isActive = true
@@ -160,6 +161,7 @@ final class ScheduleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - Internal
     
     public func configure(schedule: TimeSlot) {
         subjectNameLabel.text = schedule.subjectName

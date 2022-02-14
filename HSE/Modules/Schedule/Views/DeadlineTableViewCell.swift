@@ -29,7 +29,6 @@ final class DeadlineTableViewCell: UITableViewCell {
         label.textColor = .textAndIcons.style(.primary)()
         label.font = .customFont.style(.caption)()
         label.textAlignment = .center
-        label.text = "Till 23:59"
         
         return label
     }()
@@ -47,7 +46,6 @@ final class DeadlineTableViewCell: UITableViewCell {
         label.textColor = .textAndIcons.style(.primary)()
         label.font = .customFont.style(.caption)()
         label.textAlignment = .center
-        label.text = "Not Submitted"
         
         return label
     }()
@@ -56,7 +54,6 @@ final class DeadlineTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .primary.style(.primary)()
         label.font = .customFont.style(.caption)()
-        label.text = "MACHIENE LEARNING 1"
         
         return label
     }()
@@ -65,7 +62,6 @@ final class DeadlineTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .textAndIcons.style(.primary)()
         label.font = .customFont.style(.body)()
-        label.text = "HW 14: Venus Mars Penus and Anus Tits and Bobs"
         label.numberOfLines = 0
         
         return label
@@ -146,22 +142,20 @@ final class DeadlineTableViewCell: UITableViewCell {
         mainSV.spacing = 12
         mainSV.axis = .horizontal
         
-        addSubview(mainSV)
+        contentView.addSubview(mainSV)
         
         mainSV.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            mainSV.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-            mainSV.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            mainSV.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8),
-            mainSV.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16)
+            mainSV.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            mainSV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            mainSV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
+            mainSV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
         ])
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     public func configure(deadline: Deadline) {
@@ -195,6 +189,4 @@ extension DeadlineTableViewCell: ShimmeringObject {
                                  deadlineTimeView,
                                  submittedTimeView])
     }
-    
-    
 }

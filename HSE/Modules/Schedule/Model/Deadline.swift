@@ -11,8 +11,8 @@ enum DeadlineType: String, Decodable {
     case hw = "hw"
     case cw = "cw"
 }
-// temp parameters
-struct Deadline: Decodable{
+
+struct Deadline {
     
     let id: Int
     let type: DeadlineType
@@ -22,5 +22,7 @@ struct Deadline: Decodable{
     let sumbisionTIme: String
     
 }
+
+extension Deadline: Decodable { }
 
 extension Deadline: Hashable { }

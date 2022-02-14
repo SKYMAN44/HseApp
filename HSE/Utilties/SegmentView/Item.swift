@@ -10,5 +10,5 @@ import Foundation
 
 struct Item {
     var title: String
-    var notifications: Int?
+    var notifications: Int
 }

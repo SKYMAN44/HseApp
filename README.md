@@ -23,8 +23,8 @@ Dmitrii Sokolov
 ## Network Layer
 
     .
-    ├── EndPoint
-    ├── Manager              
+    ├── EndPoint              # Concrete information for specific request/endpoint
+    ├── Manager               # manager to make/cancel API calls
     ├── Service               # Constructing and performing generic request 
     └── Encoding              # Encoding URL/JSON  
     

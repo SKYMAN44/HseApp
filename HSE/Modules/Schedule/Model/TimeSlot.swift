@@ -7,7 +7,6 @@
 
 import Foundation
 
-// temp parameters
 struct TimeSlot: Decodable {
     
     let id: Int
