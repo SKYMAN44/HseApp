@@ -195,7 +195,7 @@ class ScheduleViewModel: NSObject {
     
     public func updateData() {
         isLoading = true
-        if contentType == .timeTable {
+        if (contentType == .timeTable) {
             fetchSchedule()
             networkManager.cancelDeadline()
         } else {

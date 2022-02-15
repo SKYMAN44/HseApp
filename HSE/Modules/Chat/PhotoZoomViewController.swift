@@ -8,7 +8,6 @@
 import UIKit
 
 final class PhotoZoomViewController: UIViewController {
-    
     private var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -52,6 +51,7 @@ final class PhotoZoomViewController: UIViewController {
         self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         self.navigationController?.navigationBar.barTintColor = .background.style(.accent)()
         view.backgroundColor = .black
+        
         setupUI()
         scrollView.delegate = self
         scrollView.contentInsetAdjustmentBehavior = .never

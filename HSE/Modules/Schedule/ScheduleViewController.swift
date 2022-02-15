@@ -49,6 +49,18 @@ final class ScheduleViewController: UIViewController {
             DispatchQueue.main.async {
             }
         }
+//        let displayLink = CADisplayLink(target: self, selector: #selector(updateLoop(_:)))
+//        displayLink.add(to: .current, forMode: .common)
+    }
+    
+    // fps performance
+    private var lastTimeStep = CACurrentMediaTime()
+    
+    @objc
+    private func updateLoop(_ displayLink: CADisplayLink) {
+        defer { lastTimeStep = displayLink.timestamp }
+        let fps = 1 / (displayLink.timestamp - lastTimeStep)
+        print("FPS: \(fps)")
     }
     
     override func viewWillAppear(_ animated: Bool) {

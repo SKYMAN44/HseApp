@@ -80,7 +80,7 @@ class GradeViewModel: NSObject {
     // MARK: - API Calls
     
     private func fetchGrades() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.isLoading = false
             self.grades = [Grade(id: 1, number: 1, name: "234232", grade: 10),Grade(id: 2, number: 1, name: "234232", grade: 10),Grade(id: 3, number: 1, name: "234232", grade: 10)]
         }

@@ -11,6 +11,8 @@ final class DeadlineTableViewCell: UITableViewCell {
     static let reuseIdentifier = "DeadlineTableViewCell"
     static let shimmerReuseIdentifier = "ShimmerDeadlineTableViewCell"
     
+    private var isShimmerMode: Bool = false
+    
     private let deadlineTimeView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 4
@@ -89,6 +91,22 @@ final class DeadlineTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if(isShimmerMode) {
+            stopShimmer()
+            startShimmer()
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        isShimmerMode = false
+        stopShimmer()
+    }
+    
+    deinit { }
     
     private func setupView() {
         
@@ -170,7 +188,7 @@ final class DeadlineTableViewCell: UITableViewCell {
         taskNameLabel.text = "                         "
         deadlineTimeLabel.text = "           "
         submittedTimeLabel.text = "           "
-        startShimmer()
+        isShimmerMode = true
     }
 
 }

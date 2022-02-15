@@ -11,6 +11,8 @@ final class ScheduleTableViewCell: UITableViewCell {
     static let reuseIdentifier = "ScheduleTableViewCell"
     static let shimmerReuseIdentifier = "ShimmerScheduleTableViewCell"
     
+    private var isShimmerMode: Bool = false
+    
     private let separatorView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 1
@@ -20,7 +22,6 @@ final class ScheduleTableViewCell: UITableViewCell {
         
         return view
     }()
-    
     
     private let subjectNameLabel: UILabel = {
         let label = UILabel()
@@ -92,6 +93,8 @@ final class ScheduleTableViewCell: UITableViewCell {
         return imageView
     }()
 
+    // MARK: - Init
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -103,21 +106,26 @@ final class ScheduleTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if(isShimmerMode) {
+            stopShimmer()
+            startShimmer()
+        }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+        isShimmerMode = false
         stopShimmer()
     }
     
-    deinit {
-        stopShimmer()
-    }
+    deinit { }
     
     // MARK: - UI setup
     
     private func setupView() {
         self.backgroundColor = .background.style(.firstLevel)()
-        
         
         timeSV.addArrangedSubview(startTimeLabel)
         timeSV.addArrangedSubview(endTimeLabel)
@@ -129,10 +137,6 @@ final class ScheduleTableViewCell: UITableViewCell {
         rigthStackView.axis = .vertical
         rigthStackView.spacing = 4
         
-        
-        rigthStackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
         let mainSV = UIStackView(arrangedSubviews: [timeSV, separatorView, rigthStackView])
         
         mainSV.alignment = .fill
@@ -140,19 +144,11 @@ final class ScheduleTableViewCell: UITableViewCell {
         mainSV.axis = .horizontal
         mainSV.spacing = 12
         
-        mainSV.translatesAutoresizingMaskIntoConstraints = false
-        
         contentView.addSubview(mainSV)
         
-        NSLayoutConstraint.activate([
-            mainSV.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            mainSV.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            mainSV.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            mainSV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
-        ])
-        
-        rigthStackView.topAnchor.constraint(equalTo: mainSV.topAnchor, constant: 4).isActive = true
-        rigthStackView.bottomAnchor.constraint(equalTo: mainSV.bottomAnchor, constant: -4).isActive = true
+        mainSV.pin(to: contentView, [.top: 8, .bottom: 8, .left: 16, .right: 16])
+        rigthStackView.pinTop(to: mainSV.topAnchor, 4)
+        rigthStackView.pinBottom(to: mainSV.bottomAnchor, 4)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -178,7 +174,7 @@ final class ScheduleTableViewCell: UITableViewCell {
         startTimeLabel.text = "           "
         endTimeLabel.text = "           "
         locationLabel.text = "           "
-        startShimmer()
+        isShimmerMode = true
     }
 
 }

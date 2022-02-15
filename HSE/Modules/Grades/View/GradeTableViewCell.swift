@@ -11,6 +11,9 @@ final class GradeTableViewCell: UITableViewCell {
     static let reuseIdentifier = "GradeTableViewCell"
     static let shimmerReuseIdentifier = "ShimmerGradeTableViewCelll"
     
+    private var isShimmerMode: Bool = false
+    private var isShimmerWorking: Bool = false
+    
     private let taskNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textAndIcons.style(.primary)()
@@ -71,17 +74,28 @@ final class GradeTableViewCell: UITableViewCell {
         return label
     }()
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        stopShimmer()
-    }
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
         setupView()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if(isShimmerMode && !isShimmerWorking) {
+            stopShimmer()
+            startShimmer()
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        isShimmerMode = false
+        isShimmerWorking = false
+        stopShimmer()
+    }
+    
+    deinit { }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -132,13 +146,14 @@ final class GradeTableViewCell: UITableViewCell {
         numberLabel.text = "     "
         nameLabel.text = "     "
         gradeLabel.text = "    "
-        startShimmer()
+        isShimmerMode = true
     }
 
 }
 
 extension GradeTableViewCell: ShimmeringObject {
     func startShimmer() {
+        isShimmerWorking = true
         applyShimmerTo(to: [taskNameLabel,
                            taskNumberLabel,
                            taskGradeLabel,
@@ -148,6 +163,7 @@ extension GradeTableViewCell: ShimmeringObject {
     }
     
     func stopShimmer() {
+        isShimmerWorking = false
         removeShimmerFrom(from: [taskNameLabel,
                                  taskNumberLabel,
                                  taskGradeLabel,

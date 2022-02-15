@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct TimeSlot: Decodable {
-    
+struct TimeSlot {
     let id: Int
     let timeStart: String
     let timeEnd: String
@@ -18,3 +17,5 @@ struct TimeSlot: Decodable {
 }
 
 extension TimeSlot: Hashable { }
+
+extension TimeSlot: Decodable { }

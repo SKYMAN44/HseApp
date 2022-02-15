@@ -52,6 +52,7 @@
 		63881F7F27B9BC4C004A2AEE /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F7E27B9BC4C004A2AEE /* Grade.swift */; };
 		63881F8127B9BCC3004A2AEE /* GradeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F8027B9BCC3004A2AEE /* GradeViewModel.swift */; };
 		63881F8327B9E5AB004A2AEE /* GradeEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F8227B9E5AB004A2AEE /* GradeEndPoint.swift */; };
+		63881F8727BC507C004A2AEE /* View+Pin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63881F8627BC507C004A2AEE /* View+Pin.swift */; };
 		639DCE0D27923404007FC2DC /* TimeSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE0C27923404007FC2DC /* TimeSlot.swift */; };
 		639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE13279240E3007FC2DC /* ScheduleDay.swift */; };
 		639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE152792E8D1007FC2DC /* Deadline.swift */; };
@@ -89,7 +90,7 @@
 		63E0499627B1ABEB00942E36 /* TaskHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0499527B1ABEB00942E36 /* TaskHeaderCollectionReusableView.swift */; };
 		63E0499827B1ACF900942E36 /* TaskCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0499727B1ACF900942E36 /* TaskCollectionViewCell.swift */; };
 		63E0499A27B1BF9900942E36 /* SubmitInteractionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0499927B1BF9900942E36 /* SubmitInteractionCollectionViewCell.swift */; };
-		63E0499C27B1C0BA00942E36 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0499B27B1C0BA00942E36 /* View.swift */; };
+		63E0499C27B1C0BA00942E36 /* View+Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0499B27B1C0BA00942E36 /* View+Shimmer.swift */; };
 		63E0499E27B1C8AC00942E36 /* SubmissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0499D27B1C8AC00942E36 /* SubmissionCollectionViewCell.swift */; };
 		63E049A027B1D42E00942E36 /* AddSubmissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E0499F27B1D42E00942E36 /* AddSubmissionCollectionViewCell.swift */; };
 		63E049A227B1D86400942E36 /* TestFile.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 63E049A127B1D86400942E36 /* TestFile.pdf */; };
@@ -169,6 +170,7 @@
 		63881F7E27B9BC4C004A2AEE /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
 		63881F8027B9BCC3004A2AEE /* GradeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeViewModel.swift; sourceTree = "<group>"; };
 		63881F8227B9E5AB004A2AEE /* GradeEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeEndPoint.swift; sourceTree = "<group>"; };
+		63881F8627BC507C004A2AEE /* View+Pin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Pin.swift"; sourceTree = "<group>"; };
 		639DCE0C27923404007FC2DC /* TimeSlot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlot.swift; sourceTree = "<group>"; };
 		639DCE13279240E3007FC2DC /* ScheduleDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleDay.swift; sourceTree = "<group>"; };
 		639DCE152792E8D1007FC2DC /* Deadline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Deadline.swift; sourceTree = "<group>"; };
@@ -210,7 +212,7 @@
 		63E0499527B1ABEB00942E36 /* TaskHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		63E0499727B1ACF900942E36 /* TaskCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCollectionViewCell.swift; sourceTree = "<group>"; };
 		63E0499927B1BF9900942E36 /* SubmitInteractionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitInteractionCollectionViewCell.swift; sourceTree = "<group>"; };
-		63E0499B27B1C0BA00942E36 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		63E0499B27B1C0BA00942E36 /* View+Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Shimmer.swift"; sourceTree = "<group>"; };
 		63E0499D27B1C8AC00942E36 /* SubmissionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionCollectionViewCell.swift; sourceTree = "<group>"; };
 		63E0499F27B1D42E00942E36 /* AddSubmissionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubmissionCollectionViewCell.swift; sourceTree = "<group>"; };
 		63E049A127B1D86400942E36 /* TestFile.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = TestFile.pdf; sourceTree = "<group>"; };
@@ -391,6 +393,15 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		63881F8827BC5858004A2AEE /* Shimmer */ = {
+			isa = PBXGroup;
+			children = (
+				63881F7727B986BD004A2AEE /* shimmerProtocol.swift */,
+				63E0499B27B1C0BA00942E36 /* View+Shimmer.swift */,
+			);
+			path = Shimmer;
+			sourceTree = "<group>";
+		};
 		639DCE0B279233F3007FC2DC /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -408,7 +419,6 @@
 				63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */,
 				639DCE46279865F3007FC2DC /* ScheduleTableViewCell.swift */,
 				639DCE4827988969007FC2DC /* DeadlineTableViewCell.swift */,
-				63881F7727B986BD004A2AEE /* shimmerProtocol.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -518,6 +528,7 @@
 		63C4D649278E358F0028381F /* Utilties */ = {
 			isa = PBXGroup;
 			children = (
+				63881F8827BC5858004A2AEE /* Shimmer */,
 				6304EAB527AACF9900BDF75D /* ImageAnimation */,
 				6304EAC227AC173B00BDF75D /* InputView */,
 				63F857E62790D35E00F45A97 /* ExtendingNavBar */,
@@ -664,9 +675,9 @@
 				639DCE442797617C007FC2DC /* Label.swift */,
 				638622F827A5B652004BCEB8 /* CollectionView.swift */,
 				638622FA27A5D01E004BCEB8 /* TableView.swift */,
-				63E0499B27B1C0BA00942E36 /* View.swift */,
 				63881F6D27B75500004A2AEE /* TableViewDiffableDataSource.swift */,
 				63881F7527B7802B004A2AEE /* Array.swift */,
+				63881F8627BC507C004A2AEE /* View+Pin.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -892,7 +903,7 @@
 				639DCE4127958C95007FC2DC /* Color.swift in Sources */,
 				63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */,
 				63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */,
-				63E0499C27B1C0BA00942E36 /* View.swift in Sources */,
+				63E0499C27B1C0BA00942E36 /* View+Shimmer.swift in Sources */,
 				638622EF27A34FF2004BCEB8 /* Message.swift in Sources */,
 				63881F6C27B72A8E004A2AEE /* DeadLineEndPoint.swift in Sources */,
 				639DCE34279576A2007FC2DC /* EndPointType.swift in Sources */,
@@ -913,6 +924,7 @@
 				639DCE4327975C6F007FC2DC /* CourseChatCollectionViewCell.swift in Sources */,
 				6304EACC27B017B600BDF75D /* LoginViewController.swift in Sources */,
 				63881F7827B986BD004A2AEE /* shimmerProtocol.swift in Sources */,
+				63881F8727BC507C004A2AEE /* View+Pin.swift in Sources */,
 				63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */,
 				638622E627A3413C004BCEB8 /* TaskDetailViewController.swift in Sources */,
 				63881F5E27B5D8EA004A2AEE /* ParameterEncoding.swift in Sources */,

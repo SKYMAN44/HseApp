@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ScheduleDay: Decodable {
+struct ScheduleDay {
     
     let day: String
     let timeSlot: [TimeSlot]
@@ -15,3 +15,4 @@ struct ScheduleDay: Decodable {
 
 extension ScheduleDay: Hashable { }
 
+extension ScheduleDay: Decodable { }

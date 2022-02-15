@@ -71,7 +71,6 @@ class InputView: UIView {
         return textField
     }()
     
-    
     private var inputFieldView: UIView = {
         let view = UIView()
         view.backgroundColor = .background.style(.firstLevel)()

@@ -13,7 +13,6 @@ protocol SegmentViewDelegate {
 }
 
 final class SegmentView: UIView {
-    
     private var collectionView: UICollectionView?
     
     /// segmentView delegate
@@ -34,17 +33,17 @@ final class SegmentView: UIView {
         super.init(frame: frame)
         
         
-        setup()
+        setupCollectionView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
         
-        setup()
+        setupCollectionView()
     }
     
-    private func setup() {
+    private func setupCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInset = UIEdgeInsets(top: 0, left: 12, bottom: 5, right: 0)
