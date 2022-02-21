@@ -8,7 +8,12 @@
 import UIKit
 
 final class ScheduleViewController: UIViewController {
+    
     let tempArray: [String: Int] = ["All": 123,"Homework": 0,"Midterm": 20]
+    private enum Constants {
+        static let tableViewHeaderHeight = 30.0
+        static let tableViewFooterHeight = 0.0
+    }
     
     private var navView: ExtendingNavBar?
     private let segmentView: SegmentView = {
@@ -33,7 +38,6 @@ final class ScheduleViewController: UIViewController {
     private lazy var viewModel = ScheduleViewModel(tableView: tableView)
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -68,7 +72,6 @@ final class ScheduleViewController: UIViewController {
     }
     
     // MARK: - UI setup
-    
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
@@ -78,6 +81,7 @@ final class ScheduleViewController: UIViewController {
     private func setupNavBar() {
         navView = ExtendingNavBar(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 60))
         navView?.color = .background.style(.accent)()
+        // переделать
         
         navView?.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
         navView?.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
@@ -89,15 +93,15 @@ final class ScheduleViewController: UIViewController {
         let constrain = navView?.setHeight(to: 60)
         navView?.addSubviews()
         
-        constrain!.identifier = "heightConstrain"
+        constrain?.identifier = "heightConstrain"
     }
     
     private func setupTableView() {
         view.insertSubview(tableView, belowSubview: navView!)
         
         tableView.separatorColor = .clear
-        tableView.sectionHeaderHeight = 30;
-        tableView.sectionFooterHeight = 0.0;
+        tableView.sectionHeaderHeight = Constants.tableViewHeaderHeight;
+        tableView.sectionFooterHeight = Constants.tableViewFooterHeight;
         tableView.backgroundColor = .background.style(.firstLevel)()
         
         tableView.automaticallyAdjustsScrollIndicatorInsets = false
@@ -116,7 +120,6 @@ final class ScheduleViewController: UIViewController {
         segmentView.setTitles(titles: tempArray)
         view.addSubview(segmentView)
         
-        segmentView.translatesAutoresizingMaskIntoConstraints = false
         segmentView.delegate = self
         
         segmentView.pin(to: view, [.left, .right])
@@ -125,7 +128,6 @@ final class ScheduleViewController: UIViewController {
     }
     
     // MARK: - Interactions
-    
     @objc
     private func calendarButtonTapped() {
         CalendarPopUpView.init().show()
@@ -178,15 +180,15 @@ final class ScheduleViewController: UIViewController {
 }
 
  // MARK: - TableView Delegate
-
 extension ScheduleViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard viewModel.contentType == .assigments else { return }
         
         let detailVC = TaskDetailViewController(deadline: viewModel.currentdeadlines[indexPath.section].assignments[indexPath.row])
-        self.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(detailVC, animated: true)
-        self.hidesBottomBarWhenPushed = false
+//        self.hidesBottomBarWhenPushed = true
+//        self.navigationController?.pushViewController(detailVC, animated: true)
+        navigationController?.present(detailVC, animated: true)
+//        self.hidesBottomBarWhenPushed = false
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -219,7 +221,6 @@ extension ScheduleViewController: UITableViewDelegate {
 }
 
 // MARK: - Scroll Delegate
-
 extension ScheduleViewController: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         navView?.hide()
@@ -228,16 +229,17 @@ extension ScheduleViewController: UIScrollViewDelegate {
 
 
 // MARK: - SegmentView Delegate
-
 extension ScheduleViewController: SegmentViewDelegate {
     func segmentChosen(index: Int) {
+        var vm: DeadlineContentType = .all
         switch index {
         case 1:
-            viewModel.deadLineContentChanged(.hw)
+            vm = .hw
         case 2:
-            viewModel.deadLineContentChanged(.cw)
+            vm = .cw
         default:
-            viewModel.deadLineContentChanged(.all)
+            vm = .all
         }
+        viewModel.deadLineContentChanged(vm)
     }
 }

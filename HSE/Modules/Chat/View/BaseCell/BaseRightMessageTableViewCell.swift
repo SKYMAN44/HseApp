@@ -8,7 +8,6 @@
 import UIKit
 
 open class BaseRightMessageTableViewCell: UITableViewCell {
-
     public let bubbleView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
@@ -18,7 +17,6 @@ open class BaseRightMessageTableViewCell: UITableViewCell {
     }()
     
     // MARK: - Init
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -36,7 +34,6 @@ open class BaseRightMessageTableViewCell: UITableViewCell {
     }
     
     // MARK: - UI setup
-    
     open func setupUI() {
         contentView.addSubview(bubbleView)
         

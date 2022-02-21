@@ -19,8 +19,10 @@ enum DeadlineContentType {
     case cw
 }
 
-class ScheduleViewModel: NSObject {
-    private var networkManager: NetworkManager!
+final class ScheduleViewModel {
+    typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable,Item>
+    
+    private var networkManager: NetworkManager?
     private var deadlineType: DeadlineContentType = .all
     public private(set) var contentType: ContentType = .timeTable {
         didSet {
@@ -35,12 +37,13 @@ class ScheduleViewModel: NSObject {
         }
     }
     
-    public private(set) var schedule = [ScheduleDay]() {
+   private(set) var schedule = [ScheduleDay]() {
         didSet {
             self.updateDataSource()
             bindScheduleViewModelToController()
         }
     }
+    // lazy sort
     // Store fetched deadlines
     private var deadlines = [DeadlineDay]() {
         didSet {
@@ -48,7 +51,7 @@ class ScheduleViewModel: NSObject {
         }
     }
     // Sorted deadlines ready to be presented
-    public private(set) var currentdeadlines = [DeadlineDay]() {
+    private(set) var currentdeadlines = [DeadlineDay]() {
         didSet {
             self.updateDataSource()
             bindScheduleViewModelToController()
@@ -56,8 +59,9 @@ class ScheduleViewModel: NSObject {
     }
     
     // MARK: - Data Source
-    
-    public lazy var datasource = UITableViewDiffableDataSource<AnyHashable,Item>(tableView: tableView!) { tableView, indexPath, itemIdentifier in
+    public lazy var dataSource = TableDataSource (
+        tableView: tableView!
+    ) { tableView, indexPath, itemIdentifier in
         switch (itemIdentifier, self.contentType) {
         case (.timeslot(let timeslot), _ ):
             let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
@@ -102,37 +106,35 @@ class ScheduleViewModel: NSObject {
     private weak var tableView: UITableView?
     
     // MARK: - Init
-    
+    // kingFisher
     init(tableView: UITableView) {
-        super.init()
-        
         
         self.tableView = tableView
-        tableView.dataSource = datasource
+        tableView.dataSource = dataSource
         networkManager = NetworkManager()
         updateData()
     }
     
     // MARK: - Data Source update
-    
     private func updateDataSource() {
         let sectionIdentifiers: [String]
         var itemBySection = [String: [Item]]()
         // transform array into itemBySection form, where Key is a day(Section) values is array of timeslots/deadlines
         if contentType == .timeTable {
-            sectionIdentifiers = self.schedule.map {$0.day}
-            self.schedule.forEach( {
-                itemBySection[$0.day] = $0.timeSlot.map({ Item.timeslot($0)})
-            })
+            sectionIdentifiers = self.schedule.map { $0.day }
+            self.schedule.forEach {
+                itemBySection[$0.day] = $0.timeSlot.map { Item.timeslot($0) }
+            }
         } else {
-            sectionIdentifiers = self.currentdeadlines.map {$0.day}
-            self.currentdeadlines.forEach( {
-                itemBySection[$0.day] = $0.assignments.map({ Item.deadline($0)})
-            })
+            sectionIdentifiers = self.currentdeadlines.map { $0.day }
+            self.currentdeadlines.forEach {
+                itemBySection[$0.day] = $0.assignments.map { Item.deadline($0) }
+            }
         }
-        datasource.applySnapshotUsing(sectionIDs: sectionIdentifiers, itemBySection: itemBySection, animatingDifferences: false)
+        dataSource.applySnapshotUsing(sectionIDs: sectionIdentifiers, itemBySection: itemBySection, animatingDifferences: false)
     }
     
+    // вынести в отдельную вьюмодел
     private func sortDeadlines() {
         // depending on user selection, filter deadlines to only homeworks, controlworks or all together
         switch deadlineType {
@@ -160,9 +162,8 @@ class ScheduleViewModel: NSObject {
     }
     
     // MARK: - API Calls
-    
     private func fetchSchedule() {
-        networkManager.getSchedule { schedule, error in
+        networkManager?.getSchedule { schedule, error in
             if let error = error {
                 print(error)
             }
@@ -174,7 +175,7 @@ class ScheduleViewModel: NSObject {
     }
     
     private func fetchDeadline() {
-        networkManager.getDeadline { deadlines, error in
+        networkManager?.getDeadline { deadlines, error in
             if let error = error{
                 print(error)
             }
@@ -186,21 +187,19 @@ class ScheduleViewModel: NSObject {
     }
     
     // MARK: - Shimmer
-    
     private func setShimmer() {
-        datasource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
+        dataSource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
     }
     
     // MARK: - Internal calls
-    
     public func updateData() {
         isLoading = true
         if (contentType == .timeTable) {
             fetchSchedule()
-            networkManager.cancelDeadline()
+            networkManager?.cancelDeadline()
         } else {
             fetchDeadline()
-            networkManager.cancelSchedule()
+            networkManager?.cancelSchedule()
         }
     }
     

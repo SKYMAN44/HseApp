@@ -8,7 +8,6 @@
 import UIKit
 
 final class CoursesViewController: UIViewController {
-    
     private var segmentView: SegmentView!
     private var courseViewModels = [CourseViewModel]()
     private var courseCollectionView: UICollectionView = {
@@ -27,7 +26,6 @@ final class CoursesViewController: UIViewController {
     }()
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -41,7 +39,6 @@ final class CoursesViewController: UIViewController {
     
     
     // MARK: - UI setup
-    
     private func configureUI() {
         self.view.backgroundColor = .background.style(.accent)()
         self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
@@ -98,7 +95,6 @@ final class CoursesViewController: UIViewController {
     }
     
 // MARK: - API Call
-    
     private func fetchCourses() {
         //simulate network call by now
         let courses = Course.courses
@@ -110,28 +106,24 @@ final class CoursesViewController: UIViewController {
 }
 
 // MARK: - Scroll Delegate
-
 extension CoursesViewController: UIScrollViewDelegate {
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // track change of pages
         let pageWidth = scrollView.frame.size.width
         let page = Int(floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1)
-        segmentView.moveTo(index: page)
+        segmentView.moveTo(page)
     }
     
 }
 
 // MARK: - CollectionView Delegate
-
 extension CoursesViewController: UICollectionViewDelegate { }
 
 
 
 // MARK: - CollectionView DataSource
-
 extension CoursesViewController: UICollectionViewDataSource {
-    
     func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
@@ -147,11 +139,9 @@ extension CoursesViewController: UICollectionViewDataSource {
         return cell
     }
     
-    
 }
 
 extension CoursesViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.bounds.width, height: collectionView.bounds.height)
     }
@@ -160,9 +150,7 @@ extension CoursesViewController: UICollectionViewDelegateFlowLayout {
 
 
 // MARK: - SegmentView delegate
-
 extension CoursesViewController: SegmentViewDelegate {
-    
     func segmentChosen(index: Int) {
         courseCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
     }
@@ -170,7 +158,6 @@ extension CoursesViewController: SegmentViewDelegate {
 }
 
 // MARK: - CourseCellDelegate
-
 extension CoursesViewController: CourseCollectionVeiwCellDelegate {
     func chatSelected() {
         let chatViewController = ChatViewController()
@@ -179,6 +166,5 @@ extension CoursesViewController: CourseCollectionVeiwCellDelegate {
         self.navigationController?.pushViewController(chatViewController, animated: true)
         self.hidesBottomBarWhenPushed = false
     }
-    
     
 }

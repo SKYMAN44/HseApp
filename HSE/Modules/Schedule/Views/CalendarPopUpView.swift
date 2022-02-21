@@ -8,7 +8,6 @@
 import UIKit
 
 final class CalendarPopUpView: UIView, UIScrollViewDelegate {
-
     var backgroundView: UIView!
     var popUpView: UIView!
     var dismissButton: UIButton!

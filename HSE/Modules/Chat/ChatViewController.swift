@@ -57,7 +57,7 @@ final class ChatViewController: UIViewController {
     
     
     // MARK: - Interactions
-    
+    // KISS
     @objc
     private func handleKeyboardNotification(notification: NSNotification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -68,18 +68,14 @@ final class ChatViewController: UIViewController {
         
         let isKeyboardShowing = notification.name == UIResponder.keyboardWillShowNotification
         
-        inputViewBotttomConstrain?.constant =  isKeyboardShowing ? (-(keyboardViewEndFrame.height - difference)) : 0
+        inputViewBotttomConstrain?.constant = isKeyboardShowing ? difference - keyboardViewEndFrame.height : 0
         
-        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut) {
             self.view.layoutIfNeeded()
-        }) { _ in
-            
         }
-        
     }
     
     // MARK: - UI setup
-    
     private func setupInputContainer() {
         view.addSubview(inputContainerView)
         
@@ -108,11 +104,9 @@ final class ChatViewController: UIViewController {
 
 
 // MARK: - TableViewDataSource
-
 extension ChatViewController: UITableViewDataSource {
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return temparr.count
+        temparr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -122,20 +116,16 @@ extension ChatViewController: UITableViewDataSource {
         
         return cell
     }
-
 }
 
 // MARK: - TableViewDelegate
-
 extension ChatViewController: UITableViewDelegate {
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         inputContainerView.dismissView()
     }
 }
 
 // MARK: - ChatCellDelegate
-
 extension ChatViewController: ChatCellDelegate {
     func selectedContentInCell(content: UIImageView, contentFrameInCell: CGRect, indexPath: IndexPath) {
         selectedImageView = content
@@ -153,12 +143,10 @@ extension ChatViewController: ChatCellDelegate {
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(photoController, animated: true)
     }
-    
 }
 
 
 // MARK: - InputViewDelegate
-
 extension ChatViewController: InputViewDelegate {
     func messageSent(messageViewModel: MessageViewModel) {
         temparr.append(messageViewModel)
@@ -175,7 +163,6 @@ extension ChatViewController: InputViewDelegate {
 
 
 // MARK: - ZoomAnimatorDelegate
-
 extension ChatViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) { }

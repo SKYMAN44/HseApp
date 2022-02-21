@@ -44,20 +44,19 @@ class GradeViewModel: NSObject {
             return cell
         }
     }
-    
-    public var bindGradeViewModelToController: () -> () = {}
+
+    public var bindGradeViewModelToController: () -> Void = {}
     
     enum Item: Hashable {
         case grade(Grade)
         case loading(UUID)
-        
+    
         static var loadingItems: [Item] {
             return Array(repeatingExpression: Item.loading(UUID()), count: 12)
         }
     }
-    
+
     // MARK: - Init
-    
     init(tableView: UITableView) {
         super.init()
         
@@ -68,7 +67,6 @@ class GradeViewModel: NSObject {
     }
     
     // MARK: - Data Source update
-    
     private func updateDataSource() {
         var itemBySection = [String: [Item]]()
         itemBySection["s"] = grades.map {
@@ -78,7 +76,6 @@ class GradeViewModel: NSObject {
     }
     
     // MARK: - API Calls
-    
     private func fetchGrades() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.isLoading = false
@@ -86,14 +83,12 @@ class GradeViewModel: NSObject {
         }
     }
     
-    // MARK: - shimmer
-    
+    // MARK: - Shimmer
     private func setShimmer() {
         datasource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
     }
     
     // MARK: - Internal call
-    
     public func updateData() {
         isLoading = true
         fetchGrades()

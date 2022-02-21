@@ -8,7 +8,6 @@
 import UIKit
 
 open class BaseLeftMessageTableViewCell: UITableViewCell {
-
     public let bubbleView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 12
@@ -43,7 +42,6 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
     var myIndexPath: IndexPath?
     
     // MARK: - Init
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -59,7 +57,6 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
     
     
     // MARK: - UI setup
-    
     open func setupUI() {
         let mainSV = UIStackView(arrangedSubviews: [senderImage, bubbleView])
         mainSV.alignment = .top

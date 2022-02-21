@@ -19,8 +19,10 @@ final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageC
         
         return label
     }()
+    private var test: Int
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        test = 1
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
@@ -46,7 +48,6 @@ final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageC
             messageLabel.rightAnchor.constraint(equalTo: bubbleView.rightAnchor, constant: -8),
             messageLabel.bottomAnchor.constraint(equalTo: bubbleView.bottomAnchor, constant: -8)
         ])
-        
     }
     
     public func configure(message: MessageViewModel) {

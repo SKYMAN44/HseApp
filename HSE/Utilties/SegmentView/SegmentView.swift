@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SegmentViewDelegate {
+protocol SegmentViewDelegate: AnyObject {
     /// called by segmentView when chosen segment has changed
     func segmentChosen(index: Int)
 }
@@ -16,7 +16,7 @@ final class SegmentView: UIView {
     private var collectionView: UICollectionView?
     
     /// segmentView delegate
-    public var delegate: SegmentViewDelegate?
+    public weak var delegate: SegmentViewDelegate?
     
     /// current segment items
     public private(set) var segmentItems: [Item] = []
@@ -28,7 +28,6 @@ final class SegmentView: UIView {
     }
     
     // MARK: - Initialization
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -80,12 +79,19 @@ final class SegmentView: UIView {
     
     
     // MARK: - API
-    
     /// set titles in segments
     public func setTitles(titles: [String: Int]) {
         segmentItems.removeAll()
         titles.forEach { (title, count) in
-            segmentItems.append(Item(title: title, notifications: count))
+            segmentItems.append(
+                Item(
+                    title: title,
+                    notifications: count,
+                    action: { title in
+                        print("")
+                    }
+                )
+            )
         }
         DispatchQueue.main.async {
             self.collectionView?.reloadData()
@@ -94,17 +100,15 @@ final class SegmentView: UIView {
     }
     
     /// scroll to specified segment
-    public func moveTo(index: Int) {
+    public func moveTo(_ index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
-        collectionView!.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        collectionView?.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
     }
     
 }
 
 // MARK: - CollectionView Delegate
-
 extension SegmentView: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.segmentChosen(index: indexPath.row)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
@@ -112,9 +116,7 @@ extension SegmentView: UICollectionViewDelegate {
 }
 
 // MARK: - CollectionView DataSource
-
 extension SegmentView: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return segmentItems.count
     }
@@ -125,5 +127,4 @@ extension SegmentView: UICollectionViewDataSource {
         
         return cell
     }
-    
 }

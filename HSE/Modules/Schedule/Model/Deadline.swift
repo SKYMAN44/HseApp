@@ -13,14 +13,12 @@ enum DeadlineType: String, Decodable {
 }
 
 struct Deadline {
-    
     let id: Int
     let type: DeadlineType
     let subjectName: String
     let assigmentName: String
     let deadlineTime: String
     let sumbisionTIme: String
-    
 }
 
 extension Deadline: Decodable { }

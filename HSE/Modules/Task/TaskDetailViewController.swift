@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct dummyStruct: Hashable {
+struct DummyStruct: Hashable {
     let dummy = "dummy"
 }
 
@@ -67,8 +67,7 @@ class TaskDetailViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
         
         collectionView.collectionViewLayout.invalidateLayout()
-        collectionView.setCollectionViewLayout(generateLayout()
-                                               , animated: false)
+        collectionView.setCollectionViewLayout(generateLayout(), animated: false)
     }
     
     required init?(coder: NSCoder) {
@@ -117,50 +116,58 @@ extension TaskDetailViewController {
             let section = self.sections[indexPath.section]
             switch section {
             case .taskInfo:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TaskInfoCollectionViewCell.reusdeIdentifier, for: indexPath) as! TaskInfoCollectionViewCell
-                cell.configure()
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TaskInfoCollectionViewCell.reusdeIdentifier, for: indexPath) as? TaskInfoCollectionViewCell
+                cell?.configure()
                 
                 return cell
             case .timeDetails:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TimeCollectionViewCell.reuseIdentifier, for: indexPath) as! TimeCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TimeCollectionViewCell.reuseIdentifier, for: indexPath) as? TimeCollectionViewCell
                 if(indexPath.row == 0) {
-                    cell.configure(title: "PUBLICATION TIME")
+                    cell?.configure(title: "PUBLICATION TIME")
                 } else {
-                    cell.configure(title: "DEADLINE TIME")
+                    cell?.configure(title: "DEADLINE TIME")
                 }
                 
                 return cell
             case .taskFile:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TaskCollectionViewCell.reuseIdentifier, for: indexPath) as! TaskCollectionViewCell
-                let file = item as! File
-                cell.configure(file: file)
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TaskCollectionViewCell.reuseIdentifier, for: indexPath) as? TaskCollectionViewCell
+                let file = item as? File
+                cell?.configure(file: file!)
                 
                 return cell
             case .taskCreator:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatorCollectionViewCell.reusdeIdentifier, for: indexPath) as! CreatorCollectionViewCell
-                cell.configure()
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CreatorCollectionViewCell.reusdeIdentifier, for: indexPath) as? CreatorCollectionViewCell
+                cell?.configure()
                 
                 return cell
             case .submissions:
                 if(indexPath.row > 0) {
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubmissionCollectionViewCell.reusdeIdentifier, for: indexPath) as! SubmissionCollectionViewCell
-                    let file = item as! File
-                    cell.configure(file: file)
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                                    SubmissionCollectionViewCell.reusdeIdentifier,
+                                                                    for: indexPath) as? SubmissionCollectionViewCell
+                    let file = item as? File
+                    cell?.configure(file: file!)
                     
                     return cell
                 } else {
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AddSubmissionCollectionViewCell.reusdeIdentifier, for: indexPath) as! AddSubmissionCollectionViewCell
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                                    AddSubmissionCollectionViewCell.reusdeIdentifier,
+                                                                    for: indexPath) as? AddSubmissionCollectionViewCell
                     return cell
                 }
             case .submissionTime:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TimeCollectionViewCell.reuseIdentifier, for: indexPath) as! TimeCollectionViewCell
-                cell.configure(title: "SUBMISSION TIME")
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                                TimeCollectionViewCell.reuseIdentifier,
+                                                                for: indexPath) as? TimeCollectionViewCell
+                cell?.configure(title: "SUBMISSION TIME")
                 
                 return cell
             case .submissionButton:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SubmitInteractionCollectionViewCell.reuseIdentifier, for: indexPath) as! SubmitInteractionCollectionViewCell
-                cell.delegate = self
-                
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
+                                                              SubmitInteractionCollectionViewCell.reuseIdentifier,
+                                                              for: indexPath) as? SubmitInteractionCollectionViewCell
+                cell?.delegate = self
+            
                 return cell
             }
         })
@@ -176,8 +183,11 @@ extension TaskDetailViewController {
                 default:
                     title = ""
                 }
-                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: SupplementaryViewKind.header, withReuseIdentifier: TaskHeaderCollectionReusableView.reuseIdentifier, for: indexPath) as! TaskHeaderCollectionReusableView
-                headerView.configure(title: title)
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind:
+                                                                                    SupplementaryViewKind.header,
+                                                                                 withReuseIdentifier: TaskHeaderCollectionReusableView.reuseIdentifier,
+                                                                                 for: indexPath) as? TaskHeaderCollectionReusableView
+                headerView?.configure(title: title)
                 
                 return headerView
             } else {
@@ -196,7 +206,7 @@ extension TaskDetailViewController {
         snapshot.appendItems([task.creator], toSection: .taskCreator)
         snapshot.appendItems(task.submissionFiles, toSection: .submissions)
         snapshot.appendItems([task.submission], toSection: .submissionTime)
-        snapshot.appendItems([dummyStruct()], toSection: .submissionButton)
+        snapshot.appendItems([DummyStruct()], toSection: .submissionButton)
         
         sections = snapshot.sectionIdentifiers
         dataSource.apply(snapshot)
@@ -296,7 +306,7 @@ extension TaskDetailViewController {
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(0))
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-                
+            
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0)
                 
@@ -306,7 +316,6 @@ extension TaskDetailViewController {
         return layout
     }
 }
-
 
 // MARK: - CollectionView Delegate
 
@@ -324,7 +333,7 @@ extension TaskDetailViewController: SubmitInteractionCollectionViewCellDelegate 
     func changeState() {
         self.isEditingFiles.toggle()
     }
-    
+
 }
 
 // MARK: - DocumentInteractionDelegate
@@ -333,4 +342,3 @@ extension TaskDetailViewController:  UIDocumentInteractionControllerDelegate {
         return self//or use return self.navigationController for fetching app navigation bar colour
     }
 }
-

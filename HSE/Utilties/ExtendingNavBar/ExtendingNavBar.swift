@@ -238,7 +238,6 @@ final class ExtendingNavBar: UIControl {
     
     @objc
     private func slidedButtonTapped() {
-        
         if(!animationCompleted) {
             return
         }

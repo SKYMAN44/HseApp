@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HSESKIT
 
 final class LoginViewController: UIViewController {
     private let loginButton: UIButton = {
@@ -110,6 +111,7 @@ final class LoginViewController: UIViewController {
         control.textColor = .textAndIcons.style(.secondary)()
         control.selectorColor = .primary.style(.filler)()
         control.selectorTextColor = .primary.style(.primary)()
+        control.textFont = .customFont.style(.body)()
         control.translatesAutoresizingMaskIntoConstraints = false
         control.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
@@ -120,7 +122,6 @@ final class LoginViewController: UIViewController {
     private var passwordTextFieldFrameInWindow: CGRect?
     
 // MARK: - LifeCycle
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -144,7 +145,6 @@ final class LoginViewController: UIViewController {
     }
     
 // MARK: - UI setup
-    
     private func setup() {
         setupScroll()
         setupButtons()
@@ -219,7 +219,6 @@ final class LoginViewController: UIViewController {
     }
     
 // MARK: - Interactions
-    
     @objc
     func handleTap() {
         emailTextField.resignFirstResponder()
@@ -255,16 +254,13 @@ final class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        // замениить на гард
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
         }
         else if (textField.tag == 1) {
             loginButtonPressed()
         }
-        else {
-            textField.resignFirstResponder()
-        }
         return false
     }
-    
 }
