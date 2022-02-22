@@ -19,7 +19,6 @@
 		6304EAB927AAEB9900BDF75D /* ZoomTransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EAB827AAEB9900BDF75D /* ZoomTransitionController.swift */; };
 		6304EABB27AAED4400BDF75D /* ZoomDismissalInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EABA27AAED4400BDF75D /* ZoomDismissalInteractionController.swift */; };
 		6304EABD27AB018800BDF75D /* PhotoZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EABC27AB018800BDF75D /* PhotoZoomViewController.swift */; };
-		6304EAC127AB131700BDF75D /* SFMonoMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6304EAC027AB131700BDF75D /* SFMonoMedium.otf */; };
 		6304EACC27B017B600BDF75D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EACB27B017B500BDF75D /* LoginViewController.swift */; };
 		6304EAD027B13D8600BDF75D /* TaskInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304EACF27B13D8600BDF75D /* TaskInfoCollectionViewCell.swift */; };
 		638622DF279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638622DE279CAFE1004BCEB8 /* TeachingStuffCollectionViewCell.swift */; };
@@ -59,10 +58,6 @@
 		639DCE2E2794C7C8007FC2DC /* testPic.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE2D2794C7C8007FC2DC /* testPic.jpg */; };
 		639DCE302794C88D007FC2DC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE2F2794C88D007FC2DC /* Image.swift */; };
 		639DCE34279576A2007FC2DC /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE33279576A2007FC2DC /* EndPointType.swift */; };
-		639DCE3727957740007FC2DC /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE3627957740007FC2DC /* Inter-Bold.ttf */; };
-		639DCE3927957750007FC2DC /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE3827957750007FC2DC /* Inter-Medium.ttf */; };
-		639DCE3B2795775C007FC2DC /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE3A2795775C007FC2DC /* Inter-Regular.ttf */; };
-		639DCE3D27957783007FC2DC /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 639DCE3C27957783007FC2DC /* Inter-SemiBold.ttf */; };
 		639DCE4327975C6F007FC2DC /* CourseChatCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE4227975C6E007FC2DC /* CourseChatCollectionViewCell.swift */; };
 		639DCE452797617C007FC2DC /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE442797617C007FC2DC /* Label.swift */; };
 		639DCE47279865F3007FC2DC /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639DCE46279865F3007FC2DC /* ScheduleTableViewCell.swift */; };
@@ -128,7 +123,6 @@
 		6304EAB827AAEB9900BDF75D /* ZoomTransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransitionController.swift; sourceTree = "<group>"; };
 		6304EABA27AAED4400BDF75D /* ZoomDismissalInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomDismissalInteractionController.swift; sourceTree = "<group>"; };
 		6304EABC27AB018800BDF75D /* PhotoZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoZoomViewController.swift; sourceTree = "<group>"; };
-		6304EAC027AB131700BDF75D /* SFMonoMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFMonoMedium.otf; sourceTree = "<group>"; };
 		6304EACB27B017B500BDF75D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		6304EACE27B0826F00BDF75D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		6304EACF27B13D8600BDF75D /* TaskInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInfoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -169,10 +163,6 @@
 		639DCE2D2794C7C8007FC2DC /* testPic.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = testPic.jpg; path = HSE/Assets/testPic.jpg; sourceTree = SOURCE_ROOT; };
 		639DCE2F2794C88D007FC2DC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		639DCE33279576A2007FC2DC /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
-		639DCE3627957740007FC2DC /* Inter-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Bold.ttf"; sourceTree = "<group>"; };
-		639DCE3827957750007FC2DC /* Inter-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.ttf"; sourceTree = "<group>"; };
-		639DCE3A2795775C007FC2DC /* Inter-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Regular.ttf"; sourceTree = "<group>"; };
-		639DCE3C27957783007FC2DC /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		639DCE4227975C6E007FC2DC /* CourseChatCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseChatCollectionViewCell.swift; sourceTree = "<group>"; };
 		639DCE442797617C007FC2DC /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		639DCE46279865F3007FC2DC /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
@@ -280,7 +270,6 @@
 				63E049A127B1D86400942E36 /* TestFile.pdf */,
 				639DCE2D2794C7C8007FC2DC /* testPic.jpg */,
 				63C4D613278DC58E0028381F /* Assets.xcassets */,
-				639DCE3527957709007FC2DC /* Fonts */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -433,18 +422,6 @@
 				63881F6527B5E399004A2AEE /* Router.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		639DCE3527957709007FC2DC /* Fonts */ = {
-			isa = PBXGroup;
-			children = (
-				639DCE3627957740007FC2DC /* Inter-Bold.ttf */,
-				639DCE3827957750007FC2DC /* Inter-Medium.ttf */,
-				639DCE3A2795775C007FC2DC /* Inter-Regular.ttf */,
-				639DCE3C27957783007FC2DC /* Inter-SemiBold.ttf */,
-				6304EAC027AB131700BDF75D /* SFMonoMedium.otf */,
-			);
-			path = Fonts;
 			sourceTree = "<group>";
 		};
 		63C4D5FE278DC58C0028381F = {
@@ -798,15 +775,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6304EAC127AB131700BDF75D /* SFMonoMedium.otf in Resources */,
 				639DCE2E2794C7C8007FC2DC /* testPic.jpg in Resources */,
 				63C4D617278DC58E0028381F /* LaunchScreen.storyboard in Resources */,
 				63C4D614278DC58E0028381F /* Assets.xcassets in Resources */,
-				639DCE3D27957783007FC2DC /* Inter-SemiBold.ttf in Resources */,
-				639DCE3727957740007FC2DC /* Inter-Bold.ttf in Resources */,
 				63E049A227B1D86400942E36 /* TestFile.pdf in Resources */,
-				639DCE3927957750007FC2DC /* Inter-Medium.ttf in Resources */,
-				639DCE3B2795775C007FC2DC /* Inter-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
