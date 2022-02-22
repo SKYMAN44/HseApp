@@ -18,7 +18,7 @@ final class ExtendingNavBar: UIControl {
     private var slidingButton: UIButton!
     private var indicatorImageView: UIImageView!
     
-    private var calendarButton: UIButton = {
+    private let calendarButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "calendarCS"), for: .normal)
         button.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
@@ -40,10 +40,10 @@ final class ExtendingNavBar: UIControl {
     private var animationCompleted: Bool = true
     
     /// returns currently chosen segment (0 or 1)
-    public var choosenSegment = 0
+    private(set) var choosenSegment = 0
     
     /// returns view height in closed form (available after addSubviews function call )
-    public private(set) var closedHeight: Double?
+    private(set) var closedHeight: Double?
     
     var mainLabel: UILabel =  {
         let label = UILabel()
@@ -63,8 +63,18 @@ final class ExtendingNavBar: UIControl {
     
     var color: UIColor = .white
     
-    // MARK: - Init
-
+//    // MARK: - Init
+//    init() {
+//        super.init(frame: .zero)
+//        
+//        
+//        addSubviews()
+//    }
+    
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
     override func draw(_ rect: CGRect) {
     }
     
@@ -170,7 +180,6 @@ final class ExtendingNavBar: UIControl {
     }
     
     // MARK: - Interactions
-    
     @objc
     private func buttonTapped() {
         

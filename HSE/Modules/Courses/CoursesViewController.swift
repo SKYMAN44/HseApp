@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import HSESKIT
 
 final class CoursesViewController: UIViewController {
-    private var segmentView: SegmentView!
+    private var segmentView: PaginationView!
     private var courseViewModels = [CourseViewModel]()
     private var courseCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -50,14 +51,14 @@ final class CoursesViewController: UIViewController {
         setupCollectionView()
     }
     
-    
     private func setupSegmentView() {
-        segmentView = SegmentView(frame: .zero)
+        segmentView = PaginationView(frame: .zero)
         segmentView.setTitles(
-            titles: Dictionary(uniqueKeysWithValues: zip(
-            courseViewModels.map({ $0.title}),
-            courseViewModels.map({ $0.counter})
-            ))
+            titles:
+                courseViewModels.map({
+                PageItem(title: $0.title,
+                     notifications: $0.counter)
+                })
         )
         
         segmentView.backgroundColor = .background.style(.accent)()
@@ -150,7 +151,7 @@ extension CoursesViewController: UICollectionViewDelegateFlowLayout {
 
 
 // MARK: - SegmentView delegate
-extension CoursesViewController: SegmentViewDelegate {
+extension CoursesViewController: PaginationViewDelegate {
     func segmentChosen(index: Int) {
         courseCollectionView.scrollToItem(at: IndexPath(row: index, section: 0), at: .centeredHorizontally, animated: true)
     }

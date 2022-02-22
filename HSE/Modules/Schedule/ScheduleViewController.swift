@@ -6,18 +6,23 @@
 //
 
 import UIKit
+import HSESKIT
 
 final class ScheduleViewController: UIViewController {
     
-    let tempArray: [String: Int] = ["All": 123,"Homework": 0,"Midterm": 20]
+    let tempArray: [PageItem] = [
+        PageItem(title: "All", notifications: 132),
+        PageItem(title: "HomeWork", notifications: 0),
+        PageItem(title: "Midterm", notifications: 13)]
+    
     private enum Constants {
         static let tableViewHeaderHeight = 30.0
         static let tableViewFooterHeight = 0.0
     }
     
     private var navView: ExtendingNavBar?
-    private let segmentView: SegmentView = {
-        let segmentView = SegmentView(frame: .zero)
+    private let segmentView: PaginationView = {
+        let segmentView = PaginationView(frame: .zero)
         segmentView.backgroundColor = .background.style(.accent)()
         
         return segmentView
@@ -229,7 +234,7 @@ extension ScheduleViewController: UIScrollViewDelegate {
 
 
 // MARK: - SegmentView Delegate
-extension ScheduleViewController: SegmentViewDelegate {
+extension ScheduleViewController: PaginationViewDelegate {
     func segmentChosen(index: Int) {
         var vm: DeadlineContentType = .all
         switch index {

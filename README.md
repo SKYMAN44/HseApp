@@ -33,7 +33,7 @@ Dmitrii Sokolov
 ## Description
 HSE application for Students/Assistants/Professor to efficently interact with each other, check timetable and pass deadlines
 
-### SPM Dependencies
+## SPM Dependencies
 
 - HSESKIT
 
