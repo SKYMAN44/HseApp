@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import HSESKIT
 
 final class ChatViewController: UIViewController {
     var temparr: [MessageViewModel] = []
@@ -148,8 +148,14 @@ extension ChatViewController: ChatCellDelegate {
 
 // MARK: - InputViewDelegate
 extension ChatViewController: InputViewDelegate {
-    func messageSent(messageViewModel: MessageViewModel) {
-        temparr.append(messageViewModel)
+    func messageSent(message: MessageContent) {
+        var tempModel: MessageViewModel
+        if(message.text != nil) {
+            tempModel = MessageViewModel(side: .right, type: .text, text: message.text, imageURL: nil, imageArray: nil)
+        } else {
+            tempModel = MessageViewModel(side: .right, type: .image, text: nil, imageURL: URL(string: "f"), imageArray: message.image)
+        }
+        temparr.append(tempModel)
         tableView.insertRows(at: [IndexPath(row: temparr.count - 1, section: 0)], with: .bottom)
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
