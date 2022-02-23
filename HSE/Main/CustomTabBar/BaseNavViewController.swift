@@ -8,11 +8,9 @@
 import UIKit
 
 class BaseNavViewController: UINavigationController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
 
     /*
     // MARK: - Navigation
@@ -23,5 +21,4 @@ class BaseNavViewController: UINavigationController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
