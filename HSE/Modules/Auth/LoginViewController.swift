@@ -9,7 +9,7 @@ import UIKit
 import HSESKIT
 
 final class LoginViewController: UIViewController {
-    private let loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .primary.style(.primary)()
         button.setTitle("Log In", for: .normal)
@@ -18,10 +18,10 @@ final class LoginViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 48).isActive = true
         button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
-        
+
         return button
     }()
-    
+
     private let loginProblemButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
@@ -30,10 +30,10 @@ final class LoginViewController: UIViewController {
         button.layer.cornerRadius = 8
         button.translatesAutoresizingMaskIntoConstraints = false
         button.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        
+
         return button
     }()
-    
+
     private let emailTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
@@ -47,10 +47,10 @@ final class LoginViewController: UIViewController {
         textField.heightAnchor.constraint(equalToConstant: 48).isActive = true
         textField.tag = 0
         textField.textContentType = .emailAddress
-        
+
         return textField
     }()
-    
+
     private let passwordTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .none
@@ -65,46 +65,46 @@ final class LoginViewController: UIViewController {
         textField.tag = 1
         textField.isSecureTextEntry = true
         textField.textContentType = .password
-        
+
         return textField
     }()
-    
+
     private let logoImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "HseLogo"))
         imageView.contentMode = .scaleAspectFill
 
         return imageView
     }()
-    
+
     private let buttonSV: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.spacing = 16
-        
+
         return stackView
     }()
-    
+
     private let formSV: UIStackView = {
         let stackView = UIStackView()
         stackView.distribution = .fill
         stackView.alignment = .fill
         stackView.axis = .vertical
         stackView.spacing = 16
-        
+
         return stackView
     }()
-    
+
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.showsVerticalScrollIndicator = false
         scrollView.isMultipleTouchEnabled = true
-        
+
         return scrollView
     }()
-    
+
     private let segmentControll: SegmentedControl = {
         let control = SegmentedControl()
         control.titlesCS = "Student,Assistant,Professor"
@@ -114,57 +114,66 @@ final class LoginViewController: UIViewController {
         control.textFont = .customFont.style(.body)()
         control.translatesAutoresizingMaskIntoConstraints = false
         control.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        
+
         return control
     }()
-    
+
     private let mainView = UIView()
     private var passwordTextFieldFrameInWindow: CGRect?
-    
+
 // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         view.backgroundColor = .background.style(.firstLevel)()
-        
+
         setup()
         emailTextField.delegate = self
         passwordTextField.delegate = self
-        
+
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap))
         view.addGestureRecognizer(tap)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(willShowKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willHideKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(willShowKeyboard),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(willHideKeyboard),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         let passwordTextFieldFrameFirstLevel = formSV.convert(passwordTextField.frame, to: mainView)
         passwordTextFieldFrameInWindow = mainView.convert(passwordTextFieldFrameFirstLevel, to: view.window)
     }
-    
+
 // MARK: - UI setup
     private func setup() {
         setupScroll()
         setupButtons()
         setupForm()
     }
-    
+
     private func setupScroll() {
         view.addSubview(scrollView)
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
             scrollView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
-        
+
         scrollView.addSubview(mainView)
         mainView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             mainView.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor),
             mainView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor),
@@ -174,64 +183,62 @@ final class LoginViewController: UIViewController {
             mainView.heightAnchor.constraint(equalTo: scrollView.heightAnchor)
         ])
     }
-    
+
     private func setupButtons() {
         buttonSV.addArrangedSubview(loginProblemButton)
         buttonSV.addArrangedSubview(loginButton)
-        
+
         mainView.addSubview(buttonSV)
-        
+
         buttonSV.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             buttonSV.bottomAnchor.constraint(equalTo: mainView.bottomAnchor, constant: -24),
             buttonSV.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 24),
-            buttonSV.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -24),
+            buttonSV.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -24)
         ])
     }
-    
+
     private func setupForm() {
         formSV.addArrangedSubview(segmentControll)
         formSV.addArrangedSubview(emailTextField)
         formSV.addArrangedSubview(passwordTextField)
-        
+
         mainView.addSubview(logoImageView)
-        
+
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             logoImageView.topAnchor.constraint(equalTo: mainView.safeAreaLayoutGuide.topAnchor, constant: 24),
             logoImageView.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 24),
             logoImageView.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -24),
             logoImageView.heightAnchor.constraint(equalToConstant: 240)
         ])
-        
+
         mainView.addSubview(formSV)
-        
+
         formSV.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             formSV.topAnchor.constraint(equalTo: logoImageView.bottomAnchor),
             formSV.rightAnchor.constraint(equalTo: mainView.rightAnchor, constant: -24),
             formSV.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 24)
         ])
-        
-        
     }
-    
+
 // MARK: - Interactions
     @objc
     func handleTap() {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
-    
+
     @objc
     private func loginButtonPressed() {
         let tabVC = TabBarBaseController()
         tabVC.modalPresentationStyle = .fullScreen
         present(tabVC, animated: true, completion: nil)
     }
-    
+
     @objc
     private func willShowKeyboard(notification: NSNotification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -242,23 +249,20 @@ final class LoginViewController: UIViewController {
         guard yDifference < 0 else { return }
         scrollView.setContentOffset(CGPoint(x: 0, y: -yDifference + 10), animated: true)
     }
-    
+
     @objc
     private func willHideKeyboard(notification: NSNotification) {
         scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
-
 }
 
 // MARK: - TextFieldDelegate
-
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // замениить на гард
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
-        }
-        else if (textField.tag == 1) {
+        } else if textField.tag == 1 {
             loginButtonPressed()
         }
         return false
