@@ -19,10 +19,8 @@ final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageC
         
         return label
     }()
-    private var test: Int
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        test = 1
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     

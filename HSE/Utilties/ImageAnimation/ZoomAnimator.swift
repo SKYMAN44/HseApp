@@ -16,11 +16,10 @@ protocol ZoomAnimatorDelegate: AnyObject {
 }
 
 final class ZoomAnimator: NSObject {
-    
     weak var fromDelegate: ZoomAnimatorDelegate?
     weak var toDelegate: ZoomAnimatorDelegate?
 
-    var transitionImageView: UIImageView?
+    weak var transitionImageView: UIImageView?
     var isPresenting: Bool = true
     
     fileprivate func animateZoomInTransition(using transitionContext: UIViewControllerContextTransitioning) {

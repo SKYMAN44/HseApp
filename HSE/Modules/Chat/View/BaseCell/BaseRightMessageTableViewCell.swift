@@ -26,7 +26,7 @@ open class BaseRightMessageTableViewCell: UITableViewCell {
         bubbleView.addInteraction(interaction)
     }
     
-    var delegate: ChatCellDelegate?
+    unowned var delegate: ChatCellDelegate?
     var myIndexPath: IndexPath?
     
     required public init?(coder: NSCoder) {

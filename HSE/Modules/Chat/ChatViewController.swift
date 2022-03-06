@@ -34,7 +34,6 @@ final class ChatViewController: UIViewController {
     private var selectedContentFrameInCell: CGRect?
     
     // MARK: - Lifecycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -151,15 +150,34 @@ extension ChatViewController: InputViewDelegate {
     func messageSent(message: MessageContent) {
         var tempModel: MessageViewModel
         if(message.text != nil) {
-            tempModel = MessageViewModel(side: .right, type: .text, text: message.text, imageURL: nil, imageArray: nil)
+            tempModel = MessageViewModel(
+                side: .right,
+                type: .text,
+                text: message.text,
+                imageURL: nil,
+                imageArray: nil
+            )
         } else {
-            tempModel = MessageViewModel(side: .right, type: .image, text: nil, imageURL: URL(string: "f"), imageArray: message.image)
+            tempModel = MessageViewModel(
+                side: .right,
+                type: .image,
+                text: nil,
+                imageURL: URL(string: "f"),
+                imageArray: message.image
+            )
         }
         temparr.append(tempModel)
         tableView.insertRows(at: [IndexPath(row: temparr.count - 1, section: 0)], with: .bottom)
         let lastSectionIndex = tableView.numberOfSections - 1
         let lastRowIndex = tableView.numberOfRows(inSection: lastSectionIndex) - 1
-        tableView.scrollToRow(at: IndexPath(row: lastRowIndex, section: lastSectionIndex), at: .bottom, animated: true)
+        tableView.scrollToRow(
+            at: IndexPath(
+                row: lastRowIndex,
+                section: lastSectionIndex
+            ),
+            at: .bottom,
+            animated: true
+        )
     }
     
     func inputViewHeightDidChange(heightConstrain: CGFloat) {

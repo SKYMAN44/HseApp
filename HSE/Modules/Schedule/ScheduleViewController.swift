@@ -163,22 +163,15 @@ final class ScheduleViewController: UIViewController {
         case .timeTable:
             //remove segmented view
             segmentView.removeFromSuperview()
-            
-            for constraint in self.view.constraints {
-                if constraint.identifier == "tableHeightConstain" {
-                    constraint.constant = navView!.closedHeight!
-                }
-            }
+            let constraint = self.view.constraints.lazy.filter { $0.identifier == "tableHeightConstain" }.first
+            constraint?.constant = navView!.closedHeight!
         case .assigments:
             addSegmentView()
             //place navView on top of segmentView
             view.bringSubviewToFront(navView!)
             // change top constraint of tableview so segmentView not covers it
-            for constraint in self.view.constraints {
-                if constraint.identifier == "tableHeightConstain" {
-                    constraint.constant = 56 + navView!.closedHeight!
-                }
-            }
+            let constraint = self.view.constraints.lazy.filter { $0.identifier == "tableHeightConstain" }.first
+            constraint?.constant = 56 + navView!.closedHeight!
             view.layoutIfNeeded()
         }
     }

@@ -17,7 +17,7 @@ enum MessageType {
     case text
     case image
 }
-
+//actually just a model by now
 struct MessageViewModel {
     let id = UUID()
     let side: Side

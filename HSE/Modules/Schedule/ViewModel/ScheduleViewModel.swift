@@ -108,7 +108,6 @@ final class ScheduleViewModel {
     // MARK: - Init
     // kingFisher
     init(tableView: UITableView) {
-        
         self.tableView = tableView
         tableView.dataSource = dataSource
         networkManager = NetworkManager()

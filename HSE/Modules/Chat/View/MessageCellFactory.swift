@@ -10,10 +10,11 @@ import UIKit
 
 
 struct MessageCellFactory {
-    static public func createCell(message: MessageViewModel,
-                                  tableView: UITableView, indexPath: IndexPath,
-                                  hostingController: ChatCellDelegate) -> MessageCellProtocol {
-        // swiftLint
+    static public func createCell(
+        message: MessageViewModel,
+        tableView: UITableView, indexPath: IndexPath,
+        hostingController: ChatCellDelegate
+    ) -> MessageCellProtocol {
         switch (message.side, message.type) {
         case (.left, .text):
             let cell = tableView.dequeueReusableCell(withIdentifier: LeftTextMessageTableViewCell.reuseIdentifier, for: indexPath) as! LeftTextMessageTableViewCell

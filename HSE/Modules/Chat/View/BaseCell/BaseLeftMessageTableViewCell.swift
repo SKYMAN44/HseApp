@@ -38,7 +38,7 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         return imageView
     }()
     
-    var delegate: ChatCellDelegate?
+    unowned var delegate: ChatCellDelegate?
     var myIndexPath: IndexPath?
     
     // MARK: - Init
