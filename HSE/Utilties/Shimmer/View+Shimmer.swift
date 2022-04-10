@@ -15,8 +15,8 @@ extension UIView {
     }
     
     private func startShimmering() {
-        let light = UIColor(white: 0, alpha: 0.1).cgColor
-        let dark = UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 0.5)
+        let light = UIColor(white: 0.95, alpha: 1.0).cgColor
+        let dark = UIColor(white: 0.85, alpha: 1.0).cgColor
         
         let gradient: CAGradientLayer = CAGradientLayer()
         
@@ -25,17 +25,17 @@ extension UIView {
         
         gradient.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradient.endPoint = CGPoint(x: 1.0, y: 0.5)
-        gradient.locations = [0.2, 0.6, 0.8]
+        gradient.locations = [0.0, 0.5, 1.0]
         
         layer.addSublayer(gradient)
         layer.cornerRadius = 6
         layer.masksToBounds = true
         
         let animation: CABasicAnimation = CABasicAnimation.init(keyPath: "locations")
-        animation.fromValue = [0.2, 0.4, 0.8]
-        animation.toValue = [0.4, 1.0, 1.0]
+        animation.fromValue = [-1.0, -0.5, 0.0]
+        animation.toValue = [1.0, 1.5, 2.0]
         
-        animation.duration = 1.5
+        animation.duration = 1
         animation.repeatCount = Float.greatestFiniteMagnitude
         animation.isRemovedOnCompletion = false
         

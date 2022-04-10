@@ -12,7 +12,6 @@ final class GradeTableViewCell: UITableViewCell {
     static let shimmerReuseIdentifier = "ShimmerGradeTableViewCelll"
     
     private var isShimmerMode: Bool = false
-    private var isShimmerWorking: Bool = false
     
     private let taskNameLabel: UILabel = {
         let label = UILabel()
@@ -82,7 +81,7 @@ final class GradeTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        if(isShimmerMode && !isShimmerWorking) {
+        if(isShimmerMode) {
             stopShimmer()
             startShimmer()
         }
@@ -91,7 +90,6 @@ final class GradeTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         isShimmerMode = false
-        isShimmerWorking = false
         stopShimmer()
     }
     
@@ -153,7 +151,6 @@ final class GradeTableViewCell: UITableViewCell {
 
 extension GradeTableViewCell: ShimmeringObject {
     func startShimmer() {
-        isShimmerWorking = true
         applyShimmerTo(to: [taskNameLabel,
                            taskNumberLabel,
                            taskGradeLabel,
@@ -163,7 +160,6 @@ extension GradeTableViewCell: ShimmeringObject {
     }
     
     func stopShimmer() {
-        isShimmerWorking = false
         removeShimmerFrom(from: [taskNameLabel,
                                  taskNumberLabel,
                                  taskGradeLabel,

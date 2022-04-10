@@ -194,8 +194,8 @@ final class ScheduleViewModel {
     public func updateData() {
         isLoading = true
         if (contentType == .timeTable) {
-            fetchSchedule()
-            networkManager?.cancelDeadline()
+            self.fetchSchedule()
+            self.networkManager?.cancelDeadline()
         } else {
             fetchDeadline()
             networkManager?.cancelSchedule()

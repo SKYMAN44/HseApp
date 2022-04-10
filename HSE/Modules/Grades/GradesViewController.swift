@@ -19,6 +19,7 @@ final class GradesViewController: UIViewController {
     private var refreshControl: UIRefreshControl!
     private lazy var viewModel = GradeViewModel(tableView: tableView)
     
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +46,7 @@ final class GradesViewController: UIViewController {
         viewModel.updateData()
     }
     
+    // MARK: - UI setup
     private func setupView() {
         self.view.backgroundColor = .background.style(.accent)()
         self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
@@ -70,7 +72,7 @@ final class GradesViewController: UIViewController {
 
 }
 
-
+// MARK: - Table Delegate
 extension GradesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = TaskDetailViewController(deadline: Deadline(id: 1, type: .cw, subjectName: "", assigmentName: "", deadlineTime: "", sumbisionTIme: ""))
