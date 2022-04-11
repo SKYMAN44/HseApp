@@ -93,6 +93,5 @@ final class CreatorCollectionViewCell: UICollectionViewCell {
     
     public func configure() {
         creatorNameLabel.text = "Oleg Melnikov"
-        
     }
 }

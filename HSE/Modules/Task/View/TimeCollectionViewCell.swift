@@ -15,6 +15,7 @@ final class TimeCollectionViewCell: UICollectionViewCell {
         label.font = .customFont.style(.special)()
         label.textColor = .textAndIcons.style(.tretiary)()
         label.textAlignment = .left
+        label.text = "Title"
         
         return label
     }()
@@ -51,9 +52,9 @@ final class TimeCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         
         setupView()
     }
@@ -62,27 +63,8 @@ final class TimeCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI setup
     private func setupView() {
-        dateView.addSubview(dateLabel)
-        
-        dateLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            dateLabel.topAnchor.constraint(equalTo: dateView.topAnchor, constant: 4),
-            dateLabel.bottomAnchor.constraint(equalTo: dateView.bottomAnchor, constant: -4),
-            dateLabel.leftAnchor.constraint(equalTo: dateView.leftAnchor, constant: 8),
-            dateLabel.rightAnchor.constraint(equalTo: dateView.rightAnchor, constant: -8)
-        ])
-        
-        timeView.addSubview(timeLabel)
-        
-        timeLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            timeLabel.topAnchor.constraint(equalTo: timeView.topAnchor, constant: 4),
-            timeLabel.bottomAnchor.constraint(equalTo: timeView.bottomAnchor, constant: -4),
-            timeLabel.leftAnchor.constraint(equalTo: timeView.leftAnchor, constant: 8),
-            timeLabel.rightAnchor.constraint(equalTo: timeView.rightAnchor, constant: -8)
-        ])
-        
         let dateSV = UIStackView(arrangedSubviews: [dateView, timeView])
         
         dateSV.distribution = .fill
@@ -98,17 +80,19 @@ final class TimeCollectionViewCell: UICollectionViewCell {
         
         self.contentView.addSubview(mainSV)
         
-        mainSV.translatesAutoresizingMaskIntoConstraints = false
+        mainSV.pin(to: self)
         
-        mainSV.pin(to: contentView)
-        contentView.setWidth(to: ScreenSize.Width - 32)
+        dateView.addSubview(dateLabel)
+        dateLabel.pin(to: dateView, [.top: 4, .bottom: 4, .left: 8, .right : 8])
         
+        timeView.addSubview(timeLabel)
+        timeLabel.pin(to: timeView, [.top: 4, .bottom: 4, .left: 8, .right : 8])
     }
     
+    // MARK: - External call
     public func configure(title: String) {
         titleLabel.text = title
         dateLabel.text = "27.01.22"
         timeLabel.text = "17:39"
-        
     }
 }

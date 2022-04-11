@@ -13,3 +13,5 @@ struct UserReference {
 }
 
 extension UserReference: Decodable { }
+
+extension UserReference: Hashable { }

@@ -13,6 +13,8 @@ struct TaskDescription {
     let discription: String
 }
 
+extension TaskDescription: Hashable { }
+
 extension TaskDescription: Decodable { }
 
 struct StudentTask {
@@ -21,8 +23,12 @@ struct StudentTask {
     let deadlineTime: String
     let taskFiles: [File]
     let postedBy: UserReference
-    let submissionFiles: [File]
-    let submissionTime: String?
+    var submissionFiles: [File]
+    var submissionTime: String?
 }
 
 extension StudentTask: Decodable { }
+
+extension StudentTask {
+    static let example = StudentTask(taskDescription: TaskDescription(courseName: "", name: "", discription: ""), publicationTime: "", deadlineTime: "", taskFiles: [], postedBy: UserReference(name: "", image: nil), submissionFiles: [], submissionTime: "")
+}

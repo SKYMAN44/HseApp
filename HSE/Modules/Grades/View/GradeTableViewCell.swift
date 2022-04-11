@@ -109,16 +109,19 @@ final class GradeTableViewCell: UITableViewCell {
         gradeSV.distribution = .fill
         gradeSV.alignment = .fill
         gradeSV.axis = .vertical
+        gradeSV.spacing = 2
         
         let nameSV = UIStackView(arrangedSubviews: [taskNameLabel, nameLabel])
         nameSV.distribution = .fill
         nameSV.alignment = .fill
         nameSV.axis = .vertical
+        nameSV.spacing = 2
         
         let numberSV = UIStackView(arrangedSubviews: [taskNumberLabel, numberLabel])
         numberSV.distribution = .fill
         numberSV.alignment = .fill
         numberSV.axis = .vertical
+        numberSV.spacing = 2
         
         let mainSV = UIStackView(arrangedSubviews: [numberSV, nameSV, gradeSV])
         mainSV.distribution = .fill

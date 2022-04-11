@@ -124,7 +124,6 @@ final class TaskInfoCollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    
     public func configure() {
         
     }

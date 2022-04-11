@@ -18,9 +18,9 @@ final class TaskCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         
         setupView()
     }
@@ -29,6 +29,7 @@ final class TaskCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - UI
     private func setupView() {
         backgroundColor = .primary.style(.filler)()
         layer.cornerRadius = 8
@@ -47,6 +48,7 @@ final class TaskCollectionViewCell: UICollectionViewCell {
         self.widthAnchor.constraint(equalToConstant: ScreenSize.Width - 32).isActive = true
     }
     
+    // MARK: - External
     public func configure(file: File) {
         taskFileName.text = file.name
     }

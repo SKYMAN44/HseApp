@@ -90,6 +90,10 @@
 		63F857E02790658800F45A97 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857DF2790658800F45A97 /* AccountViewController.swift */; };
 		63F857EA2790F1D500F45A97 /* CalendarPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */; };
 		63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857EB2791880600F45A97 /* ScreenSize.swift */; };
+		C01D10BD2804947300149652 /* SubmissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */; };
+		C01D10BF2804A29100149652 /* EditButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */; };
+		C01D10C12804C03100149652 /* AddFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */; };
+		C01D10C32804DCD800149652 /* CALayer+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C22804DCD800149652 /* CALayer+Shadow.swift */; };
 		C058979728035FB800BA5130 /* DynamicSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058979628035FB800BA5130 /* DynamicSegment.swift */; };
 /* End PBXBuildFile section */
 
@@ -198,6 +202,10 @@
 		63F857DF2790658800F45A97 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopUpView.swift; sourceTree = "<group>"; };
 		63F857EB2791880600F45A97 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
+		C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionCollectionViewCell.swift; sourceTree = "<group>"; };
+		C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonCollectionViewCell.swift; sourceTree = "<group>"; };
+		C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFileCollectionViewCell.swift; sourceTree = "<group>"; };
+		C01D10C22804DCD800149652 /* CALayer+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Shadow.swift"; sourceTree = "<group>"; };
 		C058979628035FB800BA5130 /* DynamicSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSegment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -588,6 +596,9 @@
 				63E0498F27B1789200942E36 /* CreatorCollectionViewCell.swift */,
 				63E0499727B1ACF900942E36 /* TaskCollectionViewCell.swift */,
 				63E0499527B1ABEB00942E36 /* TaskHeaderCollectionReusableView.swift */,
+				C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */,
+				C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */,
+				C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -621,6 +632,7 @@
 				63881F6D27B75500004A2AEE /* TableViewDiffableDataSource.swift */,
 				63881F7527B7802B004A2AEE /* Array.swift */,
 				63881F8627BC507C004A2AEE /* View+Pin.swift */,
+				C01D10C22804DCD800149652 /* CALayer+Shadow.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -833,6 +845,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C01D10BD2804947300149652 /* SubmissionCollectionViewCell.swift in Sources */,
 				63881F6A27B5F9A8004A2AEE /* NetworkManager.swift in Sources */,
 				63881F6427B5E2A4004A2AEE /* NetworkRouter.swift in Sources */,
 				6304EAD027B13D8600BDF75D /* TaskInfoCollectionViewCell.swift in Sources */,
@@ -849,7 +862,10 @@
 				63881F5C27B5D7DA004A2AEE /* HTTPTask.swift in Sources */,
 				63881F5A27B5D77D004A2AEE /* HTTPMethod.swift in Sources */,
 				6304EAA627A87BC500BDF75D /* BaseRightMessageTableViewCell.swift in Sources */,
+				C01D10C32804DCD800149652 /* CALayer+Shadow.swift in Sources */,
 				639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */,
+				C01D10BF2804A29100149652 /* EditButtonCollectionViewCell.swift in Sources */,
+				C01D10C12804C03100149652 /* AddFileCollectionViewCell.swift in Sources */,
 				63881F7627B7802B004A2AEE /* Array.swift in Sources */,
 				638622F727A5A587004BCEB8 /* DescriptionCollectionViewCell.swift in Sources */,
 				63E0499627B1ABEB00942E36 /* TaskHeaderCollectionReusableView.swift in Sources */,
