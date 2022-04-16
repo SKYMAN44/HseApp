@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SubmissionCollectionViewCell: UICollectionViewCell {
+final class SubmissionCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "SubmissionCollectionViewCell"
     
     private let fileNameLabel: UILabel = {

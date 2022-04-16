@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TaskDetailViewController: UIViewController {
+final class TaskDetailViewController: UIViewController {
     enum SupplementaryViewKind {
         static let header = "header"
     }

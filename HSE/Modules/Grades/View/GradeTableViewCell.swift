@@ -154,12 +154,16 @@ final class GradeTableViewCell: UITableViewCell {
 
 extension GradeTableViewCell: ShimmeringObject {
     func startShimmer() {
-        applyShimmerTo(to: [taskNameLabel,
-                           taskNumberLabel,
-                           taskGradeLabel,
-                           gradeLabel,
-                           numberLabel,
-                           nameLabel])
+        applyShimmerTo(
+            to: [
+                taskNameLabel,
+                taskNumberLabel,
+                taskGradeLabel,
+                gradeLabel,
+                numberLabel,
+                nameLabel
+            ]
+        )
     }
     
     func stopShimmer() {

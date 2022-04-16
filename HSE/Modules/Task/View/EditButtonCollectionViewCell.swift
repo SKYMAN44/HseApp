@@ -11,7 +11,7 @@ protocol EditButtonDelegate: AnyObject {
     func editModeSwitched()
 }
 
-class EditButtonCollectionViewCell: UICollectionViewCell {
+final class EditButtonCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "EditButtonCollectionViewCell"
     
     private lazy var editButton: UIButton = {

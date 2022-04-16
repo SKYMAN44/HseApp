@@ -138,7 +138,7 @@ final class TaskViewModel {
                     withReuseIdentifier: TaskHeaderCollectionReusableView.reuseIdentifier,
                     for: indexPath
                 ) as? TaskHeaderCollectionReusableView
-                if case let .taskFiles = section {
+                if case .taskFiles = section {
                     headerView?.configure(title: "TASK FILES")
                 } else {
                     headerView?.configure(title: "SUBMISSION")

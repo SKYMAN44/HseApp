@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddFileCollectionViewCell: UICollectionViewCell {
+final class AddFileCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "AddFileCollectionViewCell"
     
     private lazy var addButton: UIButton = {
