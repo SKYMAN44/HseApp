@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HSESKIT
 
 final class GradesViewController: UIViewController {
     typealias DItem = DynamicSegments.Configuration.Item
