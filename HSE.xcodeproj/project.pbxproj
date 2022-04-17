@@ -70,7 +70,6 @@
 		63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60C278DC58C0028381F /* SceneDelegate.swift */; };
 		63C4D614278DC58E0028381F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D613278DC58E0028381F /* Assets.xcassets */; };
 		63C4D617278DC58E0028381F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D615278DC58E0028381F /* LaunchScreen.storyboard */; };
-		63C4D622278DC58E0028381F /* HSETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D621278DC58E0028381F /* HSETests.swift */; };
 		63C4D62C278DC58E0028381F /* HSEUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D62B278DC58E0028381F /* HSEUITests.swift */; };
 		63C4D62E278DC58E0028381F /* HSEUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D62D278DC58E0028381F /* HSEUITestsLaunchTests.swift */; };
 		63C4D63B278DC7270028381F /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D63A278DC7270028381F /* CoursesViewController.swift */; };
@@ -96,6 +95,8 @@
 		C01D10C32804DCD800149652 /* CALayer+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C22804DCD800149652 /* CALayer+Shadow.swift */; };
 		C01D10C528062C8F00149652 /* DynamicSegmentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C428062C8F00149652 /* DynamicSegmentCollectionViewCell.swift */; };
 		C01D10C7280741E200149652 /* DynamicSegment+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C6280741E200149652 /* DynamicSegment+Helper.swift */; };
+		C01D10CA280B0B3E00149652 /* ContentChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C9280B0B3E00149652 /* ContentChange.swift */; };
+		C01D10CC280B0BF800149652 /* AssigmentFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10CB280B0BF800149652 /* AssigmentFilter.swift */; };
 		C058979728035FB800BA5130 /* DynamicSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C058979628035FB800BA5130 /* DynamicSegment.swift */; };
 /* End PBXBuildFile section */
 
@@ -183,7 +184,6 @@
 		63C4D616278DC58E0028381F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63C4D618278DC58E0028381F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63C4D61D278DC58E0028381F /* HSETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		63C4D621278DC58E0028381F /* HSETests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSETests.swift; sourceTree = "<group>"; };
 		63C4D627278DC58E0028381F /* HSEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C4D62B278DC58E0028381F /* HSEUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSEUITests.swift; sourceTree = "<group>"; };
 		63C4D62D278DC58E0028381F /* HSEUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSEUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -210,6 +210,8 @@
 		C01D10C22804DCD800149652 /* CALayer+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Shadow.swift"; sourceTree = "<group>"; };
 		C01D10C428062C8F00149652 /* DynamicSegmentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSegmentCollectionViewCell.swift; sourceTree = "<group>"; };
 		C01D10C6280741E200149652 /* DynamicSegment+Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DynamicSegment+Helper.swift"; sourceTree = "<group>"; };
+		C01D10C9280B0B3E00149652 /* ContentChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentChange.swift; sourceTree = "<group>"; };
+		C01D10CB280B0BF800149652 /* AssigmentFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigmentFilter.swift; sourceTree = "<group>"; };
 		C058979628035FB800BA5130 /* DynamicSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSegment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -482,7 +484,7 @@
 		63C4D620278DC58E0028381F /* HSETests */ = {
 			isa = PBXGroup;
 			children = (
-				63C4D621278DC58E0028381F /* HSETests.swift */,
+				C01D10C8280B0B0200149652 /* ScheduleModule */,
 			);
 			path = HSETests;
 			sourceTree = "<group>";
@@ -679,6 +681,15 @@
 				63F857DF2790658800F45A97 /* AccountViewController.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		C01D10C8280B0B0200149652 /* ScheduleModule */ = {
+			isa = PBXGroup;
+			children = (
+				C01D10C9280B0B3E00149652 /* ContentChange.swift */,
+				C01D10CB280B0BF800149652 /* AssigmentFilter.swift */,
+			);
+			path = ScheduleModule;
 			sourceTree = "<group>";
 		};
 		C058979528035FA300BA5130 /* DynamicSegments */ = {
@@ -940,7 +951,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C4D622278DC58E0028381F /* HSETests.swift in Sources */,
+				C01D10CC280B0BF800149652 /* AssigmentFilter.swift in Sources */,
+				C01D10CA280B0B3E00149652 /* ContentChange.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

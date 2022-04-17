@@ -40,7 +40,7 @@ final class ScheduleViewController: UIViewController {
     
     private var refreshControl: UIRefreshControl!
     private var currentContent: ContentType = .timeTable
-    private lazy var viewModel = ScheduleViewModel(tableView: tableView)
+    private lazy var viewModel = ScheduleViewModel(tableView: tableView, NetworkManager())
     
     // MARK: - Lifecycle
     override func viewDidLoad() {

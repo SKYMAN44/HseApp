@@ -1,20 +1,20 @@
 //
-//  HSETests.swift
+//  ContentChange.swift
 //  HSETests
 //
-//  Created by Дмитрий Соколов on 11.01.2022.
+//  Created by Дмитрий Соколов on 16.04.2022.
 //
 
 import XCTest
 @testable import HSE
 
-class HSETests: XCTestCase {
+class ContentChange: XCTestCase {
     var schViewModel: ScheduleViewModel!
     var tableVIew = UITableView()
 
     override func setUpWithError() throws {
         try super.setUpWithError()
-        schViewModel = ScheduleViewModel(tableView: tableVIew)
+        schViewModel = ScheduleViewModel(tableView: tableVIew, NetworkManager())
     }
 
     override func tearDownWithError() throws {
@@ -36,5 +36,4 @@ class HSETests: XCTestCase {
         schViewModel.deadLineContentChanged(.hw)
         
     }
-
 }

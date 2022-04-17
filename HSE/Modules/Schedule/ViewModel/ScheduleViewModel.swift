@@ -13,7 +13,7 @@ enum ContentType {
     case assigments
 }
 
-enum DeadlineContentType {
+enum DeadlineContentType: String {
     case all
     case hw
     case cw
@@ -23,9 +23,10 @@ final class ScheduleViewModel {
     typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable,Item>
     
     private var networkManager: NetworkManager?
-    private var deadlineType: DeadlineContentType = .all
+    public private(set) var deadlineType: DeadlineContentType = .all
     public private(set) var contentType: ContentType = .timeTable {
         didSet {
+            deadlineType = .all
             updateData()
         }
     }
@@ -43,7 +44,7 @@ final class ScheduleViewModel {
             bindScheduleViewModelToController()
         }
     }
-    // lazy sort
+    
     // Store fetched deadlines
     private var deadlines = [DeadlineDay]() {
         didSet {
@@ -106,11 +107,11 @@ final class ScheduleViewModel {
     private weak var tableView: UITableView?
     
     // MARK: - Init
-    // kingFisher
-    init(tableView: UITableView) {
+    // kingFisher?
+    init(tableView: UITableView, _ networkManager: NetworkManager) {
         self.tableView = tableView
+        self.networkManager = networkManager
         tableView.dataSource = dataSource
-        networkManager = NetworkManager()
         updateData()
     }
     
