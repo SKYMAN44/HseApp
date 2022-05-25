@@ -8,8 +8,21 @@
 import Foundation
 
 struct UserReference {
+    let id: Int
+    let role: UserType
     let name: String
     let image: URL?
+    
+    init(id: Int,
+         name: String,
+         role: UserType = .student,
+         image: URL? = nil
+    ) {
+        self.role = role
+        self.id = id
+        self.name = name
+        self.image = image
+    }
 }
 
 extension UserReference: Decodable { }

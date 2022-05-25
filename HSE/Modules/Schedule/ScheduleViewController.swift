@@ -9,7 +9,6 @@ import UIKit
 import HSESKIT
 
 final class ScheduleViewController: UIViewController {
-    
     let tempArray: [PageItem] = [
         PageItem(title: "All", notifications: 132),
         PageItem(title: "HomeWork", notifications: 0),

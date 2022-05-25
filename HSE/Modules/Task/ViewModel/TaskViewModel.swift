@@ -231,7 +231,7 @@ final class TaskViewModel {
                 File(name: "SomeName"),
                 File(name: "HW14: UOL harderst ARIMA tasks")
             ],
-            postedBy: UserReference(name: "s", image: nil),
+            postedBy: UserReference(id: 0, name: "s", image: nil),
             submissionFiles: [File(name: "Sokolov_Dmitrii_193_hw9_solutions.pdf")],
             submissionTime: "123"
         )

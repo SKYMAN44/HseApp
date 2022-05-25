@@ -22,6 +22,7 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
         return imageView
     }()
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -31,6 +32,7 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - setup UI
     override func setupUI() {
         super.setupUI()
         
@@ -67,12 +69,13 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
                                                           constant: 0))
     }
     
+    // MARK: - Interactions
     @objc
     private func imageTapped() {
         contentSelected()
     }
     
-    
+    // MARK: - Configuration
     public func configure(message: MessageViewModel) {
         setImage(image: UIImage(named: "testPic.jpg")!)
     }

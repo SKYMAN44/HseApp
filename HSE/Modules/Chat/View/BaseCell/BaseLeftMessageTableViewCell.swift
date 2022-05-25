@@ -19,7 +19,6 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
     
     public let senderImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.addConstraint(NSLayoutConstraint(item: imageView,
                                                   attribute: .height,

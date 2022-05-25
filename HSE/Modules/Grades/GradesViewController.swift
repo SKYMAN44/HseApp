@@ -11,7 +11,10 @@ import HSESKIT
 final class GradesViewController: UIViewController {
     typealias DItem = DynamicSegments.Configuration.Item
     typealias DTree = DynamicSegments.Node<DItem>
-    
+        
+    private var refreshControl: UIRefreshControl!
+    private lazy var viewModel = GradeViewModel(tableView: tableView)
+    private var filterView = DynamicSegments(options: getConfiguration())
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(GradeTableViewCell.self, forCellReuseIdentifier: GradeTableViewCell.reuseIdentifier)
@@ -19,10 +22,6 @@ final class GradesViewController: UIViewController {
         
         return tableView
     }()
-    
-    private var refreshControl: UIRefreshControl!
-    private lazy var viewModel = GradeViewModel(tableView: tableView)
-    private var filterView = DynamicSegments(options: getConfiguration())
     
     // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -63,6 +62,7 @@ final class GradesViewController: UIViewController {
         
     }
     
+    // MARK: - Loading Animation
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
@@ -113,8 +113,6 @@ final class GradesViewController: UIViewController {
 extension GradesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = TaskDetailViewController(deadline: Deadline(id: 1, type: .cw, subjectName: "", assigmentName: "", deadlineTime: "", sumbisionTIme: ""))
-        self.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(detailVC, animated: true)
-        self.hidesBottomBarWhenPushed = false
+        navigationController?.present(detailVC, animated: true)
     }
 }

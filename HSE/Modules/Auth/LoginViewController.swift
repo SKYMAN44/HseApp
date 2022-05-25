@@ -234,7 +234,8 @@ final class LoginViewController: UIViewController {
 
     @objc
     private func loginButtonPressed() {
-        let tabVC = TabBarBaseController()
+        let type = UserType(rawValue: segmentControll.selectedSegmentIndex) ?? .student
+        let tabVC = TabBarBaseController(type)
         tabVC.modalPresentationStyle = .fullScreen
         present(tabVC, animated: true, completion: nil)
     }

@@ -82,23 +82,25 @@ final class ScheduleTableViewCell: UITableViewCell {
         imageView.contentMode = .center
         imageView.tintColor = .textAndIcons.style(.tretiary)()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.addConstraint(NSLayoutConstraint(item: imageView,
-                                                  attribute: .height,
-                                                  relatedBy: .equal,
-                                                  toItem: imageView,
-                                                  attribute: .width,
-                                                  multiplier: 1,
-                                                  constant: 0))
+        imageView.addConstraint(
+            NSLayoutConstraint(
+                item: imageView,
+                attribute: .height,
+                relatedBy: .equal,
+                toItem: imageView,
+                attribute: .width,
+                multiplier: 1,
+                constant: 0
+            )
+        )
     
         return imageView
     }()
 
     // MARK: - Init
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-        
         setupView()
     }
     
@@ -123,7 +125,6 @@ final class ScheduleTableViewCell: UITableViewCell {
     deinit { }
     
     // MARK: - UI setup
-    
     private func setupView() {
         self.backgroundColor = .background.style(.firstLevel)()
         
@@ -158,7 +159,6 @@ final class ScheduleTableViewCell: UITableViewCell {
     }
     
     // MARK: - Internal
-    
     public func configure(schedule: TimeSlot) {
         subjectNameLabel.text = schedule.subjectName
         eventTypeLabel.text = schedule.type
@@ -181,25 +181,29 @@ final class ScheduleTableViewCell: UITableViewCell {
 
 
 // MARK: - Shimmer
-
 extension ScheduleTableViewCell: ShimmeringObject {
     public func startShimmer() {
-        applyShimmerTo(to: [subjectNameLabel,
-                            eventTypeLabel,
-                            locationLabel,
-                            startTimeLabel,
-                            endTimeLabel,
-                            onlineImageView
-                           ])
+        applyShimmerTo(
+            to: [
+            subjectNameLabel,
+            eventTypeLabel,
+            locationLabel,
+            startTimeLabel,
+            endTimeLabel,
+            onlineImageView
+        ])
     }
     
     public func stopShimmer() {
-        removeShimmerFrom(from: [subjectNameLabel,
-                                 eventTypeLabel,
-                                 locationLabel,
-                                 startTimeLabel,
-                                 endTimeLabel,
-                                 onlineImageView
-                                ])
+        removeShimmerFrom(
+            from: [
+                subjectNameLabel,
+                eventTypeLabel,
+                locationLabel,
+                startTimeLabel,
+                endTimeLabel,
+                onlineImageView
+            ]
+        )
     }
 }

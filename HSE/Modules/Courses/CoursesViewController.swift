@@ -19,14 +19,21 @@ final class CoursesViewController: UIViewController {
         layout.minimumLineSpacing = 0
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-
         collectionView.isPagingEnabled = true
-
         collectionView.register(CourseCollectionViewCell.self, forCellWithReuseIdentifier: "CourseCollectionViewCell")
 
         return collectionView
     }()
-
+    
+    // MARK: - Init
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,7 +171,7 @@ extension CoursesViewController: PaginationViewDelegate {
     }
 }
 
-// MARK: - CourseCellDelegate
+// MARK: - CourseCellDelegate + Navigation
 extension CoursesViewController: CourseCollectionVeiwCellDelegate {
     func chatSelected() {
         let chatViewController = ChatViewController()

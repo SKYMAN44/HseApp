@@ -7,7 +7,26 @@
 import Foundation
 import UIKit
 
+enum UserType: Int, Hashable, Codable {
+    case professor = 2
+    case ta = 1
+    case student = 0
+}
+
 final class TabBarBaseController: UITabBarController {
+    private let userType: UserType
+    
+    // MARK: - Init
+    init(_ userType: UserType) {
+        self.userType = userType
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
 

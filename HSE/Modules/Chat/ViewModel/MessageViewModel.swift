@@ -17,6 +17,16 @@ enum MessageType {
     case text
     case image
 }
+
+final class MessageViewModell {
+    let tableView: UITableView
+    
+    // MARK: - Init
+    init(_ tableView: UITableView) {
+        self.tableView = tableView
+    }
+}
+
 //actually just a model by now
 struct MessageViewModel {
     let id = UUID()

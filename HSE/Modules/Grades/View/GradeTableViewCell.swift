@@ -22,7 +22,6 @@ final class GradeTableViewCell: UITableViewCell {
         
         return label
     }()
-    
     private let taskNumberLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textAndIcons.style(.primary)()
@@ -32,7 +31,6 @@ final class GradeTableViewCell: UITableViewCell {
         
         return label
     }()
-    
     private let taskGradeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textAndIcons.style(.primary)()
@@ -42,7 +40,6 @@ final class GradeTableViewCell: UITableViewCell {
         
         return label
     }()
-    
     private let numberLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textAndIcons.style(.tretiary)()
@@ -52,7 +49,6 @@ final class GradeTableViewCell: UITableViewCell {
         
         return label
     }()
-    
     private let nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textAndIcons.style(.tretiary)()
@@ -62,7 +58,6 @@ final class GradeTableViewCell: UITableViewCell {
         
         return label
     }()
-    
     private let gradeLabel: UILabel = {
         let label = UILabel()
         label.textColor = .textAndIcons.style(.tretiary)()
@@ -73,6 +68,7 @@ final class GradeTableViewCell: UITableViewCell {
         return label
     }()
     
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -87,13 +83,12 @@ final class GradeTableViewCell: UITableViewCell {
         }
     }
     
+    // MARK: - Prepare for reuse
     override func prepareForReuse() {
         super.prepareForReuse()
         isShimmerMode = false
         stopShimmer()
     }
-    
-    deinit { }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -104,6 +99,7 @@ final class GradeTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // MARK: - UI setup
     private func setupView() {
         let gradeSV = UIStackView(arrangedSubviews: [taskGradeLabel, gradeLabel])
         gradeSV.distribution = .fill
@@ -134,6 +130,7 @@ final class GradeTableViewCell: UITableViewCell {
         mainSV.pin(to: contentView, [.top: 8, .bottom: 8, .left: 16, .right: 16])
     }
     
+    // MARK: Api
     public func configure(grade: Grade) {
         taskNumberLabel.text = String(grade.number)
         taskNameLabel.text = grade.name

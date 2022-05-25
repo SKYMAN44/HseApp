@@ -191,7 +191,7 @@ final class ScheduleViewModel {
         dataSource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
     }
     
-    // MARK: - Internal calls
+    // MARK: - External calls
     public func updateData() {
         isLoading = true
         if (contentType == .timeTable) {

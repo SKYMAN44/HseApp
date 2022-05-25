@@ -30,5 +30,5 @@ struct StudentTask {
 extension StudentTask: Decodable { }
 
 extension StudentTask {
-    static let example = StudentTask(taskDescription: TaskDescription(courseName: "", name: "", discription: ""), publicationTime: "", deadlineTime: "", taskFiles: [], postedBy: UserReference(name: "", image: nil), submissionFiles: [], submissionTime: "")
+    static let example = StudentTask(taskDescription: TaskDescription(courseName: "", name: "", discription: ""), publicationTime: "", deadlineTime: "", taskFiles: [], postedBy: UserReference(id: 0, name: "", image: nil), submissionFiles: [], submissionTime: "")
 }

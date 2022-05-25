@@ -24,8 +24,8 @@ final class ChatViewController: UIViewController {
         
         return tableView
     }()
-    
-    private var inputContainerView = InputView()
+    private let navView = ChatNavTitleView()
+    private let inputContainerView = InputView()
     
     private var inputViewBotttomConstrain: NSLayoutConstraint?
     private var inputViewHeightConstrain: NSLayoutConstraint?
@@ -41,6 +41,7 @@ final class ChatViewController: UIViewController {
         //temp for debug
         temparr.append(contentsOf: MessageViewModel.testArray)
         
+        setupNavigationBar()
         setupInputContainer()
         setupTableView()
         
@@ -52,26 +53,6 @@ final class ChatViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         tableView.scrollToBottom(isAnimated: false)
-    }
-    
-    
-    // MARK: - Interactions
-    // KISS
-    @objc
-    private func handleKeyboardNotification(notification: NSNotification) {
-        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
-
-        let keyboardScreenEndFrame = keyboardValue.cgRectValue
-        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
-        let difference = view.safeAreaInsets.bottom
-        
-        let isKeyboardShowing = notification.name == UIResponder.keyboardWillShowNotification
-        
-        inputViewBotttomConstrain?.constant = isKeyboardShowing ? difference - keyboardViewEndFrame.height : 0
-        
-        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut) {
-            self.view.layoutIfNeeded()
-        }
     }
     
     // MARK: - UI setup
@@ -98,9 +79,58 @@ final class ChatViewController: UIViewController {
         tableView.pinTop(to: view.safeAreaLayoutGuide.topAnchor)
         tableView.pinBottom(to: inputContainerView.topAnchor)
     }
+    
+    // MARK: - NavigationBar setup
+    private func setupNavigationBar() {
+        navView.configure(UIImage(named: "testPic.jpg")!, "Progessor/TA?Studentkfkfkfkfkfkfk", "volumeCS")
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: "chevronleft"),
+            style: .plain,
+            target: self,
+            action: #selector(goBack)
+        )
+        navigationItem.titleView = navView
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            style: .plain,
+            target: self,
+            action: #selector(infoTabBarButtonTapped)
+        )
+    }
+    
+    // MARK: - Interactions
+    // KISS
+    @objc
+    private func handleKeyboardNotification(notification: NSNotification) {
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
+        let keyboardScreenEndFrame = keyboardValue.cgRectValue
+        let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+        let difference = view.safeAreaInsets.bottom
+        
+        let isKeyboardShowing = notification.name == UIResponder.keyboardWillShowNotification
+        
+        inputViewBotttomConstrain?.constant = isKeyboardShowing ? difference - keyboardViewEndFrame.height : 0
+        
+        UIView.animate(withDuration: 0, delay: 0, options: .curveEaseOut) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc
+    private func infoTabBarButtonTapped() {
+        let detailVC = ChatDetailViewController()
+        self.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
+    
+    @objc
+    private func goBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
-
 
 // MARK: - TableViewDataSource
 extension ChatViewController: UITableViewDataSource {
@@ -216,3 +246,6 @@ extension ChatViewController: ZoomAnimatorDelegate {
     }
     
 }
+
+// MARK: - GestureDelegate
+extension ChatViewController: UIGestureRecognizerDelegate { }
