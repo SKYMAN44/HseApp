@@ -14,5 +14,4 @@ struct ScheduleDay {
 }
 
 extension ScheduleDay: Hashable { }
-
 extension ScheduleDay: Decodable { }

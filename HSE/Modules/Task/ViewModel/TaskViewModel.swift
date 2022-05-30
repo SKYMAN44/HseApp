@@ -10,8 +10,8 @@ import UIKit
 
 
 final class TaskViewModel {
-    typealias collectionDataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>
-    typealias collectionSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
+    typealias CollectionDataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>
+    typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
     
     enum Section: String, Hashable {
         case taskInfo
@@ -59,8 +59,8 @@ final class TaskViewModel {
     public var sections = [Section]()
     
     // MARK: - DataSource
-    private lazy var dataSource: collectionDataSource = {
-        let dataSource: collectionDataSource = .init(collectionView: collectionView) { [self]
+    private lazy var dataSource: CollectionDataSource = {
+        let dataSource: CollectionDataSource = .init(collectionView: collectionView) { [self]
             collectionView, indexPath, item in
             
             let section = self.sections[indexPath.section]
@@ -165,7 +165,7 @@ final class TaskViewModel {
     // MARK: - DataSource update
     private func updateDataSource() {
         prepareData()
-        var snapshot = collectionSnapshot()
+        var snapshot = CollectionSnapshot()
         
         snapshot.appendSections([
             .taskInfo,

@@ -10,7 +10,7 @@ import UIKit
 final class ChatDetailHeaderTableViewCell: UITableViewCell {
     static let reuseIdentifier = "ChatDetailHeaderTableViewCell"
     
-    public let userImageView: UIImageView = {
+    private let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.addConstraint(NSLayoutConstraint(item: imageView,

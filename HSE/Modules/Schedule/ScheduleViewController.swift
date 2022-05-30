@@ -82,22 +82,6 @@ final class ScheduleViewController: UIViewController {
         tableView.refreshControl = refreshControl
     }
     // можно ли создать свой run loop в swift
-    private func setupNavBar() {
-        navView.navBackgroundColor = .background.style(.accent)()
-        navView.navTintColor = .textAndIcons.style(.primary)()
-        navView.rightItemImage = UIImage(named: "calendarCS")
-        
-        navView.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
-        navView.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
-        
-        view.addSubview(navView)
-        
-        navView.pin(to: view, [.left, .right])
-        navView.pinTop(to: view.safeAreaLayoutGuide.topAnchor)
-        navView.closedHeight = 60
-        navView.hegihtConstraintReference = navView.setHeight(to: 60)
-    }
-    
     private func setupTableView() {
         view.insertSubview(tableView, belowSubview: navView)
         
@@ -127,6 +111,23 @@ final class ScheduleViewController: UIViewController {
         segmentView.pin(to: view, [.left, .right])
         segmentView.pinTop(to: view.safeAreaLayoutGuide.topAnchor, navView.closedHeight)
         segmentView.setHeight(to: 56)
+    }
+    
+    // MARK: - Navbar setup
+    private func setupNavBar() {
+        navView.navBackgroundColor = .background.style(.accent)()
+        navView.navTintColor = .textAndIcons.style(.primary)()
+        navView.rightItemImage = UIImage(named: "calendarCS")
+        
+        navView.addTarget(self, action: #selector(calendarButtonTapped), for: .touchUpInside)
+        navView.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
+        
+        view.addSubview(navView)
+        
+        navView.pin(to: view, [.left, .right])
+        navView.pinTop(to: view.safeAreaLayoutGuide.topAnchor)
+        navView.closedHeight = 60
+        navView.hegihtConstraintReference = navView.setHeight(to: 60)
     }
     
     // MARK: - Interactions

@@ -31,8 +31,8 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
         imageView.clipsToBounds = true
-        
         imageView.image = UIImage(named: "testPic.jpg")!.circleMask
+        imageView.isUserInteractionEnabled = true
         
         return imageView
     }()
@@ -48,6 +48,8 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         
         let interaction = UIContextMenuInteraction(delegate: self)
         bubbleView.addInteraction(interaction)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(userTapped))
+        senderImage.addGestureRecognizer(tap)
     }
     
     required public init?(coder: NSCoder) {
@@ -79,7 +81,11 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
         bubbleView.backgroundColor = .background.style(.accent)()
         
     }
-
+    
+    @objc
+    private func userTapped() {
+        delegate?.userSelected()
+    }
 }
 
 extension BaseLeftMessageTableViewCell: UIContextMenuInteractionDelegate {

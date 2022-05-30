@@ -122,13 +122,18 @@ final class ChatViewController: UIViewController {
     @objc
     private func infoTabBarButtonTapped() {
         let detailVC = ChatDetailViewController()
-        self.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(detailVC, animated: true)
+        navigateToController(detailVC)
     }
     
     @objc
     private func goBack() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - Navigation
+    private func navigateToController(_ controller: UIViewController) {
+        self.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 
@@ -171,6 +176,11 @@ extension ChatViewController: ChatCellDelegate {
         photoController.transitionController.toDelegate = photoController
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(photoController, animated: true)
+    }
+    
+    func userSelected() {
+        let accountVC = AccountViewController(userReference: UserReference(id: 1, name: "Danila Kokin", role: .student, image: nil))
+        navigateToController(accountVC)
     }
 }
 

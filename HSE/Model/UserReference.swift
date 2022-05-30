@@ -25,6 +25,5 @@ struct UserReference {
     }
 }
 
-extension UserReference: Decodable { }
-
+extension UserReference: Codable { }
 extension UserReference: Hashable { }

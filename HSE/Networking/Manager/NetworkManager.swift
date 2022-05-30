@@ -13,6 +13,7 @@ struct NetworkManager {
     static let ApiKey = "NO_key"
     private let router = Router<ScheduleAPI>()
     private let routerD = Router<DeadLineAPI>()
+    private let routerUser = Router<UserAPI>()
     
     enum NetworkingResponse: String {
         case success
@@ -93,6 +94,10 @@ struct NetworkManager {
                 }
             }
         }
+    }
+    
+    public func getMyUser(completion: @escaping (_ user: UserReference?, _ error: String?) -> () ) {
+        
     }
     
     public func cancelSchedule() {

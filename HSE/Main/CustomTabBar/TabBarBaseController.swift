@@ -38,6 +38,7 @@ final class TabBarBaseController: UITabBarController {
         let navControllerCourses = BaseNavViewController(rootViewController: courseViewController)
         let gradesViewController = GradesViewController()
         let accountViewController = AccountViewController()
+        let navAccountViewController = BaseNavViewController(rootViewController: accountViewController)
         let scheduleViewController = ScheduleViewController()
         let navControllerSchedule = BaseNavViewController(rootViewController: scheduleViewController)
         let navControllerGrades = BaseNavViewController(rootViewController: gradesViewController)
@@ -48,8 +49,8 @@ final class TabBarBaseController: UITabBarController {
         navControllerGrades.tabBarItem.image = UIImage(named: "awardCS")
         navControllerGrades.tabBarItem.selectedImage = UIImage(named: "awardCS")
 
-        accountViewController.tabBarItem.image = UIImage(named: "userCS")
-        accountViewController.tabBarItem.selectedImage = UIImage(named: "userCS")
+        navAccountViewController.tabBarItem.image = UIImage(named: "userCS")
+        navAccountViewController.tabBarItem.selectedImage = UIImage(named: "userCS")
 
         navControllerCourses.tabBarItem.image = UIImage(named: "serverCS")
         navControllerCourses.tabBarItem.selectedImage = UIImage(named: "serverCS")
@@ -58,7 +59,7 @@ final class TabBarBaseController: UITabBarController {
             [navControllerSchedule,
              navControllerCourses,
              navControllerGrades,
-             accountViewController
+             navAccountViewController
             ],
             animated: false
         )
