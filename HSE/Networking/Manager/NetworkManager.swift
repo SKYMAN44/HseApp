@@ -14,6 +14,7 @@ struct NetworkManager {
     private let router = Router<ScheduleAPI>()
     private let routerD = Router<DeadLineAPI>()
     private let routerUser = Router<UserAPI>()
+    private let routerAuth = Router<AuthApi>()
     
     enum NetworkingResponse: String {
         case success
@@ -100,6 +101,35 @@ struct NetworkManager {
         
     }
     
+    public func login(completion: @escaping (_ user: String?, _ error: String?) -> ()) {
+        routerAuth.request(.login("")) { data, response, error in
+            if error != nil {
+                completion(nil, "Check Network Connection")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkRequest(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkingResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        let apiResponse = try JSONDecoder().decode(TokenJWT.self, from: responseData)
+                        print(apiResponse)
+                        completion(apiResponse.token, nil)
+                    } catch {
+                        completion(nil, NetworkingResponse.unableToDecode.rawValue)
+                    }
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
+    }
+    
     public func cancelSchedule() {
         router.cancel()
     }
@@ -109,3 +139,6 @@ struct NetworkManager {
     }
 }
 
+struct TokenJWT: Codable {
+    var token: String
+}

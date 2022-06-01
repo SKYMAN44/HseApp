@@ -102,6 +102,8 @@
 		C02D10B6283DA4690053BFD8 /* ChatDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D10B5283DA4690053BFD8 /* ChatDetailViewModel.swift */; };
 		C02D10B8283DA6FA0053BFD8 /* ChatDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D10B7283DA6FA0053BFD8 /* ChatDetail.swift */; };
 		C02D10BA283E83E80053BFD8 /* ChatDetailHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C02D10B9283E83E80053BFD8 /* ChatDetailHeaderTableViewCell.swift */; };
+		C081BC1628458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081BC1528458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift */; };
+		C0C1AA3828468774005CB3C1 /* AuthEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */; };
 		C0E914632842BD8E00AAD804 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914622842BD8E00AAD804 /* AccountViewModel.swift */; };
 		C0E914662842C13100AAD804 /* AccountHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914652842C13100AAD804 /* AccountHeaderCollectionViewCell.swift */; };
 		C0E914682843F2A400AAD804 /* UserEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914672843F2A400AAD804 /* UserEndPoint.swift */; };
@@ -228,6 +230,8 @@
 		C02D10B5283DA4690053BFD8 /* ChatDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailViewModel.swift; sourceTree = "<group>"; };
 		C02D10B7283DA6FA0053BFD8 /* ChatDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetail.swift; sourceTree = "<group>"; };
 		C02D10B9283E83E80053BFD8 /* ChatDetailHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDetailHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		C081BC1528458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSectionSwitchCollectionReusableView.swift; sourceTree = "<group>"; };
+		C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndPoint.swift; sourceTree = "<group>"; };
 		C0E91461284147A300AAD804 /* HSESKIT */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HSESKIT; path = ../HSESKIT; sourceTree = "<group>"; };
 		C0E914622842BD8E00AAD804 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		C0E914652842C13100AAD804 /* AccountHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -451,6 +455,7 @@
 				63881F6B27B72A8E004A2AEE /* DeadLineEndPoint.swift */,
 				63881F8227B9E5AB004A2AEE /* GradeEndPoint.swift */,
 				C0E914672843F2A400AAD804 /* UserEndPoint.swift */,
+				C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -724,6 +729,7 @@
 			children = (
 				C0E914652842C13100AAD804 /* AccountHeaderCollectionViewCell.swift */,
 				C0E91472284425FA00AAD804 /* HostingCollectionViewCell.swift */,
+				C081BC1528458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -967,6 +973,7 @@
 				639DCE4327975C6F007FC2DC /* CourseChatCollectionViewCell.swift in Sources */,
 				6304EACC27B017B600BDF75D /* LoginViewController.swift in Sources */,
 				63881F7827B986BD004A2AEE /* shimmerProtocol.swift in Sources */,
+				C081BC1628458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift in Sources */,
 				C0E91473284425FA00AAD804 /* HostingCollectionViewCell.swift in Sources */,
 				63881F8727BC507C004A2AEE /* View+Pin.swift in Sources */,
 				C0E914662842C13100AAD804 /* AccountHeaderCollectionViewCell.swift in Sources */,
@@ -978,6 +985,7 @@
 				63881F5E27B5D8EA004A2AEE /* ParameterEncoding.swift in Sources */,
 				639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */,
 				C02D10B2283D9E820053BFD8 /* ChatDetailTableViewCell.swift in Sources */,
+				C0C1AA3828468774005CB3C1 /* AuthEndPoint.swift in Sources */,
 				639DCE302794C88D007FC2DC /* Image.swift in Sources */,
 				63E0498E27B15F0400942E36 /* TaskViewModel.swift in Sources */,
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,
