@@ -19,9 +19,13 @@ final class HostingCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure() {
-//        let timeVC = TimeTableViewController()
-//        self.contentView.addSubview(timeVC.view)
-//        timeVC.view.pin(to: contentView)
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+    }
+    
+    public func configure(view: UIView) {
+        view.frame = contentView.bounds
+        self.contentView.addSubview(view) 
     }
 }

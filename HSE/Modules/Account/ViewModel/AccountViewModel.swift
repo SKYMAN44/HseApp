@@ -12,6 +12,7 @@ final class AccountViewModel {
     private typealias CollectionDataSource = UICollectionViewDiffableDataSource<AnyHashable, Item>
     private typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<AnyHashable, Item>
     
+    private weak var viewController: UIViewController?
     private let collectionView: UICollectionView
     private var user: User?
     private var userReference: UserReference?
@@ -38,19 +39,52 @@ final class AccountViewModel {
                     }
                     return cell
                 case .content(let details):
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HostingCollectionViewCell.reuseIdentifier, for: indexPath)
-                    if let cell = cell as? HostingCollectionViewCell {
-                        cell.configure()
+                    switch indexPath.item {
+                    case 0:
+                        guard let vc = self.viewController else { return nil }
+                        let timeTableModule = TimeTableViewController()
+                        let scrol = timeTableModule.setupForEmbedingInScrollView()
+                        if let vc = vc as? AccountViewController {
+                            vc.embededScrollView = scrol
+                        }
+                        // temp force unwrapper
+                        timeTableModule.delegate = vc as! TimeTableViewControllerScrollDelegate
+                        vc.addChild(timeTableModule)
+                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HostingCollectionViewCell.reuseIdentifier, for: indexPath)
+                        if let cell = cell as? HostingCollectionViewCell {
+                            cell.configure(view: timeTableModule.view)
+                        }
+                        return cell
+                    default:
+                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HostingCollectionViewCell.reuseIdentifier, for: indexPath)
+                        if let cell = cell as? HostingCollectionViewCell {
+                            cell.configure(view: UIView())
+                        }
+                        return cell
                     }
-                    return cell
                 default:
                     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountHeaderCollectionViewCell.reuseIdentifier, for: indexPath)
                     return cell
                 }
             }
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+            switch kind {
+            case AccountViewController.SupplementaryViewKind.segments:
+                let segmentView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: AccountViewController.SupplementaryViewKind.segments,
+                    withReuseIdentifier: UserInfoSectionSwitchCollectionReusableView.reuseIdentifier,
+                    for: indexPath
+                ) as? UserInfoSectionSwitchCollectionReusableView
+                
+                return segmentView
+            default:
+                return nil
+            }
+        }
         return dataSource
     }()
     
+    // MARK: - CollectionItem
     private enum Item: Hashable {
         case userHeader(UserGeneralInfo)
         case loading(UUID)
@@ -62,7 +96,8 @@ final class AccountViewModel {
     }
     
     // MARK: - Init
-    init(_ collectionView: UICollectionView, _ userReference: UserReference? = nil) {
+    init(_ collectionView: UICollectionView, _ viewController: UIViewController, _ userReference: UserReference? = nil) {
+        self.viewController = viewController
         self.collectionView = collectionView
         collectionView.dataSource = dataSource
         self.userReference = userReference
