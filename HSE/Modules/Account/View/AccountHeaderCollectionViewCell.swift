@@ -65,7 +65,6 @@ final class AccountHeaderCollectionViewCell: UICollectionViewCell {
         button.layer.cornerRadius = 8
         button.heightAnchor.constraint(equalToConstant: 48).isActive = true
         button.setWidth(to: ScreenSize.Width - 32)
-        button.addTarget(self, action: #selector(emailButtonPressed), for: .touchUpInside)
         
         return button
     }()
@@ -84,6 +83,8 @@ final class AccountHeaderCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Setup UI
     private func setupUI() {
+        emailButton.addTarget(self, action: #selector(emailButtonPressed), for: .touchUpInside)
+        
         let topView = UIStackView(arrangedSubviews: [userImageView, typeLabel, nameLabel, groupLabel])
         topView.distribution = .fill
         topView.alignment = .center

@@ -16,7 +16,6 @@ final class TaskDetailViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .white
         button.setImage(UIImage(systemName: "xmark"), for: .normal)
-        button.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
         button.tintColor = .textAndIcons.style(.primary)()
         button.addConstraint(NSLayoutConstraint(
             item: button,
@@ -93,6 +92,7 @@ final class TaskDetailViewController: UIViewController {
         
         view.addSubview(dismissButton)
         dismissButton.pin(to: view, [ .right: 20, .top: 20])
+        dismissButton.addTarget(self, action: #selector(dismissButtonTapped), for: .touchUpInside)
     }
     
     // MARK: - Interactions

@@ -26,6 +26,7 @@ final class HostingCollectionViewCell: UICollectionViewCell {
     
     public func configure(view: UIView) {
         view.frame = contentView.bounds
-        self.contentView.addSubview(view) 
+        self.contentView.addSubview(view)
+//        view.pin(to: contentView)
     }
 }

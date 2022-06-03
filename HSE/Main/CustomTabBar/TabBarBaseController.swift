@@ -35,17 +35,17 @@ final class TabBarBaseController: UITabBarController {
         tabBar.backgroundColor = .background.style(.accent)()
 
         let courseViewController = CoursesViewController()
-        let navControllerCourses = BaseNavViewController(rootViewController: courseViewController)
         let gradesViewController = GradesViewController()
         let accountViewController = AccountViewController()
+        let MainViewController = MainScreenViewController()
+        let navControllerCourses = BaseNavViewController(rootViewController: courseViewController)
         let navAccountViewController = BaseNavViewController(rootViewController: accountViewController)
-        let scheduleViewController = ScheduleViewController()
-        let navControllerSchedule = BaseNavViewController(rootViewController: scheduleViewController)
+        let navMainViewController = BaseNavViewController(rootViewController: MainViewController)
         let navControllerGrades = BaseNavViewController(rootViewController: gradesViewController)
 
-        navControllerSchedule.tabBarItem.image = UIImage(named: "calendarCS")
-        navControllerSchedule.tabBarItem.selectedImage = UIImage(named: "calendarCS")
-
+        navMainViewController.tabBarItem.image = UIImage(named: "calendarCS")
+        navMainViewController.tabBarItem.selectedImage = UIImage(named: "calendarCS")
+        
         navControllerGrades.tabBarItem.image = UIImage(named: "awardCS")
         navControllerGrades.tabBarItem.selectedImage = UIImage(named: "awardCS")
 
@@ -56,18 +56,16 @@ final class TabBarBaseController: UITabBarController {
         navControllerCourses.tabBarItem.selectedImage = UIImage(named: "serverCS")
 
         self.setViewControllers(
-            [navControllerSchedule,
+            [navMainViewController,
              navControllerCourses,
              navControllerGrades,
              navAccountViewController
             ],
             animated: false
         )
-
         for (tabBarItem) in tabBar.items! {
             tabBarItem.title = ""
         }
-
         self.selectedIndex = 0
     }
 }

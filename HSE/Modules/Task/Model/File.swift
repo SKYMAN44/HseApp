@@ -8,7 +8,7 @@
 import Foundation
 
 struct File: Hashable {
-    let id = UUID()
+    var id = UUID()
     let name: String
 }
 

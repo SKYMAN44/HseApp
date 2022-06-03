@@ -33,37 +33,46 @@ final class AccountViewModel {
                 
                 switch itemIdentifier {
                 case .userHeader(let userInfo):
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountHeaderCollectionViewCell.reuseIdentifier, for: indexPath)
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: AccountHeaderCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    )
                     if let cell = cell as? AccountHeaderCollectionViewCell {
                         cell.configure(userInfo, userReference == nil ? false : true)
                     }
                     return cell
                 case .content(let details):
-                    switch indexPath.item {
-                    case 0:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: UserDetailsCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    )
+                    
+                    return cell
+                case .timetable(_):
                         guard let vc = self.viewController else { return nil }
-                        let timeTableModule = TimeTableViewController()
+                        let timeTableModule = TimeTableViewController(true)
                         let scrol = timeTableModule.setupForEmbedingInScrollView()
                         if let vc = vc as? AccountViewController {
                             vc.embededScrollView = scrol
+                            timeTableModule.delegate = vc
                         }
                         // temp force unwrapper
-                        timeTableModule.delegate = vc as! TimeTableViewControllerScrollDelegate
+//                        timeTableModule.delegate = vc as! TimeTableViewControllerScrollDelegate
                         vc.addChild(timeTableModule)
-                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HostingCollectionViewCell.reuseIdentifier, for: indexPath)
+                        let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: HostingCollectionViewCell.reuseIdentifier,
+                            for: indexPath
+                        )
                         if let cell = cell as? HostingCollectionViewCell {
                             cell.configure(view: timeTableModule.view)
                         }
+                    
                         return cell
-                    default:
-                        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HostingCollectionViewCell.reuseIdentifier, for: indexPath)
-                        if let cell = cell as? HostingCollectionViewCell {
-                            cell.configure(view: UIView())
-                        }
-                        return cell
-                    }
                 default:
-                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AccountHeaderCollectionViewCell.reuseIdentifier, for: indexPath)
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: AccountHeaderCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    )
                     return cell
                 }
             }
@@ -75,7 +84,7 @@ final class AccountViewModel {
                     withReuseIdentifier: UserInfoSectionSwitchCollectionReusableView.reuseIdentifier,
                     for: indexPath
                 ) as? UserInfoSectionSwitchCollectionReusableView
-                
+                segmentView?.delegate = self
                 return segmentView
             default:
                 return nil
@@ -87,8 +96,9 @@ final class AccountViewModel {
     // MARK: - CollectionItem
     private enum Item: Hashable {
         case userHeader(UserGeneralInfo)
-        case loading(UUID)
+        case timetable(UUID)
         case content(UserDetailedInfo)
+        case loading(UUID)
         
         static var loadingItems: [Item] {
             return Array(repeatingExpression: Item.loading(UUID()), count: 1)
@@ -112,7 +122,7 @@ final class AccountViewModel {
         snapshot.appendSections(["Header","Content"])
         snapshot.appendItems([Item.userHeader(user.userMainInfo)], toSection: "Header")
         if let details = user.detailInfo {
-            snapshot.appendItems([Item.content(details)], toSection: "Content")
+            snapshot.appendItems([Item.timetable(UUID()), Item.content(details)], toSection: "Content")
         }
         dataSource.apply(snapshot)
     }
@@ -124,4 +134,15 @@ final class AccountViewModel {
     
     // MARK: - Shimmer
     private func setShimmer() { }
+}
+
+// MARK: - UserInfoSectionSwitcher Delegate
+extension AccountViewModel: UserInfoSectionSwitcherDelegate {
+    func segmentHasChanged(_ segment: Int) {
+//        guard let cell = collectionView.cellForItem(at: IndexPath(item: segment, section: 1)) else { return }
+//        collectionView.
+//        self.collectionView.scrollRectToVisible(cell.frame, animated: true)
+//        collectionView.scrollToItem(at: IndexPath(item: segment, section: 1), at: .centeredHorizontally, animated: true)
+//        self.collectionView.scrollToItem(at: IndexPath(item: segment, section: 1), at: .centeredHorizontally, animated: true)
+    }
 }

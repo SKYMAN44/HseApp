@@ -29,14 +29,27 @@ final class TimeTableViewController: UIViewController {
     }()
     
     private var refreshControl: UIRefreshControl!
-    private lazy var viewModel = ScheduleViewModel(tableView: tableView, NetworkManager())
+    private var viewModel: ScheduleViewModel
     public var delegate: TimeTableViewControllerScrollDelegate?
     
+    // MARK: - Init
+    init(_ isMyUser: Bool,_ userRefs: UserReference? = nil) {
+        // once backend appears configure viewmodel with account to view/ dependency injection of networkService
+        self.viewModel = ScheduleViewModel(tableView: tableView, NetworkManager())
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.view.backgroundColor = .background.style(.accent)()
         setupTableView()
+        setupRefreshControl()
         tableView.delegate = self
     }
     
@@ -46,7 +59,7 @@ final class TimeTableViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(refreshData), for: .valueChanged)
         tableView.refreshControl = refreshControl
     }
-    // можно ли создать свой run loop в swift
+    
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.separatorColor = .clear
@@ -58,12 +71,7 @@ final class TimeTableViewController: UIViewController {
         
         tableView.estimatedRowHeight = 82
         tableView.rowHeight = UITableView.automaticDimension
-
-        let constrain = tableView.pinTop(to: view.topAnchor)
         tableView.pin(to: view, [.left, .right, .top, .bottom])
-        tableView.pinBottom(to: view.bottomAnchor)
-        
-        constrain.identifier = "tableHeightConstain"
     }
     
     // MARK: - Interactions
@@ -74,10 +82,17 @@ final class TimeTableViewController: UIViewController {
     }
     
     public func setupForEmbedingInScrollView() -> UIScrollView {
-//        self.tableView.bounces = false
         self.tableView.isScrollEnabled = false
         
         return tableView
+    }
+    
+    public func contentChanged(contentType: ContentType) {
+        viewModel.contentChanged(contentType: contentType)
+    }
+    
+    public func deadlineContentChanged(_ deadlineType: DeadlineContentType) {
+        viewModel.deadLineContentChanged(deadlineType)
     }
 }
 

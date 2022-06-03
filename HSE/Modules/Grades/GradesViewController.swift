@@ -40,7 +40,7 @@ final class GradesViewController: UIViewController {
         var node = DTree(DItem(presentingName: "__"), childrenCategory: DItem(presentingName: "Semester"))
         var node1 = DTree(DItem(presentingName: "Semester 1"), childrenCategory: DItem(presentingName: "Module"))
         var node2 = DTree(DItem(presentingName: "Semester 2"), childrenCategory: DItem(presentingName: "Module"))
-        var node3 = DTree(DItem(presentingName: "Semester 1&2"), childrenCategory: DItem(presentingName: "Module"))
+        let node3 = DTree(DItem(presentingName: "Semester 1&2"), childrenCategory: DItem(presentingName: "Module"))
         
         var node4 = DTree(DItem(presentingName: "Module 1"), childrenCategory: DItem(presentingName: "Type"))
         var node5 = DTree(DItem(presentingName: "Module 2"), childrenCategory: DItem(presentingName: "Type"))

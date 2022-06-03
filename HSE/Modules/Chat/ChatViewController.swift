@@ -83,7 +83,7 @@ final class ChatViewController: UIViewController {
     // MARK: - NavigationBar setup
     private func setupNavigationBar() {
         navView.configure(UIImage(named: "testPic.jpg")!, "Progessor/TA?Studentkfkfkfkfkfkfk", "volumeCS")
-        
+        navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(named: "chevronleft"),

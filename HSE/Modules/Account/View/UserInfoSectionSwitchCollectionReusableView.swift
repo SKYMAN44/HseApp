@@ -8,6 +8,11 @@
 import UIKit
 import HSESKIT
 
+// MARK: - Delegate
+protocol UserInfoSectionSwitcherDelegate {
+    func segmentHasChanged(_ segment: Int)
+}
+
 final class UserInfoSectionSwitchCollectionReusableView: UICollectionReusableView {
     static let reuseIdentifier = "UserInfoSectionSwitchCollectionReusableView"
     
@@ -32,6 +37,7 @@ final class UserInfoSectionSwitchCollectionReusableView: UICollectionReusableVie
         
         return button
     }()
+    public var delegate: UserInfoSectionSwitcherDelegate?
     
     // MARK: - Init
     override init(frame: CGRect) {
@@ -68,14 +74,17 @@ final class UserInfoSectionSwitchCollectionReusableView: UICollectionReusableVie
         segmentInfoButton.addTarget(self, action: #selector(segmentSelected(_:)), for: .touchUpInside)
     }
 
+    // MARK: - Interactions
     @objc
     private func segmentSelected(_ button: UIButton) {
         if(button.tag == 0) {
+            delegate?.segmentHasChanged(0)
             button.backgroundColor = .primary.style(.filler)()
             button.setTitleColor(.primary.style(.primary)(), for: .normal)
             segmentInfoButton.backgroundColor = .background.style(.firstLevel)()
             segmentInfoButton.setTitleColor(.textAndIcons.style(.secondary)(), for: .normal)
         } else {
+            delegate?.segmentHasChanged(1)
             button.backgroundColor = .primary.style(.filler)()
             button.setTitleColor(.primary.style(.primary)(), for: .normal)
             segmentTimeButton.backgroundColor = .background.style(.firstLevel)()

@@ -37,7 +37,7 @@ extension UserGeneralInfo: Codable { }
 extension UserGeneralInfo: Hashable { }
 
 struct UserDetailedInfo {
-    let someINfo = "Stringsssssss;fdfsfs1323242"
+    var someINfo = "Stringsssssss;fdfsfs1323242"
 }
 
 extension UserDetailedInfo: Codable { }

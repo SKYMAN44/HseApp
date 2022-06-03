@@ -13,6 +13,11 @@ final class AccountViewController: UIViewController {
         static let segments = "segments"
     }
     
+    private enum Consts {
+        static let switcherHeight = 48.0
+        static let topInset = 16.0
+    }
+    
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
         collectionView.backgroundColor = .background.style(.firstLevel)()
@@ -25,10 +30,17 @@ final class AccountViewController: UIViewController {
             forCellWithReuseIdentifier: HostingCollectionViewCell.reuseIdentifier
         )
         collectionView.register(
+            UserDetailsCollectionViewCell.self,
+            forCellWithReuseIdentifier: UserDetailsCollectionViewCell.reuseIdentifier
+        )
+        collectionView.register(
             UserInfoSectionSwitchCollectionReusableView.self,
             forSupplementaryViewOfKind: SupplementaryViewKind.segments,
             withReuseIdentifier: UserInfoSectionSwitchCollectionReusableView.reuseIdentifier
         )
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
+        collectionView.contentInsetAdjustmentBehavior = .never
         
         return collectionView
     }()
@@ -69,7 +81,7 @@ final class AccountViewController: UIViewController {
         
         collectionView.pin(to: view, [.left, .right])
         collectionView.pinTop(to: view.safeAreaLayoutGuide.topAnchor)
-        collectionView.pinBottom(to: view.safeAreaLayoutGuide.bottomAnchor)
+        collectionView.pinBottom(to: isMyAccount ? view.safeAreaLayoutGuide.bottomAnchor : view.bottomAnchor)
         collectionView.delegate = self
         collectionView.bounces = false
     }
@@ -96,13 +108,11 @@ final class AccountViewController: UIViewController {
         
     }
     
-    
-    
     // MARK: - Layout Creation
     private func generateLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout {
             (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            let segmentsItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(48))
+            let segmentsItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(Consts.switcherHeight))
             let segmentItem = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: segmentsItemSize,
                 elementKind: SupplementaryViewKind.segments,
@@ -119,20 +129,21 @@ final class AccountViewController: UIViewController {
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 0, bottom: 0, trailing: 0)
+                section.contentInsets = NSDirectionalEdgeInsets(top: Consts.topInset, leading: 0, bottom: 0, trailing: 0)
                 
                 return section
             default:
-                let valideHeight = self.view.frame.height - self.view.safeAreaInsets.top - self.view.safeAreaInsets.bottom - 48
+                let valideHeight = ScreenSize.Height - self.view.safeAreaInsets.top - 48 - (self.isMyAccount ? self.view.safeAreaInsets.bottom : 0)
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(valideHeight))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(valideHeight))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item,item])
 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
                 section.boundarySupplementaryItems = [segmentItem]
+                section.orthogonalScrollingBehavior = .paging
                 
                 return section
             }
@@ -151,7 +162,6 @@ extension AccountViewController: UICollectionViewDelegate, TimeTableViewControll
             embededScrollView?.isScrollEnabled = false
             embededScrollView?.resignFirstResponder()
             collectionView.becomeFirstResponder()
-//            embededScrollView?.resignFirstResponder()
         }
     }
     
@@ -165,7 +175,6 @@ extension AccountViewController: UICollectionViewDelegate, TimeTableViewControll
             collectionView.isScrollEnabled = false
             collectionView.resignFirstResponder()
             embededScrollView?.becomeFirstResponder()
-//            collectionView.resignFirstResponder()
         }
     }
 }
