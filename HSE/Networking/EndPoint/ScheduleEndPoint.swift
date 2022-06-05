@@ -53,6 +53,4 @@ extension ScheduleAPI: EndPointType {
     var headers: HTTPHeaders? {
         return nil
     }
-    
-    
 }

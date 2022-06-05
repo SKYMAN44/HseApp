@@ -8,7 +8,7 @@
 import Foundation
 
 public enum AuthApi {
-    case login(String)
+    case login(LoginInfo)
 }
 
 extension AuthApi: EndPointType {
@@ -34,7 +34,11 @@ extension AuthApi: EndPointType {
     }
     
     var task: HTTPTask {
-        return .requestParameters(bodyParameters: ["email":"olivan139@gmail.com","password":"12345678"], urlParameters: nil)
+        if case .login(let info) = self {
+            return .requestParameters(bodyParameters: ["email": info.email,"password": info.password, "role": info.role.rawValue], urlParameters: nil)
+        } else {
+            return .requestParameters(bodyParameters: ["email": "","password": "", "role": ""], urlParameters: nil)
+        }
     }
     
     var headers: HTTPHeaders? {

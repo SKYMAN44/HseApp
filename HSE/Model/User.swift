@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct User {
     let userMainInfo: UserGeneralInfo
     let detailInfo: UserDetailedInfo?
@@ -33,12 +32,20 @@ struct UserGeneralInfo {
     let group: String
 }
 
-extension UserGeneralInfo: Codable { }
-extension UserGeneralInfo: Hashable { }
+extension UserGeneralInfo: Codable {}
+extension UserGeneralInfo: Hashable {}
 
 struct UserDetailedInfo {
     var someINfo = "Stringsssssss;fdfsfs1323242"
 }
 
-extension UserDetailedInfo: Codable { }
-extension UserDetailedInfo: Hashable { }
+extension UserDetailedInfo: Codable {}
+extension UserDetailedInfo: Hashable {}
+
+public struct LoginInfo {
+    let email: String
+    let password: String
+    let role: UserType
+}
+
+extension LoginInfo: Codable {}

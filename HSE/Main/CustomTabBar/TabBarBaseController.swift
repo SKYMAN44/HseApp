@@ -7,10 +7,10 @@
 import Foundation
 import UIKit
 
-enum UserType: Int, Hashable, Codable {
-    case professor = 2
-    case ta = 1
-    case student = 0
+enum UserType: String, Hashable, Codable {
+    case professor = "PROFESSOR"
+    case ta = "TA"
+    case student = "STUDENT"
 }
 
 final class TabBarBaseController: UITabBarController {

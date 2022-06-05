@@ -8,7 +8,7 @@
 import UIKit
 import HSESKIT
 
-final class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController, LoginScreen {
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .primary.style(.primary)()
@@ -47,7 +47,10 @@ final class LoginViewController: UIViewController {
         textField.heightAnchor.constraint(equalToConstant: 48).isActive = true
         textField.tag = 0
         textField.textContentType = .emailAddress
-
+        textField.autocorrectionType = .no
+        textField.spellCheckingType = .no
+        textField.applyCustomClearButton()
+        
         return textField
     }()
 
@@ -64,6 +67,7 @@ final class LoginViewController: UIViewController {
         textField.heightAnchor.constraint(equalToConstant: 48).isActive = true
         textField.tag = 1
         textField.isSecureTextEntry = true
+        textField.applySecureEntrySwitcher()
         textField.textContentType = .password
 
         return textField
@@ -117,12 +121,37 @@ final class LoginViewController: UIViewController {
 
         return control
     }()
-
+    private var activityAnimation: ActivityAnimationScreen
     private let mainView = UIView()
     private var passwordTextFieldFrameInWindow: CGRect?
-    private let manager = NetworkManager()
-
-// MARK: - LifeCycle
+    private var viewModel: LoginViewModel?
+    public var isAnimating: Bool = false {
+        didSet {
+            if(isAnimating) {
+                activityAnimation.isHidden = false
+                activityAnimation.isAnimating = true
+            } else {
+                activityAnimation.isHidden = true
+                activityAnimation.isAnimating = false
+            }
+        }
+    }
+    
+    // MARK: - Init
+    init() {
+        self.activityAnimation = ActivityAnimationScreen(
+            colors: [.primary.style(.primary)(), .primary.style(.filler)()],
+            lineWidth: 5
+        )
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = LoginViewModel(self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -147,6 +176,8 @@ final class LoginViewController: UIViewController {
             name: UIResponder.keyboardWillHideNotification,
             object: nil
         )
+        
+        viewModel = LoginViewModel(self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -154,11 +185,12 @@ final class LoginViewController: UIViewController {
         passwordTextFieldFrameInWindow = mainView.convert(passwordTextFieldFrameFirstLevel, to: view.window)
     }
 
-// MARK: - UI setup
+    // MARK: - UI setup
     private func setup() {
         setupScroll()
         setupButtons()
         setupForm()
+        setupActivityAnimation()
     }
 
     private func setupScroll() {
@@ -225,6 +257,27 @@ final class LoginViewController: UIViewController {
             formSV.leftAnchor.constraint(equalTo: mainView.leftAnchor, constant: 24)
         ])
     }
+    
+    private func setupActivityAnimation() {
+        self.view.addSubview(activityAnimation)
+        
+        activityAnimation.pin(to: view)
+        
+        activityAnimation.isHidden = true
+    }
+    
+    // MARK: - Warning Activity
+    public func showIncorrectDataWarning() {
+        emailTextField.layer.borderColor = UIColor.red.cgColor
+        emailTextField.layer.borderWidth = 1.5
+        passwordTextField.layer.borderColor = UIColor.red.cgColor
+        passwordTextField.layer.borderWidth = 1.5
+    }
+    
+    private func resetWarningView() {
+        emailTextField.layer.borderWidth = 0
+        passwordTextField.layer.borderWidth = 0
+    }
 
     // MARK: - Interactions
     @objc
@@ -235,14 +288,11 @@ final class LoginViewController: UIViewController {
 
     @objc
     private func loginButtonPressed() {
-        let type = UserType(rawValue: segmentControll.selectedSegmentIndex) ?? .student
-        manager.login(completion: { string, str  in
-        })
-        let tabVC = TabBarBaseController(type)
-        tabVC.modalPresentationStyle = .fullScreen
-        present(tabVC, animated: true, completion: nil)
+        let roleNumber = segmentControll.selectedSegmentIndex
+        viewModel?.loginButtonPressed(emailTextField.text, passwordTextField.text, roleNumber)
     }
 
+    // MARK: - Keyboard Notifications
     @objc
     private func willShowKeyboard(notification: NSNotification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
@@ -269,5 +319,9 @@ extension LoginViewController: UITextFieldDelegate {
             loginButtonPressed()
         }
         return false
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.resetWarningView()
     }
 }

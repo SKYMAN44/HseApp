@@ -101,8 +101,8 @@ struct NetworkManager {
         
     }
     
-    public func login(completion: @escaping (_ user: String?, _ error: String?) -> ()) {
-        routerAuth.request(.login("")) { data, response, error in
+    public func login(_ loginInfo: LoginInfo, completion: @escaping (_ token: TokenJWT?, _ error: String?) -> ()) {
+        routerAuth.request(.login(loginInfo)) { data, response, error in
             if error != nil {
                 completion(nil, "Check Network Connection")
             }
@@ -119,7 +119,7 @@ struct NetworkManager {
                     do {
                         let apiResponse = try JSONDecoder().decode(TokenJWT.self, from: responseData)
                         print(apiResponse)
-                        completion(apiResponse.token, nil)
+                        completion(apiResponse, nil)
                     } catch {
                         completion(nil, NetworkingResponse.unableToDecode.rawValue)
                     }

@@ -107,6 +107,14 @@
 		C0C1AA3C2848EFF1005CB3C1 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA3B2848EFF1005CB3C1 /* MainScreenViewController.swift */; };
 		C0C1AA3F284BD2FF005CB3C1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA3E284BD2FF005CB3C1 /* SettingsViewController.swift */; };
 		C0C1AA41284BF6FF005CB3C1 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */; };
+		C0C1AA86284CE9CC005CB3C1 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA85284CE9CC005CB3C1 /* LoginViewModel.swift */; };
+		C0C1AA8A284D08F1005CB3C1 /* ActivityAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA89284D08F1005CB3C1 /* ActivityAnimationView.swift */; };
+		C0C1AA8C284D095E005CB3C1 /* ProgressShapeLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA8B284D095E005CB3C1 /* ProgressShapeLayer.swift */; };
+		C0C1AA8E284D0983005CB3C1 /* RotationAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA8D284D0983005CB3C1 /* RotationAnimation.swift */; };
+		C0C1AA90284D09E1005CB3C1 /* StrokeAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA8F284D09E1005CB3C1 /* StrokeAnimation.swift */; };
+		C0C1AA92284D0A1A005CB3C1 /* StrokeColorAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA91284D0A1A005CB3C1 /* StrokeColorAnimation.swift */; };
+		C0C1AA94284D0FA1005CB3C1 /* AuthProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA93284D0FA1005CB3C1 /* AuthProtocols.swift */; };
+		C0C1AA96284D1060005CB3C1 /* ActivityAnimationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA95284D1060005CB3C1 /* ActivityAnimationScreen.swift */; };
 		C0E914632842BD8E00AAD804 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914622842BD8E00AAD804 /* AccountViewModel.swift */; };
 		C0E914662842C13100AAD804 /* AccountHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914652842C13100AAD804 /* AccountHeaderCollectionViewCell.swift */; };
 		C0E914682843F2A400AAD804 /* UserEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914672843F2A400AAD804 /* UserEndPoint.swift */; };
@@ -238,6 +246,14 @@
 		C0C1AA3B2848EFF1005CB3C1 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		C0C1AA3E284BD2FF005CB3C1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		C0C1AA85284CE9CC005CB3C1 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		C0C1AA89284D08F1005CB3C1 /* ActivityAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnimationView.swift; sourceTree = "<group>"; };
+		C0C1AA8B284D095E005CB3C1 /* ProgressShapeLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressShapeLayer.swift; sourceTree = "<group>"; };
+		C0C1AA8D284D0983005CB3C1 /* RotationAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotationAnimation.swift; sourceTree = "<group>"; };
+		C0C1AA8F284D09E1005CB3C1 /* StrokeAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeAnimation.swift; sourceTree = "<group>"; };
+		C0C1AA91284D0A1A005CB3C1 /* StrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeColorAnimation.swift; sourceTree = "<group>"; };
+		C0C1AA93284D0FA1005CB3C1 /* AuthProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProtocols.swift; sourceTree = "<group>"; };
+		C0C1AA95284D1060005CB3C1 /* ActivityAnimationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnimationScreen.swift; sourceTree = "<group>"; };
 		C0E91461284147A300AAD804 /* HSESKIT */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HSESKIT; path = ../HSESKIT; sourceTree = "<group>"; };
 		C0E914622842BD8E00AAD804 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		C0E914652842C13100AAD804 /* AccountHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -535,6 +551,7 @@
 		63C4D649278E358F0028381F /* Utilties */ = {
 			isa = PBXGroup;
 			children = (
+				C0C1AA88284D087B005CB3C1 /* ActivityAnimationView */,
 				63881F8827BC5858004A2AEE /* Shimmer */,
 				6304EAB527AACF9900BDF75D /* ImageAnimation */,
 				63F857D2278F8CD400F45A97 /* Extensions */,
@@ -659,7 +676,9 @@
 		63F857CF278F8C2F00F45A97 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				C0C1AA87284CEF24005CB3C1 /* ViewModel */,
 				6304EACB27B017B500BDF75D /* LoginViewController.swift */,
+				C0C1AA93284D0FA1005CB3C1 /* AuthProtocols.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -727,6 +746,27 @@
 				C0C1AA3B2848EFF1005CB3C1 /* MainScreenViewController.swift */,
 			);
 			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		C0C1AA87284CEF24005CB3C1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0C1AA85284CE9CC005CB3C1 /* LoginViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C0C1AA88284D087B005CB3C1 /* ActivityAnimationView */ = {
+			isa = PBXGroup;
+			children = (
+				C0C1AA89284D08F1005CB3C1 /* ActivityAnimationView.swift */,
+				C0C1AA8B284D095E005CB3C1 /* ProgressShapeLayer.swift */,
+				C0C1AA8D284D0983005CB3C1 /* RotationAnimation.swift */,
+				C0C1AA8F284D09E1005CB3C1 /* StrokeAnimation.swift */,
+				C0C1AA91284D0A1A005CB3C1 /* StrokeColorAnimation.swift */,
+				C0C1AA95284D1060005CB3C1 /* ActivityAnimationScreen.swift */,
+			);
+			path = ActivityAnimationView;
 			sourceTree = "<group>";
 		};
 		C0E914642842C0E800AAD804 /* View */ = {
@@ -929,6 +969,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C01D10BD2804947300149652 /* SubmissionCollectionViewCell.swift in Sources */,
+				C0C1AA96284D1060005CB3C1 /* ActivityAnimationScreen.swift in Sources */,
 				63881F6A27B5F9A8004A2AEE /* NetworkManager.swift in Sources */,
 				63881F6427B5E2A4004A2AEE /* NetworkRouter.swift in Sources */,
 				C02D10B6283DA4690053BFD8 /* ChatDetailViewModel.swift in Sources */,
@@ -946,6 +987,7 @@
 				C02D10B8283DA6FA0053BFD8 /* ChatDetail.swift in Sources */,
 				63881F6E27B75500004A2AEE /* TableViewDiffableDataSource.swift in Sources */,
 				63881F5C27B5D7DA004A2AEE /* HTTPTask.swift in Sources */,
+				C0C1AA8E284D0983005CB3C1 /* RotationAnimation.swift in Sources */,
 				63881F5A27B5D77D004A2AEE /* HTTPMethod.swift in Sources */,
 				6304EAA627A87BC500BDF75D /* BaseRightMessageTableViewCell.swift in Sources */,
 				C02D10B0283D831C0053BFD8 /* ChatDetailViewController.swift in Sources */,
@@ -962,7 +1004,9 @@
 				C0E9146E284417BD00AAD804 /* IconTextInfoView.swift in Sources */,
 				63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */,
 				63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */,
+				C0C1AA90284D09E1005CB3C1 /* StrokeAnimation.swift in Sources */,
 				63B2830227C6944D0091C43B /* StudentTask.swift in Sources */,
+				C0C1AA86284CE9CC005CB3C1 /* LoginViewModel.swift in Sources */,
 				63E0499C27B1C0BA00942E36 /* View+Shimmer.swift in Sources */,
 				638622EF27A34FF2004BCEB8 /* Message.swift in Sources */,
 				63881F6C27B72A8E004A2AEE /* DeadLineEndPoint.swift in Sources */,
@@ -977,6 +1021,7 @@
 				63881F6027B5DB4D004A2AEE /* URLParameterEncoder.swift in Sources */,
 				C0E914712844251800AAD804 /* TimeTableViewController.swift in Sources */,
 				63B2830727C696C30091C43B /* UserReference.swift in Sources */,
+				C0C1AA92284D0A1A005CB3C1 /* StrokeColorAnimation.swift in Sources */,
 				639DCE14279240E3007FC2DC /* ScheduleDay.swift in Sources */,
 				C0C1AA3C2848EFF1005CB3C1 /* MainScreenViewController.swift in Sources */,
 				639DCE452797617C007FC2DC /* Label.swift in Sources */,
@@ -992,6 +1037,7 @@
 				C02D10BA283E83E80053BFD8 /* ChatDetailHeaderTableViewCell.swift in Sources */,
 				63B2830427C696380091C43B /* File.swift in Sources */,
 				C02D10AC283D331A0053BFD8 /* ChatNavTitleView.swift in Sources */,
+				C0C1AA94284D0FA1005CB3C1 /* AuthProtocols.swift in Sources */,
 				638622E627A3413C004BCEB8 /* TaskDetailViewController.swift in Sources */,
 				63881F5E27B5D8EA004A2AEE /* ParameterEncoding.swift in Sources */,
 				639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */,
@@ -1025,6 +1071,8 @@
 				63881F8327B9E5AB004A2AEE /* GradeEndPoint.swift in Sources */,
 				C0C1AA41284BF6FF005CB3C1 /* KeychainHelper.swift in Sources */,
 				C0E914682843F2A400AAD804 /* UserEndPoint.swift in Sources */,
+				C0C1AA8C284D095E005CB3C1 /* ProgressShapeLayer.swift in Sources */,
+				C0C1AA8A284D08F1005CB3C1 /* ActivityAnimationView.swift in Sources */,
 				63881F8127B9BCC3004A2AEE /* GradeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
