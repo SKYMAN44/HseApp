@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class GradeViewModel: NSObject {
+final class GradeViewModel: NSObject {
     private var networkManager: NetworkManager!
     public var isLoading: Bool = false {
         didSet {

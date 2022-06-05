@@ -8,18 +8,6 @@
 import UIKit
 import HSESKIT
 
-protocol TimeTableViewControllerScrollDelegate {
-    func didScroll(_ scrollView: UIScrollView)
-}
-
-protocol TimeTableModule: UIViewController {
-    var delegate: TimeTableViewControllerScrollDelegate?  { get set }
-    
-    func setupForEmbedingInScrollView() -> UIScrollView
-    func contentChanged(contentType: ContentType)
-    func deadlineContentChanged(_ deadlineType: DeadlineContentType)
-}
-
 final class TimeTableViewController: UIViewController, TimeTableModule {
     private enum Constants {
         static let tableViewHeaderHeight = 30.0

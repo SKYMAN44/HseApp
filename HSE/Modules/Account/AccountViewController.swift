@@ -191,7 +191,6 @@ extension AccountViewController: UICollectionViewDelegate, TimeTableViewControll
         guard  let cell = collectionView.cellForItem(at: IndexPath(item: 0, section: 1)) else { return }
         let newRect = cell.frame
         let newRectAgain = collectionView.convert(newRect, to: collectionView.superview)
-        print(scrollView.contentOffset.y)
         if collectionView.frame.contains(newRectAgain) {
             embededScrollView?.isScrollEnabled = true
             collectionView.isScrollEnabled = false

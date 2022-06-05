@@ -8,11 +8,10 @@
 import Foundation
 import UIKit
 
-
-final class LoginViewModel {
+final class LoginViewModel: LoginLogic {
     private let networkM = NetworkManager()
     private let encryptedStorage = KeychainHelper.shared
-    weak var loginScreen: LoginScreen?
+    private weak var loginScreen: LoginScreen?
     private var email: String = ""
     private var password: String = ""
     private var role: UserType?

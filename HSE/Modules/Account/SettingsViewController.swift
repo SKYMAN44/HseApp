@@ -16,6 +16,7 @@ final class SettingsViewController: UIViewController {
         return button
     }()
     
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
 

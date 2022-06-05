@@ -7,7 +7,6 @@
 
 import UIKit
 
-protocol TaskDetailModule: UIViewController { }
 
 final class TaskDetailViewController: UIViewController, TaskDetailModule {
     enum SupplementaryViewKind {
@@ -52,7 +51,6 @@ final class TaskDetailViewController: UIViewController, TaskDetailModule {
         return collectionView
     }()
     private var viewModel: TaskViewModel
-    
     
     // MARK: - Init
     init(deadline: Deadline) {

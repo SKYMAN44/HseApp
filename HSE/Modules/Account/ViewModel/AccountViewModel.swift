@@ -17,14 +17,13 @@ final class AccountViewModel {
     private let collectionView: UICollectionView
     private var user: User?
     private var userReference: UserReference?
-    public var isLoading: Bool = false {
+    private var isLoading: Bool = false {
         didSet {
             if(isLoading) {
                 setShimmer()
             }
         }
     }
-    
     
     // MARK: - DataSource
     private lazy var dataSource: CollectionDataSource = {
@@ -109,7 +108,11 @@ final class AccountViewModel {
     }
     
     // MARK: - Init
-    init(_ collectionView: UICollectionView, _ viewController: UIViewController, _ userReference: UserReference? = nil) {
+    init(
+        _ collectionView: UICollectionView,
+        _ viewController: UIViewController,
+        _ userReference: UserReference? = nil
+    ) {
         self.viewController = viewController
         self.collectionView = collectionView
         collectionView.dataSource = dataSource
@@ -118,6 +121,7 @@ final class AccountViewModel {
         fetchUserInfo()
     }
     
+    // MARK: - DataSource update
     private func updateDataSource() {
         guard let user = user else { return }
         var snapshot = CollectionSnapshot()
@@ -130,6 +134,7 @@ final class AccountViewModel {
         dataSource.apply(snapshot)
     }
     
+    // MARK: - API CALL
     private func fetchUserInfo() {
         self.user = User.testUser
         updateDataSource()

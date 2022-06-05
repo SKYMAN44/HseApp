@@ -19,7 +19,7 @@ enum DeadlineContentType: String {
     case cw
 }
 
-final class ScheduleViewModel {
+final class ScheduleViewModel: TimeTableFeatureLogic {
     typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable,Item>
     
     private var networkManager: NetworkManager?
@@ -41,7 +41,6 @@ final class ScheduleViewModel {
    private(set) var schedule = [ScheduleDay]() {
         didSet {
             self.updateDataSource()
-            bindScheduleViewModelToController()
         }
     }
     
@@ -55,12 +54,11 @@ final class ScheduleViewModel {
     private(set) var currentdeadlines = [DeadlineDay]() {
         didSet {
             self.updateDataSource()
-            bindScheduleViewModelToController()
         }
     }
     
     // MARK: - Data Source
-    public lazy var dataSource = TableDataSource (
+    private lazy var dataSource = TableDataSource (
         tableView: tableView!
     ) { tableView, indexPath, itemIdentifier in
         switch (itemIdentifier, self.contentType) {
@@ -102,8 +100,6 @@ final class ScheduleViewModel {
             return Array(repeatingExpression: Item.loading(UUID()), count: 8)
         }
     }
-    
-    public var bindScheduleViewModelToController: () -> () = {}
     private weak var tableView: UITableView?
     
     // MARK: - Init

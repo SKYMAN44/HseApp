@@ -124,7 +124,7 @@ final class LoginViewController: UIViewController, LoginScreen {
     private var activityAnimation: ActivityAnimationScreen
     private let mainView = UIView()
     private var passwordTextFieldFrameInWindow: CGRect?
-    private var viewModel: LoginViewModel?
+    private var viewModel: LoginLogic?
     public var isAnimating: Bool = false {
         didSet {
             if(isAnimating) {

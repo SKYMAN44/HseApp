@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-final class TaskViewModel {
+final class TaskViewModel: TaskFeatureLogic {
     typealias CollectionDataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>
     typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
     
@@ -239,11 +239,12 @@ final class TaskViewModel {
     }
     
     // MARK: - InternalCall
-    public func updateData() {
+    private func updateData() {
         fetchTask()
     }
 }
 
+// MARK: - EditButtonDelegate
 extension TaskViewModel: EditButtonDelegate {
     func editModeSwitched() {
         self.editMode.toggle()
