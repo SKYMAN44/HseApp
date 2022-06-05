@@ -22,5 +22,4 @@ struct Deadline {
 }
 
 extension Deadline: Decodable { }
-
 extension Deadline: Hashable { }

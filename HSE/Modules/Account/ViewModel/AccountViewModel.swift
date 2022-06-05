@@ -13,6 +13,7 @@ final class AccountViewModel {
     private typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<AnyHashable, Item>
     
     private weak var viewController: UIViewController?
+    private var timeTableModule: TimeTableModule?
     private let collectionView: UICollectionView
     private var user: User?
     private var userReference: UserReference?
@@ -49,25 +50,27 @@ final class AccountViewModel {
                     
                     return cell
                 case .timetable(_):
-                        guard let vc = self.viewController else { return nil }
-                        let timeTableModule = TimeTableViewController(true)
-                        let scrol = timeTableModule.setupForEmbedingInScrollView()
-                        if let vc = vc as? AccountViewController {
-                            vc.embededScrollView = scrol
-                            timeTableModule.delegate = vc
-                        }
-                        // temp force unwrapper
-//                        timeTableModule.delegate = vc as! TimeTableViewControllerScrollDelegate
-                        vc.addChild(timeTableModule)
-                        let cell = collectionView.dequeueReusableCell(
-                            withReuseIdentifier: HostingCollectionViewCell.reuseIdentifier,
-                            for: indexPath
-                        )
-                        if let cell = cell as? HostingCollectionViewCell {
-                            cell.configure(view: timeTableModule.view)
-                        }
+                    guard let vc = self.viewController else { return nil }
                     
-                        return cell
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: HostingCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    )
+                    
+                    self.timeTableModule = TimeTableViewController(true)
+                    if let scrollView = timeTableModule?.setupForEmbedingInScrollView(),
+                       let vc = vc as? AccountViewController,
+                       let timeModule = timeTableModule {
+                        vc.embededScrollView = scrollView
+                        timeTableModule?.delegate = vc
+                        vc.addChild(timeModule)
+                        
+                        if let cell = cell as? HostingCollectionViewCell {
+                            cell.configure(view: timeModule.view)
+                        }
+                    }
+                    
+                    return cell
                 default:
                     let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: AccountHeaderCollectionViewCell.reuseIdentifier,

@@ -17,5 +17,4 @@ struct TimeSlot {
 }
 
 extension TimeSlot: Hashable { }
-
 extension TimeSlot: Decodable { }

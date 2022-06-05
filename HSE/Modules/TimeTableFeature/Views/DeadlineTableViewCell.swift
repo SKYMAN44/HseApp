@@ -81,7 +81,7 @@ final class DeadlineTableViewCell: UITableViewCell {
         return view
     }()
     
-    
+    // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -92,6 +92,7 @@ final class DeadlineTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - LifeCycle
     override func layoutSubviews() {
         super.layoutSubviews()
         if(isShimmerMode) {
@@ -106,10 +107,8 @@ final class DeadlineTableViewCell: UITableViewCell {
         stopShimmer()
     }
     
-    deinit { }
-    
+    // MARK: - setupUI
     private func setupView() {
-        
         self.backgroundColor = .background.style(.firstLevel)()
         
         deadlineTimeView.addSubview(deadlineTimeLabel)
@@ -176,6 +175,7 @@ final class DeadlineTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    // MARK: - External Calls
     public func configure(deadline: Deadline) {
         subjectLabel.text = deadline.subjectName
         taskNameLabel.text = deadline.assigmentName
@@ -193,6 +193,7 @@ final class DeadlineTableViewCell: UITableViewCell {
 
 }
 
+// MARK: - Shimmering
 extension DeadlineTableViewCell: ShimmeringObject {
     func startShimmer() {
         applyShimmerTo(to: [subjectLabel,

@@ -8,7 +8,6 @@
 import Foundation
 
 struct ScheduleDay {
-    
     let day: String
     let timeSlot: [TimeSlot]
 }

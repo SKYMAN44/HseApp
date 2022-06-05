@@ -120,6 +120,7 @@ final class LoginViewController: UIViewController {
 
     private let mainView = UIView()
     private var passwordTextFieldFrameInWindow: CGRect?
+    private let manager = NetworkManager()
 
 // MARK: - LifeCycle
     override func viewDidLoad() {
@@ -225,9 +226,9 @@ final class LoginViewController: UIViewController {
         ])
     }
 
-// MARK: - Interactions
+    // MARK: - Interactions
     @objc
-    func handleTap() {
+    private func handleTap() {
         emailTextField.resignFirstResponder()
         passwordTextField.resignFirstResponder()
     }
@@ -235,7 +236,6 @@ final class LoginViewController: UIViewController {
     @objc
     private func loginButtonPressed() {
         let type = UserType(rawValue: segmentControll.selectedSegmentIndex) ?? .student
-        let manager = NetworkManager()
         manager.login(completion: { string, str  in
         })
         let tabVC = TabBarBaseController(type)
@@ -263,7 +263,6 @@ final class LoginViewController: UIViewController {
 // MARK: - TextFieldDelegate
 extension LoginViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // замениить на гард
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
             nextField.becomeFirstResponder()
         } else if textField.tag == 1 {

@@ -10,6 +10,8 @@ import UIKit
 final class HostingCollectionViewCell: UICollectionViewCell {
     static let reuseIdentifier = "HostingCollectionViewCell"
     
+    weak var hostedView: UIView?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -21,7 +23,7 @@ final class HostingCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-
+        
     }
     
     public func configure(view: UIView) {

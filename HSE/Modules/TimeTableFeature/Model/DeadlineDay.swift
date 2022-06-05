@@ -13,5 +13,4 @@ struct DeadlineDay {
 }
 
 extension DeadlineDay: Decodable { }
-
 extension DeadlineDay: Hashable { }

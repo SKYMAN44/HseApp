@@ -20,6 +20,7 @@ final class CalendarPopUpView: UIView, UIScrollViewDelegate {
         print("deinit")
     }
     
+    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -34,6 +35,7 @@ final class CalendarPopUpView: UIView, UIScrollViewDelegate {
         super.init(coder: coder)
     }
     
+    // MARK: - UI setup
     func setupView() {
         panGesture = UIPanGestureRecognizer(target: self, action: #selector(animatePopUpView(sender:)))
         

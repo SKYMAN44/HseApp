@@ -105,6 +105,8 @@
 		C0C1AA3828468774005CB3C1 /* AuthEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */; };
 		C0C1AA3A284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA39284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift */; };
 		C0C1AA3C2848EFF1005CB3C1 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA3B2848EFF1005CB3C1 /* MainScreenViewController.swift */; };
+		C0C1AA3F284BD2FF005CB3C1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA3E284BD2FF005CB3C1 /* SettingsViewController.swift */; };
+		C0C1AA41284BF6FF005CB3C1 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */; };
 		C0E914632842BD8E00AAD804 /* AccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914622842BD8E00AAD804 /* AccountViewModel.swift */; };
 		C0E914662842C13100AAD804 /* AccountHeaderCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914652842C13100AAD804 /* AccountHeaderCollectionViewCell.swift */; };
 		C0E914682843F2A400AAD804 /* UserEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914672843F2A400AAD804 /* UserEndPoint.swift */; };
@@ -234,6 +236,8 @@
 		C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndPoint.swift; sourceTree = "<group>"; };
 		C0C1AA39284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		C0C1AA3B2848EFF1005CB3C1 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		C0C1AA3E284BD2FF005CB3C1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		C0E91461284147A300AAD804 /* HSESKIT */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HSESKIT; path = ../HSESKIT; sourceTree = "<group>"; };
 		C0E914622842BD8E00AAD804 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		C0E914652842C13100AAD804 /* AccountHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -537,6 +541,7 @@
 				63F857EB2791880600F45A97 /* ScreenSize.swift */,
 				C02D10AB283D331A0053BFD8 /* ChatNavTitleView.swift */,
 				C0E9146D284417BD00AAD804 /* IconTextInfoView.swift */,
+				C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */,
 			);
 			path = Utilties;
 			sourceTree = "<group>";
@@ -702,6 +707,7 @@
 				C0E914642842C0E800AAD804 /* View */,
 				C0E9146C2843FB8E00AAD804 /* ViewModel */,
 				63F857DF2790658800F45A97 /* AccountViewController.swift */,
+				C0C1AA3E284BD2FF005CB3C1 /* SettingsViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -926,6 +932,7 @@
 				63881F6A27B5F9A8004A2AEE /* NetworkManager.swift in Sources */,
 				63881F6427B5E2A4004A2AEE /* NetworkRouter.swift in Sources */,
 				C02D10B6283DA4690053BFD8 /* ChatDetailViewModel.swift in Sources */,
+				C0C1AA3F284BD2FF005CB3C1 /* SettingsViewController.swift in Sources */,
 				6304EAD027B13D8600BDF75D /* TaskInfoCollectionViewCell.swift in Sources */,
 				6304EAA027A8723300BDF75D /* MessageCellProtocol.swift in Sources */,
 				6304EAB727AACFB500BDF75D /* ZoomAnimator.swift in Sources */,
@@ -1016,6 +1023,7 @@
 				639DCE4927988969007FC2DC /* DeadlineTableViewCell.swift in Sources */,
 				63F857EA2790F1D500F45A97 /* CalendarPopUpView.swift in Sources */,
 				63881F8327B9E5AB004A2AEE /* GradeEndPoint.swift in Sources */,
+				C0C1AA41284BF6FF005CB3C1 /* KeychainHelper.swift in Sources */,
 				C0E914682843F2A400AAD804 /* UserEndPoint.swift in Sources */,
 				63881F8127B9BCC3004A2AEE /* GradeViewModel.swift in Sources */,
 			);

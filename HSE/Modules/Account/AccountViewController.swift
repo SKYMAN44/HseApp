@@ -46,9 +46,9 @@ final class AccountViewController: UIViewController {
     }()
     private var viewModel: AccountViewModel?
     private var isMyAccount: Bool = false
-    public var embededScrollView: UIScrollView?
+    public weak var embededScrollView: UIScrollView?
     
-    // MARK:  - Init
+    // MARK: - Init
     init(userReference: UserReference? = nil) {
         super.init(nibName: nil, bundle: nil)
         
@@ -83,7 +83,7 @@ final class AccountViewController: UIViewController {
         collectionView.pinTop(to: view.safeAreaLayoutGuide.topAnchor)
         collectionView.pinBottom(to: isMyAccount ? view.safeAreaLayoutGuide.bottomAnchor : view.bottomAnchor)
         collectionView.delegate = self
-        collectionView.bounces = false
+//        collectionView.bounces = false
     }
     
     private func setupNavBar() {
@@ -105,7 +105,8 @@ final class AccountViewController: UIViewController {
     // MARK: - Interactions
     @objc
     private func showSettings() {
-        
+        let settingsController = SettingsViewController()
+        self.navigationController?.present(settingsController, animated: true)
     }
     
     // MARK: - Layout Creation
@@ -133,7 +134,7 @@ final class AccountViewController: UIViewController {
                 
                 return section
             default:
-                let valideHeight = ScreenSize.Height - self.view.safeAreaInsets.top - 48 - (self.isMyAccount ? self.view.safeAreaInsets.bottom : 0)
+                let valideHeight = self.collectionView.frame.height - Consts.switcherHeight
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(valideHeight))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
@@ -162,6 +163,11 @@ extension AccountViewController: UICollectionViewDelegate, TimeTableViewControll
             embededScrollView?.isScrollEnabled = false
             embededScrollView?.resignFirstResponder()
             collectionView.becomeFirstResponder()
+        } else {
+            embededScrollView?.isScrollEnabled = true
+            collectionView.isScrollEnabled = false
+            collectionView.resignFirstResponder()
+            embededScrollView?.becomeFirstResponder()
         }
     }
     
@@ -170,6 +176,7 @@ extension AccountViewController: UICollectionViewDelegate, TimeTableViewControll
         guard  let cell = collectionView.cellForItem(at: IndexPath(item: 0, section: 1)) else { return }
         let newRect = cell.frame
         let newRectAgain = collectionView.convert(newRect, to: collectionView.superview)
+        print(scrollView.contentOffset.y)
         if collectionView.frame.contains(newRectAgain) {
             embededScrollView?.isScrollEnabled = true
             collectionView.isScrollEnabled = false

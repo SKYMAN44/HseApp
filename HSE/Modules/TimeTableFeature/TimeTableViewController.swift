@@ -12,7 +12,15 @@ protocol TimeTableViewControllerScrollDelegate {
     func didScroll(_ scrollView: UIScrollView)
 }
 
-final class TimeTableViewController: UIViewController {
+protocol TimeTableModule: UIViewController {
+    var delegate: TimeTableViewControllerScrollDelegate?  { get set }
+    
+    func setupForEmbedingInScrollView() -> UIScrollView
+    func contentChanged(contentType: ContentType)
+    func deadlineContentChanged(_ deadlineType: DeadlineContentType)
+}
+
+final class TimeTableViewController: UIViewController, TimeTableModule {
     private enum Constants {
         static let tableViewHeaderHeight = 30.0
         static let tableViewFooterHeight = 0.0
@@ -33,7 +41,7 @@ final class TimeTableViewController: UIViewController {
     public var delegate: TimeTableViewControllerScrollDelegate?
     
     // MARK: - Init
-    init(_ isMyUser: Bool,_ userRefs: UserReference? = nil) {
+    init(_ isMyUser: Bool,_ userRefs: UserReference? = nil, networkService: NetworkManager? = nil) {
         // once backend appears configure viewmodel with account to view/ dependency injection of networkService
         self.viewModel = ScheduleViewModel(tableView: tableView, NetworkManager())
         super.init(nibName: nil, bundle: nil)

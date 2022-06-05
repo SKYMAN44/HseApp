@@ -108,6 +108,7 @@ final class ScheduleTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - LifeCycle
     override func layoutSubviews() {
         super.layoutSubviews()
         if(isShimmerMode) {
@@ -158,7 +159,7 @@ final class ScheduleTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    // MARK: - Internal
+    // MARK: - External
     public func configure(schedule: TimeSlot) {
         subjectNameLabel.text = schedule.subjectName
         eventTypeLabel.text = schedule.type
