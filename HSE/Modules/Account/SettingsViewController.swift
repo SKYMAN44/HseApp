@@ -11,6 +11,7 @@ final class SettingsViewController: UIViewController {
     private let exitButton: UIButton = {
         let button = UIButton()
         button.setTitle("Exit", for: .normal)
+        button.setTitleColor(.black, for: .normal)
         
         return button
     }()
@@ -25,7 +26,16 @@ final class SettingsViewController: UIViewController {
         self.view.backgroundColor = .background.style(.firstLevel)()
         self.view.addSubview(exitButton)
         
+        exitButton.addTarget(self, action: #selector(exitButtonTapped), for: .touchUpInside)
         exitButton.pin(to: view, [.left: 24, .right: 24])
         exitButton.pinCenter(to: view.centerYAnchor)
+    }
+    
+    @objc
+    private func exitButtonTapped() {
+        KeychainHelper.shared.delete(service: "HSESOCIAL", account: "account")
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+            sceneDelegate.window!.rootViewController = LoginViewController()
+        }
     }
 }

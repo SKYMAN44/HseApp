@@ -15,19 +15,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-//        if #available(iOS 15.0, *) {
-//            let navigationBarAppearance = UINavigationBarAppearance()
-//            navigationBarAppearance.configureWithDefaultBackground()
-//            UINavigationBar.appearance().standardAppearance = navigationBarAppearance
-//            UINavigationBar.appearance().compactAppearance = navigationBarAppearance
-//            UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
-//        }
-        
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-         window.rootViewController = LoginViewController()
-         self.window = window
-         window.makeKeyAndVisible()
+        
+        var entryController: UIViewController
+        let jwtToken = KeychainHelper.shared.read(service: "HSESOCIAL" , account: "account", type: TokenJWT.self)
+        
+        if(jwtToken != nil) {
+            entryController = TabBarBaseController(.student)
+        } else {
+            entryController = LoginViewController()
+        }
+        
+        window.rootViewController = entryController
+        self.window = window
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) { }
