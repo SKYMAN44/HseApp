@@ -416,14 +416,6 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		63881F7B27B9B837004A2AEE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				63881F7E27B9BC4C004A2AEE /* Grade.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		63881F8827BC5858004A2AEE /* Shimmer */ = {
 			isa = PBXGroup;
 			children = (
@@ -579,7 +571,7 @@
 			children = (
 				C0C1AA3D2848FA31005CB3C1 /* MainScreen */,
 				C0E9146F284424FB00AAD804 /* TimeTableFeature */,
-				63F857CF278F8C2F00F45A97 /* Auth */,
+				63F857CF278F8C2F00F45A97 /* Authentication */,
 				63E0499127B1789700942E36 /* Task */,
 				63C4D64D278E37410028381F /* Courses */,
 				638622E427A32A60004BCEB8 /* Chat */,
@@ -673,14 +665,14 @@
 			path = Main;
 			sourceTree = "<group>";
 		};
-		63F857CF278F8C2F00F45A97 /* Auth */ = {
+		63F857CF278F8C2F00F45A97 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
 				C0C1AA87284CEF24005CB3C1 /* ViewModel */,
 				6304EACB27B017B500BDF75D /* LoginViewController.swift */,
 				C0C1AA93284D0FA1005CB3C1 /* AuthProtocols.swift */,
 			);
-			path = Auth;
+			path = Authentication;
 			sourceTree = "<group>";
 		};
 		63F857D2278F8CD400F45A97 /* Extensions */ = {
@@ -712,7 +704,6 @@
 		63F857E4279085DA00F45A97 /* Grades */ = {
 			isa = PBXGroup;
 			children = (
-				63881F7B27B9B837004A2AEE /* Model */,
 				63881F7927B9B82A004A2AEE /* View */,
 				63881F7A27B9B82F004A2AEE /* ViewModel */,
 				63F857DD2790657B00F45A97 /* GradesViewController.swift */,
@@ -783,6 +774,7 @@
 		C0E914692843F38200AAD804 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				63881F7E27B9BC4C004A2AEE /* Grade.swift */,
 				63B2830627C696C30091C43B /* UserReference.swift */,
 				C0E9146A2843F39600AAD804 /* User.swift */,
 			);

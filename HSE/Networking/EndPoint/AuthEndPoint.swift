@@ -18,7 +18,6 @@ extension AuthApi: EndPointType {
         } else {
             fatalError("Couldn't construct url")
         }
-       
     }
     
     var path: String {
@@ -35,9 +34,17 @@ extension AuthApi: EndPointType {
     
     var task: HTTPTask {
         if case .login(let info) = self {
-            return .requestParameters(bodyParameters: ["email": info.email,"password": info.password, "role": info.role.rawValue], urlParameters: nil)
+            return .requestParameters(
+                bodyParameters: [
+                    "email": info.email,
+                    "password": info.password,
+                    "role": info.role.rawValue
+                ],
+                bodyEncoding: .jsonEncoding,
+                urlParameters: nil
+            )
         } else {
-            return .requestParameters(bodyParameters: ["email": "","password": "", "role": ""], urlParameters: nil)
+            return .requestParameters(bodyParameters: ["email": "","password": "", "role": ""], bodyEncoding: .jsonEncoding, urlParameters: nil)
         }
     }
     

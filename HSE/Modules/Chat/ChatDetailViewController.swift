@@ -92,58 +92,16 @@ final class ChatDetailViewController: UIViewController {
     }
     
     private func setupNavBar() {
-        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
+        let leftBarButton = UIBarButtonItem(
             image: UIImage(named: "chevronleft"),
             style: .plain,
             target: self,
             action: #selector(goBack)
         )
-        guard let navigationBar = self.navigationController?.navigationBar else { return }
-//        navigationBar.addSubview(userImageView)
-        chatNameLabel.text = "Professors/Student"
-//        navigationBar.addSubview(chatNameLabel)
-        
-        self.navigationController?.navigationBar.scalesLargeContentImage = true
-        self.navigationController?.navigationBar.showsLargeContentViewer = true
-        self.navigationController?.navigationBar.largeContentImage = userImageView.image
-        self.navigationController?.navigationBar.largeContentTitle = "Professor/Students"
-//        userImageView.pin(to: navigationBar, [.top: 0])
-//        userImageView.pinCenter(to: navigationBar)
-//        userImageView.setHeight(to: Consts.imageSmallSize)
-//        chatNameLabel.pinTop(to: userImageView.bottomAnchor, 12)
-//        chatNameLabel.pinCenter(to: navigationBar)
-//        navigationController?.navigationBar.frame = CGRect(x: navigationBar.frame.minX, y: navigationBar.frame.minY, width: ScreenSize.Width, height: 200)
-    }
-    
-    private func moveAndResize(for height: CGFloat) {
-        let coeff: CGFloat = {
-            let delta = height - Consts.imageLargeSize
-            let heightDifferenceBetweenStates = (Consts.imageLargeSize - Consts.imageSmallSize)
-            return delta / heightDifferenceBetweenStates
-        }()
-
-        let factor = Consts.imageSmallSize / Consts.imageLargeSize
-
-        let scale: CGFloat = {
-            let sizeAddendumFactor = coeff * (1.0 - factor)
-            return min(1.0, sizeAddendumFactor + factor)
-        }()
-
-        // Value of difference between icons for large and small states
-        let sizeDiff = 100 * (1.0 - factor) // 8.0
-        let yTranslation: CGFloat = {
-            let maxYTranslation = Consts.topInset - Consts.topInset + sizeDiff
-            return max(0, min(maxYTranslation, (maxYTranslation - coeff * (Consts.topInset + sizeDiff))))
-        }()
-
-        let xTranslation = max(0, sizeDiff - coeff * sizeDiff)
-
-        userImageView.transform = CGAffineTransform.identity
-            .scaledBy(x: scale, y: scale)
-            .translatedBy(x: xTranslation, y: yTranslation)
+        leftBarButton.imageInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+        navigationItem.leftBarButtonItem = leftBarButton
     }
     
     // MARK: - Navigation
@@ -159,8 +117,5 @@ extension ChatDetailViewController: UIGestureRecognizerDelegate { }
 
 // MARK: - TableViewDelegate
 extension ChatDetailViewController: UITableViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard let height = navigationController?.navigationBar.frame.height else { return }
-        moveAndResize(for: height)
-    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {}
 }

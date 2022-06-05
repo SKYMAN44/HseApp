@@ -7,9 +7,14 @@
 
 import Foundation
 
+enum NetworkEnvironment {
+    case production
+    case test
+    case local
+}
 
 struct NetworkManager {
-    static let environment: NetworkEnvironment = .local
+    static let environment: NetworkEnvironment = .production
     static let ApiKey = "NO_key"
     private let router = Router<ScheduleAPI>()
     private let routerD = Router<DeadLineAPI>()
@@ -41,8 +46,8 @@ struct NetworkManager {
         }
     }
     
-    public func getSchedule(completion: @escaping (_ schedule: [ScheduleDay]?, _ error: String?) -> () ) {
-        router.request(.currentSchedule(id: 1)) { data, response, error in
+    public func getSchedule(_ page: Int, completion: @escaping (_ schedule: [ScheduleDay]?, _ error: String?) -> () ) {
+        router.request(.mySchedule(page: page)) { data, response, error in
             if error != nil {
                 completion(nil, "Check Network Connection")
             }
@@ -57,6 +62,7 @@ struct NetworkManager {
                     }
                     
                     do {
+                        print(String(decoding: responseData, as: UTF8.self))
                         let apiResponse = try JSONDecoder().decode([ScheduleDay].self, from: responseData)
                         completion(apiResponse, nil)
                     } catch {

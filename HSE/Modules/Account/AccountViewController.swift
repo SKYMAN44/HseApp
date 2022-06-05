@@ -86,6 +86,7 @@ final class AccountViewController: UIViewController {
 //        collectionView.bounces = false
     }
     
+    // MARK: - setup NavBar
     private func setupNavBar() {
         self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -99,6 +100,15 @@ final class AccountViewController: UIViewController {
                 target: self,
                 action: #selector(showSettings)
             )
+        } else {
+            let leftBarButton = UIBarButtonItem(
+                image: UIImage(named: "chevronleft"),
+                style: .plain,
+                target: self,
+                action: #selector(goBack)
+            )
+            leftBarButton.imageInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
+            navigationItem.leftBarButtonItem = leftBarButton
         }
     }
     
@@ -107,6 +117,11 @@ final class AccountViewController: UIViewController {
     private func showSettings() {
         let settingsController = SettingsViewController()
         self.navigationController?.present(settingsController, animated: true)
+    }
+    
+    @objc
+    private func goBack() {
+        navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Layout Creation

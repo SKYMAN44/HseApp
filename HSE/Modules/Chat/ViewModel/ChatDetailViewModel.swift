@@ -32,6 +32,7 @@ final class ChatDetailViewModel: NSObject {
             }
         }
     }
+    
     enum Item: Hashable {
         case header(ChatDetail)
         case user(UserReference)
@@ -149,6 +150,10 @@ extension ChatDetailViewModel: UITableViewDelegate {
         label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16).isActive = true
 
         return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 0.0 : 30
     }
 }
 

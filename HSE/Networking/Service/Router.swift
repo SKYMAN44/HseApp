@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class Router<EndPoint: EndPointType>: NetworkRouter {
     private var task: URLSessionTask?
     
@@ -17,7 +16,7 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         do {
             let request = try self.buildRequest(from: route)
             print(request)
-            print(request.httpBody.debugDescription)
+            print(request.description)
             task = session.dataTask(with: request) { (data, response, error) in
                 completion(data, response, error)
             }
@@ -25,14 +24,6 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
             completion(nil, nil, error)
         }
         self.task?.resume()
-    }
-    
-    func cancel() {
-        guard task != nil else {
-            return
-        }
-
-        self.task?.cancel()
     }
     
     private func buildRequest(from route: EndPoint) throws -> URLRequest {
@@ -46,31 +37,19 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
             case .request:
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             case .requestParameters(let bodyParameters,
+                                    let bodyEncoding,
                                     let urlParameters):
-                try self.configureParameters(bodyParameters: bodyParameters, urlParameters: urlParameters, request: &request)
-            case .requestParametersAndHeaders(let bodyParameters,
-                                    let urlParameters,
-                                              let additionalHeaders):
+                try bodyEncoding.encode(urlRequest: &request, bodyParameters: bodyParameters, urlParameters: urlParameters)
+            case .requestParametersAndHeaders(
+                let bodyParameters,
+                let bodyEncoding,
+                let urlParameters,
+                let additionalHeaders
+            ):
                 self.addAdditionalHeaders(additionalHeaders, request: &request)
-                try self.configureParameters(bodyParameters: bodyParameters,
-                                             urlParameters: urlParameters,
-                                             request: &request)
+                try bodyEncoding.encode(urlRequest: &request, bodyParameters: bodyParameters, urlParameters: urlParameters)
             }
             return request
-        } catch {
-            throw error
-        }
-    }
-    
-    private func configureParameters(bodyParameters: Parameters?, urlParameters: Parameters?, request: inout URLRequest) throws {
-        // configure url parameters (encode them)
-        do {
-            if let bodyParameters = bodyParameters {
-                try JSONParameterEncoder.encode(urlRequest: &request, with: bodyParameters)
-            }
-            if let urlParameters = urlParameters {
-                try JSONParameterEncoder.encode(urlRequest: &request, with: urlParameters)
-            }
         } catch {
             throw error
         }
@@ -81,5 +60,13 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         for (key, value) in headers {
             request.setValue(value, forHTTPHeaderField: key)
         }
+    }
+    
+    public func cancel() {
+        guard task != nil else {
+            return
+        }
+
+        self.task?.cancel()
     }
 }

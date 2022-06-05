@@ -85,12 +85,14 @@ final class ChatViewController: UIViewController {
         navView.configure(UIImage(named: "testPic.jpg")!, "Progessor/TA?Studentkfkfkfkfkfkfk", "volumeCS")
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.interactivePopGestureRecognizer?.delegate = self
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
+        let leftButtonItem = UIBarButtonItem(
             image: UIImage(named: "chevronleft"),
             style: .plain,
             target: self,
             action: #selector(goBack)
         )
+        leftButtonItem.imageInsets = UIEdgeInsets(top: 0, left: -12, bottom:0, right: 0)
+        navigationItem.leftBarButtonItem = leftButtonItem
         navigationItem.titleView = navView
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "ellipsis"),

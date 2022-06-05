@@ -163,7 +163,7 @@ final class ScheduleViewModel {
     
     // MARK: - API Calls
     private func fetchSchedule() {
-        networkManager?.getSchedule { schedule, error in
+        networkManager?.getSchedule(1) { schedule, error in
             if let error = error {
                 print(error)
             }
