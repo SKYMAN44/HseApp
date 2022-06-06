@@ -9,10 +9,6 @@ import UIKit
 
 
 final class TaskDetailViewController: UIViewController, TaskDetailModule {
-    enum SupplementaryViewKind {
-        static let header = "header"
-    }
-    
     private let dismissButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
@@ -34,11 +30,11 @@ final class TaskDetailViewController: UIViewController, TaskDetailModule {
         return button
     }()
     
-    private let collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: -16)
         
-        collectionView.register(TaskHeaderCollectionReusableView.self, forSupplementaryViewOfKind: SupplementaryViewKind.header , withReuseIdentifier: TaskHeaderCollectionReusableView.reuseIdentifier)
+        collectionView.register(TaskHeaderCollectionReusableView.self, forSupplementaryViewOfKind: self.headerKind, withReuseIdentifier: TaskHeaderCollectionReusableView.reuseIdentifier)
         collectionView.register(TaskInfoCollectionViewCell.self, forCellWithReuseIdentifier: TaskInfoCollectionViewCell.reusdeIdentifier)
         collectionView.register(TimeCollectionViewCell.self, forCellWithReuseIdentifier: TimeCollectionViewCell.reuseIdentifier)
         collectionView.register(CreatorCollectionViewCell.self, forCellWithReuseIdentifier: CreatorCollectionViewCell.reusdeIdentifier)
@@ -50,14 +46,15 @@ final class TaskDetailViewController: UIViewController, TaskDetailModule {
         
         return collectionView
     }()
-    private var viewModel: TaskViewModel
+    
+    public let headerKind: String = "header"
+    private var taskViewModel: TaskFeatureLogic?
     
     // MARK: - Init
     init(deadline: Deadline) {
-        viewModel = TaskViewModel(collectionView, deadline: deadline)
-
         super.init(nibName: nil, bundle: nil)
         
+        taskViewModel = TaskViewModel(self, collectionView, deadline: deadline)
         collectionView.collectionViewLayout.invalidateLayout()
         collectionView.setCollectionViewLayout(generateLayout(), animated: false)
     }
@@ -70,7 +67,6 @@ final class TaskDetailViewController: UIViewController, TaskDetailModule {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = viewModel.task.taskDescription.discription
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         let backImage = UIImage(named: "chevronleft")
@@ -104,10 +100,14 @@ final class TaskDetailViewController: UIViewController, TaskDetailModule {
     // MARK: - Generate Layout
     private func generateLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(30))
-            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: SupplementaryViewKind.header, alignment: .top)
             
-            switch self.viewModel.sections[sectionIndex] {
+            guard let viewModel = self.taskViewModel else {
+                return nil
+            }
+            let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(30))
+            let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: self.headerKind, alignment: .top)
+            
+            switch viewModel.sections[sectionIndex] {
             case .taskInfo, .publicationTime, .deadlineTime, .creator, .submissionTime, .edit:
                 return self.dynamicSectionGenerator()
             case .taskFiles, .submission:

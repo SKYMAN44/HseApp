@@ -13,11 +13,10 @@ public enum UserAPI {
 
 extension UserAPI: EndPointType {
     var baseURL: URL {
-        return  URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/timetable/")!
+        return  URL(string:"https://hse-backend-test.herokuapp.com/users")!
     }
-    
     var path: String {
-        return ""
+        return "/profile"
     }
     
     var httpMethod: HTTPMethod {
@@ -29,6 +28,13 @@ extension UserAPI: EndPointType {
     }
     
     var headers: HTTPHeaders? {
-        return nil
+        guard let token = KeychainHelper.shared.read(
+            service: "HSESOCIAL",
+            account: "account",
+            type: TokenJWT.self
+        ) else {
+            return nil
+        }
+        return ["Bearer \(token.token)":"Authorization"]
     }
 }

@@ -7,10 +7,13 @@
 
 import Foundation
 
-struct ScheduleDay {
-    let day: String
-    let timeSlot: [TimeSlot]
+typealias ScheduleDictonary = [String: [TimeSlot]]
+
+struct ScheduleApiResponse {
+    var pageNum: Int
+    var timeTable: ScheduleDictonary
 }
 
-extension ScheduleDay: Hashable { }
-extension ScheduleDay: Decodable { }
+extension ScheduleApiResponse: Hashable {}
+extension ScheduleApiResponse: Decodable {}
+

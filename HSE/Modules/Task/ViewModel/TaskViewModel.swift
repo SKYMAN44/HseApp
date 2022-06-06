@@ -10,19 +10,8 @@ import UIKit
 
 
 final class TaskViewModel: TaskFeatureLogic {
-    typealias CollectionDataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>
-    typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>
-    
-    enum Section: String, Hashable {
-        case taskInfo
-        case publicationTime = "PUBLICATION TIME"
-        case deadlineTime = "DEADLINE TIME"
-        case taskFiles
-        case creator
-        case submission
-        case submissionTime = "SUBMISSION TIME"
-        case edit
-    }
+    typealias CollectionDataSource = UICollectionViewDiffableDataSource<TaskSection, AnyHashable>
+    typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<TaskSection, AnyHashable>
     
     struct ReadyToViewModel {
         let taskDescription: TaskDescription
@@ -50,13 +39,14 @@ final class TaskViewModel: TaskFeatureLogic {
     }
     public var task: StudentTask = StudentTask.example {
         didSet {
+            viewController.title = task.taskDescription.discription
             updateDataSource()
         }
     }
     
+    private var viewController: TaskDetailModule
     private var readyToViewTask: ReadyToViewModel?
-    
-    public var sections = [Section]()
+    public var sections = [TaskSection]()
     
     // MARK: - DataSource
     private lazy var dataSource: CollectionDataSource = {
@@ -130,31 +120,27 @@ final class TaskViewModel: TaskFeatureLogic {
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
-            switch kind {
-            case TaskDetailViewController.SupplementaryViewKind.header:
-                let section = self.sections[indexPath.section]
-                let headerView = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: TaskDetailViewController.SupplementaryViewKind.header,
-                    withReuseIdentifier: TaskHeaderCollectionReusableView.reuseIdentifier,
-                    for: indexPath
-                ) as? TaskHeaderCollectionReusableView
-                if case .taskFiles = section {
-                    headerView?.configure(title: "TASK FILES")
-                } else {
-                    headerView?.configure(title: "SUBMISSION")
-                }
-                
-                return headerView
-            default:
-                return nil
+            let section = self.sections[indexPath.section]
+            let headerView = collectionView.dequeueReusableSupplementaryView(
+                ofKind: self.viewController.headerKind,
+                withReuseIdentifier: TaskHeaderCollectionReusableView.reuseIdentifier,
+                for: indexPath
+            ) as? TaskHeaderCollectionReusableView
+            if case .taskFiles = section {
+                headerView?.configure(title: "TASK FILES")
+            } else {
+                headerView?.configure(title: "SUBMISSION")
             }
+            
+            return headerView
         }
         return dataSource
     }()
         
     
     // MARK: - Init
-    init(_ collectionView: UICollectionView, deadline: Deadline) {
+    init(_ viewController: TaskDetailModule, _ collectionView: UICollectionView, deadline: Deadline) {
+        self.viewController = viewController
         self.deadline = deadline
         self.collectionView = collectionView
         collectionView.dataSource = self.dataSource

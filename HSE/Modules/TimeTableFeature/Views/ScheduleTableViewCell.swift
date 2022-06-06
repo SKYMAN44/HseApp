@@ -165,7 +165,9 @@ final class ScheduleTableViewCell: UITableViewCell {
         eventTypeLabel.text = schedule.type
         startTimeLabel.text = schedule.timeStart
         endTimeLabel.text = schedule.timeEnd
-        locationLabel.text = schedule.visitType
+//        startTimeLabel.text = schedule.getNormalTimeString(schedule.timeStart)
+//        endTimeLabel.text = schedule.getNormalTimeString(schedule.timeEnd)
+        locationLabel.text = schedule.visitType ? "Online" : "Offline"
         onlineImageView.image = UIImage(named: "camera")
     }
     

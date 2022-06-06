@@ -19,7 +19,7 @@ enum DeadlineContentType: String {
     case cw
 }
 
-final class ScheduleViewModel: TimeTableFeatureLogic {
+final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable,Item>
     
     private var networkManager: NetworkManager?
@@ -38,9 +38,11 @@ final class ScheduleViewModel: TimeTableFeatureLogic {
         }
     }
     
-   private(set) var schedule = [ScheduleDay]() {
+    private var currentPage: Int = 1
+    private var scheduleSectionsIdentifiers = [String]()
+    private(set) var scheduleResponse: ScheduleApiResponse? {
         didSet {
-            self.updateDataSource()
+            updateDataSource()
         }
     }
     
@@ -96,18 +98,26 @@ final class ScheduleViewModel: TimeTableFeatureLogic {
         case deadline(Deadline)
         case loading(UUID)
         
+        static let shimmerSectionIdentifier = "Shimmer"
         static var loadingItems: [Item] {
             return Array(repeatingExpression: Item.loading(UUID()), count: 8)
         }
     }
+    private weak var viewController: TimeTableModule?
     private weak var tableView: UITableView?
     
     // MARK: - Init
     // kingFisher?
-    init(tableView: UITableView, _ networkManager: NetworkManager) {
+    init(_ viewController: TimeTableModule, tableView: UITableView, _ networkManager: NetworkManager) {
+        self.viewController = viewController
         self.tableView = tableView
         self.networkManager = networkManager
+        
+        super.init()
+        
         tableView.dataSource = dataSource
+        self.tableView?.delegate = self
+        
         updateData()
     }
     
@@ -117,17 +127,36 @@ final class ScheduleViewModel: TimeTableFeatureLogic {
         var itemBySection = [String: [Item]]()
         // transform array into itemBySection form, where Key is a day(Section) values is array of timeslots/deadlines
         if contentType == .timeTable {
-            sectionIdentifiers = self.schedule.map { $0.day }
-            self.schedule.forEach {
-                itemBySection[$0.day] = $0.timeSlot.map { Item.timeslot($0) }
-            }
+            guard let scheduleResponse = scheduleResponse else { return }
+            
+            itemBySection = scheduleResponse.timeTable.mapValues { $0.map {
+                Item.timeslot(TimeSlot(from: $0, convertDates: true))
+            }}
+            
+            let temp: [Date] = scheduleResponse.timeTable.keys.lazy.compactMap { (strDate) in
+                if let date = strDate.description.convertStringToDate() {
+                    return date
+                }
+                else {
+                    return nil
+                }
+            }.sorted(by: { $0.compare($1) == .orderedAscending })
+            
+            sectionIdentifiers = temp.map( { $0.convertFullDateToString() })
+            self.scheduleSectionsIdentifiers = sectionIdentifiers
         } else {
             sectionIdentifiers = self.currentdeadlines.map { $0.day }
             self.currentdeadlines.forEach {
                 itemBySection[$0.day] = $0.assignments.map { Item.deadline($0) }
             }
         }
-        dataSource.applySnapshotUsing(sectionIDs: sectionIdentifiers, itemBySection: itemBySection, animatingDifferences: false)
+        DispatchQueue.main.async {
+            self.dataSource.applySnapshotUsing(
+                sectionIDs: sectionIdentifiers,
+                itemBySection: itemBySection,
+                animatingDifferences: false
+            )
+        }
     }
     
     // вынести в отдельную вьюмодел
@@ -157,15 +186,35 @@ final class ScheduleViewModel: TimeTableFeatureLogic {
         }
     }
     
-    // MARK: - API Calls
-    private func fetchSchedule() {
+    // MARK: - Fetching Data
+    private func fetchOriginalSchedule() {
         networkManager?.getSchedule(1) { schedule, error in
             if let error = error {
                 print(error)
             }
             if let schedule = schedule {
                 self.isLoading = false
-                self.schedule = schedule
+                self.currentPage = 1
+                self.scheduleResponse = schedule
+            }
+        }
+    }
+    
+    private func fetchMoreSchedule() {
+        guard !isLoading else { return }
+        guard scheduleResponse?.pageNum != currentPage
+        else {
+            return
+        }
+        isLoading = true
+        networkManager?.getSchedule(currentPage + 1) { schedule, error in
+            if let error = error {
+                print(error)
+            }
+            if let schedule = schedule {
+                self.currentPage += 1
+                self.isLoading = false
+                self.scheduleResponse?.timeTable.merge(schedule.timeTable) { (current, _) in current }
             }
         }
     }
@@ -184,18 +233,45 @@ final class ScheduleViewModel: TimeTableFeatureLogic {
     
     // MARK: - Shimmer
     private func setShimmer() {
-        dataSource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
+        var snapshot = dataSource.snapshot()
+        if snapshot.sectionIdentifiers.contains(Item.shimmerSectionIdentifier) {
+            snapshot.deleteSections([Item.shimmerSectionIdentifier])
+        }
+        snapshot.appendSections([Item.shimmerSectionIdentifier])
+        snapshot.appendItems(Item.loadingItems, toSection: Item.shimmerSectionIdentifier)
+        
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot, animatingDifferences: false, completion: nil)
+        }
+    }
+    
+    private func clearDataSource(completion: @escaping () -> ()) {
+        DispatchQueue.main.async {
+            var snapshot = self.dataSource.snapshot()
+            snapshot.deleteAllItems()
+            self.dataSource.apply(snapshot, animatingDifferences: false) {
+                completion()
+            }
+        }
     }
     
     // MARK: - External calls
     public func updateData() {
-        isLoading = true
-        if (contentType == .timeTable) {
-            self.fetchSchedule()
-            self.networkManager?.cancelDeadline()
-        } else {
-            fetchDeadline()
-            networkManager?.cancelSchedule()
+        /* function is called in case of firstLoad, content switch or reload triggered by user
+            hence dataSource needed to be cleread to put shimmer on whole collection view
+         */
+        guard !isLoading else { return }
+        clearDataSource {
+            self.isLoading = true
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                if(self.contentType == .timeTable) {
+                    self.fetchOriginalSchedule()
+                    self.networkManager?.cancelDeadline()
+                } else {
+                    self.fetchDeadline()
+                    self.networkManager?.cancelSchedule()
+                }
+            }
         }
     }
     
@@ -206,5 +282,53 @@ final class ScheduleViewModel: TimeTableFeatureLogic {
     public func deadLineContentChanged(_ type: DeadlineContentType) {
         deadlineType = type
         sortDeadlines()
+    }
+}
+
+// MARK: - TableView Delegate
+extension ScheduleViewModel: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard contentType == .assigments else { return }
+        
+        let detailVC = TaskDetailViewController(deadline: currentdeadlines[indexPath.section].assignments[indexPath.row])
+        viewController?.navigationController?.present(detailVC, animated: true)
+    }
+   
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
+        headerView.backgroundColor = .background.style(.firstLevel)()
+        
+        let label = UILabel()
+        label.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: 15)
+        label.font = .customFont.style(.special)()
+        label.textColor = .textAndIcons.style(.tretiary)()
+        if isLoading == false {
+            switch contentType {
+            case .timeTable:
+                label.text = scheduleSectionsIdentifiers[section].getTodayWeekDay()
+            case .assigments:
+                label.text = currentdeadlines[section].day
+            }
+        } else {
+            label.text = ""
+        }
+        
+        headerView.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16).isActive = true
+        
+        return headerView
+    }
+    
+    // MARK: - Scroll
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        if position > ScreenSize.Height {
+            guard !isLoading  else { return }
+            fetchMoreSchedule()
+        }
+        viewController?.delegate?.didScroll(scrollView)
     }
 }

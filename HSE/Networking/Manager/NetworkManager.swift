@@ -46,7 +46,7 @@ struct NetworkManager {
         }
     }
     
-    public func getSchedule(_ page: Int, completion: @escaping (_ schedule: [ScheduleDay]?, _ error: String?) -> () ) {
+    public func getSchedule(_ page: Int, completion: @escaping (_ schedule: ScheduleApiResponse?, _ error: String?) -> () ) {
         router.request(.mySchedule(page: page)) { data, response, error in
             if error != nil {
                 completion(nil, "Check Network Connection")
@@ -62,8 +62,7 @@ struct NetworkManager {
                     }
                     
                     do {
-                        print(String(decoding: responseData, as: UTF8.self))
-                        let apiResponse = try JSONDecoder().decode([ScheduleDay].self, from: responseData)
+                        let apiResponse = try JSONDecoder().decode(ScheduleApiResponse.self, from: responseData)
                         completion(apiResponse, nil)
                     } catch {
                         completion(nil, NetworkingResponse.unableToDecode.rawValue)
@@ -103,8 +102,33 @@ struct NetworkManager {
         }
     }
     
-    public func getMyUser(completion: @escaping (_ user: UserReference?, _ error: String?) -> () ) {
-        
+    public func getMyUser(completion: @escaping (_ userRef: UserReference?, _ error: String?) -> () ) {
+        routerUser.request(.user) { data, response, error in
+            if error != nil {
+                print(error)
+                completion(nil, "Check Network Connection")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkRequest(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkingResponse.noData.rawValue)
+                        return
+                    }
+                    
+                    do {
+                        print(String(decoding: responseData, as: UTF8.self))
+                        completion(nil, nil)
+                    } catch {
+                        completion(nil, NetworkingResponse.unableToDecode.rawValue)
+                    }
+                case .failure(let error):
+                    completion(nil, error)
+                }
+            }
+        }
     }
     
     public func login(_ loginInfo: LoginInfo, completion: @escaping (_ token: TokenJWT?, _ error: String?) -> ()) {

@@ -8,9 +8,24 @@
 import UIKit
 
 protocol TaskDetailModule: UIViewController {
+    var headerKind: String { get }
+    
     init(deadline: Deadline)
 }
 
 protocol TaskFeatureLogic {
-    init(_ collectionView: UICollectionView, deadline: Deadline)
+    var sections: [TaskSection] { get }
+    
+    init(_ viewController: TaskDetailModule, _ collectionView: UICollectionView, deadline: Deadline)
+}
+
+internal enum TaskSection: String, Hashable {
+    case taskInfo
+    case publicationTime = "PUBLICATION TIME"
+    case deadlineTime = "DEADLINE TIME"
+    case taskFiles
+    case creator
+    case submission
+    case submissionTime = "SUBMISSION TIME"
+    case edit
 }

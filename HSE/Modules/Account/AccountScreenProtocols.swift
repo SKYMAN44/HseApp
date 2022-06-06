@@ -14,9 +14,9 @@ protocol AccountScreen: UIViewController {
 }
 
 protocol AccountLogic {
-    init(
-        _ collectionView: UICollectionView,
-        _ viewController: AccountScreen,
-        _ userReference: UserReference?
-    )
+//    init(
+//        _ collectionView: UICollectionView,
+//        _ viewController: AccountScreen,
+//        _ userReference: UserReference?
+//    )
 }

@@ -7,7 +7,12 @@
 
 import UIKit
 
-final class PhotoZoomViewController: UIViewController {
+protocol PhotoViewer: UIViewController {
+    var image: UIImage? { get set }
+    var transitionController: ZoomTransitionController { get }
+}
+
+final class PhotoZoomViewController: UIViewController, PhotoViewer {
     private var photoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -43,7 +48,6 @@ final class PhotoZoomViewController: UIViewController {
     public var image: UIImage?
     
     // MARK: - LifeCycle
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,7 +84,6 @@ final class PhotoZoomViewController: UIViewController {
     }
     
     // MARK: - UI setup
-    
     private func setupUI() {
         view.addSubview(scrollView)
         
@@ -108,7 +111,6 @@ final class PhotoZoomViewController: UIViewController {
     }
     
     // MARK: - Interactions
-    
     @objc
     private func tapPerformed(gestureRecognizer: UITapGestureRecognizer) {
         if(numberOfTaps == 0) {
@@ -199,7 +201,6 @@ final class PhotoZoomViewController: UIViewController {
 }
 
 // MARK: - Scroll Delegate
-
 extension PhotoZoomViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return photoImageView
@@ -211,7 +212,6 @@ extension PhotoZoomViewController: UIScrollViewDelegate {
 }
 
 // MARK: - GestureRecognizerDelegate
-
 extension PhotoZoomViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let gestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
@@ -236,7 +236,6 @@ extension PhotoZoomViewController: UIGestureRecognizerDelegate {
 }
 
 // MARK: - ZoomAnimator Delegate
-
 extension PhotoZoomViewController: ZoomAnimatorDelegate {
     
     func transitionWillStartWith(zoomAnimator: ZoomAnimator) {

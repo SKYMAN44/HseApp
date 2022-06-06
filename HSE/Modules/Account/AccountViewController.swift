@@ -8,7 +8,7 @@
 import UIKit
 import HSESKIT
 
-final class AccountViewController: UIViewController {
+final class AccountViewController: UIViewController, AccountScreen {
     public enum SupplementaryViewKind {
         static let segments = "segments"
     }

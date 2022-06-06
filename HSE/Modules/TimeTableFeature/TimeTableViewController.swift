@@ -25,14 +25,14 @@ final class TimeTableViewController: UIViewController, TimeTableModule {
     }()
     
     private var refreshControl: UIRefreshControl!
-    private var viewModel: ScheduleViewModel
+    private var viewModel: ScheduleViewModel?
     public var delegate: TimeTableViewControllerScrollDelegate?
     
     // MARK: - Init
     init(_ isMyUser: Bool,_ userRefs: UserReference? = nil, networkService: NetworkManager? = nil) {
         // once backend appears configure viewmodel with account to view/ dependency injection of networkService
-        self.viewModel = ScheduleViewModel(tableView: tableView, NetworkManager())
         super.init(nibName: nil, bundle: nil)
+        self.viewModel = ScheduleViewModel(self, tableView: tableView, NetworkManager())
     }
     
     required init?(coder: NSCoder) {
@@ -46,7 +46,6 @@ final class TimeTableViewController: UIViewController, TimeTableModule {
         self.view.backgroundColor = .background.style(.accent)()
         setupTableView()
         setupRefreshControl()
-        tableView.delegate = self
     }
     
     // MARK: - UI setup
@@ -74,7 +73,7 @@ final class TimeTableViewController: UIViewController, TimeTableModule {
     @objc
     private func refreshData() {
         refreshControl.endRefreshing()
-        viewModel.updateData()
+        viewModel?.updateData()
     }
     
     public func setupForEmbedingInScrollView() -> UIScrollView {
@@ -84,55 +83,10 @@ final class TimeTableViewController: UIViewController, TimeTableModule {
     }
     
     public func contentChanged(contentType: ContentType) {
-        viewModel.contentChanged(contentType: contentType)
+        viewModel?.contentChanged(contentType: contentType)
     }
     
     public func deadlineContentChanged(_ deadlineType: DeadlineContentType) {
-        viewModel.deadLineContentChanged(deadlineType)
-    }
-}
-
-// MARK: - TableView Delegate
-extension TimeTableViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard viewModel.contentType == .assigments else { return }
-        
-        let detailVC = TaskDetailViewController(deadline: viewModel.currentdeadlines[indexPath.section].assignments[indexPath.row])
-        //        self.hidesBottomBarWhenPushed = true
-        //        self.navigationController?.pushViewController(detailVC, animated: true)
-        navigationController?.present(detailVC, animated: true)
-        //        self.hidesBottomBarWhenPushed = false
-    }
-   
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
-        headerView.backgroundColor = .background.style(.firstLevel)()
-        
-        let label = UILabel()
-        label.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: 15)
-        label.font = .customFont.style(.special)()
-        label.textColor = .textAndIcons.style(.tretiary)()
-        if viewModel.isLoading == false {
-            switch viewModel.contentType {
-            case .timeTable:
-                label.text = viewModel.schedule[section].day
-            case .assigments:
-                label.text = viewModel.currentdeadlines[section].day
-            }
-        } else {
-            label.text = ""
-        }
-        
-        headerView.addSubview(label)
-        
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
-        label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16).isActive = true
-        
-        return headerView
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        delegate?.didScroll(scrollView)
+        viewModel?.deadLineContentChanged(deadlineType)
     }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 
-final class AccountViewModel {
+final class AccountViewModel: AccountLogic {
     private typealias CollectionDataSource = UICollectionViewDiffableDataSource<AnyHashable, Item>
     private typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<AnyHashable, Item>
     
@@ -136,6 +136,11 @@ final class AccountViewModel {
     
     // MARK: - API CALL
     private func fetchUserInfo() {
+        NetworkManager().getMyUser(completion: { (res, error) in
+            if let res = res {
+                print(res)
+            }
+        })
         self.user = User.testUser
         updateDataSource()
     }
