@@ -12,10 +12,9 @@ public enum DeadLineAPI {
     case deadlines(id: Int)
 }
 
-
 extension DeadLineAPI: EndPointType {
     var baseURL: URL {
-        switch NetworkManager.environment {
+        switch BaseNetworkManager.environment {
         case .local:
             return URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/deadline/")!
         case .production:

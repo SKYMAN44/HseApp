@@ -24,7 +24,7 @@ extension UserAPI: EndPointType {
     }
     
     var task: HTTPTask {
-        return .request
+        return .requestParametersAndHeaders(bodyParameters: nil, bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
     }
     
     var headers: HTTPHeaders? {
@@ -35,6 +35,6 @@ extension UserAPI: EndPointType {
         ) else {
             return nil
         }
-        return ["Bearer \(token.token)":"Authorization"]
+        return ["authorization":"Bearer \(token.token)"]
     }
 }

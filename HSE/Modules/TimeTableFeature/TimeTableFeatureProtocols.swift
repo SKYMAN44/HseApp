@@ -22,7 +22,7 @@ protocol TimeTableModule: UIViewController {
 
 
 protocol TimeTableFeatureLogic {
-    init(_ viewController: TimeTableModule, tableView: UITableView, _ networkManager: NetworkManager)
+    init(_ viewController: TimeTableModule, tableView: UITableView, _ deadlineNetworkManager: DeadlineNetworkManager, _ scheduleNetworkManager: ScheduleNetworkManager)
     
     func updateData()
     func contentChanged(contentType: ContentType)

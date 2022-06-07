@@ -12,10 +12,15 @@ final class AccountViewModel: AccountLogic {
     private typealias CollectionDataSource = UICollectionViewDiffableDataSource<AnyHashable, Item>
     private typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<AnyHashable, Item>
     
+    private var accountNetwork: UserNetworkManager?
     private weak var viewController: UIViewController?
     private var timeTableModule: TimeTableModule?
-    private let collectionView: UICollectionView
-    private var user: User?
+    private weak var collectionView: UICollectionView?
+    private var user: User? {
+        didSet {
+            updateDataSource()
+        }
+    }
     private var userReference: UserReference?
     private var isLoading: Bool = false {
         didSet {
@@ -28,7 +33,7 @@ final class AccountViewModel: AccountLogic {
     // MARK: - DataSource
     private lazy var dataSource: CollectionDataSource = {
         let dataSource: CollectionDataSource =
-            .init(collectionView: collectionView) { [self]
+            .init(collectionView: collectionView!) { [self]
                 collectionView, indexPath, itemIdentifier in
                 
                 switch itemIdentifier {
@@ -97,7 +102,7 @@ final class AccountViewModel: AccountLogic {
     
     // MARK: - CollectionItem
     private enum Item: Hashable {
-        case userHeader(UserGeneralInfo)
+        case userHeader(UserApiResponse)
         case timetable(UUID)
         case content(UserDetailedInfo)
         case loading(UUID)
@@ -111,12 +116,14 @@ final class AccountViewModel: AccountLogic {
     init(
         _ collectionView: UICollectionView,
         _ viewController: UIViewController,
+        _ userNetworkManager: UserNetworkManager,
         _ userReference: UserReference? = nil
     ) {
         self.viewController = viewController
         self.collectionView = collectionView
-        collectionView.dataSource = dataSource
+        self.accountNetwork = userNetworkManager
         self.userReference = userReference
+        collectionView.dataSource = dataSource
         
         fetchUserInfo()
     }
@@ -128,21 +135,30 @@ final class AccountViewModel: AccountLogic {
         
         snapshot.appendSections(["Header","Content"])
         snapshot.appendItems([Item.userHeader(user.userMainInfo)], toSection: "Header")
-        if let details = user.detailInfo {
-            snapshot.appendItems([Item.timetable(UUID()), Item.content(details)], toSection: "Content")
+        
+        var content = [Item]()
+        content.append(Item.timetable(UUID()))
+        
+        if let info = user.detailInfo {
+            content.append(Item.content(info))
         }
-        dataSource.apply(snapshot)
+        
+        snapshot.appendItems(content, toSection: "Content")
+        DispatchQueue.main.async {
+            self.dataSource.apply(snapshot)
+        }
     }
     
     // MARK: - API CALL
-    private func fetchUserInfo() {
-        NetworkManager().getMyUser(completion: { (res, error) in
+    public func fetchUserInfo() {
+        accountNetwork?.getMyUser(completion: { (res, error) in
             if let res = res {
-                print(res)
+                self.user = User(userMainInfo: res, detailInfo: nil)
+            }
+            if let error = error {
+                print(error)
             }
         })
-        self.user = User.testUser
-        updateDataSource()
     }
     
     // MARK: - Shimmer

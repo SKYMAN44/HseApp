@@ -7,15 +7,14 @@
 
 import Foundation
 
-// "https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/timetable/"
 public enum ScheduleAPI {
     case mySchedule(page: Int)
-    case currentSchedule(id: Int)
+//    case currentSchedule(id: Int)
 }
 
 extension ScheduleAPI: EndPointType {
     var baseURL: URL {
-        switch NetworkManager.environment {
+        switch BaseNetworkManager.environment {
         case .local:
             return URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/timetable/")!
         case .production:
@@ -58,7 +57,7 @@ extension ScheduleAPI: EndPointType {
             ) else {
                 return nil
             }
-            return ["Bearer \(token.token)":"Authorization"]
+            return ["authorization":"Bearer \(token.token)"]
         }
         return nil
     }

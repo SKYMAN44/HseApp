@@ -106,6 +106,10 @@
 		C03A89C6284D6529006CC46D /* AccountScreenProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89C5284D6529006CC46D /* AccountScreenProtocols.swift */; };
 		C03A89C8284D681A006CC46D /* GradesModuleProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89C7284D681A006CC46D /* GradesModuleProtocols.swift */; };
 		C03A89CA284D6BEC006CC46D /* ChatFeatureProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89C9284D6BEC006CC46D /* ChatFeatureProtocols.swift */; };
+		C03A89CC284EBA2D006CC46D /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89CB284EBA2D006CC46D /* String+Date.swift */; };
+		C03A89CE284EC12D006CC46D /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89CD284EC12D006CC46D /* AuthModels.swift */; };
+		C03A89D0284FA801006CC46D /* NetworkManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89CF284FA801006CC46D /* NetworkManagerProtocols.swift */; };
+		C03A89D2284FA80C006CC46D /* NetworkManagerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89D1284FA80C006CC46D /* NetworkManagerBase.swift */; };
 		C081BC1628458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081BC1528458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift */; };
 		C0C1AA3828468774005CB3C1 /* AuthEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */; };
 		C0C1AA3A284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA39284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift */; };
@@ -250,6 +254,10 @@
 		C03A89C5284D6529006CC46D /* AccountScreenProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountScreenProtocols.swift; sourceTree = "<group>"; };
 		C03A89C7284D681A006CC46D /* GradesModuleProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradesModuleProtocols.swift; sourceTree = "<group>"; };
 		C03A89C9284D6BEC006CC46D /* ChatFeatureProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatFeatureProtocols.swift; sourceTree = "<group>"; };
+		C03A89CB284EBA2D006CC46D /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
+		C03A89CD284EC12D006CC46D /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
+		C03A89CF284FA801006CC46D /* NetworkManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocols.swift; sourceTree = "<group>"; };
+		C03A89D1284FA80C006CC46D /* NetworkManagerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerBase.swift; sourceTree = "<group>"; };
 		C081BC1528458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSectionSwitchCollectionReusableView.swift; sourceTree = "<group>"; };
 		C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndPoint.swift; sourceTree = "<group>"; };
 		C0C1AA39284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -397,6 +405,8 @@
 			isa = PBXGroup;
 			children = (
 				63881F6927B5F9A8004A2AEE /* NetworkManager.swift */,
+				C03A89CF284FA801006CC46D /* NetworkManagerProtocols.swift */,
+				C03A89D1284FA80C006CC46D /* NetworkManagerBase.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -700,6 +710,7 @@
 				63881F8627BC507C004A2AEE /* View+Pin.swift */,
 				C01D10C22804DCD800149652 /* CALayer+Shadow.swift */,
 				C02D10AD283D397E0053BFD8 /* ViewController+BarButton.swift */,
+				C03A89CB284EBA2D006CC46D /* String+Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -791,6 +802,7 @@
 				63881F7E27B9BC4C004A2AEE /* Grade.swift */,
 				63B2830627C696C30091C43B /* UserReference.swift */,
 				C0E9146A2843F39600AAD804 /* User.swift */,
+				C03A89CD284EC12D006CC46D /* AuthModels.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -992,6 +1004,7 @@
 				63C4D641278DCD260028381F /* Course.swift in Sources */,
 				63F857E02790658800F45A97 /* AccountViewController.swift in Sources */,
 				C02D10B8283DA6FA0053BFD8 /* ChatDetail.swift in Sources */,
+				C03A89D2284FA80C006CC46D /* NetworkManagerBase.swift in Sources */,
 				63881F6E27B75500004A2AEE /* TableViewDiffableDataSource.swift in Sources */,
 				63881F5C27B5D7DA004A2AEE /* HTTPTask.swift in Sources */,
 				C0C1AA8E284D0983005CB3C1 /* RotationAnimation.swift in Sources */,
@@ -1003,6 +1016,7 @@
 				639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */,
 				C0E914632842BD8E00AAD804 /* AccountViewModel.swift in Sources */,
 				C01D10BF2804A29100149652 /* EditButtonCollectionViewCell.swift in Sources */,
+				C03A89CC284EBA2D006CC46D /* String+Date.swift in Sources */,
 				C01D10C12804C03100149652 /* AddFileCollectionViewCell.swift in Sources */,
 				63881F7627B7802B004A2AEE /* Array.swift in Sources */,
 				C0C1AA3A284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift in Sources */,
@@ -1023,6 +1037,7 @@
 				63E0499027B1789200942E36 /* CreatorCollectionViewCell.swift in Sources */,
 				639DCE1F2792FDA4007FC2DC /* BaseNavViewController.swift in Sources */,
 				63881F7F27B9BC4C004A2AEE /* Grade.swift in Sources */,
+				C03A89CE284EC12D006CC46D /* AuthModels.swift in Sources */,
 				6304EAA427A8771100BDF75D /* LeftTextMessageTableViewCell.swift in Sources */,
 				63881F6227B5E1C4004A2AEE /* JSONParameterEncoder.swift in Sources */,
 				63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */,
@@ -1041,6 +1056,7 @@
 				63881F7827B986BD004A2AEE /* shimmerProtocol.swift in Sources */,
 				C081BC1628458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift in Sources */,
 				C0E91473284425FA00AAD804 /* HostingCollectionViewCell.swift in Sources */,
+				C03A89D0284FA801006CC46D /* NetworkManagerProtocols.swift in Sources */,
 				63881F8727BC507C004A2AEE /* View+Pin.swift in Sources */,
 				C0E914662842C13100AAD804 /* AccountHeaderCollectionViewCell.swift in Sources */,
 				63F857D4278F8CEB00F45A97 /* Textfield.swift in Sources */,

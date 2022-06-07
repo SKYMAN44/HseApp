@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class LoginViewModel: LoginLogic {
-    private let networkM = NetworkManager()
+    private let loginNetworkManager: LoginNetworkManager?
     private let encryptedStorage = KeychainHelper.shared
     private weak var loginScreen: LoginScreen?
     private var email: String = ""
@@ -18,13 +18,14 @@ final class LoginViewModel: LoginLogic {
     
     // MARK: - Init
     init(_ loginScreen: LoginScreen) {
+        self.loginNetworkManager = AuthenticationNetworkManager()
         self.loginScreen = loginScreen
     }
     
     // MARK: - Api Call
     private func makeLoginCall(_ loginInfo: LoginInfo) {
         loginScreen?.isAnimating = true
-        networkM.login(loginInfo) { [weak self] (user, error) in
+        loginNetworkManager?.login(loginInfo) { [weak self] (user, error) in
             if error != nil {
                 self?.presentNetworkError(error, title: "Failed to Login")
             } else {

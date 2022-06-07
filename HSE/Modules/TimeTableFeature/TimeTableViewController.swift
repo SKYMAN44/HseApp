@@ -29,10 +29,10 @@ final class TimeTableViewController: UIViewController, TimeTableModule {
     public var delegate: TimeTableViewControllerScrollDelegate?
     
     // MARK: - Init
-    init(_ isMyUser: Bool,_ userRefs: UserReference? = nil, networkService: NetworkManager? = nil) {
+    init(_ isMyUser: Bool,_ userRefs: UserReference? = nil) {
         // once backend appears configure viewmodel with account to view/ dependency injection of networkService
         super.init(nibName: nil, bundle: nil)
-        self.viewModel = ScheduleViewModel(self, tableView: tableView, NetworkManager())
+        self.viewModel = ScheduleViewModel(self, tableView: tableView, AssignmentsNetworkManager(), TimeTableNetworkManager())
     }
     
     required init?(coder: NSCoder) {

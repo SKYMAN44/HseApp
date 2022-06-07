@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 final class GradeViewModel: NSObject {
-    private var networkManager: NetworkManager!
     public var isLoading: Bool = false {
         didSet {
             if(isLoading) {
@@ -62,7 +61,6 @@ final class GradeViewModel: NSObject {
         
         self.tableView = tableView
         tableView.dataSource = datasource
-        networkManager = NetworkManager()
         updateData()
     }
     

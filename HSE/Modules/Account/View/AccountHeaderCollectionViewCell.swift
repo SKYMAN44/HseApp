@@ -112,9 +112,10 @@ final class AccountHeaderCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Configure
-    public func configure(_ userInfo: UserGeneralInfo, _ emailButtonVisible: Bool) {
+    public func configure(_ userInfo: UserApiResponse, _ emailButtonVisible: Bool) {
         var type: String
-        switch userInfo.mainInfo.role {
+        let role = UserType.professor
+        switch role {
         case .student:
             type = "STUDENT"
         case .professor:
@@ -123,11 +124,11 @@ final class AccountHeaderCollectionViewCell: UICollectionViewCell {
             type = "TA"
         }
         typeLabel.text = type
-        nameLabel.text = userInfo.mainInfo.name
+        nameLabel.text = userInfo.name
         groupLabel.text = userInfo.group
         emailButton.isHidden = !emailButtonVisible
         emailView.configure(icon: UIImage(named: "EmailIcon"), text: userInfo.email)
-        addressView.configure(icon: UIImage(named: "AddressIcon"), text: userInfo.address)
+        addressView.configure(icon: UIImage(named: "AddressIcon"), text: userInfo.faculty)
     }
     
     @objc

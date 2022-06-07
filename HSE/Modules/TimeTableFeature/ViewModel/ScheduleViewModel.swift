@@ -22,7 +22,8 @@ enum DeadlineContentType: String {
 final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable,Item>
     
-    private var networkManager: NetworkManager?
+    private var deadlineNetworkManager: DeadlineNetworkManager?
+    private var timeTableNetworkManager: ScheduleNetworkManager?
     public private(set) var deadlineType: DeadlineContentType = .all
     public private(set) var contentType: ContentType = .timeTable {
         didSet {
@@ -108,10 +109,11 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     
     // MARK: - Init
     // kingFisher?
-    init(_ viewController: TimeTableModule, tableView: UITableView, _ networkManager: NetworkManager) {
+    init(_ viewController: TimeTableModule, tableView: UITableView, _ deadlineNetworkManager: DeadlineNetworkManager, _ scheduleNetworkManager: ScheduleNetworkManager) {
         self.viewController = viewController
         self.tableView = tableView
-        self.networkManager = networkManager
+        self.deadlineNetworkManager = deadlineNetworkManager
+        self.timeTableNetworkManager = scheduleNetworkManager
         
         super.init()
         
@@ -188,7 +190,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     
     // MARK: - Fetching Data
     private func fetchOriginalSchedule() {
-        networkManager?.getSchedule(1) { schedule, error in
+        timeTableNetworkManager?.getSchedule(1) { schedule, error in
             if let error = error {
                 print(error)
             }
@@ -207,7 +209,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             return
         }
         isLoading = true
-        networkManager?.getSchedule(currentPage + 1) { schedule, error in
+        timeTableNetworkManager?.getSchedule(currentPage + 1) { schedule, error in
             if let error = error {
                 print(error)
             }
@@ -220,7 +222,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     }
     
     private func fetchDeadline() {
-        networkManager?.getDeadline { deadlines, error in
+        deadlineNetworkManager?.getDeadline { deadlines, error in
             if let error = error{
                 print(error)
             }
@@ -266,10 +268,10 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 if(self.contentType == .timeTable) {
                     self.fetchOriginalSchedule()
-                    self.networkManager?.cancelDeadline()
+                    self.deadlineNetworkManager?.cancelRequest()
                 } else {
                     self.fetchDeadline()
-                    self.networkManager?.cancelSchedule()
+                    self.timeTableNetworkManager?.cancelRequest()
                 }
             }
         }

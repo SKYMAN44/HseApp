@@ -15,8 +15,6 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         let session = URLSession.shared
         do {
             let request = try self.buildRequest(from: route)
-            print(request)
-            print(request.description)
             task = session.dataTask(with: request) { (data, response, error) in
                 completion(data, response, error)
             }
@@ -66,7 +64,6 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         guard task != nil else {
             return
         }
-
         self.task?.cancel()
     }
 }

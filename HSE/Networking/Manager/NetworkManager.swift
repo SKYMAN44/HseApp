@@ -7,168 +7,58 @@
 
 import Foundation
 
-enum NetworkEnvironment {
-    case production
-    case test
-    case local
-}
-
-struct NetworkManager {
-    static let environment: NetworkEnvironment = .production
-    static let ApiKey = "NO_key"
-    private let router = Router<ScheduleAPI>()
-    private let routerD = Router<DeadLineAPI>()
-    private let routerUser = Router<UserAPI>()
-    private let routerAuth = Router<AuthApi>()
+final class TimeTableNetworkManager: BaseNetworkManager, ScheduleNetworkManager {
+    var router = Router<ScheduleAPI>()
     
-    enum NetworkingResponse: String {
-        case success
-        case authError = "Authentication error"
-        case badrequest = "Bad request"
-        case outdated = "url is outdated"
-        case failed = "Network request failed"
-        case noData = "no data returned"
-        case unableToDecode = "couldn't decode data"
-    }
-    
-    enum Result<String> {
-        case success
-        case failure(String)
-    }
-    
-    private func handleNetworkRequest(_ response: HTTPURLResponse) -> Result<String> {
-        switch response.statusCode {
-        case 200...299: return .success
-        case 401...500: return .failure(NetworkingResponse.authError.rawValue)
-        case 501...599: return .failure(NetworkingResponse.badrequest.rawValue)
-        case 600: return .failure(NetworkingResponse.outdated.rawValue)
-        default: return .failure(NetworkingResponse.failed.rawValue)
+    func getSchedule(_ page: Int, completion: @escaping (ScheduleApiResponse?, String?) -> ()) {
+        router.request(.mySchedule(page: page)) { [self] data, response, error in
+            processRequestResponse(data, response, error, ScheduleApiResponse.self, completion: completion)
         }
     }
     
-    public func getSchedule(_ page: Int, completion: @escaping (_ schedule: ScheduleApiResponse?, _ error: String?) -> () ) {
-        router.request(.mySchedule(page: page)) { data, response, error in
-            if error != nil {
-                completion(nil, "Check Network Connection")
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkRequest(response)
-                switch result {
-                case .success:
-                    guard let responseData = data else {
-                        completion(nil, NetworkingResponse.noData.rawValue)
-                        return 
-                    }
-                    
-                    do {
-                        let apiResponse = try JSONDecoder().decode(ScheduleApiResponse.self, from: responseData)
-                        completion(apiResponse, nil)
-                    } catch {
-                        completion(nil, NetworkingResponse.unableToDecode.rawValue)
-                    }
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
-        }
-    }
-    
-    public func getDeadline(completion: @escaping (_ schedule: [DeadlineDay]?, _ error: String?) -> () ) {
-        routerD.request(.deadlines(id: 1)) { data, response, error in
-            if error != nil {
-                completion(nil, "Check Network Connection")
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkRequest(response)
-                switch result {
-                case .success:
-                    guard let responseData = data else {
-                        completion(nil, NetworkingResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let apiResponse = try JSONDecoder().decode([DeadlineDay].self, from: responseData)
-                        completion(apiResponse, nil)
-                    } catch {
-                        completion(nil, NetworkingResponse.unableToDecode.rawValue)
-                    }
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
-        }
-    }
-    
-    public func getMyUser(completion: @escaping (_ userRef: UserReference?, _ error: String?) -> () ) {
-        routerUser.request(.user) { data, response, error in
-            if error != nil {
-                print(error)
-                completion(nil, "Check Network Connection")
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkRequest(response)
-                switch result {
-                case .success:
-                    guard let responseData = data else {
-                        completion(nil, NetworkingResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        print(String(decoding: responseData, as: UTF8.self))
-                        completion(nil, nil)
-                    } catch {
-                        completion(nil, NetworkingResponse.unableToDecode.rawValue)
-                    }
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
-        }
-    }
-    
-    public func login(_ loginInfo: LoginInfo, completion: @escaping (_ token: TokenJWT?, _ error: String?) -> ()) {
-        routerAuth.request(.login(loginInfo)) { data, response, error in
-            if error != nil {
-                completion(nil, "Check Network Connection")
-            }
-            
-            if let response = response as? HTTPURLResponse {
-                let result = self.handleNetworkRequest(response)
-                switch result {
-                case .success:
-                    guard let responseData = data else {
-                        completion(nil, NetworkingResponse.noData.rawValue)
-                        return
-                    }
-                    
-                    do {
-                        let apiResponse = try JSONDecoder().decode(TokenJWT.self, from: responseData)
-                        print(apiResponse)
-                        completion(apiResponse, nil)
-                    } catch {
-                        completion(nil, NetworkingResponse.unableToDecode.rawValue)
-                    }
-                case .failure(let error):
-                    completion(nil, error)
-                }
-            }
-        }
-    }
-    
-    public func cancelSchedule() {
+    public func cancelRequest() {
         router.cancel()
     }
+}
+
+final class AssignmentsNetworkManager: BaseNetworkManager, DeadlineNetworkManager {
+    var router = Router<DeadLineAPI>()
     
-    public func cancelDeadline() {
-        routerD.cancel()
+    public func getDeadline(completion: @escaping ([DeadlineDay]?, String?) -> () ) {
+        router.request(.deadlines(id: 1)) { [self] data, response, error in
+            processRequestResponse(data, response, error, [DeadlineDay].self, completion: completion)
+        }
+    }
+    
+    public func cancelRequest() {
+        router.cancel()
     }
 }
 
-struct TokenJWT: Codable {
-    var token: String
+final class AuthenticationNetworkManager: BaseNetworkManager, LoginNetworkManager {
+    var router = Router<AuthApi>()
+    
+    public func login(_ loginInfo: LoginInfo, completion: @escaping (_ token: TokenJWT?, _ error: String?) -> ()) {
+        router.request(.login(loginInfo)) { [self] data, response , error in
+            processRequestResponse(data, response, error, TokenJWT.self, completion: completion)
+        }
+    }
+    
+    public func cancelRequest() {
+        router.cancel()
+    }
+}
+
+final class UserInfoNetworkManager: BaseNetworkManager, UserNetworkManager {
+    var router = Router<UserAPI>()
+    
+    public func getMyUser(completion: @escaping (_ userRef: UserApiResponse?, _ error: String?) -> ()) {
+        router.request(.user) { [self] data, response, error in
+            processRequestResponse(data, response, error, UserApiResponse.self, completion: completion)
+        }
+    }
+    
+    public func cancelRequest() {
+        router.cancel()
+    }
 }

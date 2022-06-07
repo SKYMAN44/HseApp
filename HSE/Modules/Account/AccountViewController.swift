@@ -53,10 +53,10 @@ final class AccountViewController: UIViewController, AccountScreen {
         super.init(nibName: nil, bundle: nil)
         
         if let user = userReference {
-            viewModel = AccountViewModel(collectionView, self, user)
+            viewModel = AccountViewModel(collectionView, self, UserInfoNetworkManager(), user)
             isMyAccount = false
         } else {
-            viewModel = AccountViewModel(collectionView, self)
+            viewModel = AccountViewModel(collectionView, self, UserInfoNetworkManager())
             isMyAccount = true
         }
     }
@@ -70,6 +70,10 @@ final class AccountViewController: UIViewController, AccountScreen {
         super.viewDidLoad()
 
         setupUI()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     // MARK: - setup UI

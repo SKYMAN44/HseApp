@@ -8,15 +8,17 @@
 import Foundation
 
 struct User {
-    let userMainInfo: UserGeneralInfo
+    let userMainInfo: UserApiResponse
     let detailInfo: UserDetailedInfo?
     
     static let testUser = User(
-        userMainInfo: UserGeneralInfo(
-            mainInfo: UserReference(id: 1, name: "Dmitrii Sokolov", role: .student, image: nil),
-            email: "dmsokolov@edu.hse.ru",
-            address: "Покровский бульвар, 11",
-            group: "bpad193"
+        userMainInfo: UserApiResponse(
+            name: "",
+            surname: "",
+            patron: "",
+            group: "",
+            email: "",
+            faculty: ""
         ),
         detailInfo: UserDetailedInfo()
     )
@@ -25,16 +27,6 @@ struct User {
 extension User: Codable { }
 extension User: Hashable { }
 
-struct UserGeneralInfo {
-    let mainInfo: UserReference
-    let email: String
-    let address: String
-    let group: String
-}
-
-extension UserGeneralInfo: Codable {}
-extension UserGeneralInfo: Hashable {}
-
 struct UserDetailedInfo {
     var someINfo = "Stringsssssss;fdfsfs1323242"
 }
@@ -42,10 +34,15 @@ struct UserDetailedInfo {
 extension UserDetailedInfo: Codable {}
 extension UserDetailedInfo: Hashable {}
 
-public struct LoginInfo {
+
+struct UserApiResponse {
+    let name: String
+    let surname: String
+    let patron: String?
+    let group: String
     let email: String
-    let password: String
-    let role: UserType
+    let faculty: String
 }
 
-extension LoginInfo: Codable {}
+extension UserApiResponse: Codable {}
+extension UserApiResponse: Hashable {}

@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 public typealias NetworkRouterCompletion = (_ data: Data?, _ response: URLResponse?,_ error: Error?) -> ()
-
 
 protocol NetworkRouter {
     // helps to handle any endpoint confirming to EndPointType protocol

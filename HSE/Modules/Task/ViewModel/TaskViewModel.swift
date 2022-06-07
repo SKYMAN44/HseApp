@@ -29,7 +29,6 @@ final class TaskViewModel: TaskFeatureLogic {
         }
     }
     
-    private var networkManager = NetworkManager()
     private var collectionView: UICollectionView
     private var deadline: Deadline
     private var editMode: Bool = false {
