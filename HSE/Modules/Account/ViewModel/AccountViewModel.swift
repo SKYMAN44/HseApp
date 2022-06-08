@@ -13,8 +13,8 @@ final class AccountViewModel: AccountLogic {
     private typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<AnyHashable, Item>
     
     private var accountNetwork: UserNetworkManager?
-    private weak var viewController: UIViewController?
-    private var timeTableModule: TimeTableModule?
+    private weak var viewController: AccountScreen?
+    private var timeTableModule: TimeTableScreen?
     private weak var collectionView: UICollectionView?
     private var user: User? {
         didSet {
@@ -85,9 +85,9 @@ final class AccountViewModel: AccountLogic {
             }
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
             switch kind {
-            case AccountViewController.SupplementaryViewKind.segments:
+            case AccountSupplementaryViewKind.segments:
                 let segmentView = collectionView.dequeueReusableSupplementaryView(
-                    ofKind: AccountViewController.SupplementaryViewKind.segments,
+                    ofKind: AccountSupplementaryViewKind.segments,
                     withReuseIdentifier: UserInfoSectionSwitchCollectionReusableView.reuseIdentifier,
                     for: indexPath
                 ) as? UserInfoSectionSwitchCollectionReusableView
@@ -115,7 +115,7 @@ final class AccountViewModel: AccountLogic {
     // MARK: - Init
     init(
         _ collectionView: UICollectionView,
-        _ viewController: UIViewController,
+        _ viewController: AccountScreen,
         _ userNetworkManager: UserNetworkManager,
         _ userReference: UserReference? = nil
     ) {

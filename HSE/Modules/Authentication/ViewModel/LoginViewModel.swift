@@ -29,7 +29,12 @@ final class LoginViewModel: LoginLogic {
             if error != nil {
                 self?.presentNetworkError(error, title: "Failed to Login")
             } else {
-                self?.encryptedStorage.save(user, service: "HSESOCIAL", account: "account")
+                guard let token = user
+                else {
+                    self?.presentNetworkError("", title: "Failed to login")
+                    return
+                }
+                self?.encryptedStorage.save(token, service: KeychainHelper.defaultService, account: KeychainHelper.defaultAccount)
                 self?.navigateToApp()
             }
         }

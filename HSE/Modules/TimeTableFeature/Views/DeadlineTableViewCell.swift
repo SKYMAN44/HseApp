@@ -178,9 +178,9 @@ final class DeadlineTableViewCell: UITableViewCell {
     // MARK: - External Calls
     public func configure(deadline: Deadline) {
         subjectLabel.text = deadline.subjectName
-        taskNameLabel.text = deadline.assigmentName
+        taskNameLabel.text = deadline.assignmentName
         deadlineTimeLabel.text = deadline.deadlineTime
-        submittedTimeLabel.text = deadline.sumbisionTIme
+        submittedTimeLabel.text = deadline.submissionTime
     }
     
     public func configureShimmer() {

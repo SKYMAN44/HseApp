@@ -29,8 +29,8 @@ extension UserAPI: EndPointType {
     
     var headers: HTTPHeaders? {
         guard let token = KeychainHelper.shared.read(
-            service: "HSESOCIAL",
-            account: "account",
+            service: KeychainHelper.defaultService,
+            account: KeychainHelper.defaultAccount,
             type: TokenJWT.self
         ) else {
             return nil

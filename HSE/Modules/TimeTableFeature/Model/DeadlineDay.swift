@@ -7,11 +7,11 @@
 
 import Foundation
 
-typealias DeadlineDictionary = [String: [TimeSlot]]
+typealias DeadlineDictionary = [String: [Deadline]]
 
 struct DeadlineApiResponse {
     var pageNum: Int
-    var deadlines: DeadlineDictionary
+    var assignments: DeadlineDictionary
 }
 
 extension DeadlineApiResponse: Hashable {}

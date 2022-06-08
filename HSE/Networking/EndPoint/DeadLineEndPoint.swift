@@ -9,7 +9,7 @@ import Foundation
 
 
 public enum DeadLineAPI {
-    case deadlines(id: Int)
+    case deadlines(page: Int)
 }
 
 extension DeadLineAPI: EndPointType {
@@ -18,17 +18,17 @@ extension DeadLineAPI: EndPointType {
         case .local:
             return URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/deadline/")!
         case .production:
-            return URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/deadline/")!
+            return URL(string:"https://hse-backend-test.herokuapp.com")!
         case .test:
             return URL(string:"https://my-json-server.typicode.com/SKYMAN44/FAKEJSONSERVER/deadline/")!
         }
     }
     
     var path: String {
-        if case .deadlines(let id) = self {
-            return "\(id)/deadlines"
+        if case .deadlines(let page) = self {
+            return "/assignments"
         } else {
-            return "1/deadlines"
+            return "/assignments"
         }
     }
     
@@ -37,14 +37,28 @@ extension DeadLineAPI: EndPointType {
     }
     
     var task: HTTPTask {
-        if case .deadlines(_) = self {
-            return .request
+        if case .deadlines(let page) = self {
+            return .requestParameters(
+                bodyParameters: nil,
+                bodyEncoding: .urlEncoding,
+                urlParameters: ["page": String(page)]
+            )
         } else {
             return .request
         }
     }
     
     var headers: HTTPHeaders? {
+        if case .deadlines(_) = self {
+            guard let token = KeychainHelper.shared.read(
+                service: KeychainHelper.defaultService,
+                account: KeychainHelper.defaultAccount,
+                type: TokenJWT.self
+            ) else {
+                return nil
+            }
+            return ["authorization":"Bearer \(token.token)"]
+        }
         return nil
     }
 }

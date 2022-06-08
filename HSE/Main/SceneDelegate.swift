@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         
         var entryController: UIViewController
-        let jwtToken = KeychainHelper.shared.read(service: "HSESOCIAL" , account: "account", type: TokenJWT.self)
+        let jwtToken = KeychainHelper.shared.read(service: KeychainHelper.defaultService , account: KeychainHelper.defaultAccount, type: TokenJWT.self)
         
         if(jwtToken != nil) {
             entryController = TabBarBaseController(.student)

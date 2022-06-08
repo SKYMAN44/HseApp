@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TaskDetailModule: UIViewController {
+protocol TaskDetailScreen: UIViewController {
     var headerKind: String { get }
     
     init(deadline: Deadline)
@@ -16,7 +16,7 @@ protocol TaskDetailModule: UIViewController {
 protocol TaskFeatureLogic {
     var sections: [TaskSection] { get }
     
-    init(_ viewController: TaskDetailModule, _ collectionView: UICollectionView, deadline: Deadline)
+    init(_ viewController: TaskDetailScreen, _ collectionView: UICollectionView, deadline: Deadline)
 }
 
 internal enum TaskSection: String, Hashable {

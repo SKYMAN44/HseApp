@@ -8,7 +8,7 @@
 import UIKit
 import HSESKIT
 
-final class TimeTableViewController: UIViewController, TimeTableModule {
+final class TimeTableViewController: UIViewController, TimeTableScreen {
     private enum Constants {
         static let tableViewHeaderHeight = 30.0
         static let tableViewFooterHeight = 0.0
@@ -25,7 +25,7 @@ final class TimeTableViewController: UIViewController, TimeTableModule {
     }()
     
     private var refreshControl: UIRefreshControl!
-    private var viewModel: ScheduleViewModel?
+    private var viewModel: TimeTableFeatureLogic?
     public var delegate: TimeTableViewControllerScrollDelegate?
     
     // MARK: - Init

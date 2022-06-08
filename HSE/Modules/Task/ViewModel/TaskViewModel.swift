@@ -43,7 +43,7 @@ final class TaskViewModel: TaskFeatureLogic {
         }
     }
     
-    private var viewController: TaskDetailModule
+    private var viewController: TaskDetailScreen
     private var readyToViewTask: ReadyToViewModel?
     public var sections = [TaskSection]()
     
@@ -138,7 +138,7 @@ final class TaskViewModel: TaskFeatureLogic {
         
     
     // MARK: - Init
-    init(_ viewController: TaskDetailModule, _ collectionView: UICollectionView, deadline: Deadline) {
+    init(_ viewController: TaskDetailScreen, _ collectionView: UICollectionView, deadline: Deadline) {
         self.viewController = viewController
         self.deadline = deadline
         self.collectionView = collectionView

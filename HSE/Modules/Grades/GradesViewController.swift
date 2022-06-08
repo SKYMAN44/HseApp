@@ -112,7 +112,7 @@ final class GradesViewController: UIViewController {
 // MARK: - Table Delegate
 extension GradesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailVC = TaskDetailViewController(deadline: Deadline(id: 1, type: .cw, subjectName: "", assigmentName: "", deadlineTime: "", sumbisionTIme: ""))
+        let detailVC = TaskDetailViewController(deadline: Deadline(deadlineType: .cw, assignmentName: "", deadlineTime: "", submissionTime: ""))
         navigationController?.present(detailVC, animated: true)
     }
 }

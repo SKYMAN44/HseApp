@@ -13,12 +13,12 @@ enum DeadlineType: String, Decodable {
 }
 
 struct Deadline {
-    let id: Int
-    let type: DeadlineType
-    let subjectName: String
-    let assigmentName: String
+    let id: Int = Int.random(in: 0...100)
+    let deadlineType: DeadlineType
+    let subjectName: String = "SomeName"
+    let assignmentName: String
     let deadlineTime: String
-    let sumbisionTIme: String
+    let submissionTime: String?
 }
 
 extension Deadline: Decodable { }

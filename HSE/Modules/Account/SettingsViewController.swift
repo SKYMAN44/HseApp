@@ -34,7 +34,7 @@ final class SettingsViewController: UIViewController {
     
     @objc
     private func exitButtonTapped() {
-        KeychainHelper.shared.delete(service: "HSESOCIAL", account: "account")
+        KeychainHelper.shared.delete(service: KeychainHelper.defaultService, account: KeychainHelper.defaultAccount)
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
             sceneDelegate.window!.rootViewController = LoginViewController()
         }

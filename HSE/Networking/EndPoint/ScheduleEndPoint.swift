@@ -51,8 +51,8 @@ extension ScheduleAPI: EndPointType {
     var headers: HTTPHeaders? {
         if case .mySchedule(_) = self {
             guard let token = KeychainHelper.shared.read(
-                service: "HSESOCIAL",
-                account: "account",
+                service: KeychainHelper.defaultService,
+                account: KeychainHelper.defaultAccount,
                 type: TokenJWT.self
             ) else {
                 return nil

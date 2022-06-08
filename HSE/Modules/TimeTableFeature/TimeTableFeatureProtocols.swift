@@ -11,8 +11,7 @@ protocol TimeTableViewControllerScrollDelegate {
     func didScroll(_ scrollView: UIScrollView)
 }
 
-
-protocol TimeTableModule: UIViewController {
+protocol TimeTableScreen: UIViewController {
     var delegate: TimeTableViewControllerScrollDelegate?  { get set }
     
     func setupForEmbedingInScrollView() -> UIScrollView
@@ -20,11 +19,21 @@ protocol TimeTableModule: UIViewController {
     func deadlineContentChanged(_ deadlineType: DeadlineContentType)
 }
 
-
 protocol TimeTableFeatureLogic {
-    init(_ viewController: TimeTableModule, tableView: UITableView, _ deadlineNetworkManager: DeadlineNetworkManager, _ scheduleNetworkManager: ScheduleNetworkManager)
+    init(_ viewController: TimeTableScreen, tableView: UITableView, _ deadlineNetworkManager: DeadlineNetworkManager, _ scheduleNetworkManager: ScheduleNetworkManager)
     
     func updateData()
     func contentChanged(contentType: ContentType)
     func deadLineContentChanged(_ type: DeadlineContentType)
+}
+
+enum ContentType {
+    case timeTable
+    case assigments
+}
+
+enum DeadlineContentType: String {
+    case all
+    case hw
+    case cw
 }

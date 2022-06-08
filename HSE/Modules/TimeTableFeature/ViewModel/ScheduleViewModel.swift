@@ -8,19 +8,8 @@
 import Foundation
 import UIKit
 
-enum ContentType {
-    case timeTable
-    case assigments
-}
-
-enum DeadlineContentType: String {
-    case all
-    case hw
-    case cw
-}
-
 final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
-    typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable,Item>
+    private typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable,Item>
     
     private var deadlineNetworkManager: DeadlineNetworkManager?
     private var timeTableNetworkManager: ScheduleNetworkManager?
@@ -44,6 +33,11 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     private(set) var scheduleResponse: ScheduleApiResponse? {
         didSet {
             updateDataSource()
+        }
+    }
+    private(set) var assignmentsResponse: DeadlineApiResponse? {
+        didSet {
+            sortDeadlines()
         }
     }
     
@@ -94,7 +88,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
         }
     }
     
-    enum Item: Hashable {
+    private enum Item: Hashable {
         case timeslot(TimeSlot)
         case deadline(Deadline)
         case loading(UUID)
@@ -104,12 +98,12 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             return Array(repeatingExpression: Item.loading(UUID()), count: 8)
         }
     }
-    private weak var viewController: TimeTableModule?
+    private weak var viewController: TimeTableScreen?
     private weak var tableView: UITableView?
     
     // MARK: - Init
     // kingFisher?
-    init(_ viewController: TimeTableModule, tableView: UITableView, _ deadlineNetworkManager: DeadlineNetworkManager, _ scheduleNetworkManager: ScheduleNetworkManager) {
+    init(_ viewController: TimeTableScreen, tableView: UITableView, _ deadlineNetworkManager: DeadlineNetworkManager, _ scheduleNetworkManager: ScheduleNetworkManager) {
         self.viewController = viewController
         self.tableView = tableView
         self.deadlineNetworkManager = deadlineNetworkManager
@@ -171,7 +165,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             var hwDeadlines = [DeadlineDay]()
             deadlines.forEach( {
                 let filteredAssinments = $0.assignments.filter {
-                    $0.type == .hw
+                    $0.deadlineType == .hw
                 }
                 hwDeadlines.append(DeadlineDay(day: $0.day, assignments: filteredAssinments))
             })
@@ -180,7 +174,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             var cwDeadlines = [DeadlineDay]()
             deadlines.forEach( {
                 let filteredAssinments = $0.assignments.filter {
-                    $0.type == .cw
+                    $0.deadlineType == .cw
                 }
                 cwDeadlines.append(DeadlineDay(day: $0.day, assignments: filteredAssinments))
             })
@@ -222,13 +216,13 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     }
     
     private func fetchDeadline() {
-        deadlineNetworkManager?.getDeadline { deadlines, error in
+        deadlineNetworkManager?.getDeadline(1) { deadlines, error in
             if let error = error{
                 print(error)
             }
             if let deadlines = deadlines {
+                self.assignmentsResponse = deadlines
                 self.isLoading = false
-                self.deadlines = deadlines
             }
         }
     }
@@ -290,7 +284,8 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
 // MARK: - TableView Delegate
 extension ScheduleViewModel: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard contentType == .assigments else { return }
+        guard contentType == .assigments, !isLoading
+        else { return }
         
         let detailVC = TaskDetailViewController(deadline: currentdeadlines[indexPath.section].assignments[indexPath.row])
         viewController?.navigationController?.present(detailVC, animated: true)

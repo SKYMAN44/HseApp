@@ -9,10 +9,6 @@ import UIKit
 import HSESKIT
 
 final class AccountViewController: UIViewController, AccountScreen {
-    public enum SupplementaryViewKind {
-        static let segments = "segments"
-    }
-    
     private enum Consts {
         static let switcherHeight = 48.0
         static let topInset = 16.0
@@ -35,7 +31,7 @@ final class AccountViewController: UIViewController, AccountScreen {
         )
         collectionView.register(
             UserInfoSectionSwitchCollectionReusableView.self,
-            forSupplementaryViewOfKind: SupplementaryViewKind.segments,
+            forSupplementaryViewOfKind: AccountSupplementaryViewKind.segments,
             withReuseIdentifier: UserInfoSectionSwitchCollectionReusableView.reuseIdentifier
         )
         collectionView.showsVerticalScrollIndicator = false
@@ -44,7 +40,7 @@ final class AccountViewController: UIViewController, AccountScreen {
         
         return collectionView
     }()
-    private var viewModel: AccountViewModel?
+    private var viewModel: AccountLogic?
     private var isMyAccount: Bool = false
     public weak var embededScrollView: UIScrollView?
     
@@ -135,7 +131,7 @@ final class AccountViewController: UIViewController, AccountScreen {
             let segmentsItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(Consts.switcherHeight))
             let segmentItem = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: segmentsItemSize,
-                elementKind: SupplementaryViewKind.segments,
+                elementKind: AccountSupplementaryViewKind.segments,
                 alignment: .top
             )
             segmentItem.pinToVisibleBounds = true

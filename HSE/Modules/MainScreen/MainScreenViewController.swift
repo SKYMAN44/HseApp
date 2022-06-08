@@ -21,7 +21,7 @@ final class MainScreenViewController: UIViewController {
         
         return segmentView
     }()
-    private var timetableModule: TimeTableModule
+    private var timetableModule: TimeTableScreen
     
     // MARK: - Init
     init() {

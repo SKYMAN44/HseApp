@@ -12,6 +12,9 @@ protocol EncryptedStorage {
 }
 
 final class KeychainHelper {
+    static let defaultService: String = "hseSocial.com"
+    static let defaultAccount: String = "userToken"
+    
     static let shared = KeychainHelper()
     // make sure class is singleton
     private init() {}
@@ -27,9 +30,11 @@ final class KeychainHelper {
     }
     
     public func read<T>(service: String, account: String, type: T.Type) -> T? where T: Codable {
-        guard let data = read(service: service, account: account) else { return nil }
+        guard let data = read(service: service, account: account),
+              "null" != String(data: data, encoding: .utf8) else { return nil }
         
         do {
+//            let string = String(data: data, encoding: .utf8)
             let item = try JSONDecoder().decode(type, from: data)
             return item
         } catch {

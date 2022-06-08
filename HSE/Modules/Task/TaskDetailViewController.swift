@@ -8,7 +8,7 @@
 import UIKit
 
 
-final class TaskDetailViewController: UIViewController, TaskDetailModule {
+final class TaskDetailViewController: UIViewController, TaskDetailScreen {
     private let dismissButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .white
