@@ -62,17 +62,13 @@ final class CalendarPopUpView: UIView, UIScrollViewDelegate {
         shape.path = rounded.cgPath
         popUpView.layer.mask = shape
         
-        
-        let calendar = UIDatePicker(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+        let prefferedFrame = CGRect(x: 16, y: 36, width: popUpView.frame.width - 32, height: popUpView.frame.height - 36)
+        let calendar = UIDatePicker(frame: prefferedFrame)
         calendar.datePickerMode = .date
         calendar.preferredDatePickerStyle = .inline
         calendar.tintColor = .primary.style(.primary)()
         
         popUpView.addSubview(calendar)
-        
-        calendar.leftAnchor.constraint(equalTo: popUpView.leftAnchor, constant: 16).isActive = true
-        calendar.topAnchor.constraint(equalTo: popUpView.topAnchor, constant: 16).isActive = true
-        calendar.rightAnchor.constraint(equalTo: popUpView.rightAnchor, constant: 16).isActive = true
         
         // Dismiss Button
         dismissButton = UIButton(frame: CGRect(x: ScreenSize.Width - 45, y: 15, width: 30, height: 30))

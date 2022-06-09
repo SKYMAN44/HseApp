@@ -13,13 +13,35 @@ enum DeadlineType: String, Decodable {
 }
 
 struct Deadline {
-    let id: Int = Int.random(in: 0...100)
+    let id: Int
     let deadlineType: DeadlineType
-    let subjectName: String = "SomeName"
+    let courseName: String
     let assignmentName: String
     let deadlineTime: String
     let submissionTime: String?
 }
 
-extension Deadline: Decodable { }
-extension Deadline: Hashable { }
+extension Deadline {
+    public init(from deadline: Deadline, convertDates: Bool) {
+        var deadlineTimeToDisplay: String
+        var submissionTimeToDisplay: String?
+        if(convertDates) {
+            deadlineTimeToDisplay = deadline.deadlineTime.getHoursAndMinutesTimeString()
+            submissionTimeToDisplay = deadline.submissionTime?.getHoursAndMinutesTimeString()
+        } else {
+            deadlineTimeToDisplay = deadline.deadlineTime
+            submissionTimeToDisplay = deadline.submissionTime
+        }
+        self.init(
+            id: deadline.id,
+            deadlineType: deadline.deadlineType,
+            courseName: deadline.courseName,
+            assignmentName: deadline.assignmentName,
+            deadlineTime: deadlineTimeToDisplay,
+            submissionTime: submissionTimeToDisplay
+        )
+    }
+}
+
+extension Deadline: Decodable {}
+extension Deadline: Hashable {}

@@ -7,6 +7,7 @@
 
 import Foundation
 
+// fake so far no real viewModel
 class CourseViewModel {
     let title: String
     let counter: Int

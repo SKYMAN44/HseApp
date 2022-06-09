@@ -25,7 +25,7 @@ extension DeadLineAPI: EndPointType {
     }
     
     var path: String {
-        if case .deadlines(let page) = self {
+        if case .deadlines(_) = self {
             return "/assignments"
         } else {
             return "/assignments"

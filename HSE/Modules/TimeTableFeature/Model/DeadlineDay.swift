@@ -16,11 +16,3 @@ struct DeadlineApiResponse {
 
 extension DeadlineApiResponse: Hashable {}
 extension DeadlineApiResponse: Decodable {}
-
-struct DeadlineDay {
-    let day: String
-    let assignments: [Deadline]
-}
-
-extension DeadlineDay: Decodable { }
-extension DeadlineDay: Hashable { }

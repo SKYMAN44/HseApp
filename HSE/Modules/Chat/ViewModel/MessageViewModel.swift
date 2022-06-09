@@ -27,7 +27,7 @@ final class MessageViewModell {
     }
 }
 
-//actually just a model by now
+// Actually just a model by now
 struct MessageViewModel {
     let id = UUID()
     let side: Side

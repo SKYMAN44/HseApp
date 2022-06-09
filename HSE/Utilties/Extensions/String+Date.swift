@@ -20,9 +20,10 @@ extension String {
     
     func getTodayWeekDay()-> String{
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.dateFormat = "EEEE,MMMM dd"
         guard let date = self.convertStringToDate() else { return "" }
-        let weekDay = dateFormatter.string(from: date)
+        let weekDay = dateFormatter.string(from: date).capitalized
         
         return weekDay
       }
