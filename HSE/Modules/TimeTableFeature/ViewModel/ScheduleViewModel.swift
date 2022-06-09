@@ -17,7 +17,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     public private(set) var contentType: ContentType = .timeTable {
         didSet {
             deadlineType = .all
-            updateData()
+            changeContent()
         }
     }
     public var isLoading: Bool = false {
@@ -144,7 +144,9 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
                 itemBySection: itemBySection,
                 animatingDifferences: false
             )
+            self.checkToFetchMoreData()
         }
+        // check if needed to fetchMore
     }
     
     private func setSectionIdentifiers<T>(_ identifiers: inout [String], _ keys: Dictionary<String,[T]>.Keys) {
@@ -178,37 +180,19 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     }
     
     // MARK: - Fetching Data
-    private func fetchOriginalSchedule() {
-        timeTableNetworkManager?.getSchedule(1) { schedule, error in
+    private func fetchSchedule(_ page: Int) {
+        timeTableNetworkManager?.getSchedule(page) { schedule, error in
             if let error = error {
                 print(error)
-                self.isLoading = false
             }
             if let schedule = schedule {
-                print(schedule)
                 self.isLoading = false
-                self.currentSchedulePage = 1
-                self.scheduleResponse = schedule
-            }
-        }
-    }
-    
-    private func fetchMoreSchedule() {
-        guard !isLoading else { return }
-        guard scheduleResponse?.pageNum != currentSchedulePage
-        else {
-            return
-        }
-        isLoading = true
-        timeTableNetworkManager?.getSchedule(currentSchedulePage + 1) { schedule, error in
-            if let error = error {
-                print(error)
-                self.isLoading = false
-            }
-            if let schedule = schedule {
-                self.currentSchedulePage += 1
-                self.isLoading = false
-                self.scheduleResponse?.timeTable.merge(schedule.timeTable) { (current, _) in current }
+                self.currentSchedulePage = page
+                if(page > 1) {
+                    self.scheduleResponse?.timeTable.merge(schedule.timeTable) { (current, _) in current }
+                } else {
+                    self.scheduleResponse = schedule
+                }
             }
         }
     }
@@ -217,12 +201,15 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
         deadlineNetworkManager?.getDeadline(page) { deadlines, error in
             if let error = error{
                 print(error)
-                self.isLoading = false
             }
             if let deadlines = deadlines {
-                print(deadlines)
-                self.assignmentsResponse = deadlines
                 self.isLoading = false
+                self.currentAssignmentPage = page
+                if(page > 1) {
+                    self.assignmentsResponse?.assignments.merge(deadlines.assignments) { (current, _) in current }
+                } else {
+                    self.assignmentsResponse = deadlines
+                }
             }
         }
     }
@@ -230,9 +217,11 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     private func fetchMore() {
         if contentType == .timeTable {
             guard scheduleResponse?.pageNum != currentSchedulePage else { return }
-            fetchMoreSchedule()
+            isLoading = true
+            fetchSchedule(currentSchedulePage + 1)
         } else {
             guard assignmentsResponse?.pageNum != currentAssignmentPage else { return }
+            isLoading = true
             fetchDeadline(currentAssignmentPage + 1)
         }
     }
@@ -271,7 +260,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             self.isLoading = true
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 if(self.contentType == .timeTable) {
-                    self.fetchOriginalSchedule()
+                    self.fetchSchedule(1)
                     self.deadlineNetworkManager?.cancelRequest()
                 } else {
                     self.fetchDeadline(1)
@@ -288,6 +277,50 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     public func deadLineContentChanged(_ type: DeadlineContentType) {
         deadlineType = type
         sortDeadlines()
+    }
+    
+    private func changeContent() {
+        guard !isLoading else { return }
+        clearDataSource {
+            self.isLoading = true
+            DispatchQueue.main.async {
+                if(self.contentType == .timeTable) {
+                    if self.scheduleResponse == nil {
+                        self.fetchSchedule(1)
+                    } else {
+                        self.updateDataSource()
+                        self.isLoading = false
+                    }
+                    self.deadlineNetworkManager?.cancelRequest()
+                } else {
+                    if self.assignmentsResponse == nil {
+                        self.fetchDeadline(1)
+                    } else {
+                        self.updateDataSource()
+                        self.isLoading = false
+                    }
+                    self.timeTableNetworkManager?.cancelRequest()
+                }
+            }
+        }
+    }
+    
+    private func checkToFetchMoreData() {
+        guard let table = self.tableView else { return }
+        if let sections = table.dataSource?.numberOfSections?(in: table),
+            sections > 0 {
+            // find indexPath for last element
+            let sectionIdentifier = dataSource.snapshot().sectionIdentifiers[sections - 1]
+            let items = dataSource.snapshot().numberOfItems(inSection: sectionIdentifier)
+            // convert Row frame to common coordinates
+            let rowFrame = table.rectForRow(at: IndexPath(row: items-1, section: sections-1))
+            let newRect = table.convert(rowFrame, to: table.superview)
+            // if last cell is visible on screen start fetcheing more data
+            if(table.frame.contains(newRect)) {
+                guard !isLoading  else { return }
+                fetchMore()
+            }
+        }
     }
 }
 
@@ -333,20 +366,6 @@ extension ScheduleViewModel: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         viewController?.delegate?.didScroll(scrollView)
         
-        guard let table = self.tableView else { return }
-        if let sections = table.dataSource?.numberOfSections?(in: table),
-            sections > 0 {
-            // find indexPath for last element
-            let sectionIdentifier = dataSource.snapshot().sectionIdentifiers[sections - 1]
-            let items = dataSource.snapshot().numberOfItems(inSection: sectionIdentifier)
-            // convert Row frame to common coordinates
-            let rowFrame = table.rectForRow(at: IndexPath(row: items-1, section: sections-1))
-            let newRect = table.convert(rowFrame, to: table.superview)
-            // if last cell is visible on screen start fetcheing more data
-            if(table.frame.contains(newRect)) {
-                guard !isLoading  else { return }
-                fetchMoreSchedule()
-            }
-        }
+        self.checkToFetchMoreData()
     }
 }

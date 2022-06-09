@@ -10,20 +10,24 @@ import UIKit
 
 
 extension UITableViewDiffableDataSource {
-    func applySnapshotUsing(sectionIDs: [SectionIdentifierType],
-                            itemBySection: [SectionIdentifierType: [ItemIdentifierType]],
-                            sectionRetainedIfEmpty: Set<SectionIdentifierType> = Set<SectionIdentifierType>()) {
+    func applySnapshotUsing(
+        sectionIDs: [SectionIdentifierType],
+        itemBySection: [SectionIdentifierType: [ItemIdentifierType]],
+        sectionRetainedIfEmpty: Set<SectionIdentifierType> = Set<SectionIdentifierType>()
+    ) {
         applySnapshotUsing(sectionIDs: sectionIDs,
                            itemBySection: itemBySection,
                            animatingDifferences: true,
-                           sectionRetainedIfEmpty: sectionRetainedIfEmpty)
-        
+                           sectionRetainedIfEmpty: sectionRetainedIfEmpty
+        )
     }
     
-    func applySnapshotUsing(sectionIDs: [SectionIdentifierType],
-                            itemBySection: [SectionIdentifierType: [ItemIdentifierType]],
-                            animatingDifferences: Bool,
-                            sectionRetainedIfEmpty: Set<SectionIdentifierType> = Set<SectionIdentifierType>()) {
+    func applySnapshotUsing(
+        sectionIDs: [SectionIdentifierType],
+        itemBySection: [SectionIdentifierType: [ItemIdentifierType]],
+        animatingDifferences: Bool,
+        sectionRetainedIfEmpty: Set<SectionIdentifierType> = Set<SectionIdentifierType>()
+    ) {
         var snapshot = NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>()
         
         for sectionID in sectionIDs {

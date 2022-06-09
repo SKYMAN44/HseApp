@@ -180,7 +180,11 @@ final class DeadlineTableViewCell: UITableViewCell {
         subjectLabel.text = deadline.courseName
         taskNameLabel.text = deadline.assignmentName
         deadlineTimeLabel.text = deadline.deadlineTime
-        submittedTimeLabel.text = deadline.submissionTime
+        if let time = deadline.submissionTime {
+            submittedTimeLabel.text = time
+        } else {
+            submittedTimeLabel.text = "00:00"
+        }
     }
     
     public func configureShimmer() {
