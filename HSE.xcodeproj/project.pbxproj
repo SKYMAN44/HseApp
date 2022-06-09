@@ -272,7 +272,6 @@
 		C0C1AA91284D0A1A005CB3C1 /* StrokeColorAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeColorAnimation.swift; sourceTree = "<group>"; };
 		C0C1AA93284D0FA1005CB3C1 /* AuthenticationProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationProtocols.swift; sourceTree = "<group>"; };
 		C0C1AA95284D1060005CB3C1 /* ActivityAnimationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityAnimationScreen.swift; sourceTree = "<group>"; };
-		C0E91461284147A300AAD804 /* HSESKIT */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HSESKIT; path = ../HSESKIT; sourceTree = "<group>"; };
 		C0E914622842BD8E00AAD804 /* AccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModel.swift; sourceTree = "<group>"; };
 		C0E914652842C13100AAD804 /* AccountHeaderCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountHeaderCollectionViewCell.swift; sourceTree = "<group>"; };
 		C0E914672843F2A400AAD804 /* UserEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEndPoint.swift; sourceTree = "<group>"; };
@@ -510,7 +509,6 @@
 		63C4D5FE278DC58C0028381F = {
 			isa = PBXGroup;
 			children = (
-				C0E91461284147A300AAD804 /* HSESKIT */,
 				63C4D609278DC58C0028381F /* HSE */,
 				63C4D620278DC58E0028381F /* HSETests */,
 				63C4D62A278DC58E0028381F /* HSEUITests */,

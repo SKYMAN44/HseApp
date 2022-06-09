@@ -13,7 +13,11 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     
     private var deadlineNetworkManager: DeadlineNetworkManager?
     private var timeTableNetworkManager: ScheduleNetworkManager?
-    public private(set) var deadlineType: DeadlineContentType = .all
+    public private(set) var deadlineType: DeadlineContentType = .all {
+        didSet {
+            sortDeadlines()
+        }
+    }
     public private(set) var contentType: ContentType = .timeTable {
         didSet {
             deadlineType = .all
@@ -144,9 +148,35 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
                 itemBySection: itemBySection,
                 animatingDifferences: false
             )
+            // check if needed to fetchMore
             self.checkToFetchMoreData()
         }
-        // check if needed to fetchMore
+    }
+    
+    private func changeContent() {
+        guard !isLoading else { return }
+        clearDataSource {
+            self.isLoading = true
+            DispatchQueue.main.async {
+                if(self.contentType == .timeTable) {
+                    if self.scheduleResponse == nil {
+                        self.fetchSchedule(1)
+                    } else {
+                        self.updateDataSource()
+                        self.isLoading = false
+                    }
+                    self.deadlineNetworkManager?.cancelRequest()
+                } else {
+                    if self.assignmentsResponse == nil {
+                        self.fetchDeadline(1)
+                    } else {
+                        self.sortDeadlines()
+                        self.isLoading = false
+                    }
+                    self.timeTableNetworkManager?.cancelRequest()
+                }
+            }
+        }
     }
     
     private func setSectionIdentifiers<T>(_ identifiers: inout [String], _ keys: Dictionary<String,[T]>.Keys) {
@@ -276,33 +306,6 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     
     public func deadLineContentChanged(_ type: DeadlineContentType) {
         deadlineType = type
-        sortDeadlines()
-    }
-    
-    private func changeContent() {
-        guard !isLoading else { return }
-        clearDataSource {
-            self.isLoading = true
-            DispatchQueue.main.async {
-                if(self.contentType == .timeTable) {
-                    if self.scheduleResponse == nil {
-                        self.fetchSchedule(1)
-                    } else {
-                        self.updateDataSource()
-                        self.isLoading = false
-                    }
-                    self.deadlineNetworkManager?.cancelRequest()
-                } else {
-                    if self.assignmentsResponse == nil {
-                        self.fetchDeadline(1)
-                    } else {
-                        self.updateDataSource()
-                        self.isLoading = false
-                    }
-                    self.timeTableNetworkManager?.cancelRequest()
-                }
-            }
-        }
     }
     
     private func checkToFetchMoreData() {
