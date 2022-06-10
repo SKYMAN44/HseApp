@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SKYMAN44/HSESKIT",
       "state" : {
-        "revision" : "74a256fcb0c722c86255ea096ca10d633c28a41a",
-        "version" : "1.2.1"
+        "revision" : "60020fe0b3d9f043f1e168af5e5106d7250e45f0",
+        "version" : "1.2.3"
       }
     }
   ],
