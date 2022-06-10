@@ -11,6 +11,13 @@ Dmitrii Sokolov
 - Xcode 13.0+
 - Swift 5.0+
 
+## Upcoming updates
+
+- Migrate to MVVM+C
+- Unit tests
+- possibly UI tests
+- working chat, courses and grades screen
+
 ## Project Structure
 
     .

@@ -208,6 +208,7 @@ final class TaskViewModel: TaskFeatureLogic {
     
     // MARK: - Network Call
     private func fetchTask() {
+        // fake so far no backend(
         let studentTask = StudentTask(
             taskDescription: TaskDescription(courseName: "Mac", name: "s", discription: "a"),
             publicationTime: "ss",

@@ -9,8 +9,10 @@ import UIKit
 import HSESKIT
 
 final class LoginViewController: UIViewController, LoginScreen {
+    // TODO: create custom buttons, textfield and move them to HSESHKIT package
     private lazy var loginButton: UIButton = {
         let button = UIButton()
+        // change style code to work with json, and change it's api
         button.backgroundColor = .primary.style(.primary)()
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(.primary.style(.onPrimary)(), for: .normal)

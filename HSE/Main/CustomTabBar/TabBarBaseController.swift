@@ -30,6 +30,7 @@ final class TabBarBaseController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // TODO:  decompose and migrate to MVVM+C
         tabBar.isTranslucent = true
         tabBar.tintColor = .primary.style(.primary)()
         tabBar.backgroundColor = .background.style(.accent)()

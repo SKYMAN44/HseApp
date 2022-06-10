@@ -7,6 +7,7 @@
 
 import UIKit
 
+// TODO: Move to  spm package
 final class ActivityAnimationView: UIView {
     private let colors: [UIColor]
     private let lineWidth: CGFloat

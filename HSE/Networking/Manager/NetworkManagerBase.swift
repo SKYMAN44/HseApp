@@ -13,6 +13,7 @@ internal enum NetworkEnvironment {
     case local
 }
 
+// TODO: add image fetching(caching) when backend ready
 open class BaseNetworkManager {
     static let environment: NetworkEnvironment = .production
     

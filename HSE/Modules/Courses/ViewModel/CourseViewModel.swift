@@ -7,7 +7,7 @@
 
 import Foundation
 
-// fake so far no real viewModel
+// fake so far no real viewModel no backend(((((
 class CourseViewModel {
     let title: String
     let counter: Int

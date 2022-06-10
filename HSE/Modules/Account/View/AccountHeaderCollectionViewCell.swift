@@ -14,6 +14,7 @@ final class AccountHeaderCollectionViewCell: UICollectionViewCell {
     
     private let userImageView: UIImageView = {
         let imageView = UIImageView()
+        // TODO: - Move circle imageView to spm package + add image fetching(caching) when backend ready
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.addConstraint(NSLayoutConstraint(item: imageView,
                                                   attribute: .height,

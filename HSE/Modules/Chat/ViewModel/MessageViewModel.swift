@@ -18,16 +18,16 @@ enum MessageType {
     case image
 }
 
-final class MessageViewModell {
-    let tableView: UITableView
-    
-    // MARK: - Init
-    init(_ tableView: UITableView) {
-        self.tableView = tableView
-    }
-}
+//final class MessageViewModel {
+//    let tableView: UITableView
+//
+//    // MARK: - Init
+//    init(_ tableView: UITableView) {
+//        self.tableView = tableView
+//    }
+//}
 
-// Actually just a model by now
+// Actually just a model by now, no backend(((((
 struct MessageViewModel {
     let id = UUID()
     let side: Side

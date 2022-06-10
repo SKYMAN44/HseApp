@@ -7,8 +7,10 @@
 import UIKit
 import HSESKIT
 
+// move to spm package
 final class IconTextInfoView: UIView {
     private let icon: UIImageView = {
+        // create custom reusable componnent
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.addConstraint(NSLayoutConstraint(item: imageView,
