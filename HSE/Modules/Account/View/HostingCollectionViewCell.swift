@@ -14,7 +14,6 @@ final class HostingCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
     }
     
     required init?(coder: NSCoder) {
@@ -23,7 +22,6 @@ final class HostingCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-
     }
     
     public func configure(view: UIView) {

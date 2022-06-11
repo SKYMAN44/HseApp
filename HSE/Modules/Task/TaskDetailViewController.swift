@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class TaskDetailViewController: UIViewController, TaskDetailScreen {
     private let dismissButton: UIButton = {
         let button = UIButton()

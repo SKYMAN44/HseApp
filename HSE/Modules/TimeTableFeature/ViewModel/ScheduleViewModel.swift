@@ -150,7 +150,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             
             itemBySection = scheduleResponse.timeTable.mapValues { $0.map {
                 Item.timeslot(TimeSlot(from: $0, convertDates: true))
-            } }
+            }}
             
             setSectionIdentifiers(&sectionIdentifiers, scheduleResponse.timeTable.keys)
             self.scheduleSectionsIdentifiers = sectionIdentifiers
@@ -199,7 +199,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
         }
     }
 
-    private func setSectionIdentifiers<T>(_ identifiers: inout [String], _ keys: Dictionary<String,[T]>.Keys) {
+    private func setSectionIdentifiers<T>(_ identifiers: inout [String], _ keys: Dictionary<String, [T]>.Keys) {
         let temp: [Date] = keys.lazy.compactMap { (strDate) in
             if let date = strDate.convertStringToDate() {
                 return date

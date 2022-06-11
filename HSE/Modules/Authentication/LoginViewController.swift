@@ -10,63 +10,40 @@ import HSESKIT
 
 final class LoginViewController: UIViewController, LoginScreen {
     // TODO: create custom buttons, textfield and move them to HSESHKIT package
-    private lazy var loginButton: UIButton = {
-        let button = UIButton()
-        // change style code to work with json, and change it's api
-        button.backgroundColor = .primary.style(.primary)()
+    private lazy var loginButton: PrimaryButton = {
+        let button = PrimaryButton()
         button.setTitle("Log In", for: .normal)
-        button.setTitleColor(.primary.style(.onPrimary)(), for: .normal)
-        button.layer.cornerRadius = 8
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        button.setColors(.primary.style(.primary)(), .primary.style(.onPrimary)())
         button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
 
         return button
     }()
 
-    private let loginProblemButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .clear
+    private let loginProblemButton: PrimaryButton = {
+        let button = PrimaryButton()
+        button.setColors(.clear, .primary.style(.primary)())
         button.setTitle("Can't login ?", for: .normal)
-        button.setTitleColor(.primary.style(.primary)(), for: .normal)
-        button.layer.cornerRadius = 8
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.heightAnchor.constraint(equalToConstant: 48).isActive = true
 
         return button
     }()
 
-    private let emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.layer.cornerRadius = 8
-        textField.layer.masksToBounds = true
-        textField.layer.borderWidth = 0
+    private let emailTextField: PrimaryTextField = {
+        let textField = PrimaryTextField()
         textField.placeholder = "HSE Email"
-        textField.backgroundColor = .background.style(.accent)()
-        textField.setLeftPaddingPoints(16)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        textField.setColors(.background.style(.accent)())
         textField.tag = 0
         textField.textContentType = .emailAddress
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
         textField.applyCustomClearButton()
-        
+
         return textField
     }()
 
-    private let passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .none
-        textField.layer.cornerRadius = 8
-        textField.layer.masksToBounds = true
-        textField.layer.borderWidth = 0
+    private let passwordTextField: PrimaryTextField = {
+        let textField = PrimaryTextField()
         textField.placeholder = "Password"
-        textField.backgroundColor = .background.style(.accent)()
-        textField.setLeftPaddingPoints(16)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        textField.setColors(.background.style(.accent)())
         textField.tag = 1
         textField.isSecureTextEntry = true
         textField.applySecureEntrySwitcher()

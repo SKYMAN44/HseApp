@@ -89,6 +89,8 @@
 		63F857EA2790F1D500F45A97 /* CalendarPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */; };
 		63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857EB2791880600F45A97 /* ScreenSize.swift */; };
 		C00DB9172853D7B50048A928 /* TimeTableFeatureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB9162853D7B50048A928 /* TimeTableFeatureCoordinator.swift */; };
+		C00DB919285527BA0048A928 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB918285527BA0048A928 /* PrimaryButton.swift */; };
+		C00DB91B285529410048A928 /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB91A285529410048A928 /* PrimaryTextField.swift */; };
 		C01D10BD2804947300149652 /* SubmissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */; };
 		C01D10BF2804A29100149652 /* EditButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */; };
 		C01D10C12804C03100149652 /* AddFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */; };
@@ -238,6 +240,8 @@
 		63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopUpView.swift; sourceTree = "<group>"; };
 		63F857EB2791880600F45A97 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
 		C00DB9162853D7B50048A928 /* TimeTableFeatureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableFeatureCoordinator.swift; sourceTree = "<group>"; };
+		C00DB918285527BA0048A928 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		C00DB91A285529410048A928 /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
 		C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionCollectionViewCell.swift; sourceTree = "<group>"; };
 		C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -572,6 +576,8 @@
 				C02D10AB283D331A0053BFD8 /* ChatNavTitleView.swift */,
 				C0E9146D284417BD00AAD804 /* IconTextInfoView.swift */,
 				C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */,
+				C00DB918285527BA0048A928 /* PrimaryButton.swift */,
+				C00DB91A285529410048A928 /* PrimaryTextField.swift */,
 			);
 			path = Utilties;
 			sourceTree = "<group>";
@@ -979,7 +985,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "#if test -d \"/opt/homebrew/bin/\"; then\n#  PATH=\"/opt/homebrew/bin/:${PATH}\"\n#fi\n\n#export PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1006,6 +1012,7 @@
 				63F857E02790658800F45A97 /* AccountViewController.swift in Sources */,
 				C02D10B8283DA6FA0053BFD8 /* ChatDetail.swift in Sources */,
 				C03A89D2284FA80C006CC46D /* NetworkManagerBase.swift in Sources */,
+				C00DB919285527BA0048A928 /* PrimaryButton.swift in Sources */,
 				63881F6E27B75500004A2AEE /* TableViewDiffableDataSource.swift in Sources */,
 				63881F5C27B5D7DA004A2AEE /* HTTPTask.swift in Sources */,
 				C0C1AA8E284D0983005CB3C1 /* RotationAnimation.swift in Sources */,
@@ -1103,6 +1110,7 @@
 				C0C1AA8C284D095E005CB3C1 /* ProgressShapeLayer.swift in Sources */,
 				C00DB9172853D7B50048A928 /* TimeTableFeatureCoordinator.swift in Sources */,
 				C0C1AA8A284D08F1005CB3C1 /* ActivityAnimationView.swift in Sources */,
+				C00DB91B285529410048A928 /* PrimaryTextField.swift in Sources */,
 				63881F8127B9BCC3004A2AEE /* GradeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

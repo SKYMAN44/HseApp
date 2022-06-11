@@ -40,6 +40,7 @@ Dmitrii Sokolov
 ## Description
 HSE application for Students/Assistants/Professor to efficently interact with each other, check timetable and pass deadlines.
 Using SwiftLint not to mess up the codestyle
+
 ## SPM Dependencies
 
 - HSESKIT
