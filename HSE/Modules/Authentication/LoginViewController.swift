@@ -15,6 +15,7 @@ final class LoginViewController: UIViewController, LoginScreen {
         button.setTitle("Log In", for: .normal)
         button.setColors(.primary.style(.primary)(), .primary.style(.onPrimary)())
         button.addTarget(self, action: #selector(loginButtonPressed), for: .touchUpInside)
+        button.accessibilityIdentifier = "LOGIN_BUTTON"
 
         return button
     }()
@@ -23,6 +24,7 @@ final class LoginViewController: UIViewController, LoginScreen {
         let button = PrimaryButton()
         button.setColors(.clear, .primary.style(.primary)())
         button.setTitle("Can't login ?", for: .normal)
+        button.accessibilityIdentifier = "LOGIN_PROBLEM_BUTTON"
 
         return button
     }()
@@ -36,6 +38,7 @@ final class LoginViewController: UIViewController, LoginScreen {
         textField.autocorrectionType = .no
         textField.spellCheckingType = .no
         textField.applyCustomClearButton()
+        textField.accessibilityIdentifier = "EMAIL_TEXTFIELD"
 
         return textField
     }()
@@ -48,6 +51,7 @@ final class LoginViewController: UIViewController, LoginScreen {
         textField.isSecureTextEntry = true
         textField.applySecureEntrySwitcher()
         textField.textContentType = .password
+        textField.accessibilityIdentifier = "PASSWORD_TEXTFIELD"
 
         return textField
     }()
@@ -97,6 +101,7 @@ final class LoginViewController: UIViewController, LoginScreen {
         control.textFont = .customFont.style(.body)()
         control.translatesAutoresizingMaskIntoConstraints = false
         control.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        control.accessibilityIdentifier = "Segment_Controll"
 
         return control
     }()

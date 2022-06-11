@@ -70,8 +70,6 @@
 		63C4D60D278DC58C0028381F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D60C278DC58C0028381F /* SceneDelegate.swift */; };
 		63C4D614278DC58E0028381F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D613278DC58E0028381F /* Assets.xcassets */; };
 		63C4D617278DC58E0028381F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C4D615278DC58E0028381F /* LaunchScreen.storyboard */; };
-		63C4D62C278DC58E0028381F /* HSEUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D62B278DC58E0028381F /* HSEUITests.swift */; };
-		63C4D62E278DC58E0028381F /* HSEUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D62D278DC58E0028381F /* HSEUITestsLaunchTests.swift */; };
 		63C4D63B278DC7270028381F /* CoursesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D63A278DC7270028381F /* CoursesViewController.swift */; };
 		63C4D641278DCD260028381F /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D640278DCD260028381F /* Course.swift */; };
 		63C4D650278E38780028381F /* CourseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C4D64F278E38780028381F /* CourseViewModel.swift */; };
@@ -91,6 +89,11 @@
 		C00DB9172853D7B50048A928 /* TimeTableFeatureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB9162853D7B50048A928 /* TimeTableFeatureCoordinator.swift */; };
 		C00DB919285527BA0048A928 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB918285527BA0048A928 /* PrimaryButton.swift */; };
 		C00DB91B285529410048A928 /* PrimaryTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB91A285529410048A928 /* PrimaryTextField.swift */; };
+		C00DB91F285531630048A928 /* BaseTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB91E285531630048A928 /* BaseTest.swift */; };
+		C00DB921285531A90048A928 /* BaseScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB920285531A90048A928 /* BaseScreen.swift */; };
+		C00DB923285531B90048A928 /* TimeTableScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB922285531B90048A928 /* TimeTableScreen.swift */; };
+		C00DB925285532D90048A928 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB924285532D90048A928 /* LoginScreen.swift */; };
+		C00DB927285532EA0048A928 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB926285532EA0048A928 /* LoginTests.swift */; };
 		C01D10BD2804947300149652 /* SubmissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */; };
 		C01D10BF2804A29100149652 /* EditButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */; };
 		C01D10C12804C03100149652 /* AddFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */; };
@@ -221,8 +224,6 @@
 		63C4D618278DC58E0028381F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63C4D61D278DC58E0028381F /* HSETests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSETests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63C4D627278DC58E0028381F /* HSEUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HSEUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		63C4D62B278DC58E0028381F /* HSEUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSEUITests.swift; sourceTree = "<group>"; };
-		63C4D62D278DC58E0028381F /* HSEUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSEUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		63C4D63A278DC7270028381F /* CoursesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesViewController.swift; sourceTree = "<group>"; };
 		63C4D640278DCD260028381F /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
 		63C4D64F278E38780028381F /* CourseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseViewModel.swift; sourceTree = "<group>"; };
@@ -242,6 +243,11 @@
 		C00DB9162853D7B50048A928 /* TimeTableFeatureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableFeatureCoordinator.swift; sourceTree = "<group>"; };
 		C00DB918285527BA0048A928 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		C00DB91A285529410048A928 /* PrimaryTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryTextField.swift; sourceTree = "<group>"; };
+		C00DB91E285531630048A928 /* BaseTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTest.swift; sourceTree = "<group>"; };
+		C00DB920285531A90048A928 /* BaseScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScreen.swift; sourceTree = "<group>"; };
+		C00DB922285531B90048A928 /* TimeTableScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableScreen.swift; sourceTree = "<group>"; };
+		C00DB924285532D90048A928 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
+		C00DB926285532EA0048A928 /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionCollectionViewCell.swift; sourceTree = "<group>"; };
 		C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -559,8 +565,8 @@
 		63C4D62A278DC58E0028381F /* HSEUITests */ = {
 			isa = PBXGroup;
 			children = (
-				63C4D62B278DC58E0028381F /* HSEUITests.swift */,
-				63C4D62D278DC58E0028381F /* HSEUITestsLaunchTests.swift */,
+				C00DB91D285530E20048A928 /* Tests */,
+				C00DB91C285530DC0048A928 /* Screens */,
 			);
 			path = HSEUITests;
 			sourceTree = "<group>";
@@ -753,6 +759,25 @@
 			path = Account;
 			sourceTree = "<group>";
 		};
+		C00DB91C285530DC0048A928 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				C00DB920285531A90048A928 /* BaseScreen.swift */,
+				C00DB922285531B90048A928 /* TimeTableScreen.swift */,
+				C00DB924285532D90048A928 /* LoginScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		C00DB91D285530E20048A928 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				C00DB91E285531630048A928 /* BaseTest.swift */,
+				C00DB926285532EA0048A928 /* LoginTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		C01D10C8280B0B0200149652 /* ScheduleModule */ = {
 			isa = PBXGroup;
 			children = (
@@ -913,6 +938,7 @@
 					};
 					63C4D626278DC58E0028381F = {
 						CreatedOnToolsVersion = 13.1;
+						LastSwiftMigration = 1330;
 						TestTargetID = 63C4D606278DC58C0028381F;
 					};
 				};
@@ -1128,8 +1154,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63C4D62C278DC58E0028381F /* HSEUITests.swift in Sources */,
-				63C4D62E278DC58E0028381F /* HSEUITestsLaunchTests.swift in Sources */,
+				C00DB923285531B90048A928 /* TimeTableScreen.swift in Sources */,
+				C00DB925285532D90048A928 /* LoginScreen.swift in Sources */,
+				C00DB921285531A90048A928 /* BaseScreen.swift in Sources */,
+				C00DB927285532EA0048A928 /* LoginTests.swift in Sources */,
+				C00DB91F285531630048A928 /* BaseTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1388,6 +1417,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7QZL932B66;
@@ -1401,6 +1431,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = skymanapps.HSEUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = HSE;
@@ -1411,6 +1442,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7QZL932B66;
