@@ -24,9 +24,15 @@ final class TimeTableNetworkManager: BaseNetworkManager, ScheduleNetworkManager 
 final class AssignmentsNetworkManager: BaseNetworkManager, DeadlineNetworkManager {
     var router = Router<DeadLineAPI>()
     
-    public func getDeadline(_ page: Int, completion: @escaping (DeadlineApiResponse?, String?) -> () ) {
+    public func getDeadlines(_ page: Int, completion: @escaping (DeadlinesApiResponse?, String?) -> () ) {
         router.request(.deadlines(page: page)) { [self] data, response, error in
-            processRequestResponse(data, response, error, DeadlineApiResponse.self, completion: completion)
+            processRequestResponse(data, response, error, DeadlinesApiResponse.self, completion: completion)
+        }
+    }
+    
+    func getDeadlineDetails(_ id: Int, completion: @escaping (DeadlineDescriptionApiResponse?, String?) -> ()) {
+        router.request(.deadlineDetail(id: id)) { [self] data, response, error in
+            processRequestResponse(data, response, error, DeadlineDescriptionApiResponse.self, completion: completion)
         }
     }
     

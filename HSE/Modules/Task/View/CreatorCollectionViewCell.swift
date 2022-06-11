@@ -24,13 +24,15 @@ final class CreatorCollectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.addConstraint(NSLayoutConstraint(item: imageView,
-                                                  attribute: .height,
-                                                  relatedBy: .equal,
-                                                  toItem: imageView,
-                                                  attribute: .width,
-                                                  multiplier: 1,
-                                                  constant: 0))
+        imageView.addConstraint(NSLayoutConstraint(
+            item: imageView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: imageView,
+            attribute: .width,
+            multiplier: 1,
+            constant: 0
+        ))
         imageView.widthAnchor.constraint(equalToConstant: 36).isActive = true
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = false
@@ -54,8 +56,7 @@ final class CreatorCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
+
         setupView()
     }
     
@@ -64,9 +65,8 @@ final class CreatorCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - UI setup
-    
     private func setupView() {
-        let ownerSV = UIStackView(arrangedSubviews: [creatorImageView,creatorNameLabel])
+        let ownerSV = UIStackView(arrangedSubviews: [creatorImageView, creatorNameLabel])
         ownerSV.distribution = .fill
         ownerSV.alignment = .center
         ownerSV.axis = .horizontal

@@ -16,4 +16,3 @@ struct ScheduleApiResponse {
 
 extension ScheduleApiResponse: Hashable {}
 extension ScheduleApiResponse: Decodable {}
-

@@ -100,42 +100,53 @@ extension CourseCollectionViewCell: UICollectionViewDelegate {
 // MARK: - Data Source Initialization
 extension CourseCollectionViewCell {
     func configureDataSource() {
-        dataSource = .init(collectionView: oneCourseCollectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
-            let section = self.sections[indexPath.section]
-            switch section {
-            case .chat:
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: CourseChatCollectionViewCell.reuseIdentifier,
-                    for: indexPath
-                ) as! CourseChatCollectionViewCell
+        dataSource = .init(
+            collectionView: oneCourseCollectionView,
+            cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
 
-                return cell
-            case .description:
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: DescriptionCollectionViewCell.reuseIdentifier,
-                    for: indexPath
-                ) as! DescriptionCollectionViewCell
-                cell.configure()
+                let section = self.sections[indexPath.section]
+                switch section {
+                case .chat:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: CourseChatCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    )
 
-                return cell
-            case .tStuff:
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier,
-                    for: indexPath
-                ) as! TeachingStuffCollectionViewCell
-                cell.configure()
+                    return cell
+                case .description:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: DescriptionCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    )
+                    if let cell = cell as? DescriptionCollectionViewCell {
+                        cell.configure()
+                    }
 
-                return cell
-            case .formula:
-                let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: FormulaCollectionViewCell.reuseIdentifier,
-                    for: indexPath
-                ) as! FormulaCollectionViewCell
-                cell.configure(item as! Formula)
+                    return cell
+                case .tStuff:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: TeachingStuffCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    )
+                    if let cell = cell as? TeachingStuffCollectionViewCell {
+                        cell.configure()
+                    }
 
-                return cell
+                    return cell
+                case .formula:
+                    let cell = collectionView.dequeueReusableCell(
+                        withReuseIdentifier: FormulaCollectionViewCell.reuseIdentifier,
+                        for: indexPath
+                    )
+                    if let cell = cell as? FormulaCollectionViewCell,
+                       let item = item as? Formula {
+                        cell.configure(item)
+                    }
+
+                    return cell
+                }
             }
-        })
+        )
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
         snapshot.appendSections([.chat, .description, .tStuff, .formula])

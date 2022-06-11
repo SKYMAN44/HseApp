@@ -9,7 +9,7 @@ import UIKit
 import HSESKIT
 
 // MARK: - Delegate
-protocol UserInfoSectionSwitcherDelegate {
+protocol UserInfoSectionSwitcherDelegate: AnyObject {
     func segmentHasChanged(_ segment: Int)
 }
 
@@ -93,7 +93,5 @@ final class UserInfoSectionSwitchCollectionReusableView: UICollectionReusableVie
     }
     
     // MARK: - External Calls
-    public func setSelection() {
-        
-    }
+    public func setSelection() {}
 }

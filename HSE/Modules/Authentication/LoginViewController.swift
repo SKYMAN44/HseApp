@@ -297,7 +297,8 @@ final class LoginViewController: UIViewController, LoginScreen {
     // MARK: - Keyboard Notifications
     @objc
     private func willShowKeyboard(notification: NSNotification) {
-        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+        guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+        else { return }
         let keyboardScreenEndFrame = keyboardValue.cgRectValue
         let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
         let yDifference = keyboardViewEndFrame.minY - passwordTextFieldFrameInWindow!.maxY

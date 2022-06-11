@@ -25,7 +25,6 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
     // MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
     }
     
     required public init?(coder: NSCoder) {
@@ -35,7 +34,6 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
     // MARK: - setup UI
     override func setupUI() {
         super.setupUI()
-        
         
         setupMessageImageView()
     }
@@ -60,13 +58,15 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
     private func setImage(image: UIImage) {
         let ratio = image.size.width / image.size.height
         messageImageView.image = image
-        messageImageView.addConstraint(NSLayoutConstraint(item: messageImageView,
-                                                          attribute: .height,
-                                                          relatedBy: .equal,
-                                                          toItem: messageImageView,
-                                                          attribute: .width,
-                                                          multiplier: ratio,
-                                                          constant: 0))
+        messageImageView.addConstraint(NSLayoutConstraint(
+            item: messageImageView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: messageImageView,
+            attribute: .width,
+            multiplier: ratio,
+            constant: 0
+        ))
     }
     
     // MARK: - Interactions
@@ -92,7 +92,10 @@ final class LeftImageMessageTableViewCell: BaseLeftMessageTableViewCell, Message
     }
     
     private func contentSelected() {
-        self.delegate?.selectedContentInCell(content: messageImageView, contentFrameInCell: imageFrameRegardingCell(), indexPath: myIndexPath!)
+        self.delegate?.selectedContentInCell(
+            content: messageImageView,
+            contentFrameInCell: imageFrameRegardingCell(),
+            indexPath: myIndexPath!
+        )
     }
-
 }

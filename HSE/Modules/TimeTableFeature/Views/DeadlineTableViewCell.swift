@@ -77,7 +77,6 @@ final class DeadlineTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.widthAnchor.constraint(equalToConstant: 2).isActive = true
         
-        
         return view
     }()
     
@@ -106,52 +105,45 @@ final class DeadlineTableViewCell: UITableViewCell {
         isShimmerMode = false
         stopShimmer()
     }
-    
+
     // MARK: - setupUI
     private func setupView() {
         self.backgroundColor = .background.style(.firstLevel)()
-        
+
         deadlineTimeView.addSubview(deadlineTimeLabel)
-        
         deadlineTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             deadlineTimeLabel.topAnchor.constraint(equalTo: deadlineTimeView.topAnchor, constant: 4),
             deadlineTimeLabel.trailingAnchor.constraint(equalTo: deadlineTimeView.trailingAnchor, constant: -8),
             deadlineTimeLabel.bottomAnchor.constraint(equalTo: deadlineTimeView.bottomAnchor, constant: -4),
             deadlineTimeLabel.leadingAnchor.constraint(equalTo: deadlineTimeView.leadingAnchor, constant: 8)
         ])
-        
-        
+
         submittedTimeView.addSubview(submittedTimeLabel)
-        
         submittedTimeLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         NSLayoutConstraint.activate([
             submittedTimeLabel.topAnchor.constraint(equalTo: submittedTimeView.topAnchor, constant: 4),
             submittedTimeLabel.trailingAnchor.constraint(equalTo: submittedTimeView.trailingAnchor, constant: -8),
             submittedTimeLabel.bottomAnchor.constraint(equalTo: submittedTimeView.bottomAnchor, constant: -4),
             submittedTimeLabel.leadingAnchor.constraint(equalTo: submittedTimeView.leadingAnchor, constant: 8)
         ])
-        
-        
-        
+
         let submissionSV = UIStackView(arrangedSubviews: [deadlineTimeView, submittedTimeView])
-        
+
         submissionSV.alignment = .fill
         submissionSV.distribution = .fill
         submissionSV.spacing = 8
         submissionSV.axis = .horizontal
-        
-        
+
         let taskSV = UIStackView(arrangedSubviews: [ subjectLabel, taskNameLabel, submissionSV])
-        
+
         taskSV.alignment = .leading
         taskSV.distribution = .fill
         taskSV.spacing = 8
         taskSV.axis = .vertical
-        
-        
+
         let mainSV = UIStackView(arrangedSubviews: [separateView, taskSV])
         
         mainSV.alignment = .fill
@@ -170,11 +162,11 @@ final class DeadlineTableViewCell: UITableViewCell {
             mainSV.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16)
         ])
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
     // MARK: - External Calls
     public func configure(deadline: Deadline) {
         subjectLabel.text = deadline.courseName
@@ -186,7 +178,7 @@ final class DeadlineTableViewCell: UITableViewCell {
             submittedTimeLabel.text = "00:00"
         }
     }
-    
+
     public func configureShimmer() {
         subjectLabel.text = "                     "
         taskNameLabel.text = "                         "
@@ -194,22 +186,25 @@ final class DeadlineTableViewCell: UITableViewCell {
         submittedTimeLabel.text = "           "
         isShimmerMode = true
     }
-
 }
 
 // MARK: - Shimmering
 extension DeadlineTableViewCell: ShimmeringObject {
     func startShimmer() {
-        applyShimmerTo(to: [subjectLabel,
-                           taskNameLabel,
-                           deadlineTimeView,
-                           submittedTimeView])
+        applyShimmerTo(to: [
+            subjectLabel,
+            taskNameLabel,
+            deadlineTimeView,
+            submittedTimeView
+        ])
     }
-    
+
     func stopShimmer() {
-        removeShimmerFrom(from: [subjectLabel,
-                                 taskNameLabel,
-                                 deadlineTimeView,
-                                 submittedTimeView])
+        removeShimmerFrom(from: [
+            subjectLabel,
+            taskNameLabel,
+            deadlineTimeView,
+            submittedTimeView
+        ])
     }
 }

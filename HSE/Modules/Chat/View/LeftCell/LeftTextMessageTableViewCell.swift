@@ -31,7 +31,6 @@ final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageC
     override func setupUI() {
         super.setupUI()
         
-        
         setupMessageLabel()
     }
     
@@ -55,6 +54,4 @@ final class LeftTextMessageTableViewCell: BaseLeftMessageTableViewCell, MessageC
     func handleReply() {
         print("Fake so far")
     }
-    
 }
-

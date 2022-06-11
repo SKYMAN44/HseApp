@@ -34,7 +34,11 @@ final class LoginViewModel: LoginLogic {
                     self?.presentNetworkError("", title: "Failed to login")
                     return
                 }
-                self?.encryptedStorage.save(token, service: KeychainHelper.defaultService, account: KeychainHelper.defaultAccount)
+                self?.encryptedStorage.save(
+                    token,
+                    service: KeychainHelper.defaultService,
+                    account: KeychainHelper.defaultAccount
+                )
                 self?.navigateToApp()
             }
         }
@@ -56,7 +60,7 @@ final class LoginViewModel: LoginLogic {
         case 0:
             return .professor
         case 1:
-            return .ta
+            return .assist
         case 2:
             return .student
         default:
@@ -65,7 +69,7 @@ final class LoginViewModel: LoginLogic {
     }
     
     // MARK: - Interactions
-    public func loginButtonPressed(_ email: String?,_ password: String?, _ roleNumber: Int) {
+    public func loginButtonPressed(_ email: String?, _ password: String?, _ roleNumber: Int) {
         if let email = email, let password = password {
             self.email = email
             self.password = password

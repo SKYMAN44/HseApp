@@ -41,7 +41,5 @@ final class AddFileCollectionViewCell: UICollectionViewCell {
     }
     
     @objc
-    private func addButtonTapped() {
-        
-    }
+    private func addButtonTapped() {}
 }

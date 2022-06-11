@@ -18,8 +18,14 @@ final class TimeTableViewController: UIViewController, TimeTableScreen {
         let tableView = UITableView()
         tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.reuseIdentifier)
         tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.reuseIdentifier)
-        tableView.register(ScheduleTableViewCell.self, forCellReuseIdentifier: ScheduleTableViewCell.shimmerReuseIdentifier)
-        tableView.register(DeadlineTableViewCell.self, forCellReuseIdentifier: DeadlineTableViewCell.shimmerReuseIdentifier)
+        tableView.register(
+            ScheduleTableViewCell.self,
+            forCellReuseIdentifier: ScheduleTableViewCell.shimmerReuseIdentifier
+        )
+        tableView.register(
+            DeadlineTableViewCell.self,
+            forCellReuseIdentifier: DeadlineTableViewCell.shimmerReuseIdentifier
+        )
         
         return tableView
     }()
@@ -29,10 +35,15 @@ final class TimeTableViewController: UIViewController, TimeTableScreen {
     public var delegate: TimeTableViewControllerScrollDelegate?
     
     // MARK: - Init
-    init(_ isMyUser: Bool,_ userRefs: UserReference? = nil) {
+    init(_ isMyUser: Bool, _ userRefs: UserReference? = nil) {
         // once backend appears configure viewmodel with account to view/ dependency injection of networkService
         super.init(nibName: nil, bundle: nil)
-        self.viewModel = ScheduleViewModel(self, tableView: tableView, AssignmentsNetworkManager(), TimeTableNetworkManager())
+        self.viewModel = ScheduleViewModel(
+            self,
+            tableView: tableView,
+            AssignmentsNetworkManager(),
+            TimeTableNetworkManager()
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -58,8 +69,8 @@ final class TimeTableViewController: UIViewController, TimeTableScreen {
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.separatorColor = .clear
-        tableView.sectionHeaderHeight = Constants.tableViewHeaderHeight;
-        tableView.sectionFooterHeight = Constants.tableViewFooterHeight;
+        tableView.sectionHeaderHeight = Constants.tableViewHeaderHeight
+        tableView.sectionFooterHeight = Constants.tableViewFooterHeight
         tableView.backgroundColor = .background.style(.firstLevel)()
         
         tableView.automaticallyAdjustsScrollIndicatorInsets = false

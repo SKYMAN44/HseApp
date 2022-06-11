@@ -11,10 +11,10 @@ import HSESKIT
 class BaseNavViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         setupAppearance()
     }
-    
+
     private func setupAppearance() {
         // breaks nested scrolling
         let appearance = UINavigationBarAppearance()
@@ -22,7 +22,7 @@ class BaseNavViewController: UINavigationController {
         appearance.backgroundImage = UIImage()
         appearance.shadowImage = nil
         appearance.shadowColor = .none
-        
+
         self.navigationBar.standardAppearance = appearance
         self.navigationBar.scrollEdgeAppearance = appearance
         self.navigationBar.isTranslucent = false

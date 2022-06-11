@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct Grade {
     let id: Int
     let number: Int

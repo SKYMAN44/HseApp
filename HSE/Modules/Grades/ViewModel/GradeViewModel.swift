@@ -22,34 +22,39 @@ final class GradeViewModel: NSObject {
            updateDataSource()
         }
     }
-    
-    
+
     // MARK: - DataSource
-    public lazy var datasource = UITableViewDiffableDataSource<AnyHashable,Item>(tableView: tableView!) {
+    public lazy var datasource = UITableViewDiffableDataSource<AnyHashable, Item>(tableView: tableView!) {
         tableView, indexPath, itemIdentifier in
-        
+
         switch itemIdentifier {
         case .grade(let grade):
-            let cell = tableView.dequeueReusableCell(withIdentifier: GradeTableViewCell.reuseIdentifier, for: indexPath) as! GradeTableViewCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: GradeTableViewCell.reuseIdentifier,
+                for: indexPath
+            ) as! GradeTableViewCell
             cell.selectionStyle = .none
             cell.configure(grade: grade)
-            
+
             return cell
         case .loading(_):
-            let cell = tableView.dequeueReusableCell(withIdentifier: GradeTableViewCell.shimmerReuseIdentifier, for: indexPath) as! GradeTableViewCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: GradeTableViewCell.shimmerReuseIdentifier,
+                for: indexPath
+            ) as! GradeTableViewCell
             cell.selectionStyle = .none
             cell.configureShimmer()
-            
+
             return cell
         }
     }
 
     public var bindGradeViewModelToController: () -> Void = {}
-    
+
     enum Item: Hashable {
         case grade(Grade)
         case loading(UUID)
-    
+
         static var loadingItems: [Item] {
             return Array(repeatingExpression: Item.loading(UUID()), count: 12)
         }
@@ -58,12 +63,12 @@ final class GradeViewModel: NSObject {
     // MARK: - Init
     init(tableView: UITableView) {
         super.init()
-        
+
         self.tableView = tableView
         tableView.dataSource = datasource
         updateData()
     }
-    
+
     // MARK: - Data Source update
     private func updateDataSource() {
         var itemBySection = [String: [Item]]()
@@ -72,20 +77,28 @@ final class GradeViewModel: NSObject {
         }
         datasource.applySnapshotUsing(sectionIDs: ["s"], itemBySection: itemBySection, animatingDifferences: false)
     }
-    
+
     // MARK: - API Calls
     private func fetchGrades() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
             self.isLoading = false
-            self.grades = [Grade(id: 1, number: 1, name: "234232", grade: 10),Grade(id: 2, number: 1, name: "234232", grade: 10),Grade(id: 3, number: 1, name: "234232", grade: 10)]
+            self.grades = [
+                Grade(id: 1, number: 1, name: "234232", grade: 10),
+                Grade(id: 2, number: 1, name: "234232", grade: 10),
+                Grade(id: 3, number: 1, name: "234232", grade: 10)
+            ]
         }
     }
-    
+
     // MARK: - Shimmer
     private func setShimmer() {
-        datasource.applySnapshotUsing(sectionIDs: [""], itemBySection: ["":Item.loadingItems], animatingDifferences: false)
+        datasource.applySnapshotUsing(
+            sectionIDs: [""],
+            itemBySection: ["": Item.loadingItems],
+            animatingDifferences: false
+        )
     }
-    
+
     // MARK: - Internal call
     public func updateData() {
         isLoading = true

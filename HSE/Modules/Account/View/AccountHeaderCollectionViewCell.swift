@@ -121,7 +121,7 @@ final class AccountHeaderCollectionViewCell: UICollectionViewCell {
             type = "STUDENT"
         case .professor:
             type = "PROFESSOR"
-        case .ta:
+        case .assist:
             type = "TA"
         }
         typeLabel.text = type
@@ -133,7 +133,5 @@ final class AccountHeaderCollectionViewCell: UICollectionViewCell {
     }
     
     @objc
-    private func emailButtonPressed() {
-        
-    }
+    private func emailButtonPressed() {}
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginScreen: UIViewController {
-    var isAnimating: Bool {get set}
+    var isAnimating: Bool { get set }
     
     func showIncorrectDataWarning()
 }
@@ -16,5 +16,5 @@ protocol LoginScreen: UIViewController {
 protocol LoginLogic {
     init(_ loginScreen: LoginScreen)
     
-    func loginButtonPressed(_ email: String?,_ password: String?, _ roleNumber: Int)
+    func loginButtonPressed(_ email: String?, _ password: String?, _ roleNumber: Int)
 }

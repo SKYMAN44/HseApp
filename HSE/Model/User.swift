@@ -10,7 +10,7 @@ import Foundation
 struct User {
     let userMainInfo: UserApiResponse
     let detailInfo: UserDetailedInfo?
-    
+
     static let testUser = User(
         userMainInfo: UserApiResponse(
             name: "",
@@ -33,7 +33,6 @@ struct UserDetailedInfo {
 
 extension UserDetailedInfo: Codable {}
 extension UserDetailedInfo: Hashable {}
-
 
 struct UserApiResponse {
     let name: String

@@ -23,7 +23,7 @@ final class HostingCollectionViewCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        
+
     }
     
     public func configure(view: UIView) {

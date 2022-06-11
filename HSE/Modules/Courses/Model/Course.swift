@@ -24,7 +24,6 @@ struct Course {
 }
 
 // temp things for layout
-
 struct Chat: Hashable {
     let id = UUID()
     let name: String

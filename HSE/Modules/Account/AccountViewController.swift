@@ -123,12 +123,15 @@ final class AccountViewController: UIViewController, AccountScreen {
     private func goBack() {
         navigationController?.popViewController(animated: true)
     }
-    
+
     // MARK: - Layout Creation
     private func generateLayout() -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout {
-            (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            let segmentsItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(Consts.switcherHeight))
+            (sectionIndex, _) -> NSCollectionLayoutSection? in
+            let segmentsItemSize = NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .absolute(Consts.switcherHeight)
+            )
             let segmentItem = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: segmentsItemSize,
                 elementKind: AccountSupplementaryViewKind.segments,
@@ -138,23 +141,40 @@ final class AccountViewController: UIViewController, AccountScreen {
             
             switch sectionIndex {
             case 0:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(150))
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .estimated(150)
+                )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(150))
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .estimated(150)
+                )
                 let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
 
                 let section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = NSDirectionalEdgeInsets(top: Consts.topInset, leading: 0, bottom: 0, trailing: 0)
+                section.contentInsets = NSDirectionalEdgeInsets(
+                    top: Consts.topInset,
+                    leading: 0,
+                    bottom: 0,
+                    trailing: 0
+                )
                 
                 return section
             default:
                 let valideHeight = self.collectionView.frame.height - Consts.switcherHeight
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(valideHeight))
+                let itemSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .absolute(valideHeight)
+                )
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(valideHeight))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item,item])
+                let groupSize = NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .absolute(valideHeight)
+                )
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item, item])
 
                 let section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)

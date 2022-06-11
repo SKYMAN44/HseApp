@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 final class TaskViewModel: TaskFeatureLogic {
     typealias CollectionDataSource = UICollectionViewDiffableDataSource<TaskSection, AnyHashable>
     typealias CollectionSnapshot = NSDiffableDataSourceSnapshot<TaskSection, AnyHashable>
@@ -30,6 +29,7 @@ final class TaskViewModel: TaskFeatureLogic {
     }
     
     private var collectionView: UICollectionView
+    private var deadlineNetworkManager: DeadlineNetworkManager?
     private var deadline: Deadline
     private var editMode: Bool = false {
         didSet {
@@ -91,7 +91,8 @@ final class TaskViewModel: TaskFeatureLogic {
                 if case let .addFile(id) = item {
                     let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: AddFileCollectionViewCell.reuseIdentifier,
-                        for: indexPath) as? AddFileCollectionViewCell
+                        for: indexPath
+                    ) as? AddFileCollectionViewCell
                     
                     return cell
                 }
@@ -118,7 +119,7 @@ final class TaskViewModel: TaskFeatureLogic {
             }
         }
         
-        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+        dataSource.supplementaryViewProvider = { collectionView, _, indexPath -> UICollectionReusableView? in
             let section = self.sections[indexPath.section]
             let headerView = collectionView.dequeueReusableSupplementaryView(
                 ofKind: self.viewController.headerKind,
@@ -135,10 +136,15 @@ final class TaskViewModel: TaskFeatureLogic {
         }
         return dataSource
     }()
-        
-    
+
     // MARK: - Init
-    init(_ viewController: TaskDetailScreen, _ collectionView: UICollectionView, deadline: Deadline) {
+    init(
+        _ viewController: TaskDetailScreen,
+        _ collectionView: UICollectionView,
+        _ deadlineNetwork: DeadlineNetworkManager,
+        deadline: Deadline
+    ) {
+        self.deadlineNetworkManager = deadlineNetwork
         self.viewController = viewController
         self.deadline = deadline
         self.collectionView = collectionView

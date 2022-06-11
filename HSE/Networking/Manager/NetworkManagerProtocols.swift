@@ -16,7 +16,9 @@ protocol ScheduleNetworkManager: NetworkManagerBase {
 }
 
 protocol DeadlineNetworkManager: NetworkManagerBase {
-    func getDeadline(_ page: Int, completion: @escaping (_ schedule: DeadlineApiResponse?, _ error: String?) -> ())
+    func getDeadlines(_ page: Int, completion: @escaping (_ schedule: DeadlinesApiResponse?, _ error: String?) -> ())
+    
+    func getDeadlineDetails(_ id: Int, completion: @escaping (_ deadline: DeadlineDescriptionApiResponse?, _ error: String?) -> ())
 }
 
 protocol LoginNetworkManager: NetworkManagerBase {

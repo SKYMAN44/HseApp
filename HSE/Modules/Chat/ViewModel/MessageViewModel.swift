@@ -18,14 +18,14 @@ enum MessageType {
     case image
 }
 
-//final class MessageViewModel {
+// final class MessageViewModel {
 //    let tableView: UITableView
 //
 //    // MARK: - Init
 //    init(_ tableView: UITableView) {
 //        self.tableView = tableView
 //    }
-//}
+// }
 
 // Actually just a model by now, no backend(((((
 struct MessageViewModel {
@@ -35,7 +35,6 @@ struct MessageViewModel {
     let text: String?
     let imageURL: URL?
     var imageArray: UIImage?
-    
     
     static let testArray: [MessageViewModel] = [
         MessageViewModel(side: .left, type: .text, text: "Я все скипнул, мне доступ открыт и везде зеленый свет", imageURL: nil),

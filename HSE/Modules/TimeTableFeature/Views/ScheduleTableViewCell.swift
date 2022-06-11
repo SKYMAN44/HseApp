@@ -47,8 +47,7 @@ final class ScheduleTableViewCell: UITableViewCell {
         
         return label
     }()
-    
-    
+
     private let startTimeLabel: UILabel = {
         let label = UILabel()
         label.font = .customFont.style(.special)()
@@ -132,7 +131,12 @@ final class ScheduleTableViewCell: UITableViewCell {
         timeSV.addArrangedSubview(startTimeLabel)
         timeSV.addArrangedSubview(endTimeLabel)
         
-        let rigthStackView = UIStackView(arrangedSubviews: [eventTypeLabel, subjectNameLabel, locationLabel, onlineImageView])
+        let rigthStackView = UIStackView(arrangedSubviews: [
+            eventTypeLabel,
+            subjectNameLabel,
+            locationLabel,
+            onlineImageView
+        ])
         
         rigthStackView.distribution = .fill
         rigthStackView.alignment = .leading
@@ -179,15 +183,12 @@ final class ScheduleTableViewCell: UITableViewCell {
         locationLabel.text = "           "
         isShimmerMode = true
     }
-
 }
-
 
 // MARK: - Shimmer
 extension ScheduleTableViewCell: ShimmeringObject {
     public func startShimmer() {
-        applyShimmerTo(
-            to: [
+        applyShimmerTo(to: [
             subjectNameLabel,
             eventTypeLabel,
             locationLabel,
@@ -196,7 +197,7 @@ extension ScheduleTableViewCell: ShimmeringObject {
             onlineImageView
         ])
     }
-    
+
     public func stopShimmer() {
         removeShimmerFrom(
             from: [

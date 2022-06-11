@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol AccountScreen: UIViewController, TimeTableViewControllerScrollDelegate  {
+protocol AccountScreen: UIViewController, TimeTableViewControllerScrollDelegate {
     var embededScrollView: UIScrollView? { get set }
     
     init(userReference: UserReference?)

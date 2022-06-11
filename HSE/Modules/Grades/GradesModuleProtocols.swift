@@ -7,6 +7,4 @@
 
 import UIKit
 
-protocol GradeScreen: UIViewController {
-    
-}
+protocol GradeScreen: UIViewController {}

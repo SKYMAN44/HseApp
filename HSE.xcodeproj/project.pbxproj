@@ -88,6 +88,7 @@
 		63F857E02790658800F45A97 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857DF2790658800F45A97 /* AccountViewController.swift */; };
 		63F857EA2790F1D500F45A97 /* CalendarPopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */; };
 		63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F857EB2791880600F45A97 /* ScreenSize.swift */; };
+		C00DB9172853D7B50048A928 /* TimeTableFeatureCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C00DB9162853D7B50048A928 /* TimeTableFeatureCoordinator.swift */; };
 		C01D10BD2804947300149652 /* SubmissionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */; };
 		C01D10BF2804A29100149652 /* EditButtonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */; };
 		C01D10C12804C03100149652 /* AddFileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */; };
@@ -236,7 +237,7 @@
 		63F857DF2790658800F45A97 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		63F857E92790F1D400F45A97 /* CalendarPopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPopUpView.swift; sourceTree = "<group>"; };
 		63F857EB2791880600F45A97 /* ScreenSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenSize.swift; sourceTree = "<group>"; };
-		C00DB915285386970048A928 /* HSESKIT */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HSESKIT; path = ../HSESKIT; sourceTree = "<group>"; };
+		C00DB9162853D7B50048A928 /* TimeTableFeatureCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableFeatureCoordinator.swift; sourceTree = "<group>"; };
 		C01D10BC2804947300149652 /* SubmissionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmissionCollectionViewCell.swift; sourceTree = "<group>"; };
 		C01D10BE2804A29100149652 /* EditButtonCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditButtonCollectionViewCell.swift; sourceTree = "<group>"; };
 		C01D10C02804C03100149652 /* AddFileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFileCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -510,7 +511,6 @@
 		63C4D5FE278DC58C0028381F = {
 			isa = PBXGroup;
 			children = (
-				C00DB915285386970048A928 /* HSESKIT */,
 				63C4D609278DC58C0028381F /* HSE */,
 				63C4D620278DC58E0028381F /* HSETests */,
 				63C4D62A278DC58E0028381F /* HSEUITests */,
@@ -823,6 +823,7 @@
 				639DCE202793068B007FC2DC /* ViewModel */,
 				C0E914702844251800AAD804 /* TimeTableViewController.swift */,
 				C03A89C1284D60FE006CC46D /* TimeTableFeatureProtocols.swift */,
+				C00DB9162853D7B50048A928 /* TimeTableFeatureCoordinator.swift */,
 			);
 			path = TimeTableFeature;
 			sourceTree = "<group>";
@@ -978,7 +979,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin/\"; then\n  PATH=\"/opt/homebrew/bin/:${PATH}\"\nfi\n\nexport PATH\n\nif which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1100,6 +1101,7 @@
 				C0C1AA41284BF6FF005CB3C1 /* KeychainHelper.swift in Sources */,
 				C0E914682843F2A400AAD804 /* UserEndPoint.swift in Sources */,
 				C0C1AA8C284D095E005CB3C1 /* ProgressShapeLayer.swift in Sources */,
+				C00DB9172853D7B50048A928 /* TimeTableFeatureCoordinator.swift in Sources */,
 				C0C1AA8A284D08F1005CB3C1 /* ActivityAnimationView.swift in Sources */,
 				63881F8127B9BCC3004A2AEE /* GradeViewModel.swift in Sources */,
 			);

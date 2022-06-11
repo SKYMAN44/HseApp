@@ -9,10 +9,10 @@ import Foundation
 
 typealias DeadlineDictionary = [String: [Deadline]]
 
-struct DeadlineApiResponse {
+struct DeadlinesApiResponse {
     var pageNum: Int
     var assignments: DeadlineDictionary
 }
 
-extension DeadlineApiResponse: Hashable {}
-extension DeadlineApiResponse: Decodable {}
+extension DeadlinesApiResponse: Hashable {}
+extension DeadlinesApiResponse: Decodable {}

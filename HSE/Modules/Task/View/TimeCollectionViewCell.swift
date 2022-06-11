@@ -83,10 +83,10 @@ final class TimeCollectionViewCell: UICollectionViewCell {
         mainSV.pin(to: self)
         
         dateView.addSubview(dateLabel)
-        dateLabel.pin(to: dateView, [.top: 4, .bottom: 4, .left: 8, .right : 8])
+        dateLabel.pin(to: dateView, [.top: 4, .bottom: 4, .left: 8, .right: 8])
         
         timeView.addSubview(timeLabel)
-        timeLabel.pin(to: timeView, [.top: 4, .bottom: 4, .left: 8, .right : 8])
+        timeLabel.pin(to: timeView, [.top: 4, .bottom: 4, .left: 8, .right: 8])
     }
     
     // MARK: - External call

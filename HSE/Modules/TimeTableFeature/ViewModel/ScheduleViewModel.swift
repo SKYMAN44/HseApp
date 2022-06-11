@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
-    private typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable,Item>
+    private typealias TableDataSource = UITableViewDiffableDataSource<AnyHashable, Item>
     
     private var deadlineNetworkManager: DeadlineNetworkManager?
     private var timeTableNetworkManager: ScheduleNetworkManager?
@@ -41,7 +41,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             updateDataSource()
         }
     }
-    private(set) var assignmentsResponse: DeadlineApiResponse? {
+    private(set) var assignmentsResponse: DeadlinesApiResponse? {
         didSet {
             sortDeadlines()
         }
@@ -53,34 +53,54 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     }
     
     // MARK: - Data Source
-    private lazy var dataSource = TableDataSource (
+    private lazy var dataSource = TableDataSource(
         tableView: tableView!
     ) { tableView, indexPath, itemIdentifier in
         switch (itemIdentifier, self.contentType) {
         case (.timeslot(let timeslot), _ ):
-            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.reuseIdentifier , for: indexPath) as! ScheduleTableViewCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: ScheduleTableViewCell.reuseIdentifier,
+                for: indexPath
+            )
+            if let cell = cell as? ScheduleTableViewCell {
+                cell.configure(schedule: timeslot)
+            }
             cell.selectionStyle = .none
-            cell.configure(schedule: timeslot)
             
             return cell
         case (.deadline(let deadline), _):
-            let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.reuseIdentifier , for: indexPath) as! DeadlineTableViewCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: DeadlineTableViewCell.reuseIdentifier,
+                for: indexPath
+            )
+            if let cell = cell as? DeadlineTableViewCell {
+                cell.configure(deadline: deadline)
+            }
             cell.selectionStyle = .none
-            cell.configure(deadline: deadline)
             
             return cell
         case (.loading(_), .timeTable):
-            let cell = tableView.dequeueReusableCell(withIdentifier: ScheduleTableViewCell.shimmerReuseIdentifier , for: indexPath) as! ScheduleTableViewCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: ScheduleTableViewCell.shimmerReuseIdentifier,
+                for: indexPath
+            )
+            if let cell = cell as? ScheduleTableViewCell {
+                cell.configureShimmer()
+            }
             cell.selectionStyle = .none
             cell.setHeight(to: 100)
-            cell.configureShimmer()
             
             return cell
         case (.loading(_), .assigments):
-            let cell = tableView.dequeueReusableCell(withIdentifier: DeadlineTableViewCell.shimmerReuseIdentifier , for: indexPath) as! DeadlineTableViewCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: DeadlineTableViewCell.shimmerReuseIdentifier,
+                for: indexPath
+            )
+            if let cell = cell as? DeadlineTableViewCell {
+                cell.configureShimmer()
+            }
             cell.selectionStyle = .none
             cell.setHeight(to: 80)
-            cell.configureShimmer()
             
             return cell
         }
@@ -130,7 +150,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             
             itemBySection = scheduleResponse.timeTable.mapValues { $0.map {
                 Item.timeslot(TimeSlot(from: $0, convertDates: true))
-            }}
+            } }
             
             setSectionIdentifiers(&sectionIdentifiers, scheduleResponse.timeTable.keys)
             self.scheduleSectionsIdentifiers = sectionIdentifiers
@@ -152,7 +172,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             self.checkToFetchMoreData()
         }
     }
-    
+
     private func changeContent() {
         guard !isLoading else { return }
         clearDataSource {
@@ -178,7 +198,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             }
         }
     }
-    
+
     private func setSectionIdentifiers<T>(_ identifiers: inout [String], _ keys: Dictionary<String,[T]>.Keys) {
         let temp: [Date] = keys.lazy.compactMap { (strDate) in
             if let date = strDate.convertStringToDate() {
@@ -189,7 +209,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
         }.sorted(by: { $0.compare($1) == .orderedAscending })
         identifiers = temp.map { $0.convertFullDateToString() }
     }
-    
+
     // вынести в отдельную вьюмодел
     // MARK: - Assignments Sort
     private func sortDeadlines() {
@@ -204,11 +224,11 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             }
         case .cw:
             currentAssignments = assignments.mapValues {
-                $0.filter { $0.deadlineType == .cw}
+                $0.filter { $0.deadlineType == .cw }
             }
         }
     }
-    
+
     // MARK: - Fetching Data
     private func fetchSchedule(_ page: Int) {
         timeTableNetworkManager?.getSchedule(page) { schedule, error in
@@ -226,10 +246,10 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             }
         }
     }
-    
+
     private func fetchDeadline(_ page: Int) {
-        deadlineNetworkManager?.getDeadline(page) { deadlines, error in
-            if let error = error{
+        deadlineNetworkManager?.getDeadlines(page) { deadlines, error in
+            if let error = error {
                 print(error)
             }
             if let deadlines = deadlines {
@@ -243,7 +263,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             }
         }
     }
-    
+
     private func fetchMore() {
         if contentType == .timeTable {
             guard scheduleResponse?.pageNum != currentSchedulePage else { return }
@@ -255,7 +275,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             fetchDeadline(currentAssignmentPage + 1)
         }
     }
-    
+
     // MARK: - Shimmer
     private func setShimmer() {
         var snapshot = dataSource.snapshot()
@@ -264,13 +284,12 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
         }
         snapshot.appendSections([Item.shimmerSectionIdentifier])
         snapshot.appendItems(Item.loadingItems, toSection: Item.shimmerSectionIdentifier)
-        
         DispatchQueue.main.async {
             self.dataSource.apply(snapshot, animatingDifferences: false, completion: nil)
         }
     }
-    
-    private func clearDataSource(completion: @escaping () -> ()) {
+
+    private func clearDataSource(completion: @escaping () -> Void) {
         DispatchQueue.main.async {
             var snapshot = self.dataSource.snapshot()
             snapshot.deleteAllItems()
@@ -279,7 +298,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             }
         }
     }
-    
+
     // MARK: - External calls
     public func updateData() {
         /* function is called in case of firstLoad, content switch or reload triggered by user
@@ -299,15 +318,15 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             }
         }
     }
-    
+
     public func contentChanged(contentType: ContentType) {
         self.contentType = contentType
     }
-    
+
     public func deadLineContentChanged(_ type: DeadlineContentType) {
         deadlineType = type
     }
-    
+
     private func checkToFetchMoreData() {
         guard let table = self.tableView else { return }
         if let sections = table.dataSource?.numberOfSections?(in: table),
@@ -316,7 +335,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
             let sectionIdentifier = dataSource.snapshot().sectionIdentifiers[sections - 1]
             let items = dataSource.snapshot().numberOfItems(inSection: sectionIdentifier)
             // convert Row frame to common coordinates
-            let rowFrame = table.rectForRow(at: IndexPath(row: items-1, section: sections-1))
+            let rowFrame = table.rectForRow(at: IndexPath(row: items - 1, section: sections - 1))
             let newRect = table.convert(rowFrame, to: table.superview)
             // if last cell is visible on screen start fetcheing more data
             if(table.frame.contains(newRect)) {
@@ -332,17 +351,17 @@ extension ScheduleViewModel: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard contentType == .assigments, !isLoading
         else { return }
-        
+
         let detailVC = TaskDetailViewController(deadline: Deadline(id: 1, deadlineType: .cw, courseName: "", assignmentName: "", deadlineTime: "", submissionTime: "0"))
         viewController?.navigationController?.present(detailVC, animated: true)
     }
-   
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.frame.width, height: 30))
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 30))
         headerView.backgroundColor = .background.style(.firstLevel)()
-        
+
         let label = UILabel()
-        label.frame = CGRect.init(x: 16, y: 0, width: headerView.frame.width, height: 15)
+        label.frame = CGRect(x: 16, y: 0, width: headerView.frame.width, height: 15)
         label.font = .customFont.style(.special)()
         label.textColor = .textAndIcons.style(.tretiary)()
         if isLoading == false {
@@ -350,25 +369,24 @@ extension ScheduleViewModel: UITableViewDelegate {
             case .timeTable:
                 label.text = scheduleSectionsIdentifiers[section].getTodayWeekDay()
             case .assigments:
+                print(section)
                 label.text = assignmentsSectionIdentifier[section].getTodayWeekDay()
             }
         } else {
             label.text = ""
         }
-        
         headerView.addSubview(label)
-        
+
         label.translatesAutoresizingMaskIntoConstraints = false
         label.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
         label.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 16).isActive = true
-        
+
         return headerView
     }
-    
+
     // MARK: - Scroll
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         viewController?.delegate?.didScroll(scrollView)
-        
         self.checkToFetchMoreData()
     }
 }

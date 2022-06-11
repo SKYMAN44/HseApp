@@ -133,7 +133,7 @@ final class AccountViewModel: AccountLogic {
         guard let user = user else { return }
         var snapshot = CollectionSnapshot()
         
-        snapshot.appendSections(["Header","Content"])
+        snapshot.appendSections(["Header", "Content"])
         snapshot.appendItems([Item.userHeader(user.userMainInfo)], toSection: "Header")
         
         var content = [Item]()

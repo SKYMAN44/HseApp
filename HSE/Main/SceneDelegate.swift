@@ -17,17 +17,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     ) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        
+
         // TODO: add token validation (check for expiration date) 
         var entryController: UIViewController
-        let jwtToken = KeychainHelper.shared.read(service: KeychainHelper.defaultService , account: KeychainHelper.defaultAccount, type: TokenJWT.self)
-        
+        let jwtToken = KeychainHelper.shared.read(
+            service: KeychainHelper.defaultService,
+            account: KeychainHelper.defaultAccount,
+            type: TokenJWT.self
+        )
+
         if(jwtToken != nil) {
             entryController = TabBarBaseController(.student)
         } else {
             entryController = LoginViewController()
         }
-        
+
         window.rootViewController = entryController
         self.window = window
         window.makeKeyAndVisible()

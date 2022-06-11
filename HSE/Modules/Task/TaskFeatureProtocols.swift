@@ -16,7 +16,12 @@ protocol TaskDetailScreen: UIViewController {
 protocol TaskFeatureLogic {
     var sections: [TaskSection] { get }
     
-    init(_ viewController: TaskDetailScreen, _ collectionView: UICollectionView, deadline: Deadline)
+    init(
+        _ viewController: TaskDetailScreen,
+        _ collectionView: UICollectionView,
+        _ deadlineNetwork: DeadlineNetworkManager,
+        deadline: Deadline
+    )
 }
 
 internal enum TaskSection: String, Hashable {

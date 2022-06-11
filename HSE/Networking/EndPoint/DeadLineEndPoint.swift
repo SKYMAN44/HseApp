@@ -10,6 +10,7 @@ import Foundation
 
 public enum DeadLineAPI {
     case deadlines(page: Int)
+    case deadlineDetail(id: Int)
 }
 
 extension DeadLineAPI: EndPointType {
@@ -28,7 +29,7 @@ extension DeadLineAPI: EndPointType {
         if case .deadlines(_) = self {
             return "/assignments"
         } else {
-            return "/assignments"
+            return "/assignments/details"
         }
     }
     
@@ -37,28 +38,30 @@ extension DeadLineAPI: EndPointType {
     }
     
     var task: HTTPTask {
-        if case .deadlines(let page) = self {
+        switch self {
+        case .deadlines(let page):
             return .requestParameters(
                 bodyParameters: nil,
                 bodyEncoding: .urlEncoding,
                 urlParameters: ["page": String(page)]
             )
-        } else {
-            return .request
+        case .deadlineDetail(let id):
+            return .requestParameters(
+                bodyParameters: nil,
+                bodyEncoding: .urlEncoding,
+                urlParameters: ["id": String(id)]
+            )
         }
     }
     
     var headers: HTTPHeaders? {
-        if case .deadlines(_) = self {
-            guard let token = KeychainHelper.shared.read(
-                service: KeychainHelper.defaultService,
-                account: KeychainHelper.defaultAccount,
-                type: TokenJWT.self
-            ) else {
-                return nil
-            }
-            return ["authorization":"Bearer \(token.token)"]
+        guard let token = KeychainHelper.shared.read(
+            service: KeychainHelper.defaultService,
+            account: KeychainHelper.defaultAccount,
+            type: TokenJWT.self
+        ) else {
+            return nil
         }
-        return nil
+        return ["authorization":"Bearer \(token.token)"]
     }
 }

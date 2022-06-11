@@ -60,11 +60,11 @@ final class ChatDetailViewController: UIViewController {
         self.viewModel = ChatDetailViewModel(tableView)
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,10 +72,10 @@ final class ChatDetailViewController: UIViewController {
         setupNavBar()
         setupView()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
+
         userImageView.removeFromSuperview()
         chatNameLabel.removeFromSuperview()
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -90,7 +90,7 @@ final class ChatDetailViewController: UIViewController {
         tableView.pin(to: view, [.left, .right, .bottom])
         tableView.pinTop(to: view.safeAreaLayoutGuide.topAnchor)
     }
-    
+
     private func setupNavBar() {
         navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         navigationController?.interactivePopGestureRecognizer?.delegate = self
@@ -103,7 +103,7 @@ final class ChatDetailViewController: UIViewController {
         leftBarButton.imageInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 0)
         navigationItem.leftBarButtonItem = leftBarButton
     }
-    
+
     // MARK: - Navigation
     @objc
     private func goBack() {
@@ -113,7 +113,6 @@ final class ChatDetailViewController: UIViewController {
 
 // MARK: - GestureDelegate
 extension ChatDetailViewController: UIGestureRecognizerDelegate { }
-
 
 // MARK: - TableViewDelegate
 extension ChatDetailViewController: UITableViewDelegate {

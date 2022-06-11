@@ -12,11 +12,12 @@ struct UserReference {
     let role: UserType
     let name: String
     let image: URL?
-    
-    init(id: Int,
-         name: String,
-         role: UserType = .student,
-         image: URL? = nil
+
+    init(
+        id: Int,
+        name: String,
+        role: UserType = .student,
+        image: URL? = nil
     ) {
         self.role = role
         self.id = id

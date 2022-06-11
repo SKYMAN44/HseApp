@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DeadlineType: String, Decodable {
+enum DeadlineType: String, Codable {
     case hw = "hw"
     case cw = "cw"
 }

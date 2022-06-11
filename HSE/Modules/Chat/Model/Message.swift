@@ -13,7 +13,6 @@ enum SenderType {
 }
 
 struct Message {
-    
     let senderName: String
     let senderType: SenderType
     let message: String
@@ -46,5 +45,3 @@ struct Message {
     
     ]
 }
-
-

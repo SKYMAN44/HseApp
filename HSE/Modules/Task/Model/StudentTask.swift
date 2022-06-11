@@ -7,6 +7,20 @@
 
 import Foundation
 
+struct DeadlineDescriptionApiResponse {
+    let id: Int
+    let deadlineType: DeadlineType
+    let assignmentName: String
+    let courseName: String
+    let description: String
+    let deadlineTime: String
+    let submissionTime: String?
+    let createdAt: String
+    let updatedAt: String
+}
+
+extension DeadlineDescriptionApiResponse: Codable {}
+
 struct TaskDescription {
     let courseName: String
     let name: String

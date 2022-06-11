@@ -13,13 +13,15 @@ final class ChatDetailHeaderTableViewCell: UITableViewCell {
     private let userImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.addConstraint(NSLayoutConstraint(item: imageView,
-                                                  attribute: .height,
-                                                  relatedBy: .equal,
-                                                  toItem: imageView,
-                                                  attribute: .width,
-                                                  multiplier: 1,
-                                                  constant: 0))
+        imageView.addConstraint(NSLayoutConstraint(
+            item: imageView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: imageView,
+            attribute: .width,
+            multiplier: 1,
+            constant: 0
+        ))
         imageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = false
@@ -43,7 +45,7 @@ final class ChatDetailHeaderTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - UI setup
     private func setupView() {
         let stackView = UIStackView(arrangedSubviews: [userImageView, nameLabel, detailedLabel])

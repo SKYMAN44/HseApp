@@ -9,23 +9,23 @@ import UIKit
 
 enum UserType: String, Hashable, Codable {
     case professor = "PROFESSOR"
-    case ta = "TA"
+    case assist = "TA"
     case student = "STUDENT"
 }
 
 final class TabBarBaseController: UITabBarController {
     private let userType: UserType
-    
+
     // MARK: - Init
     init(_ userType: UserType) {
         self.userType = userType
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,15 +38,15 @@ final class TabBarBaseController: UITabBarController {
         let courseViewController = CoursesViewController()
         let gradesViewController = GradesViewController()
         let accountViewController = AccountViewController()
-        let MainViewController = MainScreenViewController()
+        let mainViewController = MainScreenViewController()
         let navControllerCourses = BaseNavViewController(rootViewController: courseViewController)
         let navAccountViewController = BaseNavViewController(rootViewController: accountViewController)
-        let navMainViewController = BaseNavViewController(rootViewController: MainViewController)
+        let navMainViewController = BaseNavViewController(rootViewController: mainViewController)
         let navControllerGrades = BaseNavViewController(rootViewController: gradesViewController)
 
         navMainViewController.tabBarItem.image = UIImage(named: "calendarCS")
         navMainViewController.tabBarItem.selectedImage = UIImage(named: "calendarCS")
-        
+
         navControllerGrades.tabBarItem.image = UIImage(named: "awardCS")
         navControllerGrades.tabBarItem.selectedImage = UIImage(named: "awardCS")
 

@@ -31,7 +31,5 @@ final class UserDetailsCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: - Configuration
-    public func configure() {
-        
-    }
+    public func configure() {}
 }

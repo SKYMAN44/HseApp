@@ -20,13 +20,15 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
     public let senderImage: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.addConstraint(NSLayoutConstraint(item: imageView,
-                                                  attribute: .height,
-                                                  relatedBy: .equal,
-                                                  toItem: imageView,
-                                                  attribute: .width,
-                                                  multiplier: 1,
-                                                  constant: 0))
+        imageView.addConstraint(NSLayoutConstraint(
+            item: imageView,
+            attribute: .height,
+            relatedBy: .equal,
+            toItem: imageView,
+            attribute: .width,
+            multiplier: 1,
+            constant: 0
+        ))
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = false
         imageView.layer.cornerRadius = imageView.frame.size.width / 2
@@ -55,8 +57,7 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+
     // MARK: - UI setup
     open func setupUI() {
         let mainSV = UIStackView(arrangedSubviews: [senderImage, bubbleView])
@@ -79,7 +80,6 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
             mainSV.rightAnchor.constraint(lessThanOrEqualTo: contentView.rightAnchor, constant: -100)
         ])
         bubbleView.backgroundColor = .background.style(.accent)()
-        
     }
     
     @objc
@@ -89,21 +89,24 @@ open class BaseLeftMessageTableViewCell: UITableViewCell {
 }
 
 extension BaseLeftMessageTableViewCell: UIContextMenuInteractionDelegate {
-    public func contextMenuInteraction(_ interaction: UIContextMenuInteraction, configurationForMenuAtLocation location: CGPoint) -> UIContextMenuConfiguration? {
+    public func contextMenuInteraction(
+        _ interaction: UIContextMenuInteraction,
+        configurationForMenuAtLocation location: CGPoint
+    ) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: nil, previewProvider: nil, actionProvider: { _ in
             let children: [UIMenuElement] = [self.makeRemoveRatingAction()]
             return UIMenu(title: "", children: children)
         })
     }
-    
+
     func makeRemoveRatingAction() -> UIAction {
         return UIAction(
-        title: "Reply",
-        image: UIImage(systemName: "arrowshape.turn.up.left"),
-        identifier: nil,
-        handler: replySelected)
+            title: "Reply",
+            image: UIImage(systemName: "arrowshape.turn.up.left"),
+            identifier: nil,
+            handler: replySelected
+        )
     }
-    
+
     func replySelected(from action: UIAction) { }
 }
-
