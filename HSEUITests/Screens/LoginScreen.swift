@@ -26,8 +26,10 @@ final class LoginScreen: BaseScreen {
         switch id {
         case .loginButton, .loginProblemButton:
             return app.buttons[id.rawValue]
-        case .emailTextField, .passwordTextField:
+        case .emailTextField:
             return app.textFields[id.rawValue]
+        case .passwordTextField:
+            return app.secureTextFields[id.rawValue]
         case .segmentController:
             return app.firstMatch
         }
@@ -76,8 +78,9 @@ final class LoginScreen: BaseScreen {
 
     @discardableResult
     func touchTopPoint() -> Self {
-        let point = elementById(.emailTextField).coordinate(withNormalizedOffset: CGVector(dx: 0, dy:-100))
-        point.tap()
+        let scrollViewsQuery = app.scrollViews
+        let element = scrollViewsQuery.children(matching: .other).element(boundBy: 0)
+        element.tap()
 
         return self
     }
