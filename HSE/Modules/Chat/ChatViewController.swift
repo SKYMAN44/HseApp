@@ -76,6 +76,12 @@ final class ChatViewController: UIViewController {
         tableView.scrollToBottom(isAnimated: false)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
     // MARK: - UI setup
     private func setupInputContainer() {
         view.addSubview(inputContainerView)

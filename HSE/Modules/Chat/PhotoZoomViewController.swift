@@ -51,9 +51,16 @@ final class PhotoZoomViewController: UIViewController, PhotoViewer {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
-        self.navigationController?.navigationBar.barTintColor = .background.style(.accent)()
+        self.navigationController?.navigationBar.backgroundColor = .primary.style(.primary)()
+        self.navigationController?.navigationBar.barTintColor = .primary.style(.primary)()
         view.backgroundColor = .black
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "ellipsis"),
+            style: .plain,
+            target: self,
+            action: #selector(infoTabBarButtonTapped)
+        )
         
         setupUI()
         scrollView.delegate = self
@@ -175,6 +182,16 @@ final class PhotoZoomViewController: UIViewController, PhotoViewer {
         self.scrollView.zoom(to: rectToZoomTo, animated: true)
     }
 
+    @objc
+    private func infoTabBarButtonTapped(_ sender: UIButton) {
+        guard let image = image else { return }
+        let activityController = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        activityController.popoverPresentationController?.sourceView = sender
+
+        present(activityController, animated: true)
+    }
+
+    // MARK: - Scale Animations
     private func updateZoomScaleForSize(_ size: CGSize) {
         let widthScale = size.width / photoImageView.bounds.width
         let heightScale = size.height / photoImageView.bounds.height
