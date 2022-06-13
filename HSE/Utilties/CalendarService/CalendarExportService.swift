@@ -8,23 +8,29 @@
 import Foundation
 import EventKit
 
-
 class CalendarExportService {
+    private enum ExportError: String, Error {
+        case failedToExport = "Failed to export"
+        case accessNotGrandet = "No access to calendar"
+    }
+
+    private let eventStore = EKEventStore()
+
     static let shared = CalendarExportService()
 
     private init() {}
 
-    private let eventStore = EKEventStore()
-
-    private func requestAccess() {
+    private func requestAccess(completion: @escaping (Result<String, Error>) -> Void) {
         eventStore.requestAccess(to: .event) { (granted, error) in
             if granted {
-                self.save()
+                self.save(completion: completion)
+            } else {
+                completion(.failure(ExportError.accessNotGrandet))
             }
         }
     }
 
-    private func save() {
+    private func save(completion: @escaping (Result<String, Error>)-> Void) {
         // remove fake event to those which a passed as agruments
         guard let calendar = eventStore.defaultCalendarForNewEvents else { return }
         let event = EKEvent(eventStore: eventStore)
@@ -35,12 +41,13 @@ class CalendarExportService {
         event.calendar = calendar
         do {
             try eventStore.save(event, span: .thisEvent, commit: true)
+            completion(.success("Successfuly exported to calendar"))
         } catch {
-
+            completion(.failure(ExportError.failedToExport))
         }
     }
 
-    public func saveEvents() {
-        requestAccess()
+    public func saveEvents(completion: @escaping (Result<String, Error>) -> Void) {
+        requestAccess(completion: completion)
     }
 }

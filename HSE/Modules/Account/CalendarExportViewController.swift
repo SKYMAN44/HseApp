@@ -28,6 +28,8 @@ final class CalendarExportViewController: UIViewController {
         return slider
     }()
 
+    private var animator = ToastNotification()
+
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,7 +123,17 @@ final class CalendarExportViewController: UIViewController {
     @objc
     private func exportButtonPressed(_ sender: UIButton) {
         // add fetching of events for specified date range
-        exportManager.saveEvents()
+        // add real assigmnets when backend dude fix his part!
+        exportManager.saveEvents() { (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let sucess):
+                    self.animator.showSuccess(message: sucess)
+                case .failure(let error):
+                    self.animator.showFailure(message: error.localizedDescription)
+                }
+            }
+        }
     }
 
     // MARK: - Navigation
