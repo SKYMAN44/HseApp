@@ -40,8 +40,7 @@ final class SettingsViewController: UIViewController {
         let appDetails = AppInfo(logo: UIImage(named: "testPic.jpg")!, "HSE APP (Version 1.0.0)", "Made by DSBA Student")
         view.addSubview(appDetails)
 
-//        appDetails.setHeight(to: 175)
-        appDetails.pinBottom(to: view.bottomAnchor, 116)
+        appDetails.pinBottom(to: view.bottomAnchor, 50)
         appDetails.pinCenter(to: view.centerXAnchor)
 
         setupCells()
@@ -141,11 +140,15 @@ extension SettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.row {
         case 0:
+            let notificationVC = NotificationSettingsViewController()
+            navigateTo(notificationVC)
             return
         case 1:
             let exportVC = CalendarExportViewController()
             navigateTo(exportVC)
         case 2:
+            let aboutVC = AboutAppSettingsViewController()
+            navigateTo(aboutVC)
             return
         case 3:
             exitButtonTapped()
