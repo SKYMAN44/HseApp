@@ -26,12 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             type: TokenJWT.self
         )
 
-//        if(jwtToken != nil) {
-//            entryController = TabBarBaseController(.student)
-//        } else {
-//            entryController = LoginViewController()
-//        }
-        entryController = TabBarBaseController(.student)
+        if(jwtToken != nil) {
+            entryController = TabBarBaseController(.student)
+        } else {
+            entryController = LoginViewController()
+        }
+//        entryController = TabBarBaseController(.student)
 
         window.rootViewController = entryController
         self.window = window
