@@ -137,6 +137,8 @@
 		C0E9146E284417BD00AAD804 /* IconTextInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E9146D284417BD00AAD804 /* IconTextInfoView.swift */; };
 		C0E914712844251800AAD804 /* TimeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E914702844251800AAD804 /* TimeTableViewController.swift */; };
 		C0E91473284425FA00AAD804 /* HostingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E91472284425FA00AAD804 /* HostingCollectionViewCell.swift */; };
+		C0FEB72D2857945A00C9281F /* CalendarExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEB72C2857945A00C9281F /* CalendarExportViewController.swift */; };
+		C0FEB72F285795D200C9281F /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEB72E285795D200C9281F /* AppInfoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -291,6 +293,8 @@
 		C0E9146D284417BD00AAD804 /* IconTextInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextInfoView.swift; sourceTree = "<group>"; };
 		C0E914702844251800AAD804 /* TimeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableViewController.swift; sourceTree = "<group>"; };
 		C0E91472284425FA00AAD804 /* HostingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingCollectionViewCell.swift; sourceTree = "<group>"; };
+		C0FEB72C2857945A00C9281F /* CalendarExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExportViewController.swift; sourceTree = "<group>"; };
+		C0FEB72E285795D200C9281F /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -584,6 +588,7 @@
 				C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */,
 				C00DB918285527BA0048A928 /* PrimaryButton.swift */,
 				C00DB91A285529410048A928 /* PrimaryTextField.swift */,
+				C0FEB72E285795D200C9281F /* AppInfoView.swift */,
 			);
 			path = Utilties;
 			sourceTree = "<group>";
@@ -755,6 +760,7 @@
 				63F857DF2790658800F45A97 /* AccountViewController.swift */,
 				C0C1AA3E284BD2FF005CB3C1 /* SettingsViewController.swift */,
 				C03A89C5284D6529006CC46D /* AccountScreenProtocols.swift */,
+				C0FEB72C2857945A00C9281F /* CalendarExportViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -1058,6 +1064,7 @@
 				63E0499627B1ABEB00942E36 /* TaskHeaderCollectionReusableView.swift in Sources */,
 				6304EAA827A87C8100BDF75D /* RightTextMessageTableViewCell.swift in Sources */,
 				C0E9146E284417BD00AAD804 /* IconTextInfoView.swift in Sources */,
+				C0FEB72D2857945A00C9281F /* CalendarExportViewController.swift in Sources */,
 				63C4D60B278DC58C0028381F /* AppDelegate.swift in Sources */,
 				63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */,
 				C0C1AA90284D09E1005CB3C1 /* StrokeAnimation.swift in Sources */,
@@ -1103,6 +1110,7 @@
 				639DCE2427937F95007FC2DC /* CourseCollectionViewCell.swift in Sources */,
 				C02D10B2283D9E820053BFD8 /* ChatDetailTableViewCell.swift in Sources */,
 				C0C1AA3828468774005CB3C1 /* AuthEndPoint.swift in Sources */,
+				C0FEB72F285795D200C9281F /* AppInfoView.swift in Sources */,
 				639DCE302794C88D007FC2DC /* Image.swift in Sources */,
 				63E0498E27B15F0400942E36 /* TaskViewModel.swift in Sources */,
 				639DCE182792E8F6007FC2DC /* DeadlineDay.swift in Sources */,

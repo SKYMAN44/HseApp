@@ -252,9 +252,9 @@ final class LoginViewController: UIViewController, LoginScreen {
     
     // MARK: - Warning Activity
     public func showIncorrectDataWarning() {
-        emailTextField.layer.borderColor = UIColor.red.cgColor
+        emailTextField.layer.borderColor = UIColor.special.style(.warning)().cgColor
         emailTextField.layer.borderWidth = 1.5
-        passwordTextField.layer.borderColor = UIColor.red.cgColor
+        passwordTextField.layer.borderColor = UIColor.special.style(.warning)().cgColor
         passwordTextField.layer.borderWidth = 1.5
     }
     

@@ -112,11 +112,13 @@ final class AccountViewController: UIViewController, AccountScreen {
         }
     }
     
-    // MARK: - Interactions
+    // MARK: - Navgation
     @objc
     private func showSettings() {
         let settingsController = SettingsViewController()
-        self.navigationController?.present(settingsController, animated: true)
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(settingsController, animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
     
     @objc
