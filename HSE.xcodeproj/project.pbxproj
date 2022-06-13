@@ -143,6 +143,7 @@
 		C0FEB7362857D07E00C9281F /* ToastNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEB7352857D07E00C9281F /* ToastNotification.swift */; };
 		C0FEB7392857F4D800C9281F /* NotificationSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEB7382857F4D800C9281F /* NotificationSettingsViewController.swift */; };
 		C0FEB73B2857F4EC00C9281F /* AboutAppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEB73A2857F4EC00C9281F /* AboutAppSettingsViewController.swift */; };
+		C0FEB73D2857F8E000C9281F /* HSE_ICON.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C0FEB73C2857F8E000C9281F /* HSE_ICON.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -303,6 +304,7 @@
 		C0FEB7352857D07E00C9281F /* ToastNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastNotification.swift; sourceTree = "<group>"; };
 		C0FEB7382857F4D800C9281F /* NotificationSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingsViewController.swift; sourceTree = "<group>"; };
 		C0FEB73A2857F4EC00C9281F /* AboutAppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppSettingsViewController.swift; sourceTree = "<group>"; };
+		C0FEB73C2857F8E000C9281F /* HSE_ICON.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HSE_ICON.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +373,7 @@
 		6304EACD27B0224500BDF75D /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				C0FEB73C2857F8E000C9281F /* HSE_ICON.jpg */,
 				63E049A127B1D86400942E36 /* TestFile.pdf */,
 				639DCE2D2794C7C8007FC2DC /* testPic.jpg */,
 				63C4D613278DC58E0028381F /* Assets.xcassets */,
@@ -1025,6 +1028,7 @@
 				63C4D617278DC58E0028381F /* LaunchScreen.storyboard in Resources */,
 				63C4D614278DC58E0028381F /* Assets.xcassets in Resources */,
 				63E049A227B1D86400942E36 /* TestFile.pdf in Resources */,
+				C0FEB73D2857F8E000C9281F /* HSE_ICON.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

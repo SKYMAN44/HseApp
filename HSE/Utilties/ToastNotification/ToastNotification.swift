@@ -79,14 +79,14 @@ final class ToastNotification: UIView {
         }
         scontroller.addSubview(self)
         self.alpha = 0
-        UIView.animate(withDuration: 2.5, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1
             let translateTransform = CGAffineTransform(translationX: 0, y: Consts.yAnimationOffset)
             self.transform = translateTransform
         }) { _ in
-            UIView.animate(withDuration: 2, animations: {
+            UIView.animate(withDuration: 0.3, delay: 2, animations: {
                 self.transform = .identity
-                self.alpha = 0
+                self.alpha = 1
             }) { _ in
                 self.removeFromSuperview()
             }

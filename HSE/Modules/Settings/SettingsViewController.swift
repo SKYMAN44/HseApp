@@ -37,7 +37,7 @@ final class SettingsViewController: UIViewController {
         tableView.pin(to: view)
         tableView.rowHeight = 48
 
-        let appDetails = AppInfo(logo: UIImage(named: "testPic.jpg")!, "HSE APP (Version 1.0.0)", "Made by DSBA Student")
+        let appDetails = AppInfo(logo: UIImage(named: "HSE_ICON.jpg")!, "HSE APP (Version 1.0.0)", "Made by DSBA Student")
         view.addSubview(appDetails)
 
         appDetails.pinBottom(to: view.bottomAnchor, 50)
