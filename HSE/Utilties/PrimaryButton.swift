@@ -14,6 +14,7 @@ final class PrimaryButton: UIButton {
 
         self.layer.cornerRadius = 8
         self.setHeight(to: 48)
+        self.titleLabel?.font = .customFont.style(.body)()
     }
 
     required init?(coder: NSCoder) {

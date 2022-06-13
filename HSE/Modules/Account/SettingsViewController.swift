@@ -22,6 +22,7 @@ final class SettingsViewController: UIViewController {
         tableView.isScrollEnabled = false
         tableView.dataSource = self
         tableView.delegate = self
+
         setupNavbar()
         setupUI()
     }
@@ -34,6 +35,7 @@ final class SettingsViewController: UIViewController {
         tableView.backgroundColor = .clear
         view.addSubview(tableView)
         tableView.pin(to: view)
+        tableView.rowHeight = 48
 
         let appDetails = AppInfo(logo: UIImage(named: "testPic.jpg")!, "HSE APP (Version 1.0.0)", "Made by DSBA Student")
         view.addSubview(appDetails)
@@ -45,6 +47,7 @@ final class SettingsViewController: UIViewController {
         setupCells()
     }
 
+    // decieded to make a static defult tableView
     private func setupCells() {
         notificationCell.accessoryType = .disclosureIndicator
         notificationCell.textLabel?.text = "Notifications"

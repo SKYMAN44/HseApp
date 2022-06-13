@@ -139,6 +139,7 @@
 		C0E91473284425FA00AAD804 /* HostingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0E91472284425FA00AAD804 /* HostingCollectionViewCell.swift */; };
 		C0FEB72D2857945A00C9281F /* CalendarExportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEB72C2857945A00C9281F /* CalendarExportViewController.swift */; };
 		C0FEB72F285795D200C9281F /* AppInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEB72E285795D200C9281F /* AppInfoView.swift */; };
+		C0FEB73328579FEF00C9281F /* CalendarExportService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0FEB73228579FEF00C9281F /* CalendarExportService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -295,6 +296,7 @@
 		C0E91472284425FA00AAD804 /* HostingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostingCollectionViewCell.swift; sourceTree = "<group>"; };
 		C0FEB72C2857945A00C9281F /* CalendarExportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExportViewController.swift; sourceTree = "<group>"; };
 		C0FEB72E285795D200C9281F /* AppInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoView.swift; sourceTree = "<group>"; };
+		C0FEB73228579FEF00C9281F /* CalendarExportService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExportService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +580,8 @@
 		63C4D649278E358F0028381F /* Utilties */ = {
 			isa = PBXGroup;
 			children = (
+				C0FEB73128579FAD00C9281F /* KeyChainService */,
+				C0FEB73028579FA500C9281F /* CalendarService */,
 				C0C1AA88284D087B005CB3C1 /* ActivityAnimationView */,
 				63881F8827BC5858004A2AEE /* Shimmer */,
 				6304EAB527AACF9900BDF75D /* ImageAnimation */,
@@ -585,7 +589,6 @@
 				63F857EB2791880600F45A97 /* ScreenSize.swift */,
 				C02D10AB283D331A0053BFD8 /* ChatNavTitleView.swift */,
 				C0E9146D284417BD00AAD804 /* IconTextInfoView.swift */,
-				C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */,
 				C00DB918285527BA0048A928 /* PrimaryButton.swift */,
 				C00DB91A285529410048A928 /* PrimaryTextField.swift */,
 				C0FEB72E285795D200C9281F /* AppInfoView.swift */,
@@ -865,6 +868,22 @@
 			path = TimeTableFeature;
 			sourceTree = "<group>";
 		};
+		C0FEB73028579FA500C9281F /* CalendarService */ = {
+			isa = PBXGroup;
+			children = (
+				C0FEB73228579FEF00C9281F /* CalendarExportService.swift */,
+			);
+			path = CalendarService;
+			sourceTree = "<group>";
+		};
+		C0FEB73128579FAD00C9281F /* KeyChainService */ = {
+			isa = PBXGroup;
+			children = (
+				C0C1AA40284BF6FF005CB3C1 /* KeychainHelper.swift */,
+			);
+			path = KeyChainService;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1069,6 +1088,7 @@
 				63F857EC2791880600F45A97 /* ScreenSize.swift in Sources */,
 				C0C1AA90284D09E1005CB3C1 /* StrokeAnimation.swift in Sources */,
 				63B2830227C6944D0091C43B /* StudentTask.swift in Sources */,
+				C0FEB73328579FEF00C9281F /* CalendarExportService.swift in Sources */,
 				C0C1AA86284CE9CC005CB3C1 /* LoginViewModel.swift in Sources */,
 				63E0499C27B1C0BA00942E36 /* View+Shimmer.swift in Sources */,
 				638622EF27A34FF2004BCEB8 /* Message.swift in Sources */,
