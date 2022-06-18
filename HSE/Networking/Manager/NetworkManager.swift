@@ -41,6 +41,28 @@ final class AssignmentsNetworkManager: BaseNetworkManager, DeadlineNetworkManage
     }
 }
 
+final class CourseNetworkManager: BaseNetworkManager, SubjectsNetworkManager {
+    var router = Router<CoursesApi>()
+
+    func getCoursesList(completion: @escaping () -> ()) {
+        //
+    }
+
+    func getCourseById(completion: @escaping () -> ()) {
+        //
+    }
+
+    func createCourse(_ courseOptions: CourseCreation, completion: @escaping (String?, String?) -> ()) {
+        router.request(.createCourse(courseOptions)) { [self] data, response, error in
+            processRequestResponse(data, response, error, String.self, completion: completion)
+        }
+    }
+
+    func cancelRequest() {
+        router.cancel()
+    }
+}
+
 final class AuthenticationNetworkManager: BaseNetworkManager, LoginNetworkManager {
     var router = Router<AuthApi>()
     

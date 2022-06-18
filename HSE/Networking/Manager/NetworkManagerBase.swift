@@ -62,8 +62,8 @@ open class BaseNetworkManager {
                     return
                 }
                 do {
-//                    let string = String(data: responseData, encoding: .utf8)
-//                    print(string)
+                    let string = String(data: responseData, encoding: .utf8)
+                    print(string)
                     let apiResponse = try JSONDecoder().decode(T.self, from: responseData)
                     completion(apiResponse, nil)
                 } catch {

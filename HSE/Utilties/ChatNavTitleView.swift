@@ -33,7 +33,6 @@ final class ChatNavTitleView: UIView {
         imageView.pinWidth(to: imageView.heightAnchor, 1)
         indicatorImage.contentMode = .scaleAspectFit
         titleLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        
         let stackView = UIStackView(arrangedSubviews: [imageView, titleLabel, indicatorImage])
         stackView.distribution = .fill
         stackView.alignment = .fill

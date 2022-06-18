@@ -16,7 +16,7 @@ final class MainScreenViewController: UIViewController {
 
     private var navView: DropNavigationBar = DropNavigationBar()
     private let segmentView: PaginationView = {
-        let segmentView = PaginationView(frame: .zero)
+        let segmentView = PaginationView(PaginationView.Mode.read)
         segmentView.backgroundColor = .background.style(.accent)()
 
         return segmentView
@@ -141,6 +141,8 @@ extension MainScreenViewController: PaginationViewDelegate {
         }
         timetableModule.deadlineContentChanged(type)
     }
+
+    func addItemChosen() {}
 }
 
 // MARK: - TimeTableModuleScrollDelegate

@@ -28,25 +28,24 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
     
     private func buildRequest(from route: EndPoint) throws -> URLRequest {
         // construct proper URL request given desired endpoint
-        var request = URLRequest(url: route.baseURL.appendingPathComponent(route.path),
-                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
-                                 timeoutInterval: 10.0)
+        var request = URLRequest(
+            url: route.baseURL.appendingPathComponent(route.path),
+            cachePolicy: .reloadIgnoringLocalAndRemoteCacheData,
+            timeoutInterval: 10.0
+        )
         request.httpMethod = route.httpMethod.rawValue
         do {
             switch route.task {
             case .request:
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            case .requestParameters(let bodyParameters,
-                                    let bodyEncoding,
-                                    let urlParameters):
-                try bodyEncoding.encode(urlRequest: &request, bodyParameters: bodyParameters, urlParameters: urlParameters)
-            case .requestParametersAndHeaders(
+            case .requestParameters(
                 let bodyParameters,
                 let bodyEncoding,
-                let urlParameters,
-                let additionalHeaders
+                let urlParameters
             ):
-                self.addAdditionalHeaders(additionalHeaders, request: &request)
+                if let headers = route.headers {
+                    self.addAdditionalHeaders(headers, request: &request)
+                }
                 try bodyEncoding.encode(urlRequest: &request, bodyParameters: bodyParameters, urlParameters: urlParameters)
             }
             return request

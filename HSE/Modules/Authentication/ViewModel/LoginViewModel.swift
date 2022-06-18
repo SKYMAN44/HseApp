@@ -47,6 +47,7 @@ final class LoginViewModel: LoginLogic {
     // MARK: - Navigation
     private func navigateToApp() {
         guard let role = role else { return }
+        UserDefaults.standard.set(role.rawValue, forKey: "ROLE")
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.loginScreen?.isAnimating = false
             let tabVC = TabBarBaseController(role)
@@ -58,11 +59,11 @@ final class LoginViewModel: LoginLogic {
     private func userTypeByNumber(_ num: Int) -> UserType {
         switch num {
         case 0:
-            return .professor
+            return .student
         case 1:
             return .assist
         case 2:
-            return .student
+            return .professor
         default:
             return .student
         }

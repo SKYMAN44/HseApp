@@ -116,6 +116,16 @@
 		C03A89CE284EC12D006CC46D /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89CD284EC12D006CC46D /* AuthModels.swift */; };
 		C03A89D0284FA801006CC46D /* NetworkManagerProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89CF284FA801006CC46D /* NetworkManagerProtocols.swift */; };
 		C03A89D2284FA80C006CC46D /* NetworkManagerBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C03A89D1284FA80C006CC46D /* NetworkManagerBase.swift */; };
+		C059D753285E1609004D8CE4 /* CoursesEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059D752285E1609004D8CE4 /* CoursesEndPoint.swift */; };
+		C059D755285E2756004D8CE4 /* CoursesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059D754285E2756004D8CE4 /* CoursesApi.swift */; };
+		C059D758285E5888004D8CE4 /* AddCourseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059D757285E5888004D8CE4 /* AddCourseViewController.swift */; };
+		C059D760285E5CBF004D8CE4 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C059D75F285E5CBF004D8CE4 /* WidgetKit.framework */; };
+		C059D762285E5CBF004D8CE4 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C059D761285E5CBF004D8CE4 /* SwiftUI.framework */; };
+		C059D765285E5CBF004D8CE4 /* HseWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C059D764285E5CBF004D8CE4 /* HseWidget.swift */; };
+		C059D768285E5CBF004D8CE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C059D767285E5CBF004D8CE4 /* Assets.xcassets */; };
+		C059D76A285E5CBF004D8CE4 /* HseWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C059D766285E5CBF004D8CE4 /* HseWidget.intentdefinition */; };
+		C059D76B285E5CBF004D8CE4 /* HseWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = C059D766285E5CBF004D8CE4 /* HseWidget.intentdefinition */; };
+		C059D76E285E5CBF004D8CE4 /* HseWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C059D75D285E5CBF004D8CE4 /* HseWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		C081BC1628458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081BC1528458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift */; };
 		C0C1AA3828468774005CB3C1 /* AuthEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */; };
 		C0C1AA3A284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C1AA39284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift */; };
@@ -161,7 +171,28 @@
 			remoteGlobalIDString = 63C4D606278DC58C0028381F;
 			remoteInfo = HSE;
 		};
+		C059D76C285E5CBF004D8CE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 63C4D5FF278DC58C0028381F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C059D75C285E5CBF004D8CE4;
+			remoteInfo = HseWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C059D772285E5CBF004D8CE4 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C059D76E285E5CBF004D8CE4 /* HseWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6304EA9F27A8723200BDF75D /* MessageCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCellProtocol.swift; sourceTree = "<group>"; };
@@ -277,6 +308,17 @@
 		C03A89CD284EC12D006CC46D /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
 		C03A89CF284FA801006CC46D /* NetworkManagerProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocols.swift; sourceTree = "<group>"; };
 		C03A89D1284FA80C006CC46D /* NetworkManagerBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerBase.swift; sourceTree = "<group>"; };
+		C059D752285E1609004D8CE4 /* CoursesEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesEndPoint.swift; sourceTree = "<group>"; };
+		C059D754285E2756004D8CE4 /* CoursesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoursesApi.swift; sourceTree = "<group>"; };
+		C059D756285E4D26004D8CE4 /* HSESKIT */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HSESKIT; path = ../HSESKIT; sourceTree = "<group>"; };
+		C059D757285E5888004D8CE4 /* AddCourseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCourseViewController.swift; sourceTree = "<group>"; };
+		C059D75D285E5CBF004D8CE4 /* HseWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HseWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C059D75F285E5CBF004D8CE4 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		C059D761285E5CBF004D8CE4 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C059D764285E5CBF004D8CE4 /* HseWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HseWidget.swift; sourceTree = "<group>"; };
+		C059D766285E5CBF004D8CE4 /* HseWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = HseWidget.intentdefinition; sourceTree = "<group>"; };
+		C059D767285E5CBF004D8CE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C059D769285E5CBF004D8CE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C081BC1528458E1C007CB03F /* UserInfoSectionSwitchCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoSectionSwitchCollectionReusableView.swift; sourceTree = "<group>"; };
 		C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthEndPoint.swift; sourceTree = "<group>"; };
 		C0C1AA39284827B5005CB3C1 /* UserDetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -327,6 +369,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C059D75A285E5CBF004D8CE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C059D762285E5CBF004D8CE4 /* SwiftUI.framework in Frameworks */,
+				C059D760285E5CBF004D8CE4 /* WidgetKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +568,7 @@
 				63881F8227B9E5AB004A2AEE /* GradeEndPoint.swift */,
 				C0E914672843F2A400AAD804 /* UserEndPoint.swift */,
 				C0C1AA3728468774005CB3C1 /* AuthEndPoint.swift */,
+				C059D752285E1609004D8CE4 /* CoursesEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -536,10 +588,13 @@
 		63C4D5FE278DC58C0028381F = {
 			isa = PBXGroup;
 			children = (
+				C059D756285E4D26004D8CE4 /* HSESKIT */,
 				63C4D609278DC58C0028381F /* HSE */,
 				63C4D620278DC58E0028381F /* HSETests */,
 				63C4D62A278DC58E0028381F /* HSEUITests */,
 				6304EACE27B0826F00BDF75D /* README.md */,
+				C059D763285E5CBF004D8CE4 /* HseWidget */,
+				C059D75E285E5CBF004D8CE4 /* Frameworks */,
 				63C4D608278DC58C0028381F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -550,6 +605,7 @@
 				63C4D607278DC58C0028381F /* HSE.app */,
 				63C4D61D278DC58E0028381F /* HSETests.xctest */,
 				63C4D627278DC58E0028381F /* HSEUITests.xctest */,
+				C059D75D285E5CBF004D8CE4 /* HseWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -572,6 +628,7 @@
 		63C4D620278DC58E0028381F /* HSETests */ = {
 			isa = PBXGroup;
 			children = (
+				C0FEB73E285801F400C9281F /* AuthModule */,
 				C01D10C8280B0B0200149652 /* ScheduleModule */,
 			);
 			path = HSETests;
@@ -640,6 +697,7 @@
 				63C4D651278E3A000028381F /* View */,
 				63C4D64E278E37830028381F /* ViewModel */,
 				63C4D63A278DC7270028381F /* CoursesViewController.swift */,
+				C059D757285E5888004D8CE4 /* AddCourseViewController.swift */,
 			);
 			path = Courses;
 			sourceTree = "<group>";
@@ -805,6 +863,26 @@
 			path = ScheduleModule;
 			sourceTree = "<group>";
 		};
+		C059D75E285E5CBF004D8CE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C059D75F285E5CBF004D8CE4 /* WidgetKit.framework */,
+				C059D761285E5CBF004D8CE4 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C059D763285E5CBF004D8CE4 /* HseWidget */ = {
+			isa = PBXGroup;
+			children = (
+				C059D764285E5CBF004D8CE4 /* HseWidget.swift */,
+				C059D766285E5CBF004D8CE4 /* HseWidget.intentdefinition */,
+				C059D767285E5CBF004D8CE4 /* Assets.xcassets */,
+				C059D769285E5CBF004D8CE4 /* Info.plist */,
+			);
+			path = HseWidget;
+			sourceTree = "<group>";
+		};
 		C0C1AA3D2848FA31005CB3C1 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -852,6 +930,7 @@
 				63B2830627C696C30091C43B /* UserReference.swift */,
 				C0E9146A2843F39600AAD804 /* User.swift */,
 				C03A89CD284EC12D006CC46D /* AuthModels.swift */,
+				C059D754285E2756004D8CE4 /* CoursesApi.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -912,6 +991,13 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		C0FEB73E285801F400C9281F /* AuthModule */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AuthModule;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -923,10 +1009,12 @@
 				63C4D603278DC58C0028381F /* Sources */,
 				63C4D604278DC58C0028381F /* Frameworks */,
 				63C4D605278DC58C0028381F /* Resources */,
+				C059D772285E5CBF004D8CE4 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C059D76D285E5CBF004D8CE4 /* PBXTargetDependency */,
 			);
 			name = HSE;
 			packageProductDependencies = (
@@ -972,6 +1060,23 @@
 			productReference = 63C4D627278DC58E0028381F /* HSEUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		C059D75C285E5CBF004D8CE4 /* HseWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C059D76F285E5CBF004D8CE4 /* Build configuration list for PBXNativeTarget "HseWidgetExtension" */;
+			buildPhases = (
+				C059D759285E5CBF004D8CE4 /* Sources */,
+				C059D75A285E5CBF004D8CE4 /* Frameworks */,
+				C059D75B285E5CBF004D8CE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HseWidgetExtension;
+			productName = HseWidgetExtension;
+			productReference = C059D75D285E5CBF004D8CE4 /* HseWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -979,7 +1084,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1310;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1310;
 				TargetAttributes = {
 					63C4D606278DC58C0028381F = {
@@ -993,6 +1098,9 @@
 						CreatedOnToolsVersion = 13.1;
 						LastSwiftMigration = 1330;
 						TestTargetID = 63C4D606278DC58C0028381F;
+					};
+					C059D75C285E5CBF004D8CE4 = {
+						CreatedOnToolsVersion = 13.3;
 					};
 				};
 			};
@@ -1015,6 +1123,7 @@
 				63C4D606278DC58C0028381F /* HSE */,
 				63C4D61C278DC58E0028381F /* HSETests */,
 				63C4D626278DC58E0028381F /* HSEUITests */,
+				C059D75C285E5CBF004D8CE4 /* HseWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -1043,6 +1152,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C059D75B285E5CBF004D8CE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C059D768285E5CBF004D8CE4 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1081,6 +1198,7 @@
 				C02D10B6283DA4690053BFD8 /* ChatDetailViewModel.swift in Sources */,
 				C0C1AA3F284BD2FF005CB3C1 /* SettingsViewController.swift in Sources */,
 				6304EAD027B13D8600BDF75D /* TaskInfoCollectionViewCell.swift in Sources */,
+				C059D76B285E5CBF004D8CE4 /* HseWidget.intentdefinition in Sources */,
 				6304EAA027A8723300BDF75D /* MessageCellProtocol.swift in Sources */,
 				6304EAB727AACFB500BDF75D /* ZoomAnimator.swift in Sources */,
 				6304EAAE27A8817500BDF75D /* RightImageMessageTableViewCell.swift in Sources */,
@@ -1106,6 +1224,7 @@
 				639DCE162792E8D1007FC2DC /* Deadline.swift in Sources */,
 				C0E914632842BD8E00AAD804 /* AccountViewModel.swift in Sources */,
 				C01D10BF2804A29100149652 /* EditButtonCollectionViewCell.swift in Sources */,
+				C059D753285E1609004D8CE4 /* CoursesEndPoint.swift in Sources */,
 				C03A89CC284EBA2D006CC46D /* String+Date.swift in Sources */,
 				C01D10C12804C03100149652 /* AddFileCollectionViewCell.swift in Sources */,
 				63881F7627B7802B004A2AEE /* Array.swift in Sources */,
@@ -1122,6 +1241,7 @@
 				C0FEB73328579FEF00C9281F /* CalendarExportService.swift in Sources */,
 				C0C1AA86284CE9CC005CB3C1 /* LoginViewModel.swift in Sources */,
 				63E0499C27B1C0BA00942E36 /* View+Shimmer.swift in Sources */,
+				C059D755285E2756004D8CE4 /* CoursesApi.swift in Sources */,
 				638622EF27A34FF2004BCEB8 /* Message.swift in Sources */,
 				C03A89C6284D6529006CC46D /* AccountScreenProtocols.swift in Sources */,
 				63881F6C27B72A8E004A2AEE /* DeadLineEndPoint.swift in Sources */,
@@ -1188,6 +1308,7 @@
 				638622EA27A34D87004BCEB8 /* ChatViewController.swift in Sources */,
 				6304EAA227A873F400BDF75D /* BaseLeftMessageTableViewCell.swift in Sources */,
 				63C4D63B278DC7270028381F /* CoursesViewController.swift in Sources */,
+				C059D758285E5888004D8CE4 /* AddCourseViewController.swift in Sources */,
 				639DCE4927988969007FC2DC /* DeadlineTableViewCell.swift in Sources */,
 				63F857EA2790F1D500F45A97 /* CalendarPopUpView.swift in Sources */,
 				63881F8327B9E5AB004A2AEE /* GradeEndPoint.swift in Sources */,
@@ -1222,6 +1343,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C059D759285E5CBF004D8CE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C059D765285E5CBF004D8CE4 /* HseWidget.swift in Sources */,
+				C059D76A285E5CBF004D8CE4 /* HseWidget.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1234,6 +1364,11 @@
 			isa = PBXTargetDependency;
 			target = 63C4D606278DC58C0028381F /* HSE */;
 			targetProxy = 63C4D628278DC58E0028381F /* PBXContainerItemProxy */;
+		};
+		C059D76D285E5CBF004D8CE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C059D75C285E5CBF004D8CE4 /* HseWidgetExtension */;
+			targetProxy = C059D76C285E5CBF004D8CE4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1368,6 +1503,7 @@
 		63C4D632278DC58E0028381F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1375,8 +1511,13 @@
 				DEVELOPMENT_TEAM = 7QZL932B66;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HSE/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Allow access to export data";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need to access your camera to take photos";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Need to access your photos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to access your photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
@@ -1397,6 +1538,7 @@
 		63C4D633278DC58E0028381F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -1404,8 +1546,13 @@
 				DEVELOPMENT_TEAM = 7QZL932B66;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = HSE/Info.plist;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Allow access to export data";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Need to access your camera to take photos";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Need to access your photos";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Need to access your photos";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
@@ -1522,6 +1669,62 @@
 			};
 			name = Release;
 		};
+		C059D770285E5CBF004D8CE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7QZL932B66;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HseWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HseWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = skymanapps.HSE.HseWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C059D771285E5CBF004D8CE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7QZL932B66;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = HseWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = HseWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = skymanapps.HSE.HseWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1557,6 +1760,15 @@
 			buildConfigurations = (
 				63C4D638278DC58E0028381F /* Debug */,
 				63C4D639278DC58E0028381F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C059D76F285E5CBF004D8CE4 /* Build configuration list for PBXNativeTarget "HseWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C059D770285E5CBF004D8CE4 /* Debug */,
+				C059D771285E5CBF004D8CE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

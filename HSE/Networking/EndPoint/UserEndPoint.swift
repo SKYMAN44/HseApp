@@ -24,7 +24,7 @@ extension UserAPI: EndPointType {
     }
     
     var task: HTTPTask {
-        return .requestParametersAndHeaders(bodyParameters: nil, bodyEncoding: .jsonEncoding, urlParameters: nil, additionHeaders: headers)
+        return .requestParameters(bodyParameters: nil, bodyEncoding: .jsonEncoding, urlParameters: nil)
     }
     
     var headers: HTTPHeaders? {

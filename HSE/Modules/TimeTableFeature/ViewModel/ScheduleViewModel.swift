@@ -174,7 +174,7 @@ final class ScheduleViewModel: NSObject, TimeTableFeatureLogic {
     }
 
     private func changeContent() {
-        guard !isLoading else { return }
+//        guard !isLoading else { return }
         clearDataSource {
             self.isLoading = true
             DispatchQueue.main.async {

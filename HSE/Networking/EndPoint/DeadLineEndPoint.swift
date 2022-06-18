@@ -62,6 +62,6 @@ extension DeadLineAPI: EndPointType {
         ) else {
             return nil
         }
-        return ["authorization":"Bearer \(token.token)"]
+        return ["Authorization":"Bearer \(token.token)"]
     }
 }

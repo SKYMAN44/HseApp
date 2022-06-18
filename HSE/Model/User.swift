@@ -13,12 +13,15 @@ struct User {
 
     static let testUser = User(
         userMainInfo: UserApiResponse(
+            id: 1,
             name: "",
             surname: "",
             patron: "",
-            group: "",
+            groupId: "",
             email: "",
-            faculty: ""
+            faculty: "",
+            currentRole: .student,
+            profilePicURL: ""
         ),
         detailInfo: UserDetailedInfo()
     )
@@ -35,12 +38,15 @@ extension UserDetailedInfo: Codable {}
 extension UserDetailedInfo: Hashable {}
 
 struct UserApiResponse {
+    let id: Int
     let name: String
     let surname: String
     let patron: String?
-    let group: String
+    let groupId: String?
     let email: String
     let faculty: String
+    let currentRole: UserType
+    let profilePicURL: String?
 }
 
 extension UserApiResponse: Codable {}

@@ -21,6 +21,14 @@ protocol DeadlineNetworkManager: NetworkManagerBase {
     func getDeadlineDetails(_ id: Int, completion: @escaping (_ deadline: DeadlineDescriptionApiResponse?, _ error: String?) -> ())
 }
 
+protocol SubjectsNetworkManager: NetworkManagerBase {
+    func getCoursesList(completion: @escaping () -> ())
+
+    func getCourseById(completion: @escaping () -> ())
+
+    func createCourse(_ courseOptions: CourseCreation, completion: @escaping (_ sucess: String?, _ error: String?) -> ())
+}
+
 protocol LoginNetworkManager: NetworkManagerBase {
     func login(_ loginInfo: LoginInfo, completion: @escaping (_ token: TokenJWT?, _ error: String?) -> ())
 }

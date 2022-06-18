@@ -8,7 +8,6 @@
 import UIKit
 import HSESKIT
 
-// probably migrate to viper/cleanswift
 final class CoursesViewController: UIViewController {
     private var segmentView: PaginationView!
     private var courseViewModels = [CourseViewModel]()
@@ -24,9 +23,11 @@ final class CoursesViewController: UIViewController {
 
         return collectionView
     }()
-    
+    private let role: UserType
+
     // MARK: - Init
-    init() {
+    init(_ role: UserType) {
+        self.role = role
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,17 +49,36 @@ final class CoursesViewController: UIViewController {
     // MARK: - UI setup
     private func configureUI() {
         self.view.backgroundColor = .background.style(.accent)()
-        self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-
-        self.navigationItem.title = "Courses"
+        setupNavBar()
 
         setupSegmentView()
         setupCollectionView()
     }
 
+    private func setupNavBar() {
+        self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+
+        self.navigationItem.title = "Courses"
+
+        if(role == .professor) {
+            let settingsImage = UIImage(named: "editIcon")?.withTintColor(.black)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: settingsImage,
+                style: .plain,
+                target: self,
+                action: #selector(editCourseButtonPressed)
+            )
+            navigationItem.rightBarButtonItem?.tintColor = .black
+        }
+    }
+
     private func setupSegmentView() {
-        segmentView = PaginationView(frame: .zero)
+        var mode: PaginationView.Mode = .read
+        if(self.role == .professor) {
+            mode = .edit
+        }
+        segmentView = PaginationView(mode)
         segmentView.setTitles(
             titles:
                 courseViewModels.map({
@@ -102,8 +122,11 @@ final class CoursesViewController: UIViewController {
 
         NSLayoutConstraint.activate(collectionConstraints)
     }
+    // MARK: - Interactions
+    @objc
+    private func editCourseButtonPressed() {}
 
-// MARK: - API Call
+    // MARK: - API Call
     private func fetchCourses() {
         // simulate network call by now
         let courses = Course.courses
@@ -168,6 +191,13 @@ extension CoursesViewController: PaginationViewDelegate {
             at: .centeredHorizontally,
             animated: true
         )
+    }
+
+    func addItemChosen() {
+        print("Add new")
+        let addCourse = AddCourseViewController()
+
+        self.navigationController?.present(addCourse, animated: true)
     }
 }
 

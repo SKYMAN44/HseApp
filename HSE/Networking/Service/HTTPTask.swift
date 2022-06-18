@@ -16,9 +16,4 @@ public enum HTTPTask {
         bodyEncoding: ParameterEncoding,
         urlParameters: Parameters?
     )
-    case requestParametersAndHeaders(
-        bodyParameters: Parameters?,
-        bodyEncoding: ParameterEncoding,
-        urlParameters: Parameters?,
-        additionHeaders: Parameters?)
 }
