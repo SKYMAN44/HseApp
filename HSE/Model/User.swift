@@ -17,11 +17,11 @@ struct User {
             name: "",
             surname: "",
             patron: "",
-            groupId: "",
+            groupId: 1,
             email: "",
             faculty: "",
             currentRole: .student,
-            profilePicURL: ""
+            pic: ""
         ),
         detailInfo: UserDetailedInfo()
     )
@@ -42,11 +42,11 @@ struct UserApiResponse {
     let name: String
     let surname: String
     let patron: String?
-    let groupId: String?
+    let groupId: Int?
     let email: String
     let faculty: String
     let currentRole: UserType
-    let profilePicURL: String?
+    let pic: String?
 }
 
 extension UserApiResponse: Codable {}

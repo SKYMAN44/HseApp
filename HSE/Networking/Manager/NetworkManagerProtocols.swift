@@ -22,9 +22,9 @@ protocol DeadlineNetworkManager: NetworkManagerBase {
 }
 
 protocol SubjectsNetworkManager: NetworkManagerBase {
-    func getCoursesList(completion: @escaping () -> ())
+    func getCoursesList(completion: @escaping (_ courseList: CourseListApiResponse?, _ error: String?) -> ())
 
-    func getCourseById(completion: @escaping () -> ())
+    func getCourseById(_ id: Int, completion: @escaping (_ course: CourseApiResponse?, _ error: String?) -> ())
 
     func createCourse(_ courseOptions: CourseCreation, completion: @escaping (_ sucess: String?, _ error: String?) -> ())
 }

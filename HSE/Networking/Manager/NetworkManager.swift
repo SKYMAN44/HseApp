@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class TimeTableNetworkManager: BaseNetworkManager, ScheduleNetworkManager {
     var router = Router<ScheduleAPI>()
@@ -44,12 +45,22 @@ final class AssignmentsNetworkManager: BaseNetworkManager, DeadlineNetworkManage
 final class CourseNetworkManager: BaseNetworkManager, SubjectsNetworkManager {
     var router = Router<CoursesApi>()
 
-    func getCoursesList(completion: @escaping () -> ()) {
-        //
+    func getCoursesList(completion: @escaping (_ courseList: CourseListApiResponse?, _ error: String?) -> ()) {
+        router.request(.getCourses) { [self] data, response, error in
+            processRequestResponse(
+                data,
+                response,
+                error,
+                CourseListApiResponse.self,
+                completion: completion
+            )
+        }
     }
 
-    func getCourseById(completion: @escaping () -> ()) {
-        //
+    func getCourseById(_ id: Int, completion: @escaping (_ course: CourseApiResponse?, _ error: String?) -> ()) {
+        router.request(.getCourseById(id)) { [self] data, response, error in
+            processRequestResponse(data, response, error, CourseApiResponse.self , completion: completion)
+        }
     }
 
     func createCourse(_ courseOptions: CourseCreation, completion: @escaping (String?, String?) -> ()) {

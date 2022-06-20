@@ -122,12 +122,33 @@ final class CoursesViewController: UIViewController {
 
         NSLayoutConstraint.activate(collectionConstraints)
     }
+
+    public func setSegments() {
+
+    }
+
     // MARK: - Interactions
     @objc
     private func editCourseButtonPressed() {}
 
     // MARK: - API Call
     private func fetchCourses() {
+        let networkManager = CourseNetworkManager()
+        networkManager.getCoursesList() { data, error  in
+            if let error = error {
+                print(error)
+            } else {
+                print(data)
+            }
+        }
+
+        networkManager.getCourseById(1) { data, error in
+            if let error = error {
+                print(error)
+            } else {
+                print(data)
+            }
+        }
         // simulate network call by now
         let courses = Course.courses
         courseViewModels = courses.map({

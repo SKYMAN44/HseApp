@@ -116,7 +116,7 @@ final class AccountHeaderCollectionViewCell: UICollectionViewCell {
     public func configure(_ userInfo: UserApiResponse, _ emailButtonVisible: Bool) {
         typeLabel.text = userInfo.currentRole.rawValue
         nameLabel.text = userInfo.name
-        groupLabel.text = userInfo.groupId
+        groupLabel.text = String(userInfo.groupId ?? 0)
         emailButton.isHidden = !emailButtonVisible
         emailView.configure(icon: UIImage(named: "EmailIcon"), text: userInfo.email)
         addressView.configure(icon: UIImage(named: "AddressIcon"), text: userInfo.faculty)

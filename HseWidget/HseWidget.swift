@@ -44,7 +44,10 @@ struct HseWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack {
+            Text(entry.date, style: .time)
+            Text("Hi there").bold()
+        }
     }
 }
 

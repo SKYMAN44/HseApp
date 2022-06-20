@@ -26,11 +26,11 @@ extension CoursesApi: EndPointType {
     var path: String {
         switch self {
         case .getCourses:
-            return "/courses"
-        case .getCourseById(let int):
-            return ""
+            return "users/courses"
+        case .getCourseById(_):
+            return "courses/course"
         case .createCourse:
-            return "/courses"
+            return "users/courses"
         }
     }
 
@@ -52,6 +52,12 @@ extension CoursesApi: EndPointType {
                 bodyEncoding: .jsonEncoding,
                 urlParameters: nil
             )
+        } else if case .getCourseById(let id) = self {
+            return .requestParameters(
+                bodyParameters: nil,
+                bodyEncoding: .urlEncoding,
+                urlParameters: ["id": String(id)]
+            )
         } else {
             return .request
         }
@@ -65,8 +71,6 @@ extension CoursesApi: EndPointType {
         ) else {
             return nil
         }
-        return ["authorization":"Bearer \(token.token)"]
+        return ["Authorization":"Bearer \(token.token)"]
     }
-
-
 }

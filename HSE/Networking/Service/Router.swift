@@ -37,6 +37,9 @@ class Router<EndPoint: EndPointType>: NetworkRouter {
         do {
             switch route.task {
             case .request:
+                if let headers = route.headers {
+                    self.addAdditionalHeaders(headers, request: &request)
+                }
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
             case .requestParameters(
                 let bodyParameters,
