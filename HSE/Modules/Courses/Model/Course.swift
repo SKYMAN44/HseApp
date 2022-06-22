@@ -7,20 +7,11 @@
 
 import Foundation
 
-struct Course {
-    public let id: Int
-    public let title: String
-
-    static let  courses = [Course(id: 1, title: "Linear Algebra"),
-                           Course(id: 2, title: "TSSP"),
-                           Course(id: 3, title: "Discrete Mathematics"),
-                           Course(id: 4, title: "Onlyfans"),
-                           Course(id: 5, title: "Algebra"),
-                           Course(id: 6, title: "Time Series"),
-                           Course(id: 7, title: "Econometrics"),
-                           Course(id: 8, title: "Macchine Learning 1"),
-                           Course(id: 9, title: "BAFE")
-    ]
+struct CoursePresentationModel {
+    let chat: [Chat]
+    let assitants: [TA]
+    let description: Description
+    let formula: Formula
 }
 
 // temp things for layout

@@ -13,8 +13,7 @@ final class GradesViewController: UIViewController {
     typealias DTree = DynamicSegments.Node<DItem>
 
     private var refreshControl: UIRefreshControl!
-    private lazy var viewModel = GradeViewModel(tableView: tableView)
-    private var filterView = DynamicSegments(options: getConfiguration())
+    private var filterView: DynamicSegments
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.register(GradeTableViewCell.self, forCellReuseIdentifier: GradeTableViewCell.reuseIdentifier)
@@ -22,7 +21,26 @@ final class GradesViewController: UIViewController {
 
         return tableView
     }()
-    
+    private let role: UserType
+    private var viewModel: GradeViewModel?
+
+    // MARK: - Init
+    init(_ role: UserType) {
+        self.role = role
+        if(role == .student) {
+            filterView = DynamicSegments(options: Self.getConfiguration())
+        } else {
+            filterView = DynamicSegments()
+        }
+        super.init(nibName: nil, bundle: nil)
+
+        self.viewModel = GradeViewModel(self, tableView: tableView, role)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +48,9 @@ final class GradesViewController: UIViewController {
         setupView()
         setupRefreshControl()
 
+        filterView.delegate = self
         tableView.delegate = self
-        viewModel.bindGradeViewModelToController = {
+        viewModel?.bindGradeViewModelToController = {
             // do nothing
         }
     }
@@ -60,6 +79,17 @@ final class GradesViewController: UIViewController {
         return node
     }
 
+    // temp approach due to fucking back
+    public func setOneFilter(_ names: [String]) {
+        var node = DTree(DItem(presentingName: "__"), childrenCategory: DItem(presentingName: "Course"))
+
+        node.add(child: names.map {
+           DTree(DItem(presentingName: $0), childrenCategory: DItem(presentingName: "_"))
+        })
+
+        filterView.updateConfiguration(options: node)
+    }
+
     // MARK: - Loading Animation
     private func setupRefreshControl() {
         refreshControl = UIRefreshControl()
@@ -70,7 +100,7 @@ final class GradesViewController: UIViewController {
     @objc
     private func refreshData() {
         refreshControl.endRefreshing()
-        viewModel.updateData()
+        viewModel?.updateData()
     }
 
     // MARK: - UI setup
@@ -119,5 +149,13 @@ extension GradesViewController: UITableViewDelegate {
             )
         )
         navigationController?.present(detailVC, animated: true)
+    }
+}
+
+// MARK: - Dynamic Segments Delegate
+extension GradesViewController: DynamicSegmentsDelegate {
+    func configurationChosen(configuration: [DynamicSegments.Configuration.Item]) {
+        let name = configuration[0].presentingName
+        viewModel?.courseChosen(name)
     }
 }

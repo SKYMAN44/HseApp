@@ -36,7 +36,7 @@ final class TabBarBaseController: UITabBarController {
         tabBar.backgroundColor = .background.style(.accent)()
 
         let courseViewController = CoursesViewController(self.userType)
-        let gradesViewController = GradesViewController()
+        let gradesViewController = GradesViewController(self.userType)
         let accountViewController = AccountViewController()
         let mainViewController = MainScreenViewController()
         let navControllerCourses = BaseNavViewController(rootViewController: courseViewController)

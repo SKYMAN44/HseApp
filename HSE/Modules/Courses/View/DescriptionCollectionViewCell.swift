@@ -70,7 +70,7 @@ class DescriptionCollectionViewCell: UICollectionViewCell {
         ])
     }
 
-    public func configure() {
-        print("__--_--_-_-__-__-__-__-__-_______DDDDDDAA")
+    public func configure(_ desc: String) {
+        descriptionLabel.text = desc
     }
 }

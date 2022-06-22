@@ -11,6 +11,7 @@ import Foundation
 public enum DeadLineAPI {
     case deadlines(page: Int)
     case deadlineDetail(id: Int)
+    case courseDeadlines(courseId: Int)
 }
 
 extension DeadLineAPI: EndPointType {
@@ -28,6 +29,8 @@ extension DeadLineAPI: EndPointType {
     var path: String {
         if case .deadlines(_) = self {
             return "/assignments"
+        } else if case .courseDeadlines = self {
+            return "/assignments/assignments-list"
         } else {
             return "/assignments/details"
         }
@@ -50,6 +53,12 @@ extension DeadLineAPI: EndPointType {
                 bodyParameters: nil,
                 bodyEncoding: .urlEncoding,
                 urlParameters: ["id": String(id)]
+            )
+        case .courseDeadlines(let courseId):
+            return .requestParameters(
+                bodyParameters: nil,
+                bodyEncoding: .urlEncoding,
+                urlParameters: ["id": String(courseId)]
             )
         }
     }

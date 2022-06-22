@@ -30,7 +30,7 @@ extension CoursesApi: EndPointType {
         case .getCourseById(_):
             return "courses/course"
         case .createCourse:
-            return "users/courses"
+            return "courses"
         }
     }
 
@@ -47,7 +47,7 @@ extension CoursesApi: EndPointType {
             return .requestParameters(
                 bodyParameters: [
                     "courseName": course.courseName,
-                    "courseDescription": course.courseDescription
+                    "courseDesc": course.courseDescription
                 ],
                 bodyEncoding: .jsonEncoding,
                 urlParameters: nil

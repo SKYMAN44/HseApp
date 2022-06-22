@@ -8,9 +8,8 @@
 import UIKit
 import HSESKIT
 
-final class CoursesViewController: UIViewController {
+final class CoursesViewController: UIViewController, CoursesModuleScreen {
     private var segmentView: PaginationView!
-    private var courseViewModels = [CourseViewModel]()
     private var courseCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -24,11 +23,23 @@ final class CoursesViewController: UIViewController {
         return collectionView
     }()
     private let role: UserType
+    private var courseViewModel: CoursesModuleLogic?
 
     // MARK: - Init
     init(_ role: UserType) {
         self.role = role
         super.init(nibName: nil, bundle: nil)
+
+        var mode: PaginationView.Mode = .read
+        if(self.role == .professor) {
+            mode = .edit
+        }
+        segmentView = PaginationView(mode)
+        self.courseViewModel = CoursesViewModel(
+            CourseNetworkManager(),
+            self,
+            courseCollectionView
+        )
     }
     
     required init?(coder: NSCoder) {
@@ -39,22 +50,12 @@ final class CoursesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fetchCourses()
         configureUI()
 
         courseCollectionView.delegate = self
-        courseCollectionView.dataSource = self
     }
 
-    // MARK: - UI setup
-    private func configureUI() {
-        self.view.backgroundColor = .background.style(.accent)()
-        setupNavBar()
-
-        setupSegmentView()
-        setupCollectionView()
-    }
-
+    // MARK: - Navbar setup
     private func setupNavBar() {
         self.navigationController?.navigationBar.backgroundColor = .background.style(.accent)()
         self.navigationController?.setNavigationBarHidden(false, animated: false)
@@ -73,22 +74,16 @@ final class CoursesViewController: UIViewController {
         }
     }
 
-    private func setupSegmentView() {
-        var mode: PaginationView.Mode = .read
-        if(self.role == .professor) {
-            mode = .edit
-        }
-        segmentView = PaginationView(mode)
-        segmentView.setTitles(
-            titles:
-                courseViewModels.map({
-                    PageItem(
-                        title: $0.title,
-                        notifications: $0.counter
-                    )
-                })
-        )
+    // MARK: - UI setup
+    private func configureUI() {
+        self.view.backgroundColor = .background.style(.accent)()
+        setupNavBar()
 
+        setupSegmentView()
+        setupCollectionView()
+    }
+
+    private func setupSegmentView() {
         segmentView.backgroundColor = .background.style(.accent)()
         segmentView.delegate = self
 
@@ -123,37 +118,28 @@ final class CoursesViewController: UIViewController {
         NSLayoutConstraint.activate(collectionConstraints)
     }
 
-    public func setSegments() {
-
+    public func setSegments(content: [(String, Int)]) {
+        segmentView.setTitles(
+            titles:
+                content.map({
+                    PageItem(
+                        title: $0.0,
+                        notifications: $0.1
+                    )
+                })
+        )
     }
 
     // MARK: - Interactions
     @objc
     private func editCourseButtonPressed() {}
 
-    // MARK: - API Call
-    private func fetchCourses() {
-        let networkManager = CourseNetworkManager()
-        networkManager.getCoursesList() { data, error  in
-            if let error = error {
-                print(error)
-            } else {
-                print(data)
-            }
-        }
+    // MARK: - Navigation
+    private func navigateToCreateCourse() {
+        let addCourse = AddEditCourseViewController()
 
-        networkManager.getCourseById(1) { data, error in
-            if let error = error {
-                print(error)
-            } else {
-                print(data)
-            }
-        }
-        // simulate network call by now
-        let courses = Course.courses
-        courseViewModels = courses.map({
-            return CourseViewModel(course: $0 )
-        })
+        addCourse.modalPresentationStyle = .popover
+        self.present(addCourse, animated: true)
     }
 }
 
@@ -170,30 +156,7 @@ extension CoursesViewController: UIScrollViewDelegate {
 // MARK: - CollectionView Delegate
 extension CoursesViewController: UICollectionViewDelegate { }
 
-// MARK: - CollectionView DataSource
-extension CoursesViewController: UICollectionViewDataSource {
-    func collectionView(
-        _ collectionView: UICollectionView,
-        numberOfItemsInSection section: Int
-    ) -> Int {
-        return courseViewModels.count
-    }
-
-    func collectionView(
-        _ collectionView: UICollectionView,
-        cellForItemAt indexPath: IndexPath
-    ) -> UICollectionViewCell {
-         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CourseCollectionViewCell.reuseIdentifier,
-            for: indexPath
-         ) as! CourseCollectionViewCell
-
-        cell.delegate = self
-
-        return cell
-    }
-}
-
+// MARK: - FlowLayout Delegate
 extension CoursesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
@@ -207,28 +170,18 @@ extension CoursesViewController: UICollectionViewDelegateFlowLayout {
 // MARK: - SegmentView delegate
 extension CoursesViewController: PaginationViewDelegate {
     func segmentChosen(index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        guard let item = courseCollectionView.cellForItem(at: indexPath) else {
+            return
+        }
         courseCollectionView.scrollToItem(
-            at: IndexPath(row: index, section: 0),
+            at: indexPath,
             at: .centeredHorizontally,
             animated: true
         )
     }
 
     func addItemChosen() {
-        print("Add new")
-        let addCourse = AddCourseViewController()
-
-        self.navigationController?.present(addCourse, animated: true)
-    }
-}
-
-// MARK: - CourseCellDelegate + Navigation
-extension CoursesViewController: CourseCollectionVeiwCellDelegate {
-    func chatSelected() {
-        let chatViewController = ChatViewController()
-
-        self.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(chatViewController, animated: true)
-        self.hidesBottomBarWhenPushed = false
+        navigateToCreateCourse()
     }
 }

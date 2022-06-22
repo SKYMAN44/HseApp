@@ -16,10 +16,19 @@ final class GradeViewModel: NSObject {
             }
         }
     }
+    private weak var viewController: GradesViewController?
     private weak var tableView: UITableView?
     public private(set) var grades = [Grade]() {
         didSet {
            updateDataSource()
+        } 
+    }
+    private let networkManager: DeadlineNetworkManager
+    private var availabelFilters: CourseList? {
+        didSet {
+            if let availabelFilters = availabelFilters {
+                viewController?.setOneFilter(availabelFilters.map { $0.courseName })
+            }
         }
     }
 
@@ -61,11 +70,16 @@ final class GradeViewModel: NSObject {
     }
 
     // MARK: - Init
-    init(tableView: UITableView) {
+    init(_ viewController: GradesViewController, tableView: UITableView, _ role: UserType) {
+        self.viewController = viewController
+        self.networkManager = AssignmentsNetworkManager()
         super.init()
 
         self.tableView = tableView
         tableView.dataSource = datasource
+        if(role == .professor) {
+            fetchOptions()
+        }
         updateData()
     }
 
@@ -90,6 +104,23 @@ final class GradeViewModel: NSObject {
         }
     }
 
+    private func fetchOptions() {
+        let courseManager = CourseNetworkManager()
+        courseManager.getCoursesList() { (data, error) in
+            if let error = error {
+                print(error)
+            } else {
+                self.availabelFilters = data?.courses
+            }
+        }
+    }
+
+    private func fetchDeadlinesByCourse(_ courseName: String) {
+        let rightFilter = availabelFilters?.first(where: { $0.courseName == courseName})
+
+//        networkManager.co
+    }
+
     // MARK: - Shimmer
     private func setShimmer() {
         datasource.applySnapshotUsing(
@@ -103,5 +134,10 @@ final class GradeViewModel: NSObject {
     public func updateData() {
         isLoading = true
         fetchGrades()
+    }
+
+    public func courseChosen(_ name: String) {
+        isLoading = true
+        fetchDeadlinesByCourse(name)
     }
 }

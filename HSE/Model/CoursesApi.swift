@@ -31,7 +31,10 @@ extension CourseListApiResponse: Codable {}
 
 
 public struct CourseApiResponse {
-
+    let id: Int
+    let courseName: String
+    let courseDesc: String
+    let ownerId: Int
 }
 
 extension CourseApiResponse: Decodable {}
